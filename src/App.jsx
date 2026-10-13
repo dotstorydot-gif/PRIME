@@ -22,6 +22,8 @@ import CheckoutPage from './components/CheckoutPage';
 
 // Modals & Drawers
 import CartDrawer from './components/CartDrawer';
+import WishlistDrawer from './components/WishlistDrawer';
+import AccountModal from './components/AccountModal';
 import SearchModal from './components/SearchModal';
 import QuickViewModal from './components/QuickViewModal';
 import Toast from './components/Toast';
@@ -65,6 +67,8 @@ export default function App() {
         
         {/* Overlays */}
         <CartDrawer />
+        <WishlistDrawer />
+        <AccountModal />
         <SearchModal />
         <QuickViewModal />
         <Toast />

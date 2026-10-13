@@ -12,6 +12,8 @@ export function StoreProvider({ children }) {
   // Modals & Drawers
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false);
+  const [isAccountOpen, setIsAccountOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const [customQuotePreFill, setCustomQuotePreFill] = useState(null);
 
@@ -191,6 +193,10 @@ export function StoreProvider({ children }) {
       setIsCartOpen,
       isSearchOpen,
       setIsSearchOpen,
+      isWishlistOpen,
+      setIsWishlistOpen,
+      isAccountOpen,
+      setIsAccountOpen,
       quickViewProduct,
       setQuickViewProduct,
       customQuotePreFill,

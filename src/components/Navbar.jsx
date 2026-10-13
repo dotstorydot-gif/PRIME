@@ -9,6 +9,8 @@ export default function Navbar() {
     cartItemCount, 
     setIsCartOpen, 
     setIsSearchOpen, 
+    setIsWishlistOpen,
+    setIsAccountOpen,
     wishlist 
   } = useStore();
 
@@ -117,27 +119,27 @@ export default function Navbar() {
                 <Search className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
 
-              {/* Wishlist Link */}
+              {/* Wishlist Button */}
               <button
                 type="button"
-                onClick={() => navigateTo('shop')}
-                className="p-2 text-charcoal-700 hover:text-wood-600 transition-colors relative focus:outline-none hidden sm:block"
+                onClick={() => setIsWishlistOpen(true)}
+                className="p-2 text-charcoal-700 hover:text-wood-600 transition-colors relative focus:outline-none"
                 aria-label="Wishlist"
                 title="Saved pieces"
               >
                 <Heart className="w-4 h-4 sm:w-5 sm:h-5" />
                 {wishlist.length > 0 && (
-                  <span className="absolute top-1.5 right-1 w-2 h-2 rounded-full bg-wood-600" />
+                  <span className="absolute top-1.5 right-1 w-2 h-2 rounded-full bg-wood-700" />
                 )}
               </button>
 
               {/* Account / Consultation modal trigger */}
               <button
                 type="button"
-                onClick={() => navigateTo('custom')}
-                className="p-2 text-charcoal-700 hover:text-wood-600 transition-colors focus:outline-none hidden sm:block"
+                onClick={() => setIsAccountOpen(true)}
+                className="p-2 text-charcoal-700 hover:text-wood-600 transition-colors focus:outline-none"
                 aria-label="Account and Bespoke Profile"
-                title="Bespoke Account"
+                title="Client Account & Orders"
               >
                 <User className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
@@ -206,6 +208,36 @@ export default function Navbar() {
                   <ArrowRight className="w-4 h-4 text-wood-400" />
                 </button>
               ))}
+
+              <div className="pt-4 border-t border-[#E9E2D5] space-y-2">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    setIsWishlistOpen(true);
+                  }}
+                  className="w-full text-left py-2 text-xs uppercase tracking-widest text-charcoal-700 hover:text-wood-800 flex items-center justify-between"
+                >
+                  <span className="flex items-center space-x-2">
+                    <Heart className="w-4 h-4 text-wood-600" />
+                    <span>Saved Pieces ({wishlist.length})</span>
+                  </span>
+                  <ArrowRight className="w-3.5 h-3.5 text-wood-400" />
+                </button>
+
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    setIsAccountOpen(true);
+                  }}
+                  className="w-full text-left py-2 text-xs uppercase tracking-widest text-charcoal-700 hover:text-wood-800 flex items-center justify-between"
+                >
+                  <span className="flex items-center space-x-2">
+                    <User className="w-4 h-4 text-wood-600" />
+                    <span>Client Account & Tracking</span>
+                  </span>
+                  <ArrowRight className="w-3.5 h-3.5 text-wood-400" />
+                </button>
+              </div>
             </nav>
 
             <div className="pt-6 border-t border-[#E9E2D5] space-y-4 text-xs text-charcoal-600">
