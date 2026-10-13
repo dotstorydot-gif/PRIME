@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useStore } from '../context/StoreContext';
 import { PRODUCTS } from '../data/products';
 import ProductCard from './ProductCard';
+import CustomDropdown from './CustomDropdown';
 import { SlidersHorizontal, ChevronDown, Check, X } from 'lucide-react';
 
 export default function ShopPage() {
@@ -19,6 +20,20 @@ export default function ShopPage() {
     { id: 'tables', label: 'Tables' },
     { id: 'chairs', label: 'Chairs' },
     { id: 'storage', label: 'Storage' },
+  ];
+
+  const timberOptions = [
+    { value: 'all', label: 'All Woods' },
+    { value: 'oak', label: 'Natural Oak', swatch: '#D7C4A5' },
+    { value: 'walnut', label: 'Smoked Walnut', swatch: '#533C29' },
+    { value: 'ash', label: 'Blackened Ash', swatch: '#262423' },
+  ];
+
+  const sortOptions = [
+    { value: 'featured', label: 'Featured' },
+    { value: 'newest', label: 'Newest' },
+    { value: 'price-low', label: 'Price: Low to High' },
+    { value: 'price-high', label: 'Price: High to Low' },
   ];
 
   const filteredProducts = useMemo(() => {
@@ -97,37 +112,29 @@ export default function ShopPage() {
         </button>
 
         {/* Right side: Sort Dropdown & Finish selector */}
-        <div className="flex items-center space-x-4 ml-auto">
-          {/* Wood Finish Filter (Subtle) */}
-          <div className="hidden sm:flex items-center space-x-2 text-xs text-charcoal-600">
-            <span className="uppercase tracking-widest text-[10px]">Timber:</span>
-            <select
+        <div className="flex items-center space-x-3 sm:space-x-4 ml-auto">
+          {/* Wood Finish Filter */}
+          <div className="hidden sm:block">
+            <CustomDropdown
+              labelPrefix="TIMBER:"
               value={filterFinish}
-              onChange={(e) => setFilterFinish(e.target.value)}
-              className="bg-transparent text-xs text-charcoal-800 border-none focus:outline-none cursor-pointer uppercase tracking-wider font-medium"
-            >
-              <option value="all">All Woods</option>
-              <option value="oak">Natural Oak</option>
-              <option value="walnut">Smoked Walnut</option>
-              <option value="ash">Blackened Ash</option>
-            </select>
+              onChange={setFilterFinish}
+              options={timberOptions}
+              align="right"
+            />
           </div>
 
           <div className="h-4 w-[1px] bg-[#E9E2D5] hidden sm:block" />
 
           {/* Sort By Dropdown */}
-          <div className="flex items-center space-x-2 text-xs text-charcoal-700">
-            <span className="uppercase tracking-widest text-[10px] text-charcoal-500">Sort:</span>
-            <select
+          <div>
+            <CustomDropdown
+              labelPrefix="SORT:"
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="bg-transparent text-xs text-charcoal-900 border-none focus:outline-none cursor-pointer uppercase tracking-wider font-semibold"
-            >
-              <option value="featured">Featured</option>
-              <option value="newest">Newest</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-            </select>
+              onChange={setSortBy}
+              options={sortOptions}
+              align="right"
+            />
           </div>
         </div>
 
