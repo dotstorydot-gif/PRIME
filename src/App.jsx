@@ -19,10 +19,10 @@ import AboutPage from './components/AboutPage';
 import ContactPage from './components/ContactPage';
 import CartPage from './components/CartPage';
 import CheckoutPage from './components/CheckoutPage';
+import WishlistPage from './components/WishlistPage';
 
 // Modals & Drawers
 import CartDrawer from './components/CartDrawer';
-import WishlistDrawer from './components/WishlistDrawer';
 import AccountModal from './components/AccountModal';
 import SearchModal from './components/SearchModal';
 import QuickViewModal from './components/QuickViewModal';
@@ -53,6 +53,7 @@ function MainContent() {
       {currentPage === 'contact' && <ContactPage />}
       {currentPage === 'cart' && <CartPage />}
       {currentPage === 'checkout' && <CheckoutPage />}
+      {currentPage === 'wishlist' && <WishlistPage />}
     </main>
   );
 }
@@ -67,7 +68,6 @@ export default function App() {
         
         {/* Overlays */}
         <CartDrawer />
-        <WishlistDrawer />
         <AccountModal />
         <SearchModal />
         <QuickViewModal />

@@ -119,15 +119,17 @@ export default function Navbar() {
                 <Search className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
 
-              {/* Wishlist Button */}
+              {/* Wishlist Button - Full Screen Screen Navigation */}
               <button
                 type="button"
-                onClick={() => setIsWishlistOpen(true)}
-                className="p-2 text-charcoal-700 hover:text-wood-600 transition-colors relative focus:outline-none"
+                onClick={() => navigateTo('wishlist')}
+                className={`p-2 transition-colors relative focus:outline-none ${
+                  currentPage === 'wishlist' ? 'text-wood-800' : 'text-charcoal-700 hover:text-wood-600'
+                }`}
                 aria-label="Wishlist"
                 title="Saved pieces"
               >
-                <Heart className="w-4 h-4 sm:w-5 sm:h-5" />
+                <Heart className={`w-4 h-4 sm:w-5 sm:h-5 ${currentPage === 'wishlist' ? 'fill-current' : ''}`} />
                 {wishlist.length > 0 && (
                   <span className="absolute top-1.5 right-1 w-2 h-2 rounded-full bg-wood-700" />
                 )}
@@ -213,7 +215,7 @@ export default function Navbar() {
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
-                    setIsWishlistOpen(true);
+                    navigateTo('wishlist');
                   }}
                   className="w-full text-left py-2 text-xs uppercase tracking-widest text-charcoal-700 hover:text-wood-800 flex items-center justify-between"
                 >
