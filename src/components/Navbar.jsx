@@ -29,7 +29,8 @@ export default function Navbar() {
     { name: 'Home', id: 'home' },
     { name: 'Shop', id: 'shop' },
     { name: 'Custom Furniture', id: 'custom' },
-    { name: 'About Us', id: 'about' },
+    { name: 'Our Craft', id: 'craft' },
+    { name: 'About', id: 'about' },
     { name: 'Contact', id: 'contact' },
   ];
 
