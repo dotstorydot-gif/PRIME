@@ -29,8 +29,7 @@ export default function Navbar() {
     { name: 'Home', id: 'home' },
     { name: 'Shop', id: 'shop' },
     { name: 'Custom Furniture', id: 'custom' },
-    { name: 'Our Craft', id: 'craft' },
-    { name: 'About', id: 'about' },
+    { name: 'About Us', id: 'about' },
     { name: 'Contact', id: 'contact' },
   ];
 
@@ -41,7 +40,14 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <span className="hidden md:inline text-sand-400">Est. 1948 · Cairo Workshop</span>
           <span className="mx-auto md:mx-0">Handcrafted in Egypt · White-Glove Installation on Orders Over 50,000 EGP</span>
-          <span className="hidden md:inline text-sand-400">Call / WhatsApp: (+20) 122 293 5556</span>
+          <a 
+            href="https://wa.me/201222935556" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="hidden md:inline text-sand-400 hover:text-white transition-colors"
+          >
+            Call / WhatsApp: (+20) 122 293 5556
+          </a>
         </div>
       </div>
 
@@ -245,13 +251,19 @@ export default function Navbar() {
             <div className="pt-6 border-t border-[#E9E2D5] space-y-4 text-xs text-charcoal-600">
               <div>
                 <p className="font-semibold text-charcoal-800 uppercase tracking-wider text-[11px] mb-1">Workshop & Showroom</p>
-                <p>3 El Madaress St., Off Port Said St.</p>
-                <p>Ghamra, Cairo, Egypt</p>
+                <a 
+                  href="https://maps.google.com/?q=3+El+Madaress+St+Off+Port+Said+St+Ghamra+Cairo+Egypt" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-wood-800 transition-colors block"
+                >
+                  3 El Madaress St., Off Port Said St.<br />Ghamra, Cairo, Egypt ↗
+                </a>
               </div>
               <div>
                 <p className="font-semibold text-charcoal-800 uppercase tracking-wider text-[11px] mb-1">Direct Contact</p>
-                <p>(+20) 122 293 5556</p>
-                <p>info@primewoodenworks.com</p>
+                <a href="tel:+201222935556" className="hover:text-wood-800 transition-colors block">(+20) 122 293 5556</a>
+                <a href="mailto:info@primewoodenworks.com" className="hover:text-wood-800 transition-colors block">info@primewoodenworks.com</a>
               </div>
               <button
                 onClick={() => {

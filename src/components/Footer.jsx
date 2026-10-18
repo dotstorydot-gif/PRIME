@@ -21,8 +21,8 @@ export default function Footer() {
     <footer className="bg-[#1C1A18] text-[#FAF8F5] pt-20 pb-12 border-t border-wood-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-white/10">
+        {/* Main Footer Grid with items-start for consistent top baseline alignment */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-16 border-b border-white/10 items-start">
           
           {/* Brand Column */}
           <div className="lg:col-span-4 space-y-4">
@@ -30,38 +30,63 @@ export default function Footer() {
               <span className="font-serif text-3xl tracking-[0.16em] font-medium text-white uppercase block">
                 PRIME
               </span>
-              <span className="text-[10px] tracking-[0.28em] font-sans text-wood-300 uppercase block -mt-1 font-medium">
-                WOODEN WORK
+              <span className="text-[10px] tracking-[0.28em] font-sans text-wood-300 uppercase block -mt-0.5 font-medium">
+                WOODEN WORK · CAIRO
               </span>
             </div>
-            <p className="text-sm text-neutral-400 font-light leading-relaxed max-w-sm pt-2">
-              Contemporary furniture, thoughtfully crafted in Egypt from honest materials. Built to bring architectural warmth and lasting presence to your space.
+            <p className="text-sm text-neutral-400 font-light leading-relaxed max-w-sm">
+              Contemporary furniture, thoughtfully crafted in Egypt from honest hardwoods. Built to bring architectural warmth and generational presence to your home.
             </p>
-            <div className="pt-2 text-xs text-neutral-400 space-y-1.5 font-light">
-              <p className="flex items-center space-x-2">
-                <MapPin className="w-3.5 h-3.5 text-wood-300 shrink-0" />
-                <span>3 El Madaress St., Off Port Said St., Ghamra, Cairo</span>
-              </p>
-              <p className="flex items-center space-x-2">
-                <Phone className="w-3.5 h-3.5 text-wood-300 shrink-0" />
-                <span>(+20) 122 293 5556 / (+20) 127 748 8868</span>
-              </p>
-              <p className="flex items-center space-x-2">
-                <Mail className="w-3.5 h-3.5 text-wood-300 shrink-0" />
-                <span>info@primewoodenworks.com</span>
-              </p>
+            <div className="pt-2 text-xs text-neutral-400 space-y-2.5 font-light">
+              <a 
+                href="https://maps.google.com/?q=3+El+Madaress+St+Off+Port+Said+St+Ghamra+Cairo+Egypt" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-wood-200 transition-colors flex items-start space-x-2 group"
+                title="Open workshop location in Google Maps"
+              >
+                <MapPin className="w-4 h-4 text-wood-300 shrink-0 mt-0.5 group-hover:text-wood-200" />
+                <span className="underline-offset-4 group-hover:underline">
+                  3 El Madaress St., Off Port Said St., Ghamra, Cairo, Egypt ↗
+                </span>
+              </a>
+
+              <div className="flex items-center space-x-2">
+                <Phone className="w-4 h-4 text-wood-300 shrink-0" />
+                <div className="flex items-center space-x-2">
+                  <a href="tel:+201222935556" className="hover:text-wood-200 transition-colors">
+                    (+20) 122 293 5556
+                  </a>
+                  <span>/</span>
+                  <a href="tel:+201277488868" className="hover:text-wood-200 transition-colors">
+                    (+20) 127 748 8868
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <Mail className="w-4 h-4 text-wood-300 shrink-0" />
+                <a href="mailto:info@primewoodenworks.com" className="hover:text-wood-200 transition-colors">
+                  info@primewoodenworks.com
+                </a>
+              </div>
             </div>
           </div>
 
           {/* Navigation Links */}
-          <div className="lg:col-span-2 space-y-3">
+          <div className="lg:col-span-2 space-y-4">
             <h4 className="text-[11px] uppercase tracking-[0.25em] text-white font-semibold">
               Explore
             </h4>
-            <ul className="space-y-2 text-xs text-neutral-400 font-light">
+            <ul className="space-y-2.5 text-xs text-neutral-400 font-light">
+              <li>
+                <button onClick={() => navigateTo('home')} className="hover:text-white transition-colors">
+                  Home
+                </button>
+              </li>
               <li>
                 <button onClick={() => navigateTo('shop')} className="hover:text-white transition-colors">
-                  Shop
+                  Shop Pieces
                 </button>
               </li>
               <li>
@@ -70,37 +95,37 @@ export default function Footer() {
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateTo('craft')} className="hover:text-white transition-colors">
-                  Our Craft
-                </button>
-              </li>
-              <li>
                 <button onClick={() => navigateTo('about')} className="hover:text-white transition-colors">
-                  About
+                  About Us & Craft
                 </button>
               </li>
               <li>
                 <button onClick={() => navigateTo('contact')} className="hover:text-white transition-colors">
-                  Contact
+                  Contact & Atelier
+                </button>
+              </li>
+              <li>
+                <button onClick={() => navigateTo('wishlist')} className="hover:text-white transition-colors">
+                  Saved Pieces
                 </button>
               </li>
             </ul>
           </div>
 
           {/* Customer Care */}
-          <div className="lg:col-span-2 space-y-3">
+          <div className="lg:col-span-2 space-y-4">
             <h4 className="text-[11px] uppercase tracking-[0.25em] text-white font-semibold">
               Customer Care
             </h4>
-            <ul className="space-y-2 text-xs text-neutral-400 font-light">
+            <ul className="space-y-2.5 text-xs text-neutral-400 font-light">
               <li>
                 <button onClick={() => navigateTo('contact')} className="hover:text-white transition-colors">
-                  Shipping & Delivery
+                  Delivery Across Egypt
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateTo('contact')} className="hover:text-white transition-colors">
-                  Returns & Guarantee
+                <button onClick={() => navigateTo('about')} className="hover:text-white transition-colors">
+                  10-Year Craft Guarantee
                 </button>
               </li>
               <li>
@@ -109,19 +134,19 @@ export default function Footer() {
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateTo('contact')} className="hover:text-white transition-colors">
-                  Consultation FAQs
+                <button onClick={() => navigateTo('custom')} className="hover:text-white transition-colors">
+                  Bespoke Dimensions
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateTo('custom')} className="hover:text-white transition-colors">
-                  Bespoke Dimensions
+                <button onClick={() => navigateTo('contact')} className="hover:text-white transition-colors">
+                  Architectural Consultation
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Newsletter Column matching screenshot */}
+          {/* Newsletter Column */}
           <div className="lg:col-span-4 space-y-4">
             <h4 className="text-[11px] uppercase tracking-[0.25em] text-white font-semibold">
               Get Inspired. Stay Connected.
@@ -160,14 +185,31 @@ export default function Footer() {
             <div className="pt-3 flex items-center space-x-5 text-xs text-neutral-400">
               <span className="text-[11px] tracking-wider uppercase text-neutral-500">Cairo, Egypt</span>
               <span>·</span>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+              <a 
+                href="https://instagram.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-white transition-colors"
+              >
                 Instagram
               </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+              <a 
+                href="https://facebook.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-white transition-colors"
+              >
                 Facebook
               </a>
-              <a href="https://wa.me/201222935556" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                WhatsApp
+              <a 
+                href="https://wa.me/201222935556" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-emerald-400 transition-colors flex items-center space-x-1"
+                title="Chat with Prime on WhatsApp"
+              >
+                <span>WhatsApp</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" />
               </a>
             </div>
           </div>
@@ -178,9 +220,9 @@ export default function Footer() {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-neutral-500 font-light tracking-wider space-y-4 sm:space-y-0">
           <p>© 2026 Prime Wooden Work. All rights reserved.</p>
           <div className="flex items-center space-x-6">
-            <span>Made with pride in Egypt</span>
+            <span>Made with pride in Cairo, Egypt</span>
             <span>·</span>
-            <span className="font-serif italic text-neutral-400">Wood Arthouse</span>
+            <span className="font-serif italic text-neutral-400">Honest Timber Arthouse</span>
           </div>
         </div>
 

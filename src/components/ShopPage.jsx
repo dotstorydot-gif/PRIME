@@ -3,6 +3,7 @@ import { useStore } from '../context/StoreContext';
 import { PRODUCTS } from '../data/products';
 import ProductCard from './ProductCard';
 import CustomDropdown from './CustomDropdown';
+import { CATEGORIES } from '../data/categories';
 import { SlidersHorizontal, ChevronDown, Check, X } from 'lucide-react';
 
 export default function ShopPage() {
@@ -13,13 +14,8 @@ export default function ShopPage() {
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
   const categories = [
-    { id: 'all', label: 'All' },
-    { id: 'living-room', label: 'Living Room' },
-    { id: 'dining', label: 'Dining' },
-    { id: 'bedroom', label: 'Bedroom' },
-    { id: 'tables', label: 'Tables' },
-    { id: 'chairs', label: 'Chairs' },
-    { id: 'storage', label: 'Storage' },
+    { id: 'all', label: 'All Pieces' },
+    ...CATEGORIES.map(cat => ({ id: cat.id, label: cat.name }))
   ];
 
   const timberOptions = [

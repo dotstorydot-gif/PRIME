@@ -10,11 +10,16 @@ import {
   X, 
   PhoneCall, 
   MessageSquare,
-  ArrowRight
+  ArrowRight,
+  Check
 } from 'lucide-react';
+import { PREVIOUS_CUSTOM_WORKS } from '../data/products';
 
 export default function CustomFurniturePage() {
   const { customQuotePreFill, setCustomQuotePreFill, showToast, navigateTo } = useStore();
+
+  const [inspirationMode, setInspirationMode] = useState('portfolio'); // 'portfolio' | 'upload'
+  const [selectedPreviousWorkId, setSelectedPreviousWorkId] = useState(null);
 
   const [formData, setFormData] = useState({
     pieceType: 'Dining table',
@@ -28,7 +33,8 @@ export default function CustomFurniturePage() {
     phone: '',
     email: '',
     city: 'Cairo (New Cairo / Maadi / Zamalek)',
-    imagePreview: null
+    imagePreview: null,
+    selectedCustomWorkTitle: ''
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -327,38 +333,132 @@ export default function CustomFurniturePage() {
             />
           </div>
 
-          {/* 6. Upload inspiration image */}
-          <div className="space-y-3">
+          {/* 6. Upload inspiration image — Both Possibilities */}
+          <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <span className="w-6 h-6 rounded-full bg-wood-800 text-white text-xs flex items-center justify-center font-medium">6</span>
-              <h3 className="font-serif text-xl text-charcoal-900 font-normal">
-                Upload inspiration image
+              <h3 className="font-serif text-xl sm:text-2xl text-charcoal-900 font-normal">
+                Inspiration Image
               </h3>
             </div>
-            
-            {formData.imagePreview ? (
-              <div className="relative inline-block border border-[#E9E2D5] bg-white p-2">
-                <img
-                  src={formData.imagePreview}
-                  alt="Inspiration Preview"
-                  className="w-48 h-36 object-cover"
-                />
+            <p className="text-xs text-charcoal-500 font-light">
+              Choose an example from our previously crafted bespoke woodwork, or upload your own outside photo, floorplan, or sketch.
+            </p>
+
+            {/* Dual Possibility Selector Tabs */}
+            <div className="flex flex-wrap gap-2 pt-1 border-b border-[#E9E2D5] pb-3">
+              <button
+                type="button"
+                onClick={() => setInspirationMode('portfolio')}
+                className={`px-4 py-2 text-xs uppercase tracking-wider font-medium transition-all ${
+                  inspirationMode === 'portfolio'
+                    ? 'bg-wood-800 text-white shadow-sm'
+                    : 'bg-[#FAF8F5] border border-[#E9E2D5] text-charcoal-700 hover:bg-white'
+                }`}
+              >
+                ✦ Prime Custom Portfolio ({PREVIOUS_CUSTOM_WORKS.length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setInspirationMode('upload')}
+                className={`px-4 py-2 text-xs uppercase tracking-wider font-medium transition-all ${
+                  inspirationMode === 'upload'
+                    ? 'bg-wood-800 text-white shadow-sm'
+                    : 'bg-[#FAF8F5] border border-[#E9E2D5] text-charcoal-700 hover:bg-white'
+                }`}
+              >
+                ⇪ Upload Outside Photo / Sketch
+              </button>
+            </div>
+
+            {/* Active Selected Preview if any */}
+            {formData.imagePreview && (
+              <div className="p-4 bg-wood-50 border border-wood-300 flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <img
+                    src={formData.imagePreview}
+                    alt="Active inspiration"
+                    className="w-20 h-16 object-cover border border-wood-200"
+                  />
+                  <div>
+                    <span className="text-[10px] uppercase tracking-wider text-wood-700 font-semibold block">
+                      Active Inspiration Reference
+                    </span>
+                    <p className="font-serif text-sm font-medium text-charcoal-900">
+                      {formData.selectedCustomWorkTitle || 'Uploaded Reference Image'}
+                    </p>
+                  </div>
+                </div>
                 <button
                   type="button"
                   onClick={handleRemoveImage}
-                  className="absolute -top-2 -right-2 bg-charcoal-900 text-white rounded-full p-1 shadow-md hover:bg-black"
+                  className="px-3 py-1.5 border border-charcoal-400 text-charcoal-700 hover:text-red-700 hover:border-red-600 text-xs uppercase tracking-wider transition-colors"
                 >
-                  <X className="w-4 h-4" />
+                  Change / Remove
                 </button>
               </div>
-            ) : (
+            )}
+
+            {/* Possibility 1: Previous Custom Works Gallery */}
+            {inspirationMode === 'portfolio' && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+                {PREVIOUS_CUSTOM_WORKS.map((work) => {
+                  const isSelected = selectedPreviousWorkId === work.id;
+                  return (
+                    <div
+                      key={work.id}
+                      onClick={() => {
+                        setSelectedPreviousWorkId(work.id);
+                        setFormData(prev => ({
+                          ...prev,
+                          imagePreview: work.image,
+                          selectedCustomWorkTitle: work.title,
+                          description: prev.description ? prev.description : `Inspired by Prime custom piece: ${work.title} (${work.location}).`
+                        }));
+                        showToast(`Selected "${work.title}" from custom portfolio`, 'success');
+                      }}
+                      className={`group relative cursor-pointer border p-2 transition-all bg-white ${
+                        isSelected 
+                          ? 'border-wood-800 ring-2 ring-wood-700 shadow-md' 
+                          : 'border-[#E9E2D5] hover:border-wood-400'
+                      }`}
+                    >
+                      <div className="aspect-[16/11] overflow-hidden bg-[#EFECE6] relative">
+                        <img
+                          src={work.image}
+                          alt={work.title}
+                          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                        />
+                        {isSelected && (
+                          <div className="absolute top-2 right-2 bg-wood-800 text-white rounded-full p-1 shadow">
+                            <Check className="w-3.5 h-3.5" />
+                          </div>
+                        )}
+                        <div className="absolute bottom-1 left-1 bg-black/60 backdrop-blur-sm text-[9px] uppercase tracking-wider text-white px-2 py-0.5">
+                          {work.category}
+                        </div>
+                      </div>
+                      <div className="pt-2">
+                        <h4 className="font-serif text-sm font-medium text-charcoal-900 group-hover:text-wood-800 transition-colors">
+                          {work.title}
+                        </h4>
+                        <p className="text-[10px] text-charcoal-500 mt-0.5">{work.location}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Possibility 2: Upload External Image */}
+            {inspirationMode === 'upload' && (
               <label className="border-2 border-dashed border-[#D5C9B3] hover:border-wood-600 bg-white p-6 sm:p-8 flex flex-col items-center justify-center cursor-pointer transition-colors text-center group">
                 <Upload className="w-8 h-8 text-charcoal-400 group-hover:text-wood-700 mb-2 transition-colors" />
                 <span className="text-xs uppercase tracking-wider font-medium text-charcoal-800">
-                  Click to upload floorplan, sketch or reference photo
+                  Click to upload your outside inspiration image, floorplan, or sketch
                 </span>
                 <span className="text-[11px] text-charcoal-400 mt-1">
-                  Supports PNG, JPG, PDF up to 25MB
+                  Supports PNG, JPG, WEBP, PDF up to 25MB
                 </span>
                 <input
                   type="file"

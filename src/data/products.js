@@ -2,8 +2,8 @@ export const PRODUCTS = [
   {
     id: 'oslo-dining-table',
     name: 'Oslo Dining Table',
-    category: 'Dining',
-    categoryId: 'dining',
+    category: 'Tables',
+    categoryId: 'tables',
     price: 42500,
     isFeatured: true,
     isNew: true,
@@ -39,8 +39,8 @@ export const PRODUCTS = [
   {
     id: 'arco-side-table',
     name: 'Arco Side Table',
-    category: 'Living Room',
-    categoryId: 'living-room',
+    category: 'Tables',
+    categoryId: 'tables',
     price: 9800,
     isFeatured: true,
     isNew: false,
@@ -74,8 +74,8 @@ export const PRODUCTS = [
   {
     id: 'noma-console',
     name: 'Noma Console',
-    category: 'Storage',
-    categoryId: 'storage',
+    category: 'Consoles & Buffets',
+    categoryId: 'consoles',
     price: 24750,
     isFeatured: true,
     isNew: true,
@@ -143,7 +143,7 @@ export const PRODUCTS = [
   {
     id: 'haven-lounge-chair',
     name: 'Haven Lounge Chair',
-    category: 'Chairs',
+    category: 'Chairs & Armchairs',
     categoryId: 'chairs',
     price: 28500,
     isFeatured: true,
@@ -177,7 +177,7 @@ export const PRODUCTS = [
   {
     id: 'frame-storage-cabinet',
     name: 'Frame Storage Cabinet',
-    category: 'Storage',
+    category: 'Storage & Bookcases',
     categoryId: 'storage',
     price: 38500,
     isFeatured: true,
@@ -210,10 +210,75 @@ export const PRODUCTS = [
     delivery: 'Delivered and assembled into place with felt glides on all contact points.'
   },
   {
+    id: 'prime-lumina-tv-unit',
+    name: 'Prime Lumina TV Unit',
+    category: 'TV & Media Units',
+    categoryId: 'tv-units',
+    price: 32000,
+    isFeatured: true,
+    isNew: true,
+    badge: 'Media Suite',
+    rating: 4.9,
+    reviewsCount: 18,
+    primaryImage: 'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1200&q=80',
+    secondaryImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80'
+    ],
+    tagline: 'Floating modern media unit with warm ambient backlighting and acoustic wood slats.',
+    description: 'The Prime Lumina TV Unit redefines contemporary living spaces. Designed with hidden wire passages, soft-close acoustic slatted pull-down panels, and warm indirect ambient LED lighting.',
+    dimensions: {
+      standard: '220 cm (W) x 42 cm (D) x 45 cm (H)',
+      large: '260 cm (W) x 42 cm (D) x 45 cm (H)'
+    },
+    materials: 'Kiln-dried European Oak veneer with solid acoustic vertical slats and German soft-close gas struts.',
+    finishes: [
+      { name: 'Natural White Oak', hex: '#D7C4A5', colorClass: 'bg-[#D7C4A5]' },
+      { name: 'Smoked Walnut', hex: '#533C29', colorClass: 'bg-[#533C29]' }
+    ],
+    sizes: ['220 cm Width', '260 cm Width'],
+    inStock: true,
+    leadTime: '10 - 14 business days',
+    delivery: 'Mounted directly by Prime installation specialists with laser leveling.'
+  },
+  {
+    id: 'prime-echo-console',
+    name: 'Prime Echo Sideboard',
+    category: 'Consoles & Buffets',
+    categoryId: 'consoles',
+    price: 26800,
+    isFeatured: true,
+    isNew: true,
+    badge: 'Artisanal',
+    rating: 4.9,
+    reviewsCount: 12,
+    primaryImage: 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=1200&q=80',
+    secondaryImage: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1200&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1200&q=80'
+    ],
+    tagline: 'Warm wooden sideboard featuring textured reeded curved doors and sleek tapered legs.',
+    description: 'Inspired by Egyptian mid-century craftsmanship, the Echo Sideboard introduces an artistic focal point with its rounded fluted tambour doors and internal adjustable shelves.',
+    dimensions: {
+      standard: '175 cm (W) x 45 cm (D) x 80 cm (H)'
+    },
+    materials: 'Solid Egyptian Zan (Beech) structural legs with European oak reeded doors and satin brass ferrules.',
+    finishes: [
+      { name: 'Smoked Walnut', hex: '#533C29', colorClass: 'bg-[#533C29]' },
+      { name: 'Natural White Oak', hex: '#D7C4A5', colorClass: 'bg-[#D7C4A5]' }
+    ],
+    sizes: ['Standard 175 cm'],
+    inStock: true,
+    leadTime: '8 - 12 business days',
+    delivery: 'Crated and hand-delivered directly to your dining or living room.'
+  },
+  {
     id: 'nile-fluted-bed',
     name: 'Nile Fluted Bed Frame',
-    category: 'Bedroom',
-    categoryId: 'bedroom',
+    category: 'Beds & Nightstands',
+    categoryId: 'beds',
     price: 46000,
     isFeatured: false,
     isNew: true,
@@ -245,8 +310,8 @@ export const PRODUCTS = [
   {
     id: 'solis-round-table',
     name: 'Solis Round Dining Table',
-    category: 'Dining',
-    categoryId: 'dining',
+    category: 'Tables',
+    categoryId: 'tables',
     price: 34500,
     isFeatured: false,
     isNew: false,
@@ -279,8 +344,8 @@ export const PRODUCTS = [
   {
     id: 'kairo-sculptural-armchair',
     name: 'Kairo Sculptural Armchair',
-    category: 'Living Room',
-    categoryId: 'living-room',
+    category: 'Chairs & Armchairs',
+    categoryId: 'chairs',
     price: 21200,
     isFeatured: false,
     isNew: true,
@@ -307,33 +372,71 @@ export const PRODUCTS = [
     inStock: true,
     leadTime: '7 - 10 business days',
     delivery: 'Dispatched in premium protective packaging.'
-  }
-];
-
-export const INSTAGRAM_POSTS = [
-  {
-    id: 1,
-    image: 'https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=800&q=80',
-    caption: 'The Oslo Dining Table in European Oak installed at a residence in Katameya Dunes, Cairo.',
-    likes: '1.4k'
   },
   {
-    id: 2,
-    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80',
-    caption: 'Warm shadows and handcrafted joinery. Detail of the Linea Coffee Table.',
-    likes: '980'
+    id: 'prime-curve-dresser',
+    name: 'Prime Curve Dresser',
+    category: 'Dressers & Vanities',
+    categoryId: 'dressers',
+    price: 29500,
+    isFeatured: false,
+    isNew: true,
+    badge: 'Masterpiece',
+    rating: 5.0,
+    reviewsCount: 8,
+    primaryImage: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80',
+    secondaryImage: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80'
+    ],
+    tagline: 'Masterfully curved wooden dressing unit with circular mirror and felt-lined drawer organizers.',
+    description: 'A study in organic curves and soft luxury. Hand-milled solid wood casing houses 6 deep push-to-open soft-close drawers for vanity storage.',
+    dimensions: {
+      standard: '140 cm (W) x 48 cm (D) x 86 cm (H)'
+    },
+    materials: 'European White Oak curved carcass with solid oak drawer fronts.',
+    finishes: [
+      { name: 'Natural White Oak', hex: '#D7C4A5', colorClass: 'bg-[#D7C4A5]' },
+      { name: 'Smoked Walnut', hex: '#533C29', colorClass: 'bg-[#533C29]' }
+    ],
+    sizes: ['Standard 140 cm'],
+    inStock: true,
+    leadTime: '10 - 14 business days',
+    delivery: 'Direct white glove delivery and placement in your bedroom suite.'
   },
   {
-    id: 3,
-    image: 'https://images.unsplash.com/photo-1580481077111-9f79cb25a4e7?auto=format&fit=crop&w=800&q=80',
-    caption: 'Artisanal curvature — the Haven Lounge Chair in natural oak and raw linen.',
-    likes: '2.1k'
-  },
-  {
-    id: 4,
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
-    caption: 'Custom dressing sanctuary with fluted walnut claddings crafted at our Ghamra workshops.',
-    likes: '1.7k'
+    id: 'prime-portal-door',
+    name: 'Prime Portal Pivot Door',
+    category: 'Doors & Millwork',
+    categoryId: 'doors-millwork',
+    price: 38000,
+    isFeatured: false,
+    isNew: true,
+    badge: 'Architectural',
+    rating: 4.9,
+    reviewsCount: 10,
+    primaryImage: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80',
+    secondaryImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80'
+    ],
+    tagline: 'Monumental natural wood interior pivot door with flush timber handles and hidden hardware.',
+    description: 'Bespoke grand entrance pivot door for luxury villas and residences. Heavyweight solid hardwood engineered core with acoustic seals.',
+    dimensions: {
+      standard: '110 cm (W) x 260 cm (H) x 6 cm (T)',
+      custom: 'Custom architectural ceiling heights up to 340 cm'
+    },
+    materials: 'Solid Smoked Walnut or European Oak with integrated heavy-duty German pivot hinge system.',
+    finishes: [
+      { name: 'Smoked Walnut', hex: '#533C29', colorClass: 'bg-[#533C29]' },
+      { name: 'Blackened Ash', hex: '#262423', colorClass: 'bg-[#262423]' },
+      { name: 'Natural White Oak', hex: '#D7C4A5', colorClass: 'bg-[#D7C4A5]' }
+    ],
+    sizes: ['Standard 260H', 'Full Height Bespoke'],
+    inStock: true,
+    leadTime: '14 - 20 business days',
+    delivery: 'Precision installation and frame anchoring by Prime master door technicians.'
   }
 ];
 
@@ -349,7 +452,7 @@ export const CRAFT_STEPS = [
     number: '02',
     title: 'Shape',
     description: 'Precision craftsmanship brings the design to life.',
-    detail: 'Combining traditional joinery inherited across four generations of Egyptian wood masters with German precision tooling to carve lasting silhouettes.',
+    detail: 'Combining traditional joinery inherited across four generations of Egyptian wood masters with precision European tooling to carve lasting silhouettes.',
     image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80'
   },
   {
@@ -375,4 +478,55 @@ export const PARTNERS_AND_CLIENTS = [
   { name: 'EgyStone', note: 'Marble & Fine Woodworks' },
   { name: 'Humania', note: 'Progressing Humanity Healthcare' },
   { name: 'Haven Bespoke', note: 'Turnkey Architectural Solutions' }
+];
+
+export const PREVIOUS_CUSTOM_WORKS = [
+  {
+    id: 'custom-fluted-credenza',
+    title: 'Fluted Walnut Credenza & Marble Vanity',
+    category: 'Dressers & Consoles',
+    location: 'Katameya Dunes Villa, Cairo',
+    material: 'American Smoked Walnut & Italian Marble',
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80'
+  },
+  {
+    id: 'custom-monolith-table',
+    title: 'Monolithic Oval Dining Table (320cm)',
+    category: 'Dining Tables',
+    location: 'Palm Hills Residence, 6th of October',
+    material: 'Solid European White Oak',
+    image: 'https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=900&q=80'
+  },
+  {
+    id: 'custom-floating-bed',
+    title: 'Floating Bed Suite with Slat Wall Headboard',
+    category: 'Beds & Nightstands',
+    location: 'Swan Lake North Coast Villa',
+    material: 'Natural Bleached Oak & Bouclé',
+    image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80'
+  },
+  {
+    id: 'custom-acoustic-tv',
+    title: 'Acoustic Slat TV Media Center & Shelving',
+    category: 'TV & Media Units',
+    location: 'Mivida Compound, New Cairo',
+    material: 'Smoked Walnut & Integrated LED',
+    image: 'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=900&q=80'
+  },
+  {
+    id: 'custom-dressing-room',
+    title: 'Walk-In Dressing Sanctuary with Glass Wardrobes',
+    category: 'Dressing Rooms',
+    location: 'Uptown Cairo Villa, Mokattam',
+    material: 'Solid Zan Hardwood & Fluted Bronze',
+    image: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=900&q=80'
+  },
+  {
+    id: 'custom-pivot-entrance',
+    title: 'Geometric Carved Pivot Entrance Door',
+    category: 'Doors & Millwork',
+    location: 'Private Lakeview Villa, New Cairo',
+    material: 'Kiln-Dried Blackened Ash',
+    image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=80'
+  }
 ];
