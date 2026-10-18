@@ -140,36 +140,16 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Redesigned Premium WhatsApp Button */}
+            {/* WhatsApp Button matching site buttons with WhatsApp logo */}
             <div className="pt-4 border-t border-[#E9E2D5]">
               <a
                 href="https://wa.me/201222935556?text=Hello%20Prime%20Wooden%20Work%2C%20I%20would%20like%20to%20inquire%20about%20a%20woodwork%20piece."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full bg-[#18231C] hover:bg-[#111A14] text-[#FAF8F5] border border-[#25D366]/40 hover:border-[#25D366] p-4 transition-all duration-300 flex items-center justify-between shadow-sm group"
+                className="w-full py-4 px-6 bg-wood-800 hover:bg-wood-900 text-white text-xs uppercase tracking-[0.2em] font-medium transition-colors shadow-sm flex items-center justify-center space-x-2.5 group"
               >
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform">
-                    <WhatsAppIcon className="w-5 h-5" />
-                  </div>
-                  <div className="text-left">
-                    <div className="flex items-center space-x-2">
-                      <span className="text-xs uppercase tracking-wider font-semibold text-white">
-                        Chat on WhatsApp
-                      </span>
-                      <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
-                    </div>
-                    <span className="text-[11px] text-[#A6C4B0] font-mono block">
-                      (+20) 122 293 5556
-                    </span>
-                  </div>
-                </div>
-                <div className="text-right hidden sm:block">
-                  <span className="text-[10px] uppercase tracking-widest text-[#25D366] font-medium block">
-                    Online Now
-                  </span>
-                  <span className="text-[10px] text-white/60">Instant Reply ↗</span>
-                </div>
+                <WhatsAppIcon className="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" />
+                <span>Chat on WhatsApp</span>
               </a>
             </div>
 
