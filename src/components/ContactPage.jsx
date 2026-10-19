@@ -57,9 +57,8 @@ export default function ContactPage() {
       {/* Aligned 2-Column Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         
-        {/* Left Column: Factory Information & Redesigned WhatsApp Button */}
-        <div className="lg:col-span-5 space-y-6 flex flex-col justify-between h-full">
-          
+        {/* Left Column: Factory Information & WhatsApp Button */}
+        <div className="lg:col-span-5">
           <div className="bg-[#FAF8F5] border border-[#E9E2D5] p-6 sm:p-8 lg:p-10 space-y-6">
             <div className="border-b border-[#E9E2D5] pb-4">
               <span className="text-[10px] uppercase tracking-widest text-wood-600 font-semibold block mb-1">
@@ -154,15 +153,6 @@ export default function ContactPage() {
             </div>
 
           </div>
-
-          {/* Architectural Advisory Card */}
-          <div className="p-6 bg-[#F0EDE6] border border-[#E9E2D5] text-xs text-charcoal-700 font-light space-y-2">
-            <h4 className="font-serif text-lg text-charcoal-900 font-medium">For Architects & Interior Studios</h4>
-            <p className="leading-relaxed">
-              We deliver complimentary timber sample boxes (European Oak, Smoked Walnut, Zan Beech, Ash) directly to design studios across Greater Cairo and Giza.
-            </p>
-          </div>
-
         </div>
 
         {/* Right Column: Message & Consultation Form */}
