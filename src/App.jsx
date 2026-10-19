@@ -39,7 +39,7 @@ function MainContent() {
       {currentPage === 'shop' && <ShopPage />}
       {currentPage === 'product-detail' && <ProductDetailPage />}
       {currentPage === 'custom' && <CustomFurniturePage />}
-      {(currentPage === 'about' || currentPage === 'craft') && <AboutPage />}
+      {currentPage === 'about' && <AboutPage />}
       {currentPage === 'contact' && <ContactPage />}
       {currentPage === 'cart' && <CartPage />}
       {currentPage === 'checkout' && <CheckoutPage />}

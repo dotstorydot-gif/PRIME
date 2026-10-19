@@ -101,7 +101,7 @@ export default function Footer() {
               </li>
               <li>
                 <button onClick={() => navigateTo('about')} className="hover:text-white transition-colors text-left">
-                  About Us & Craft
+                  About Us
                 </button>
               </li>
               <li>
