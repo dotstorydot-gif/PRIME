@@ -60,7 +60,7 @@ export default function ContactPage() {
         {/* Left Column: Factory Information & Redesigned WhatsApp Button */}
         <div className="lg:col-span-5 space-y-6 flex flex-col justify-between h-full">
           
-          <div className="bg-[#FAF8F5] border border-[#E9E2D5] p-6 sm:p-8 space-y-6">
+          <div className="bg-[#FAF8F5] border border-[#E9E2D5] p-6 sm:p-8 lg:p-10 space-y-6">
             <div className="border-b border-[#E9E2D5] pb-4">
               <span className="text-[10px] uppercase tracking-widest text-wood-600 font-semibold block mb-1">
                 Atelier Location
@@ -68,6 +68,9 @@ export default function ContactPage() {
               <h2 className="font-serif text-2xl sm:text-3xl text-charcoal-900 font-normal">
                 Cairo Headquarters
               </h2>
+              <p className="text-xs text-charcoal-500 font-light mt-1">
+                Workshop, design studio, and raw timber material library in Ghamra.
+              </p>
             </div>
 
             <div className="space-y-5 text-xs text-charcoal-700 leading-relaxed font-light">
@@ -167,7 +170,7 @@ export default function ContactPage() {
 
         {/* Right Column: Message & Consultation Form */}
         <div className="lg:col-span-7">
-          <div className="bg-[#FAF8F5] border border-[#E9E2D5] p-6 sm:p-10 h-full">
+          <div className="bg-[#FAF8F5] border border-[#E9E2D5] p-6 sm:p-8 lg:p-10 h-full">
             {submitted ? (
               <div className="text-center py-16 space-y-4">
                 <CheckCircle2 className="w-14 h-14 text-wood-700 mx-auto" />
