@@ -68,9 +68,6 @@ export default function ContactPage() {
               <h2 className="font-serif text-2xl sm:text-3xl text-charcoal-900 font-normal">
                 Cairo Headquarters
               </h2>
-              <p className="text-xs text-charcoal-500 font-light mt-1">
-                Workshop, design studio, and raw timber material library in Ghamra.
-              </p>
             </div>
 
             <div className="space-y-5 text-xs text-charcoal-700 leading-relaxed font-light">
@@ -198,9 +195,6 @@ export default function ContactPage() {
                   <h2 className="font-serif text-2xl sm:text-3xl text-charcoal-900 font-normal">
                     Send a Message
                   </h2>
-                  <p className="text-xs text-charcoal-500 font-light mt-1">
-                    Have questions about dimensions, showroom viewings, or specific finishes?
-                  </p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
