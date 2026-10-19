@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStore } from '../context/StoreContext';
-import { CRAFT_STEPS, PARTNERS_AND_CLIENTS } from '../data/products';
+import { CRAFT_STEPS } from '../data/products';
 import { 
   ArrowRight, 
   MapPin, 
@@ -122,107 +122,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Story Chapter 3: Heritage Quote & Collaborations */}
-      <div className="bg-[#382517] text-[#FAF8F5] p-8 sm:p-16 text-center max-w-4xl mx-auto space-y-6 shadow-sm">
-        <span className="text-[10px] uppercase tracking-[0.3em] text-wood-300 font-semibold block">
-          Chapter III · Ancient Lineage
-        </span>
-        <blockquote className="font-serif text-xl sm:text-3xl font-light italic leading-relaxed text-[#FAF8F5]">
-          “Once fit for pharaohs, the opulent designs of ancient Egypt still find their way into high-end interiors today. Every curve and finish reflects passion and precision.”
-        </blockquote>
-        <p className="text-xs uppercase tracking-widest text-wood-300 font-medium">
-          — Kate Yourde · In Collaboration with Yasmina Makram
-        </p>
-      </div>
 
-      {/* Landmark Corporate & Architectural Collaborations */}
-      <div className="space-y-8">
-        <div className="border-b border-[#E9E2D5] pb-4 flex flex-col sm:flex-row sm:items-end justify-between">
-          <div>
-            <span className="text-[10px] uppercase tracking-[0.25em] text-wood-600 font-semibold block mb-1">
-              Chapter IV · Architectural Partnerships
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl text-charcoal-900 font-normal">
-              Trusted by Egypt's Design Leaders
-            </h2>
-          </div>
-          <p className="text-xs text-charcoal-500 font-light mt-2 sm:mt-0">
-            Furnishing prestige offices, hospitality landmarks, and private residences.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {PARTNERS_AND_CLIENTS.map((partner) => (
-            <div 
-              key={partner.name}
-              className="bg-white border border-[#E9E2D5] p-5 text-center flex flex-col items-center justify-center min-h-24 hover:border-wood-400 transition-colors"
-            >
-              <span className="font-serif text-sm font-semibold text-charcoal-900 block">
-                {partner.name}
-              </span>
-              <span className="text-[10px] text-wood-600 font-sans tracking-tight mt-1">
-                {partner.note}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Story Chapter 5: Brand Values */}
-      <div className="bg-[#FAF8F5] border border-[#E9E2D5] p-8 sm:p-14 space-y-10">
-        <div className="border-b border-[#E9E2D5] pb-4">
-          <span className="text-[10px] uppercase tracking-[0.25em] text-wood-600 font-semibold block mb-1">
-            Chapter V · Our Guiding Creed
-          </span>
-          <h2 className="font-serif text-3xl sm:text-4xl text-charcoal-900 font-normal">
-            Brand Values
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="space-y-2">
-            <h3 className="font-serif text-xl text-charcoal-900 font-medium">Innovative Leadership</h3>
-            <p className="text-xs text-charcoal-600 font-light leading-relaxed">
-              Decades of experience married with contemporary design and European high-precision machinery.
-            </p>
-          </div>
-
-          <div className="space-y-2">
-            <h3 className="font-serif text-xl text-charcoal-900 font-medium">Exceptional Quality</h3>
-            <p className="text-xs text-charcoal-600 font-light leading-relaxed">
-              Meticulous joints, premium imported hardwoods, and long-lasting eco-certified non-toxic finishes.
-            </p>
-          </div>
-
-          <div className="space-y-2">
-            <h3 className="font-serif text-xl text-charcoal-900 font-medium">Customer-Centric Bespoke</h3>
-            <p className="text-xs text-charcoal-600 font-light leading-relaxed">
-              Tailoring dimensions, edge radiuses, and species to unique architectural spaces across Egypt.
-            </p>
-          </div>
-
-          <div className="space-y-2">
-            <h3 className="font-serif text-xl text-charcoal-900 font-medium">Heritage & Expertise</h3>
-            <p className="text-xs text-charcoal-600 font-light leading-relaxed">
-              Preserving Cairo's woodworking mastery since 1948 while continually evolving contemporary forms.
-            </p>
-          </div>
-
-          <div className="space-y-2">
-            <h3 className="font-serif text-xl text-charcoal-900 font-medium">Diverse Offerings</h3>
-            <p className="text-xs text-charcoal-600 font-light leading-relaxed">
-              From freestanding dining tables to architectural wall claddings, vanity units, and pivot doors.
-            </p>
-          </div>
-
-          <div className="space-y-2">
-            <h3 className="font-serif text-xl text-charcoal-900 font-medium">Sustainable Stewardship</h3>
-            <p className="text-xs text-charcoal-600 font-light leading-relaxed">
-              Responsibly harvested FSC timbers paired with zero-waste workshop practices in Cairo.
-            </p>
-          </div>
-        </div>
-      </div>
 
       {/* Workshop Location & Showroom Call-to-Action */}
       <div className="bg-white border border-[#E9E2D5] p-8 sm:p-12 flex flex-col md:flex-row md:items-center justify-between gap-8">
