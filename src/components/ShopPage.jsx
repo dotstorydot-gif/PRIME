@@ -12,15 +12,17 @@ export default function ShopPage() {
   const [filterFinish, setFilterFinish] = useState('all');
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
-  // Exact categories matching old UI (media_1792326157868_a66b0ff4.png)
+  // Chosen piece categories (not room categories)
   const categories = [
     { id: 'all', label: 'All' },
-    { id: 'living-room', label: 'Living Room' },
-    { id: 'dining', label: 'Dining' },
-    { id: 'bedroom', label: 'Bedroom' },
     { id: 'tables', label: 'Tables' },
+    { id: 'consoles', label: 'Consoles' },
+    { id: 'beds', label: 'Beds' },
     { id: 'chairs', label: 'Chairs' },
+    { id: 'dressers', label: 'Dressers' },
+    { id: 'tv-units', label: 'TV Units' },
     { id: 'storage', label: 'Storage' },
+    { id: 'doors-millwork', label: 'Doors' },
   ];
 
   const timberOptions = [
@@ -40,67 +42,9 @@ export default function ShopPage() {
   const filteredProducts = useMemo(() => {
     let result = [...PRODUCTS];
 
-    // Filter by Category matching both room categories and piece categories
+    // Filter by piece Category
     if (selectedCategoryFilter && selectedCategoryFilter !== 'all') {
-      result = result.filter(item => {
-        // Direct categoryId or room match
-        if (item.categoryId === selectedCategoryFilter) return true;
-        if (item.room === selectedCategoryFilter) return true;
-        if (item.rooms && item.rooms.includes(selectedCategoryFilter)) return true;
-
-        // Custom mappings for old UI categories
-        if (selectedCategoryFilter === 'living-room') {
-          return ['tables', 'consoles', 'chairs', 'tv-units', 'storage', 'doors-millwork'].includes(item.categoryId) ||
-                 item.category?.toLowerCase().includes('living') ||
-                 item.room === 'living-room' ||
-                 item.rooms?.includes('living-room');
-        }
-        if (selectedCategoryFilter === 'dining') {
-          return (item.categoryId === 'tables' && item.name.toLowerCase().includes('dining')) ||
-                 item.categoryId === 'consoles' ||
-                 item.category?.toLowerCase().includes('dining') ||
-                 item.room === 'dining' ||
-                 item.rooms?.includes('dining');
-        }
-        if (selectedCategoryFilter === 'bedroom') {
-          return item.categoryId === 'beds' ||
-                 item.categoryId === 'dressers' ||
-                 item.category?.toLowerCase().includes('bed') ||
-                 item.room === 'bedroom' ||
-                 item.rooms?.includes('bedroom');
-        }
-        if (selectedCategoryFilter === 'tables') {
-          return item.categoryId === 'tables' || item.name.toLowerCase().includes('table');
-        }
-        if (selectedCategoryFilter === 'chairs') {
-          return item.categoryId === 'chairs' || item.name.toLowerCase().includes('chair') || item.name.toLowerCase().includes('armchair');
-        }
-        if (selectedCategoryFilter === 'storage') {
-          return ['storage', 'tv-units', 'dressers', 'consoles'].includes(item.categoryId) ||
-                 item.name.toLowerCase().includes('cabinet') ||
-                 item.name.toLowerCase().includes('credenza') ||
-                 item.name.toLowerCase().includes('sideboard');
-        }
-
-        // Direct matching for piece categories if navigated from homepage:
-        if (selectedCategoryFilter === 'consoles') {
-          return item.categoryId === 'consoles';
-        }
-        if (selectedCategoryFilter === 'beds') {
-          return item.categoryId === 'beds';
-        }
-        if (selectedCategoryFilter === 'dressers') {
-          return item.categoryId === 'dressers';
-        }
-        if (selectedCategoryFilter === 'tv-units') {
-          return item.categoryId === 'tv-units';
-        }
-        if (selectedCategoryFilter === 'doors-millwork') {
-          return item.categoryId === 'doors-millwork';
-        }
-
-        return false;
-      });
+      result = result.filter(item => item.categoryId === selectedCategoryFilter);
     }
 
     // Filter by Finish if selected
@@ -122,18 +66,12 @@ export default function ShopPage() {
     return result;
   }, [selectedCategoryFilter, sortBy, filterFinish]);
 
-  // Determine which tab is active (including if a sub-piece was selected from home)
+  // Determine which tab is active
   const isTabActive = (catId) => {
     if (catId === 'all') {
       return !selectedCategoryFilter || selectedCategoryFilter === 'all';
     }
-    if (selectedCategoryFilter === catId) return true;
-    if (catId === 'tables' && selectedCategoryFilter === 'tables') return true;
-    if (catId === 'chairs' && selectedCategoryFilter === 'chairs') return true;
-    if (catId === 'storage' && (selectedCategoryFilter === 'storage' || selectedCategoryFilter === 'tv-units')) return true;
-    if (catId === 'bedroom' && (selectedCategoryFilter === 'beds' || selectedCategoryFilter === 'dressers')) return true;
-    if (catId === 'living-room' && (selectedCategoryFilter === 'consoles' || selectedCategoryFilter === 'doors-millwork')) return true;
-    return false;
+    return selectedCategoryFilter === catId;
   };
 
   return (
@@ -155,8 +93,8 @@ export default function ShopPage() {
       {/* Filter and Sort Toolbar */}
       <div className="border-y border-[#E9E2D5] py-4 mb-10 flex flex-wrap items-center justify-between gap-4">
         
-        {/* Desktop Category Pills matching old UI */}
-        <div className="hidden lg:flex items-center space-x-8 overflow-x-auto no-scrollbar py-1">
+        {/* Desktop Category Pills: Chosen Piece Categories */}
+        <div className="hidden lg:flex items-center space-x-5 xl:space-x-7 overflow-x-auto no-scrollbar py-1">
           {categories.map((cat) => {
             const isSelected = isTabActive(cat.id);
             return (
