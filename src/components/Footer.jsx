@@ -127,33 +127,23 @@ export default function Footer() {
 
             <ul className="space-y-3 text-xs text-neutral-400 font-light">
               <li>
-                <button onClick={() => navigateTo('contact')} className="hover:text-white transition-colors text-left">
-                  Delivery Across Egypt
+                <button onClick={() => navigateTo('shipping')} className="hover:text-white transition-colors text-left">
+                  Shipping & Delivery
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateTo('about')} className="hover:text-white transition-colors text-left">
-                  10-Year Craft Guarantee
+                <button onClick={() => navigateTo('returns')} className="hover:text-white transition-colors text-left">
+                  Returns
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateTo('about')} className="hover:text-white transition-colors text-left">
-                  Solid Wood Care Guide
+                <button onClick={() => navigateTo('faq')} className="hover:text-white transition-colors text-left">
+                  FAQs
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateTo('custom')} className="hover:text-white transition-colors text-left">
-                  Bespoke Dimensions
-                </button>
-              </li>
-              <li>
-                <button onClick={() => navigateTo('contact')} className="hover:text-white transition-colors text-left">
-                  Architectural Consultation
-                </button>
-              </li>
-              <li>
-                <button onClick={() => navigateTo('contact')} className="hover:text-white transition-colors text-left">
-                  Showroom Appointments
+                <button onClick={() => navigateTo('care-guide')} className="hover:text-white transition-colors text-left">
+                  Care Guide
                 </button>
               </li>
             </ul>

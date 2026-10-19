@@ -329,6 +329,12 @@ export default function ProductDetailPage() {
                 <div className="pb-4 text-xs text-charcoal-600 font-light leading-relaxed space-y-2">
                   <p><strong>Lead Time:</strong> {product.leadTime}</p>
                   <p>{product.delivery}</p>
+                  <button 
+                    onClick={() => navigateTo('shipping')}
+                    className="text-wood-700 underline underline-offset-2 hover:text-wood-900 block pt-1 font-medium"
+                  >
+                    View White-Glove Delivery Details & Zones →
+                  </button>
                 </div>
               )}
             </div>
@@ -348,6 +354,12 @@ export default function ProductDetailPage() {
                   <p>• For spills, blot immediately with a slightly damp cloth and wipe dry.</p>
                   <p>• Avoid harsh chemical detergents and direct prolonged placement over heating radiators.</p>
                   <p>• Re-nourish annually with Prime natural beeswax conditioning paste.</p>
+                  <button 
+                    onClick={() => navigateTo('care-guide')}
+                    className="text-wood-700 underline underline-offset-2 hover:text-wood-900 block pt-1 font-medium"
+                  >
+                    View Full Solid Wood Care & Preservation Guide →
+                  </button>
                 </div>
               )}
             </div>

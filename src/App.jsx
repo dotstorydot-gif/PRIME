@@ -15,6 +15,7 @@ import ContactPage from './components/ContactPage';
 import CartPage from './components/CartPage';
 import CheckoutPage from './components/CheckoutPage';
 import WishlistPage from './components/WishlistPage';
+import CustomerCarePage from './components/CustomerCarePage';
 
 // Modals & Drawers
 import CartDrawer from './components/CartDrawer';
@@ -44,6 +45,13 @@ function MainContent() {
       {currentPage === 'cart' && <CartPage />}
       {currentPage === 'checkout' && <CheckoutPage />}
       {currentPage === 'wishlist' && <WishlistPage />}
+
+      {/* Customer Care Pages */}
+      {currentPage === 'shipping' && <CustomerCarePage initialTab="shipping" />}
+      {currentPage === 'returns' && <CustomerCarePage initialTab="returns" />}
+      {currentPage === 'faq' && <CustomerCarePage initialTab="faq" />}
+      {currentPage === 'care-guide' && <CustomerCarePage initialTab="care-guide" />}
+      {currentPage === 'customer-care' && <CustomerCarePage initialTab="shipping" />}
     </main>
   );
 }
