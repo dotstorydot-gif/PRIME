@@ -39,8 +39,8 @@ export default function Navbar() {
       <header 
         className={`sticky top-0 z-40 transition-all duration-300 ${
           isScrolled 
-            ? 'bg-[#fae6c3]/95 backdrop-blur-md border-b border-[#ebd2a9] py-3.5 shadow-sm' 
-            : 'bg-[#fae6c3] border-b border-[#ebd2a9]/80 py-5'
+            ? 'bg-white/95 backdrop-blur-md border-b border-neutral-200/80 py-3.5 shadow-sm' 
+            : 'bg-white border-b border-neutral-200/60 py-5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,8 +64,8 @@ export default function Navbar() {
               >
                 <svg className="w-8 h-8 shrink-0" viewBox="0 0 100 100" fill="none">
                   <circle cx="50" cy="50" r="46" fill="#1d2743" />
-                  <path d="M30 50 Q50 20 70 50 T30 50" stroke="#fae6c3" strokeWidth="4" fill="none" strokeLinecap="round" />
-                  <path d="M25 60 Q50 30 75 60" stroke="#fae6c3" strokeWidth="4" fill="none" strokeLinecap="round" />
+                  <path d="M30 50 Q50 20 70 50 T30 50" stroke="#ffffff" strokeWidth="4" fill="none" strokeLinecap="round" />
+                  <path d="M25 60 Q50 30 75 60" stroke="#ffffff" strokeWidth="4" fill="none" strokeLinecap="round" />
                 </svg>
                 <span className="font-serif text-2xl sm:text-3xl tracking-[0.18em] font-medium text-[#1d2743] uppercase">
                   PRIME
@@ -146,7 +146,7 @@ export default function Navbar() {
                 <div className="relative">
                   <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5" />
                   {cartItemCount > 0 && (
-                    <span className="absolute -top-1.5 -right-2 bg-[#1d2743] text-[#fae6c3] text-[10px] font-sans font-semibold w-4 h-4 rounded-full flex items-center justify-center">
+                    <span className="absolute -top-1.5 -right-2 bg-[#1d2743] text-white text-[10px] font-sans font-semibold w-4 h-4 rounded-full flex items-center justify-center">
                       {cartItemCount}
                     </span>
                   )}
@@ -164,13 +164,13 @@ export default function Navbar() {
             className="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity" 
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="fixed inset-y-0 left-0 max-w-xs w-full bg-[#fae6c3] shadow-xl flex flex-col z-10 p-6 border-r border-[#ebd2a9]">
-            <div className="flex items-center justify-between pb-6 border-b border-[#ebd2a9]">
+          <div className="fixed inset-y-0 left-0 max-w-xs w-full bg-white shadow-xl flex flex-col z-10 p-6 border-r border-neutral-200">
+            <div className="flex items-center justify-between pb-6 border-b border-neutral-200">
               <div className="flex items-center space-x-2">
                 <svg className="w-7 h-7 shrink-0" viewBox="0 0 100 100" fill="none">
                   <circle cx="50" cy="50" r="46" fill="#1d2743" />
-                  <path d="M30 50 Q50 20 70 50 T30 50" stroke="#fae6c3" strokeWidth="4" fill="none" strokeLinecap="round" />
-                  <path d="M25 60 Q50 30 75 60" stroke="#fae6c3" strokeWidth="4" fill="none" strokeLinecap="round" />
+                  <path d="M30 50 Q50 20 70 50 T30 50" stroke="#ffffff" strokeWidth="4" fill="none" strokeLinecap="round" />
+                  <path d="M25 60 Q50 30 75 60" stroke="#ffffff" strokeWidth="4" fill="none" strokeLinecap="round" />
                 </svg>
                 <span className="font-serif text-2xl tracking-[0.16em] font-medium text-[#1d2743] uppercase">
                   PRIME
@@ -203,7 +203,7 @@ export default function Navbar() {
                 </button>
               ))}
 
-              <div className="pt-4 border-t border-[#ebd2a9] space-y-2">
+              <div className="pt-4 border-t border-neutral-200 space-y-2">
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
@@ -234,7 +234,7 @@ export default function Navbar() {
               </div>
             </nav>
 
-            <div className="pt-6 border-t border-[#ebd2a9] space-y-4 text-xs text-[#1d2743]/80">
+            <div className="pt-6 border-t border-neutral-200 space-y-4 text-xs text-[#1d2743]/80">
               <div>
                 <p className="font-semibold text-charcoal-800 uppercase tracking-wider text-[11px] mb-1">Workshop & Showroom</p>
                 <a 
