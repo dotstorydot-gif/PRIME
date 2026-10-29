@@ -10,7 +10,7 @@ export default function Hero() {
       {/* Editorial Background Image with natural warm lighting */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/products/image32.png"
+          src="https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=2400&q=85"
           alt="Contemporary handcrafted wooden interior by Prime Wooden Work"
           className="w-full h-full object-cover object-center filter brightness-[0.78] contrast-[1.03] transform scale-100 transition-transform duration-1000 ease-out"
         />
