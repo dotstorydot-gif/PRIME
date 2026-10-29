@@ -18,7 +18,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#1C1A18] text-[#FAF8F5] pt-20 pb-12 border-t border-wood-900">
+    <footer className="bg-[#182032] text-[#FAF8F5] pt-20 pb-12 border-t border-[#1d2743]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Footer Grid: 4 Balanced Columns with Harmonious Top Baselines */}
@@ -30,45 +30,45 @@ export default function Footer() {
               <span className="font-serif text-2xl tracking-[0.16em] font-medium text-white uppercase block leading-none">
                 PRIME
               </span>
-              <span className="text-[9px] tracking-[0.28em] font-sans text-wood-300 uppercase block mt-1.5 font-medium">
+              <span className="text-[9px] tracking-[0.28em] font-sans text-[#fae6c3] uppercase block mt-1.5 font-medium">
                 WOODEN WORK · CAIRO
               </span>
             </div>
 
-            <p className="text-xs text-neutral-400 font-light leading-relaxed">
+            <p className="text-xs text-neutral-300 font-light leading-relaxed">
               Contemporary furniture, thoughtfully crafted in Egypt from honest hardwoods since 1948. Built to bring architectural warmth and lasting presence to your space.
             </p>
 
-            <div className="pt-3 border-t border-white/10 space-y-2.5 text-xs text-neutral-400 font-light">
+            <div className="pt-3 border-t border-white/10 space-y-2.5 text-xs text-neutral-300 font-light">
               <a 
                 href="https://maps.google.com/?q=3+El+Madaress+St+Off+Port+Said+St+Ghamra+Cairo+Egypt" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="hover:text-wood-200 transition-colors flex items-start space-x-2.5 group"
+                className="hover:text-[#fae6c3] transition-colors flex items-start space-x-2.5 group"
                 title="Open workshop location in Google Maps"
               >
-                <MapPin className="w-3.5 h-3.5 text-wood-300 shrink-0 mt-0.5 group-hover:text-wood-200" />
+                <MapPin className="w-3.5 h-3.5 text-[#fae6c3] shrink-0 mt-0.5 group-hover:text-white" />
                 <span className="underline-offset-4 group-hover:underline">
                   3 El Madaress St., Ghamra, Cairo ↗
                 </span>
               </a>
 
               <div className="flex items-center space-x-2.5">
-                <Phone className="w-3.5 h-3.5 text-wood-300 shrink-0" />
+                <Phone className="w-3.5 h-3.5 text-[#fae6c3] shrink-0" />
                 <div className="flex items-center space-x-2">
-                  <a href="tel:+201222935556" className="hover:text-wood-200 transition-colors">
+                  <a href="tel:+201222935556" className="hover:text-[#fae6c3] transition-colors">
                     (+20) 122 293 5556
                   </a>
                   <span>/</span>
-                  <a href="tel:+201277488868" className="hover:text-wood-200 transition-colors">
+                  <a href="tel:+201277488868" className="hover:text-[#fae6c3] transition-colors">
                     (+20) 127 748 8868
                   </a>
                 </div>
               </div>
 
               <div className="flex items-center space-x-2.5">
-                <Mail className="w-3.5 h-3.5 text-wood-300 shrink-0" />
-                <a href="mailto:info@primewoodenworks.com" className="hover:text-wood-200 transition-colors">
+                <Mail className="w-3.5 h-3.5 text-[#fae6c3] shrink-0" />
+                <a href="mailto:info@primewoodenworks.com" className="hover:text-[#fae6c3] transition-colors">
                   info@primewoodenworks.com
                 </a>
               </div>
@@ -174,7 +174,7 @@ export default function Footer() {
                 <button
                   type="submit"
                   disabled={subscribed}
-                  className="text-xs uppercase tracking-[0.2em] font-medium text-wood-200 hover:text-white transition-colors ml-3 shrink-0 flex items-center space-x-1"
+                  className="text-xs uppercase tracking-[0.2em] font-medium text-[#fae6c3] hover:text-white transition-colors ml-3 shrink-0 flex items-center space-x-1"
                 >
                   {subscribed ? (
                     <span className="flex items-center space-x-1 text-green-300">

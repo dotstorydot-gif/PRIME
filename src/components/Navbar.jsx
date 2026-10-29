@@ -35,27 +35,12 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top Heritage Marquee Bar */}
-      <div className="bg-[#1C1A18] text-[#FAF8F5] text-[11px] tracking-widest uppercase py-2 px-4 text-center font-medium border-b border-wood-800 hidden md:block">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <span className="text-sand-400">Est. 1948 · Cairo Workshop</span>
-          <a 
-            href="https://wa.me/201222935556" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="text-sand-400 hover:text-white transition-colors"
-          >
-            Call / WhatsApp: (+20) 122 293 5556
-          </a>
-        </div>
-      </div>
-
       {/* Main Sticky Navigation */}
       <header 
         className={`sticky top-0 z-40 transition-all duration-300 ${
           isScrolled 
-            ? 'bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#E9E2D5] py-3.5 shadow-sm' 
-            : 'bg-[#FAF8F5] border-b border-[#E9E2D5]/70 py-5'
+            ? 'bg-[#fae6c3]/95 backdrop-blur-md border-b border-[#ebd2a9] py-3.5 shadow-sm' 
+            : 'bg-[#fae6c3] border-b border-[#ebd2a9]/80 py-5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -66,7 +51,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(true)}
-                className="lg:hidden p-2 text-charcoal-800 hover:text-wood-600 transition-colors"
+                className="lg:hidden p-2 text-[#1d2743] hover:text-[#182032] transition-colors"
                 aria-label="Open navigation menu"
               >
                 <Menu className="w-5 h-5" />
@@ -75,15 +60,15 @@ export default function Navbar() {
               {/* Brand Logo */}
               <button 
                 onClick={() => navigateTo('home')}
-                className="text-left group focus:outline-none flex flex-col items-start"
+                className="text-left group focus:outline-none flex items-center space-x-2.5"
               >
-                <div className="flex items-baseline space-x-1.5">
-                  <span className="font-serif text-2xl sm:text-3xl tracking-[0.18em] font-medium text-[#1C1A18] uppercase">
-                    PRIME
-                  </span>
-                </div>
-                <span className="text-[9px] sm:text-[10px] tracking-[0.28em] font-sans text-wood-500 uppercase -mt-1 font-medium">
-                  WOODEN WORK
+                <svg className="w-8 h-8 shrink-0" viewBox="0 0 100 100" fill="none">
+                  <circle cx="50" cy="50" r="46" fill="#1d2743" />
+                  <path d="M30 50 Q50 20 70 50 T30 50" stroke="#fae6c3" strokeWidth="4" fill="none" strokeLinecap="round" />
+                  <path d="M25 60 Q50 30 75 60" stroke="#fae6c3" strokeWidth="4" fill="none" strokeLinecap="round" />
+                </svg>
+                <span className="font-serif text-2xl sm:text-3xl tracking-[0.18em] font-medium text-[#1d2743] uppercase">
+                  PRIME
                 </span>
               </button>
             </div>
@@ -98,13 +83,13 @@ export default function Navbar() {
                     onClick={() => navigateTo(link.id)}
                     className={`text-xs uppercase tracking-[0.18em] font-medium transition-all relative py-1 ${
                       isActive 
-                        ? 'text-wood-700 font-semibold' 
-                        : 'text-charcoal-700 hover:text-wood-600'
+                        ? 'text-[#1d2743] font-semibold' 
+                        : 'text-[#1d2743]/85 hover:text-[#1d2743]'
                     }`}
                   >
                     {link.name}
                     {isActive && (
-                      <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-wood-600 animate-fadeIn" />
+                      <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-[#1d2743] animate-fadeIn" />
                     )}
                   </button>
                 );
@@ -117,7 +102,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setIsSearchOpen(true)}
-                className="p-2 text-charcoal-700 hover:text-wood-600 transition-colors focus:outline-none"
+                className="p-2 text-[#1d2743] hover:text-[#182032] transition-colors focus:outline-none"
                 aria-label="Search furniture catalog"
                 title="Search catalog"
               >
@@ -129,14 +114,14 @@ export default function Navbar() {
                 type="button"
                 onClick={() => navigateTo('wishlist')}
                 className={`p-2 transition-colors relative focus:outline-none ${
-                  currentPage === 'wishlist' ? 'text-wood-800' : 'text-charcoal-700 hover:text-wood-600'
+                  currentPage === 'wishlist' ? 'text-[#1d2743]' : 'text-[#1d2743] hover:text-[#182032]'
                 }`}
                 aria-label="Wishlist"
                 title="Saved pieces"
               >
                 <Heart className={`w-4 h-4 sm:w-5 sm:h-5 ${currentPage === 'wishlist' ? 'fill-current' : ''}`} />
                 {wishlist.length > 0 && (
-                  <span className="absolute top-1.5 right-1 w-2 h-2 rounded-full bg-wood-700" />
+                  <span className="absolute top-1.5 right-1 w-2 h-2 rounded-full bg-[#1d2743]" />
                 )}
               </button>
 
@@ -144,7 +129,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setIsAccountOpen(true)}
-                className="p-2 text-charcoal-700 hover:text-wood-600 transition-colors focus:outline-none"
+                className="p-2 text-[#1d2743] hover:text-[#182032] transition-colors focus:outline-none"
                 aria-label="Account and Bespoke Profile"
                 title="Client Account & Orders"
               >
@@ -155,13 +140,13 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setIsCartOpen(true)}
-                className="flex items-center space-x-1.5 p-2 text-charcoal-800 hover:text-wood-600 transition-colors relative focus:outline-none"
+                className="flex items-center space-x-1.5 p-2 text-[#1d2743] hover:text-[#182032] transition-colors relative focus:outline-none"
                 aria-label={`Shopping bag with ${cartItemCount} items`}
               >
                 <div className="relative">
                   <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5" />
                   {cartItemCount > 0 && (
-                    <span className="absolute -top-1.5 -right-2 bg-wood-700 text-[#FAF8F5] text-[10px] font-sans font-semibold w-4 h-4 rounded-full flex items-center justify-center">
+                    <span className="absolute -top-1.5 -right-2 bg-[#1d2743] text-[#fae6c3] text-[10px] font-sans font-semibold w-4 h-4 rounded-full flex items-center justify-center">
                       {cartItemCount}
                     </span>
                   )}
@@ -179,19 +164,21 @@ export default function Navbar() {
             className="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity" 
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="fixed inset-y-0 left-0 max-w-xs w-full bg-[#FAF8F5] shadow-xl flex flex-col z-10 p-6 border-r border-[#E9E2D5]">
-            <div className="flex items-center justify-between pb-6 border-b border-[#E9E2D5]">
-              <div>
-                <span className="font-serif text-2xl tracking-[0.16em] font-medium text-[#1C1A18] uppercase">
+          <div className="fixed inset-y-0 left-0 max-w-xs w-full bg-[#fae6c3] shadow-xl flex flex-col z-10 p-6 border-r border-[#ebd2a9]">
+            <div className="flex items-center justify-between pb-6 border-b border-[#ebd2a9]">
+              <div className="flex items-center space-x-2">
+                <svg className="w-7 h-7 shrink-0" viewBox="0 0 100 100" fill="none">
+                  <circle cx="50" cy="50" r="46" fill="#1d2743" />
+                  <path d="M30 50 Q50 20 70 50 T30 50" stroke="#fae6c3" strokeWidth="4" fill="none" strokeLinecap="round" />
+                  <path d="M25 60 Q50 30 75 60" stroke="#fae6c3" strokeWidth="4" fill="none" strokeLinecap="round" />
+                </svg>
+                <span className="font-serif text-2xl tracking-[0.16em] font-medium text-[#1d2743] uppercase">
                   PRIME
                 </span>
-                <p className="text-[9px] tracking-[0.24em] font-sans text-wood-500 uppercase">
-                  WOODEN WORK · CAIRO
-                </p>
               </div>
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2 text-charcoal-700 hover:text-charcoal-900"
+                className="p-2 text-[#1d2743] hover:text-[#182032]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -207,28 +194,28 @@ export default function Navbar() {
                   }}
                   className={`w-full text-left py-2 text-sm uppercase tracking-widest flex items-center justify-between transition-colors ${
                     currentPage === link.id 
-                      ? 'text-wood-700 font-semibold' 
-                      : 'text-charcoal-700 hover:text-wood-600'
+                      ? 'text-[#1d2743] font-bold' 
+                      : 'text-[#1d2743]/80 hover:text-[#1d2743]'
                   }`}
                 >
                   <span>{link.name}</span>
-                  <ArrowRight className="w-4 h-4 text-wood-400" />
+                  <ArrowRight className="w-4 h-4 text-[#1d2743]/50" />
                 </button>
               ))}
 
-              <div className="pt-4 border-t border-[#E9E2D5] space-y-2">
+              <div className="pt-4 border-t border-[#ebd2a9] space-y-2">
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
                     navigateTo('wishlist');
                   }}
-                  className="w-full text-left py-2 text-xs uppercase tracking-widest text-charcoal-700 hover:text-wood-800 flex items-center justify-between"
+                  className="w-full text-left py-2 text-xs uppercase tracking-widest text-[#1d2743]/85 hover:text-[#1d2743] flex items-center justify-between"
                 >
                   <span className="flex items-center space-x-2">
-                    <Heart className="w-4 h-4 text-wood-600" />
+                    <Heart className="w-4 h-4 text-[#1d2743]" />
                     <span>Saved Pieces ({wishlist.length})</span>
                   </span>
-                  <ArrowRight className="w-3.5 h-3.5 text-wood-400" />
+                  <ArrowRight className="w-3.5 h-3.5 text-[#1d2743]/50" />
                 </button>
 
                 <button
@@ -236,18 +223,18 @@ export default function Navbar() {
                     setMobileMenuOpen(false);
                     setIsAccountOpen(true);
                   }}
-                  className="w-full text-left py-2 text-xs uppercase tracking-widest text-charcoal-700 hover:text-wood-800 flex items-center justify-between"
+                  className="w-full text-left py-2 text-xs uppercase tracking-widest text-[#1d2743]/85 hover:text-[#1d2743] flex items-center justify-between"
                 >
                   <span className="flex items-center space-x-2">
-                    <User className="w-4 h-4 text-wood-600" />
+                    <User className="w-4 h-4 text-[#1d2743]" />
                     <span>Client Account & Tracking</span>
                   </span>
-                  <ArrowRight className="w-3.5 h-3.5 text-wood-400" />
+                  <ArrowRight className="w-3.5 h-3.5 text-[#1d2743]/50" />
                 </button>
               </div>
             </nav>
 
-            <div className="pt-6 border-t border-[#E9E2D5] space-y-4 text-xs text-charcoal-600">
+            <div className="pt-6 border-t border-[#ebd2a9] space-y-4 text-xs text-[#1d2743]/80">
               <div>
                 <p className="font-semibold text-charcoal-800 uppercase tracking-wider text-[11px] mb-1">Workshop & Showroom</p>
                 <a 

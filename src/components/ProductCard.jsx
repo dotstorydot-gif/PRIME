@@ -83,8 +83,8 @@ export default function ProductCard({ product }) {
             onClick={handleWishlistToggle}
             className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
               wishlisted 
-                ? 'bg-wood-800 text-[#FAF8F5]' 
-                : 'bg-[#FAF8F5]/90 backdrop-blur-sm text-charcoal-700 hover:text-wood-700 hover:bg-white'
+                ? 'bg-[#1d2743] text-[#fae6c3]' 
+                : 'bg-[#FAF8F5]/90 backdrop-blur-sm text-charcoal-700 hover:text-[#1d2743] hover:bg-white'
             }`}
             aria-label={wishlisted ? 'Remove from wishlist' : 'Save to wishlist'}
             title={wishlisted ? 'Remove from saved' : 'Save to wishlist'}
@@ -113,7 +113,7 @@ export default function ProductCard({ product }) {
           <button
             type="button"
             onClick={handleQuickAdd}
-            className="py-2.5 px-3 bg-wood-800 text-[#FAF8F5] hover:bg-wood-900 transition-colors flex items-center justify-center text-[11px] uppercase tracking-widest font-medium border border-wood-900"
+            className="py-2.5 px-3 bg-[#1d2743] text-[#fae6c3] hover:bg-[#182032] transition-colors flex items-center justify-center text-[11px] uppercase tracking-widest font-medium border border-[#1d2743]"
             title="Quick add to bag"
           >
             {justAdded ? (

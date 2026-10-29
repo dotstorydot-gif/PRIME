@@ -100,8 +100,8 @@ export default function ProductDetailPage() {
               onClick={() => toggleWishlist(product.id)}
               className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center transition-all ${
                 wishlisted 
-                  ? 'bg-wood-800 text-white' 
-                  : 'bg-white/90 backdrop-blur-sm text-charcoal-700 hover:text-wood-700'
+                  ? 'bg-[#1d2743] text-[#fae6c3]' 
+                  : 'bg-white/90 backdrop-blur-sm text-charcoal-700 hover:text-[#1d2743]'
               }`}
               title="Save to Wishlist"
             >
@@ -260,7 +260,7 @@ export default function ProductDetailPage() {
               <button
                 type="button"
                 onClick={handleAddToCart}
-                className="flex-1 py-4 bg-wood-800 text-[#FAF8F5] hover:bg-wood-900 text-xs uppercase tracking-[0.2em] font-medium transition-all shadow-sm flex items-center justify-center space-x-2"
+                className="flex-1 py-4 bg-[#1d2743] text-[#fae6c3] hover:bg-[#182032] text-xs uppercase tracking-[0.2em] font-medium transition-all shadow-sm flex items-center justify-center space-x-2 rounded-md"
               >
                 <ShoppingBag className="w-4 h-4" />
                 <span>
@@ -275,7 +275,7 @@ export default function ProductDetailPage() {
             <button
               type="button"
               onClick={handleCustomize}
-              className="w-full py-3.5 border border-wood-700 text-wood-800 hover:bg-wood-50 text-xs uppercase tracking-[0.2em] font-medium transition-all flex items-center justify-center space-x-2"
+              className="w-full py-3.5 border border-[#1d2743] text-[#1d2743] hover:bg-[#fae6c3]/20 text-xs uppercase tracking-[0.2em] font-medium transition-all flex items-center justify-center space-x-2 rounded-md"
             >
               <Compass className="w-4 h-4 text-wood-600" />
               <span>Customize This Piece</span>
