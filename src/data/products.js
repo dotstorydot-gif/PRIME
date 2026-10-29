@@ -1,532 +1,1220 @@
 export const PRODUCTS = [
+  // === EXPLICIT B2C PRICED COLLECTION (FROM EXCEL COLUMN I & J) ===
   {
-    id: 'oslo-dining-table',
-    name: 'Oslo Dining Table',
-    category: 'Tables',
-    categoryId: 'tables',
-    price: 42500,
+    id: 'prime-cloud-bed',
+    name: 'Prime Cloud Bed',
+    category: 'Beds',
+    categoryId: 'beds',
+    price: 56000,
+    isFeatured: true,
+    isNew: true,
+    badge: 'Best Seller',
+    tagline: 'Upholstered Bed 180×200 · Plywood & Oak Wood',
+    description: 'A modern and cozy design featuring a soft upholstered curved base and split headboard, bringing ultimate comfort and smoothness to your room.',
+    dimensions: {
+      standard: '180 x 200 cm Mattress Frame',
+      large: '200 x 200 cm King Frame (Custom)'
+    },
+    materials: 'Upholstered Bed 180*200 — Plywood, oak wood',
+    leadTime: '3 – 4 Weeks',
+    delivery: 'White-glove delivery and bedroom installation across Greater Cairo, Giza, and North Coast.',
+    finishes: [
+      { name: 'Plywood & Natural Oak', hex: '#D7C4A5' },
+      { name: 'Warm Bouclé & Oak', hex: '#E5DDD0' },
+      { name: 'Smoked Walnut Trim', hex: '#533C29' }
+    ],
+    sizes: [
+      '180 x 200 cm (Queen/King Standard)',
+      '200 x 200 cm (Super King)',
+      'Custom Dimensions'
+    ],
+    primaryImage: '/images/products/image1.jpg',
+    secondaryImage: '/images/products/image22.png',
+    gallery: [
+      '/images/products/image1.jpg',
+      '/images/products/image22.png',
+      '/images/products/image29.png'
+    ]
+  },
+  {
+    id: 'prime-bliss-bed',
+    name: 'Prime Bliss Bed',
+    category: 'Beds',
+    categoryId: 'beds',
+    price: 54500,
+    isFeatured: true,
+    isNew: true,
+    badge: 'Featured',
+    tagline: 'Upholstered Bed 180×200 · Plywood & Oak Wood',
+    description: 'A soft, comforting design that fills your bedroom with an enchanting sense of relaxation and peace.',
+    dimensions: {
+      standard: '180 x 200 cm Mattress Frame',
+      large: '200 x 200 cm King Frame (Custom)'
+    },
+    materials: 'Upholstered Bed 180*200 — Plywood, oak wood',
+    leadTime: '3 – 4 Weeks',
+    delivery: 'Full room assembly and headboard mounting included.',
+    finishes: [
+      { name: 'Plywood & Oak Wood', hex: '#C8A986' },
+      { name: 'Warm Cream Upholstery', hex: '#EAE3D5' },
+      { name: 'Smoked Walnut', hex: '#533C29' }
+    ],
+    sizes: [
+      '180 x 200 cm (Standard)',
+      '200 x 200 cm (King)',
+      'Custom Dimensions'
+    ],
+    primaryImage: '/images/products/image29.png',
+    secondaryImage: '/images/products/image24.png',
+    gallery: [
+      '/images/products/image29.png',
+      '/images/products/image24.png',
+      '/images/products/image1.jpg'
+    ]
+  },
+  {
+    id: 'prime-curve',
+    name: 'Prime Curve Highboard',
+    category: 'Storage',
+    categoryId: 'storage',
+    price: 68500,
+    isFeatured: true,
+    isNew: true,
+    badge: 'Limited Series',
+    tagline: 'Highboard · Plywood & Oak Veneer',
+    description: 'A luxurious curved design offering sleek storage.',
+    dimensions: {
+      standard: '120 cm (W) x 45 cm (D) x 155 cm (H)',
+      large: '140 cm (W) x 48 cm (D) x 165 cm (H)'
+    },
+    materials: 'Highboard — Plywood, oak veneer',
+    leadTime: '3 – 4 Weeks',
+    delivery: 'Delivered fully assembled with anti-tip wall anchoring hardware.',
+    finishes: [
+      { name: 'Natural Oak Veneer', hex: '#D7C4A5' },
+      { name: 'Smoked Walnut', hex: '#533C29' },
+      { name: 'Blackened Ash Base', hex: '#262423' }
+    ],
+    sizes: [
+      'Standard Highboard',
+      'Custom Dimensions'
+    ],
+    primaryImage: '/images/products/image13.png',
+    secondaryImage: '/images/products/image2.png',
+    gallery: [
+      '/images/products/image13.png',
+      '/images/products/image2.png',
+      '/images/products/image27.png'
+    ]
+  },
+  {
+    id: 'prime-shadow',
+    name: 'Prime Shadow Sideboard',
+    category: 'Consoles',
+    categoryId: 'consoles',
+    price: 58000,
     isFeatured: true,
     isNew: true,
     badge: 'Signature',
-    rating: 4.9,
-    reviewsCount: 28,
-    primaryImage: 'https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1200&q=80',
-    secondaryImage: 'https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=1200&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?auto=format&fit=crop&w=1200&q=80'
-    ],
-    tagline: 'Monumental solid oak dining table with soft pillowed radius edges and monolithic sculpted timber legs.',
-    description: 'The Oslo Dining Table balances architectural presence with warm domestic tactility. Handcrafted from sustainably harvested European white oak in our Cairo workshop, its gentle pillowed perimeter softens an otherwise bold, monolithic presence. Designed to host intimate dinners or grand celebratory feasts for generations.',
+    tagline: 'Architectural Sideboard · Plywood & Oak Wood',
+    description: 'A sleek dark design that adds a warm and unique touch to your space.',
     dimensions: {
-      standard: '240 cm (W) x 105 cm (D) x 76 cm (H)',
-      large: '280 cm (W) x 115 cm (D) x 76 cm (H)',
-      compact: '200 cm (W) x 95 cm (D) x 76 cm (H)'
+      standard: '200 cm (W) x 48 cm (D) x 80 cm (H)',
+      large: '240 cm (W) x 50 cm (D) x 82 cm (H)'
     },
-    materials: 'Solid White Oak or Smoked Walnut top with mortise-and-tenon undercarriage. Matte bio-polyurethane seal that preserves the raw organic feel while offering superior water and stain resistance.',
+    materials: 'Plywood, oak wood',
+    leadTime: '3 – 4 Weeks',
+    delivery: 'White-glove room placement and door alignment calibration.',
     finishes: [
-      { name: 'Natural White Oak', hex: '#D7C4A5', colorClass: 'bg-[#D7C4A5]' },
-      { name: 'Smoked Walnut', hex: '#533C29', colorClass: 'bg-[#533C29]' },
-      { name: 'Blackened Ash', hex: '#262423', colorClass: 'bg-[#262423]' }
+      { name: 'Charcoal & Natural Oak', hex: '#262423' },
+      { name: 'Natural Oak', hex: '#D7C4A5' },
+      { name: 'Smoked Walnut', hex: '#533C29' }
     ],
-    sizes: ['200 x 95 cm (Seats 6)', '240 x 105 cm (Seats 8)', '280 x 115 cm (Seats 10-12)'],
-    inStock: true,
-    leadTime: '10 - 14 business days across Egypt',
-    delivery: 'Free White Glove assembly & placement in Greater Cairo, Giza, and New Capital. Insured crated dispatch to Alexandria, North Coast, and Red Sea.'
+    sizes: [
+      '200 x 48 x 80 cm (4-Door Standard)',
+      '240 x 50 x 82 cm (Large)',
+      'Custom Dimensions'
+    ],
+    primaryImage: '/images/products/image2.png',
+    secondaryImage: '/images/products/image10.png',
+    gallery: [
+      '/images/products/image2.png',
+      '/images/products/image10.png',
+      '/images/products/image6.png'
+    ]
   },
   {
-    id: 'arco-side-table',
-    name: 'Arco Side Table',
+    id: 'prime-carve-dresser',
+    name: 'Prime Carve Dresser',
+    category: 'Dressers',
+    categoryId: 'dressers',
+    price: 42500,
+    isFeatured: true,
+    isNew: false,
+    badge: 'Master Craft',
+    tagline: 'Wood Cabinet · Plywood & Oak Wood',
+    description: 'A masterfully carved wooden design bringing timeless elegance to your space.',
+    dimensions: {
+      standard: '120 cm (W) x 50 cm (D) x 90 cm (H) + Mirror',
+      large: '150 cm (W) x 52 cm (D) x 90 cm (H) + Mirror'
+    },
+    materials: 'Wood Cabinet — Plywood, oak wood',
+    leadTime: '3 – 4 Weeks',
+    delivery: 'Includes secure wall-mounting for the matching wood-framed mirror.',
+    finishes: [
+      { name: 'Natural Carved Oak', hex: '#C8A986' },
+      { name: 'Smoked Walnut', hex: '#533C29' },
+      { name: 'Warm Honey Oak', hex: '#D7C4A5' }
+    ],
+    sizes: [
+      'Standard Cabinet & Mirror',
+      'Custom Dimensions'
+    ],
+    primaryImage: '/images/products/image21.jpg',
+    secondaryImage: '/images/products/image28.png',
+    gallery: [
+      '/images/products/image21.jpg',
+      '/images/products/image28.png'
+    ]
+  },
+  {
+    id: 'prime-lattice',
+    name: 'Prime Lattice TV Unit',
+    category: 'TV Units',
+    categoryId: 'tv-units',
+    price: 33750,
+    isFeatured: true,
+    isNew: true,
+    badge: 'New Release',
+    tagline: 'Floating TV Unit · Plywood & Oak Wood',
+    description: 'A floating TV unit with refined geometric details.',
+    dimensions: {
+      standard: '200 cm (W) x 40 cm (D) x 35 cm (H)',
+      large: '240 cm (W) x 42 cm (D) x 35 cm (H)'
+    },
+    materials: 'Tv unit — Plywood, oak wood',
+    leadTime: '2 – 3 Weeks',
+    delivery: 'Includes structural wall cleat installation and concealed cable routing.',
+    finishes: [
+      { name: 'Natural Oak & Carved Front', hex: '#D7C4A5' },
+      { name: 'Smoked Walnut', hex: '#533C29' },
+      { name: 'Blackened Ash', hex: '#262423' }
+    ],
+    sizes: [
+      '200 cm Floating Unit',
+      '240 cm Floating Unit',
+      'Custom Dimensions'
+    ],
+    primaryImage: '/images/products/image15.png',
+    secondaryImage: '/images/products/image36.png',
+    gallery: [
+      '/images/products/image15.png',
+      '/images/products/image36.png'
+    ]
+  },
+  {
+    id: 'prime-pillar',
+    name: 'Prime Pillar Display Unit',
+    category: 'Storage',
+    categoryId: 'storage',
+    price: 32000,
+    priceUnit: 'per unit',
+    isFeatured: true,
+    isNew: false,
+    badge: 'Modular Unit',
+    tagline: 'Architectural Shelving · Plywood & Oak Wood',
+    description: 'An open wooden display unit featuring spacious shelving and a refined architectural structure.',
+    dimensions: {
+      standard: '90 cm (W) x 38 cm (D) x 210 cm (H) per unit',
+      large: '180 cm (W) Dual Modular Pair'
+    },
+    materials: 'Material: plywood , oak wood',
+    leadTime: '2 – 3 Weeks',
+    delivery: 'Delivered assembled with optional wall-securing brackets.',
+    finishes: [
+      { name: 'Natural White Oak', hex: '#D7C4A5' },
+      { name: 'Smoked Walnut', hex: '#533C29' }
+    ],
+    sizes: [
+      'Single Unit (32,000 EGP / unit)',
+      'Custom Modular Wall Configuration'
+    ],
+    primaryImage: '/images/products/image27.png',
+    secondaryImage: '/images/products/image9.png',
+    gallery: [
+      '/images/products/image27.png',
+      '/images/products/image9.png'
+    ]
+  },
+  {
+    id: 'prime-groove',
+    name: 'Prime Groove Console',
+    category: 'Consoles',
+    categoryId: 'consoles',
+    price: 28500,
+    isFeatured: true,
+    isNew: false,
+    badge: 'Hand Fluted',
+    tagline: 'Textured Console · Plywood & Oak Wood',
+    description: 'A warm wooden design with sleek textured lines.',
+    dimensions: {
+      standard: '140 cm (W) x 40 cm (D) x 80 cm (H)',
+      large: '170 cm (W) x 42 cm (D) x 80 cm (H)'
+    },
+    materials: 'Plywood, oak wood',
+    leadTime: '2 – 3 Weeks',
+    delivery: 'Delivered assembled ready for entryway or living room placement.',
+    finishes: [
+      { name: 'Warm Natural Oak', hex: '#C8A986' },
+      { name: 'Smoked Walnut', hex: '#533C29' },
+      { name: 'Blackened Ash', hex: '#262423' }
+    ],
+    sizes: [
+      '140 x 40 x 80 cm (Standard)',
+      '170 x 42 x 80 cm (Large)',
+      'Custom Dimensions'
+    ],
+    primaryImage: '/images/products/image6.png',
+    secondaryImage: '/images/products/image17.jpg',
+    gallery: [
+      '/images/products/image6.png',
+      '/images/products/image17.jpg'
+    ]
+  },
+  {
+    id: 'prime-vista-dressing',
+    name: 'Prime Vista Dressing',
+    category: 'Dressers',
+    categoryId: 'dressers',
+    price: 24500,
+    priceUnit: 'per m²',
+    isFeatured: true,
+    isNew: true,
+    badge: 'Bespoke / m²',
+    tagline: 'Dressing Room · Plywood & Veneer',
+    description: 'A modern, sleek wardrobe featuring glass doors and smart internal lighting for ultimate organization and style.',
+    dimensions: {
+      standard: 'Custom Measured to Room (Priced at 24,500 EGP per m²)',
+      large: 'Full Walk-In Dressing Suite'
+    },
+    materials: 'Dressing room — Plywood and veneer',
+    leadTime: '4 – 6 Weeks',
+    delivery: 'Includes on-site laser measurement, 3D layout, and full Cairo workshop installation.',
+    finishes: [
+      { name: 'Natural Oak Veneer & Tinted Glass', hex: '#C8A986' },
+      { name: 'Smoked Walnut Veneer', hex: '#533C29' },
+      { name: 'Charcoal Veneer & Bronze Glass', hex: '#262423' }
+    ],
+    sizes: [
+      'Per Square Meter (24,500 EGP / m²)',
+      'Full Dressing Room Commission'
+    ],
+    primaryImage: '/images/products/image7.png',
+    secondaryImage: '/images/products/image38.png',
+    gallery: [
+      '/images/products/image7.png',
+      '/images/products/image38.png'
+    ]
+  },
+  {
+    id: 'prime-motif-nightstand',
+    name: 'Prime Motif Nightstand',
+    category: 'Night Stands',
+    categoryId: 'night-stands',
+    price: 18500,
+    isFeatured: true,
+    isNew: true,
+    badge: 'Carved Front',
+    tagline: 'Textured Pattern Nightstand · Plywood & Oak Wood',
+    description: 'A textured pattern design adding depth and warm elegance to your bedside.',
+    dimensions: {
+      standard: '55 cm (W) x 45 cm (D) x 55 cm (H)'
+    },
+    materials: 'Materials: plywood , oak wood',
+    leadTime: '2 Weeks',
+    delivery: 'Delivered fully assembled with soft-close concealed runners.',
+    finishes: [
+      { name: 'Natural Oak', hex: '#D7C4A5' },
+      { name: 'Smoked Walnut', hex: '#533C29' }
+    ],
+    sizes: [
+      '55 x 45 x 55 cm (Standard)',
+      'Custom Dimensions'
+    ],
+    primaryImage: '/images/products/image19.png',
+    secondaryImage: '/images/products/image26.png',
+    gallery: [
+      '/images/products/image19.png',
+      '/images/products/image26.png',
+      '/images/products/image4.png'
+    ]
+  },
+  {
+    id: 'prime-echo-nightstand',
+    name: 'Prime Echo Nightstand',
+    category: 'Night Stands',
+    categoryId: 'night-stands',
+    price: 16200,
+    isFeatured: false,
+    isNew: true,
+    badge: null,
+    tagline: 'Modern Bedside Table · Plywood & Oak Wood',
+    description: 'A stylish and modern wooden bedside table.',
+    dimensions: {
+      standard: '55 cm (W) x 42 cm (D) x 52 cm (H)'
+    },
+    materials: 'Materials: plywood , oak wood',
+    leadTime: '2 Weeks',
+    delivery: 'Delivered fully assembled.',
+    finishes: [
+      { name: 'Warm Walnut & Oak', hex: '#7A583B' },
+      { name: 'Natural Oak', hex: '#D7C4A5' }
+    ],
+    sizes: [
+      '55 x 42 x 52 cm (Standard)',
+      'Custom Dimensions'
+    ],
+    primaryImage: '/images/products/image26.png',
+    secondaryImage: '/images/products/image4.png',
+    gallery: [
+      '/images/products/image26.png',
+      '/images/products/image4.png'
+    ]
+  },
+  {
+    id: 'prime-minimal-nightstand',
+    name: 'Prime Minimal Nightstand',
+    category: 'Night Stands',
+    categoryId: 'night-stands',
+    price: 15750,
+    isFeatured: false,
+    isNew: false,
+    badge: null,
+    tagline: 'Night Stand · Plywood & Oak Wood',
+    description: 'A simple and functional design suited for any space.',
+    dimensions: {
+      standard: '50 cm (W) x 42 cm (D) x 52 cm (H)'
+    },
+    materials: 'Night stand — Materials: plywood , oak wood',
+    leadTime: '10 – 14 Days',
+    delivery: 'Delivered fully assembled.',
+    finishes: [
+      { name: 'Natural White Oak', hex: '#D7C4A5' },
+      { name: 'Smoked Walnut', hex: '#533C29' }
+    ],
+    sizes: [
+      '50 x 42 x 52 cm (Standard)',
+      'Custom Dimensions'
+    ],
+    primaryImage: '/images/products/image4.png',
+    secondaryImage: '/images/products/image26.png',
+    gallery: [
+      '/images/products/image4.png',
+      '/images/products/image26.png'
+    ]
+  },
+  {
+    id: 'prime-bold',
+    name: 'Prime Bold Console',
+    category: 'Consoles',
+    categoryId: 'consoles',
+    price: 14500,
+    isFeatured: true,
+    isNew: true,
+    badge: 'Statement Piece',
+    tagline: 'Console · Plywood & Beech Wood',
+    description: 'A bold and vibrant statement piece that adds a striking modern touch to your space.',
+    dimensions: {
+      standard: '130 cm (W) x 38 cm (D) x 80 cm (H)'
+    },
+    materials: 'Console — Plywood , beech wood',
+    leadTime: '2 Weeks',
+    delivery: 'Delivered fully assembled across Cairo & Giza.',
+    finishes: [
+      { name: 'Cobalt Blue & Turned Black Beech', hex: '#1E3F7F' },
+      { name: 'Natural Oak & Black Beech', hex: '#D7C4A5' },
+      { name: 'Blackened Ash', hex: '#262423' }
+    ],
+    sizes: [
+      '130 x 38 x 80 cm (Standard)',
+      'Custom Dimensions'
+    ],
+    primaryImage: '/images/products/image31.png',
+    secondaryImage: '/images/products/image17.jpg',
+    gallery: [
+      '/images/products/image31.png',
+      '/images/products/image17.jpg'
+    ]
+  },
+  {
+    id: 'prime-core-side-table',
+    name: 'Prime Core Side Table',
+    category: 'Tables',
+    categoryId: 'tables',
+    price: 14200,
+    isFeatured: false,
+    isNew: false,
+    badge: null,
+    tagline: 'Side Table · Plywood & Oak Wood',
+    description: 'A classic wooden design with distinct modern touches.',
+    dimensions: {
+      standard: '50 cm (W) x 45 cm (D) x 55 cm (H)'
+    },
+    materials: 'Side table — Plywood, oak wood',
+    leadTime: '10 – 14 Days',
+    delivery: 'Delivered fully assembled.',
+    finishes: [
+      { name: 'Natural Oak', hex: '#D7C4A5' },
+      { name: 'Smoked Walnut', hex: '#533C29' }
+    ],
+    sizes: [
+      '50 x 45 x 55 cm (Standard)',
+      'Custom Dimensions'
+    ],
+    primaryImage: '/images/products/image23.png',
+    secondaryImage: '/images/products/image20.png',
+    gallery: [
+      '/images/products/image23.png',
+      '/images/products/image20.png'
+    ]
+  },
+  {
+    id: 'prime-orbit',
+    name: 'Prime Orbit Side Table',
     category: 'Tables',
     categoryId: 'tables',
     price: 9800,
     isFeatured: true,
-    isNew: false,
-    badge: 'Popular',
-    rating: 4.8,
-    reviewsCount: 19,
-    primaryImage: 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=1200&q=80',
-    secondaryImage: 'https://images.unsplash.com/photo-1532372320572-cda25653a26d?auto=format&fit=crop&w=1200&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1532372320572-cda25653a26d?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80'
-    ],
-    tagline: 'Sculptural cylindrical accent table turned from solid kiln-dried timber blocks.',
-    description: 'The Arco Side Table functions as a sculptural art piece and functional drink resting table. Turned on heavy-duty wood lathes by master carpenters in Cairo, every unit celebrates the continuous end-grain and unique growth rings of natural timber.',
-    dimensions: {
-      standard: '45 cm (Dia) x 52 cm (H)',
-      compact: '38 cm (Dia) x 46 cm (H)'
-    },
-    materials: 'Solid American Walnut or Natural Ash with soft chamfered edges and concealed felt floor protectors.',
-    finishes: [
-      { name: 'Natural White Oak', hex: '#D7C4A5', colorClass: 'bg-[#D7C4A5]' },
-      { name: 'Smoked Walnut', hex: '#533C29', colorClass: 'bg-[#533C29]' },
-      { name: 'Bleached Ash', hex: '#E7DFD3', colorClass: 'bg-[#E7DFD3]' }
-    ],
-    sizes: ['Compact (38 dia)', 'Standard (45 dia)'],
-    inStock: true,
-    leadTime: '3 - 5 business days',
-    delivery: 'Handled by Prime direct courier fleet. Dispatched fully assembled in protective padded linen wrapping.'
-  },
-  {
-    id: 'noma-console',
-    name: 'Noma Console',
-    category: 'Consoles & Buffets',
-    categoryId: 'consoles',
-    price: 24750,
-    isFeatured: true,
     isNew: true,
-    badge: 'Editorial Pick',
-    rating: 5.0,
-    reviewsCount: 14,
-    primaryImage: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1200&q=80',
-    secondaryImage: 'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1200&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80'
-    ],
-    tagline: 'Refined entryway and living console with softly curved pillared legs and concealed touch-latch drawers.',
-    description: 'Designed to greet entering guests with understated grandeur, the Noma Console features a floating timber profile anchored by two massive elliptical wooden pillars. Two seamless push-to-open felt-lined drawers keep keys and daily essentials out of sight.',
+    badge: 'Best Value',
+    tagline: 'Geometric Side Table · Plywood & Beech Wood',
+    description: 'A sleek black design with circular geometric motifs and refined legs for a touch of distinct elegance.',
     dimensions: {
-      standard: '160 cm (W) x 40 cm (D) x 84 cm (H)',
-      large: '190 cm (W) x 42 cm (D) x 84 cm (H)'
+      standard: '48 cm (Diameter) x 55 cm (H)'
     },
-    materials: 'European Oak veneer over high-density marine ply core with solid timber edge banding and solid oak support pillars.',
+    materials: 'Plywood , beech wood',
+    leadTime: '10 – 14 Days',
+    delivery: 'Delivered fully assembled.',
     finishes: [
-      { name: 'Smoked Walnut', hex: '#533C29', colorClass: 'bg-[#533C29]' },
-      { name: 'Natural White Oak', hex: '#D7C4A5', colorClass: 'bg-[#D7C4A5]' },
-      { name: 'Blackened Ash', hex: '#262423', colorClass: 'bg-[#262423]' }
+      { name: 'Blackened Beech & Brass Tips', hex: '#262423' },
+      { name: 'Smoked Walnut & Brass', hex: '#533C29' },
+      { name: 'Natural Oak', hex: '#D7C4A5' }
     ],
-    sizes: ['160 x 40 cm', '190 x 42 cm'],
-    inStock: true,
-    leadTime: '7 - 10 business days',
-    delivery: 'Delivered and leveled on-site by Prime technicians with wall-anchor hardware included.'
+    sizes: [
+      '48 cm Diameter x 55 cm H (Standard)',
+      'Custom Dimensions'
+    ],
+    primaryImage: '/images/products/image20.png',
+    secondaryImage: '/images/products/image23.png',
+    gallery: [
+      '/images/products/image20.png',
+      '/images/products/image23.png'
+    ]
   },
+
+  // === ADDITIONAL CATALOG & CUSTOM E-COMMERCE PIECES FROM EXCEL SHEET ===
   {
-    id: 'linea-coffee-table',
-    name: 'Linea Coffee Table',
-    category: 'Tables',
-    categoryId: 'tables',
-    price: 18900,
-    isFeatured: true,
+    id: 'prime-haven-bed',
+    name: 'Prime Haven Bed',
+    category: 'Beds',
+    categoryId: 'beds',
+    price: null,
+    isFeatured: false,
     isNew: false,
-    badge: 'Bestseller',
-    rating: 4.9,
-    reviewsCount: 36,
-    primaryImage: 'https://images.unsplash.com/photo-1532372320572-cda25653a26d?auto=format&fit=crop&w=1200&q=80',
-    secondaryImage: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1532372320572-cda25653a26d?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1200&q=80'
-    ],
-    tagline: 'Low-profile circular cocktail table featuring a radial timber grain top and recessed shadow plinth.',
-    description: 'The Linea Coffee Table grounds modern living rooms with quiet confidence. Its low 36cm height invites a relaxed lounge atmosphere, while the sunburst radial grain pattern captures natural window light throughout the day.',
+    badge: 'Custom Order',
+    tagline: 'Warm Wood & Soft Upholstery Bed Suite',
+    description: 'Your cozy retreat blending warm wood and soft upholstery for ultimate comfort.',
     dimensions: {
-      standard: '110 cm (Dia) x 36 cm (H)',
-      large: '130 cm (Dia) x 36 cm (H)'
+      standard: '180 x 200 cm Mattress Frame (Custom Wall Cladding Available)'
     },
-    materials: 'Solid core with hand-matched radial oak grain and hand-rubbed organic oil and beeswax finish.',
+    materials: 'Solid Oak & Plywood with Upholstered Headboard Panels',
+    leadTime: '3 – 5 Weeks',
+    delivery: 'White-glove delivery and bedroom installation.',
     finishes: [
-      { name: 'Natural White Oak', hex: '#D7C4A5', colorClass: 'bg-[#D7C4A5]' },
-      { name: 'Smoked Walnut', hex: '#533C29', colorClass: 'bg-[#533C29]' }
+      { name: 'Natural Oak & Warm Beige', hex: '#D7C4A5' },
+      { name: 'Smoked Walnut', hex: '#533C29' }
     ],
-    sizes: ['110 cm Diameter', '130 cm Diameter'],
-    inStock: true,
-    leadTime: '5 - 7 business days',
-    delivery: 'Carefully wrapped and delivered to your living room. Ready to enjoy immediately.'
+    sizes: ['180 x 200 cm', '200 x 200 cm', 'Custom Wall-to-Wall Suite'],
+    primaryImage: '/images/products/image22.png',
+    secondaryImage: '/images/products/image1.jpg',
+    gallery: ['/images/products/image22.png', '/images/products/image1.jpg']
   },
   {
-    id: 'haven-lounge-chair',
-    name: 'Haven Lounge Chair',
-    category: 'Chairs & Armchairs',
-    categoryId: 'chairs',
-    price: 28500,
-    isFeatured: true,
-    isNew: true,
-    badge: 'Crafted Excellence',
-    rating: 4.9,
-    reviewsCount: 22,
-    primaryImage: 'https://images.unsplash.com/photo-1580481077111-9f79cb25a4e7?auto=format&fit=crop&w=1200&q=80',
-    secondaryImage: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1200&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1580481077111-9f79cb25a4e7?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80'
-    ],
-    tagline: 'Sculptural solid timber armchair upholstered in heavyweight textured Egyptian bouclé linen.',
-    description: 'A study in honest joinery and comfort. The Haven Lounge Chair pairs an exposed solid ash exoskeleton with deep, feather-blend cushions upholstered in breathable linen woven in Egypt. Its reclined pitch cradles the body during hours of conversation or reading.',
+    id: 'prime-aura-bed',
+    name: 'Prime Aura Bed',
+    category: 'Beds',
+    categoryId: 'beds',
+    price: null,
+    isFeatured: false,
+    isNew: false,
+    badge: 'Custom Order',
+    tagline: 'Elevated Wooden Frame & Split Headboard',
+    description: 'Modern elegance and simplicity, featuring an elevated wooden frame with a sleek comfortable headboard.',
     dimensions: {
-      standard: '82 cm (W) x 88 cm (D) x 78 cm (H) — Seat Height 40 cm'
+      standard: '180 x 200 cm Frame with Integrated Nightstands'
     },
-    materials: 'Kiln-dried solid Ash framework with exposed brass dowels. Dual-density foam with natural down feather envelope.',
+    materials: 'Plywood, Natural Oak & Linen Upholstery',
+    leadTime: '3 – 4 Weeks',
+    delivery: 'White-glove delivery and assembly.',
     finishes: [
-      { name: 'Natural White Oak / Cream Bouclé', hex: '#D7C4A5', colorClass: 'bg-[#D7C4A5]' },
-      { name: 'Smoked Walnut / Oatmeal Wool', hex: '#533C29', colorClass: 'bg-[#533C29]' },
-      { name: 'Blackened Ash / Olive Linen', hex: '#262423', colorClass: 'bg-[#262423]' }
+      { name: 'Natural Oak', hex: '#D7C4A5' },
+      { name: 'Smoked Walnut', hex: '#533C29' }
     ],
-    sizes: ['Standard Lounge'],
-    inStock: true,
-    leadTime: '10 - 14 business days',
-    delivery: 'Hand-inspected before white glove domestic delivery.'
+    sizes: ['180 x 200 cm', '200 x 200 cm', 'Custom Dimensions'],
+    primaryImage: '/images/products/image24.png',
+    secondaryImage: '/images/products/image29.png',
+    gallery: ['/images/products/image24.png', '/images/products/image29.png']
   },
   {
-    id: 'frame-storage-cabinet',
-    name: 'Frame Storage Cabinet',
-    category: 'Storage & Bookcases',
-    categoryId: 'storage',
-    price: 38500,
-    isFeatured: true,
+    id: 'prime-pearl-bed',
+    name: 'Prime Pearl Bed',
+    category: 'Beds',
+    categoryId: 'beds',
+    price: null,
+    isFeatured: false,
+    isNew: false,
+    badge: 'Custom Order',
+    tagline: 'Classic White Serenity Bedroom Suite',
+    description: 'Soft luxury in a classic white design bringing pure serenity to your room.',
+    dimensions: {
+      standard: '180 x 200 cm Frame'
+    },
+    materials: 'Solid Beech & Lacquered Wood with Upholstered Headboard',
+    leadTime: '3 – 4 Weeks',
+    delivery: 'White-glove delivery and bedroom installation.',
+    finishes: [
+      { name: 'Pearl White & Oak', hex: '#F3EFEA' },
+      { name: 'Natural White Oak', hex: '#D7C4A5' }
+    ],
+    sizes: ['180 x 200 cm', '200 x 200 cm', 'Custom Dimensions'],
+    primaryImage: '/images/products/image18.png',
+    secondaryImage: '/images/products/image40.jpg',
+    gallery: ['/images/products/image18.png', '/images/products/image40.jpg']
+  },
+  {
+    id: 'prime-oasis-bed',
+    name: 'Prime Oasis Bed',
+    category: 'Beds',
+    categoryId: 'beds',
+    price: null,
+    isFeatured: false,
+    isNew: false,
+    badge: 'Custom Order',
+    tagline: 'Upholstered Headboard & Matching Bench',
+    description: 'A cozy design with an upholstered headboard and bench for a relaxing room.',
+    dimensions: {
+      standard: '180 x 200 cm Bed + End-of-Bed Bench'
+    },
+    materials: 'Plywood, Oak Wood & Soft Textured Upholstery',
+    leadTime: '3 – 4 Weeks',
+    delivery: 'White-glove delivery and room setup.',
+    finishes: [
+      { name: 'Natural Oak & Cream Fabric', hex: '#D7C4A5' },
+      { name: 'Smoked Walnut', hex: '#533C29' }
+    ],
+    sizes: ['180 x 200 cm + Bench', '200 x 200 cm + Bench'],
+    primaryImage: '/images/products/image40.jpg',
+    secondaryImage: '/images/products/image18.png',
+    gallery: ['/images/products/image40.jpg', '/images/products/image18.png']
+  },
+  {
+    id: 'prime-lumina',
+    name: 'Prime Lumina TV Unit',
+    category: 'TV Units',
+    categoryId: 'tv-units',
+    price: null,
+    isFeatured: false,
+    isNew: false,
+    badge: 'Custom Order',
+    tagline: 'Floating Media Unit with Warm Ambient Lighting',
+    description: 'A floating modern unit with warm ambient lighting and wood accents for a sleek look.',
+    dimensions: {
+      standard: '240 cm (W) x 42 cm (D) x 260 cm (H) Full Media Wall'
+    },
+    materials: 'Plywood, Oak Veneer & Integrated Warm LED Lighting',
+    leadTime: '3 – 4 Weeks',
+    delivery: 'Full on-site wall installation and electrical integration.',
+    finishes: [
+      { name: 'Natural Oak & Matte Taupe', hex: '#C8A986' },
+      { name: 'Smoked Walnut', hex: '#533C29' }
+    ],
+    sizes: ['220 cm Width', '260 cm Width', 'Custom Wall Measurement'],
+    primaryImage: '/images/products/image36.png',
+    secondaryImage: '/images/products/image15.png',
+    gallery: ['/images/products/image36.png', '/images/products/image15.png']
+  },
+  {
+    id: 'prime-portal',
+    name: 'Prime Portal Door',
+    category: 'Doors',
+    categoryId: 'doors-millwork',
+    price: null,
+    isFeatured: false,
     isNew: false,
     badge: 'Architectural',
-    rating: 4.8,
-    reviewsCount: 15,
-    primaryImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-    secondaryImage: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1200&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1200&q=80'
-    ],
-    tagline: 'Subtle fluted door credenza with integrated cable routing and adjustable solid wood shelving.',
-    description: 'Hand-carved vertical fluting creates rhythm and texture across the four doors of the Frame Cabinet. Designed for dining room tableware storage, media components, or bedroom wardrobe expansion, with soft-close German hardware throughout.',
+    tagline: 'Natural Wood Interior Door with Modern Handles',
+    description: 'Natural wood interior doors with modern handles for seamless home continuity.',
     dimensions: {
-      standard: '180 cm (W) x 48 cm (D) x 82 cm (H)',
-      tall: '140 cm (W) x 45 cm (D) x 120 cm (H)'
+      standard: '90 / 100 cm (W) x 220 / 240 cm (H) Custom Jamb Depth'
     },
-    materials: 'Solid oak structural framing with fluted oak panels. Brushed patinated bronze pulls.',
+    materials: 'Solid Wood Core, Natural Oak Veneer & Concealed Hinges',
+    leadTime: '3 – 5 Weeks',
+    delivery: 'Includes on-site frame fitting, acoustic seals, and hardware installation.',
     finishes: [
-      { name: 'Smoked Walnut', hex: '#533C29', colorClass: 'bg-[#533C29]' },
-      { name: 'Natural White Oak', hex: '#D7C4A5', colorClass: 'bg-[#D7C4A5]' },
-      { name: 'Blackened Ash', hex: '#262423', colorClass: 'bg-[#262423]' }
+      { name: 'Natural Oak', hex: '#D7C4A5' },
+      { name: 'Smoked Walnut', hex: '#533C29' },
+      { name: 'Blackened Ash', hex: '#262423' }
     ],
-    sizes: ['Low Credenza (180W)', 'Tall Cabinet (140W)'],
-    inStock: true,
-    leadTime: '12 - 16 business days',
-    delivery: 'Delivered and assembled into place with felt glides on all contact points.'
+    sizes: ['Standard Interior Door', 'Floor-to-Ceiling Pivot / Flush Door'],
+    primaryImage: '/images/products/image25.png',
+    secondaryImage: '/images/products/image39.jpg',
+    gallery: ['/images/products/image25.png', '/images/products/image39.jpg']
   },
   {
-    id: 'prime-lumina-tv-unit',
-    name: 'Prime Lumina TV Unit',
-    category: 'TV & Media Units',
-    categoryId: 'tv-units',
-    price: 32000,
-    isFeatured: true,
-    isNew: true,
-    badge: 'Media Suite',
-    rating: 4.9,
-    reviewsCount: 18,
-    primaryImage: 'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1200&q=80',
-    secondaryImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80'
-    ],
-    tagline: 'Floating modern media unit with warm ambient backlighting and acoustic wood slats.',
-    description: 'The Prime Lumina TV Unit redefines contemporary living spaces. Designed with hidden wire passages, soft-close acoustic slatted pull-down panels, and warm indirect ambient LED lighting.',
+    id: 'prime-halo-unit',
+    name: 'Prime Halo Unit Dresser',
+    category: 'Dressers',
+    categoryId: 'dressers',
+    price: null,
+    isFeatured: false,
+    isNew: false,
+    badge: 'Custom Order',
+    tagline: 'Circular Mirror & Fine Wooden Detailing',
+    description: 'A modern fusion of a circular mirror and fine wooden detailing for complete elegance.',
     dimensions: {
-      standard: '220 cm (W) x 42 cm (D) x 45 cm (H)',
-      large: '260 cm (W) x 42 cm (D) x 45 cm (H)'
+      standard: '130 cm (W) x 48 cm (D) x 85 cm (H) + Circular Mirror'
     },
-    materials: 'Kiln-dried European Oak veneer with solid acoustic vertical slats and German soft-close gas struts.',
+    materials: 'Plywood, Carved Oak Wood & Optical Mirror',
+    leadTime: '3 – 4 Weeks',
+    delivery: 'Includes delivery and mirror wall mounting.',
     finishes: [
-      { name: 'Natural White Oak', hex: '#D7C4A5', colorClass: 'bg-[#D7C4A5]' },
-      { name: 'Smoked Walnut', hex: '#533C29', colorClass: 'bg-[#533C29]' }
+      { name: 'Natural Oak', hex: '#D7C4A5' },
+      { name: 'Smoked Walnut', hex: '#533C29' }
     ],
-    sizes: ['220 cm Width', '260 cm Width'],
-    inStock: true,
-    leadTime: '10 - 14 business days',
-    delivery: 'Mounted directly by Prime installation specialists with laser leveling.'
+    sizes: ['130 cm Standard', 'Custom Dimensions'],
+    primaryImage: '/images/products/image28.png',
+    secondaryImage: '/images/products/image21.jpg',
+    gallery: ['/images/products/image28.png', '/images/products/image21.jpg']
   },
   {
     id: 'prime-echo-console',
-    name: 'Prime Echo Sideboard',
-    category: 'Consoles & Buffets',
+    name: 'Prime Echo Console',
+    category: 'Consoles',
     categoryId: 'consoles',
-    price: 26800,
-    isFeatured: true,
-    isNew: true,
-    badge: 'Artisanal',
-    rating: 4.9,
-    reviewsCount: 12,
-    primaryImage: 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=1200&q=80',
-    secondaryImage: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1200&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1200&q=80'
-    ],
-    tagline: 'Warm wooden sideboard featuring textured reeded curved doors and sleek tapered legs.',
-    description: 'Inspired by Egyptian mid-century craftsmanship, the Echo Sideboard introduces an artistic focal point with its rounded fluted tambour doors and internal adjustable shelves.',
-    dimensions: {
-      standard: '175 cm (W) x 45 cm (D) x 80 cm (H)'
-    },
-    materials: 'Solid Egyptian Zan (Beech) structural legs with European oak reeded doors and satin brass ferrules.',
-    finishes: [
-      { name: 'Smoked Walnut', hex: '#533C29', colorClass: 'bg-[#533C29]' },
-      { name: 'Natural White Oak', hex: '#D7C4A5', colorClass: 'bg-[#D7C4A5]' }
-    ],
-    sizes: ['Standard 175 cm'],
-    inStock: true,
-    leadTime: '8 - 12 business days',
-    delivery: 'Crated and hand-delivered directly to your dining or living room.'
-  },
-  {
-    id: 'nile-fluted-bed',
-    name: 'Nile Fluted Bed Frame',
-    category: 'Beds & Nightstands',
-    categoryId: 'beds',
-    price: 46000,
-    isFeatured: false,
-    isNew: true,
-    badge: 'Bespoke Bedding',
-    rating: 5.0,
-    reviewsCount: 11,
-    primaryImage: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80',
-    secondaryImage: 'https://images.unsplash.com/photo-1540518614846-7ede433c4ef4?auto=format&fit=crop&w=1200&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1540518614846-7ede433c4ef4?auto=format&fit=crop&w=1200&q=80'
-    ],
-    tagline: 'Low platform bed with an extended fluted headboard and integrated cantilevered floating nightstands.',
-    description: 'Transform your bedroom into a quiet luxury retreat. The Nile Bed features a continuous fluted wooden backdrop that extends past the mattress to anchor floating nightstand surfaces with wireless cable cutouts.',
-    dimensions: {
-      standard: 'King (180x200 mattress): Headboard 280 cm (W) x 105 cm (H)',
-      large: 'Super King (200x200 mattress): Headboard 300 cm (W) x 105 cm (H)'
-    },
-    materials: 'Solid Oak slats and headboard rails. Sourced from certified sustainable European forests.',
-    finishes: [
-      { name: 'Natural White Oak', hex: '#D7C4A5', colorClass: 'bg-[#D7C4A5]' },
-      { name: 'Smoked Walnut', hex: '#533C29', colorClass: 'bg-[#533C29]' }
-    ],
-    sizes: ['Queen (160 x 200)', 'King (180 x 200)', 'Super King (200 x 200)'],
-    inStock: true,
-    leadTime: '14 - 18 business days',
-    delivery: 'Professional installation team assembles slats and mounts floating components.'
-  },
-  {
-    id: 'solis-round-table',
-    name: 'Solis Round Dining Table',
-    category: 'Tables',
-    categoryId: 'tables',
-    price: 34500,
+    price: null,
     isFeatured: false,
     isNew: false,
-    badge: 'Timeless',
-    rating: 4.8,
-    reviewsCount: 17,
-    primaryImage: 'https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?auto=format&fit=crop&w=1200&q=80',
-    secondaryImage: 'https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1200&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1200&q=80'
-    ],
-    tagline: 'Circular dining table supported by a conical slatted wood pedestal base.',
-    description: 'Ideal for conversational gatherings, the Solis Round Dining Table allows easy interaction without harsh table corners. The fluted conical center pedestal provides complete leg clearance around the entire perimeter.',
+    badge: 'Custom Order',
+    tagline: 'Textured Carved Doors & Sleek Legs',
+    description: 'A warm wooden sideboard combining textured carved doors and sleek legs to add a unique artistic touch to your home.',
     dimensions: {
-      standard: '135 cm (Dia) x 76 cm (H) — Seats 5-6',
-      large: '160 cm (Dia) x 76 cm (H) — Seats 8'
+      standard: '180 cm (W) x 45 cm (D) x 82 cm (H)'
     },
-    materials: 'Solid Oak top with reinforced bevel. Pedestal formed with hand-milled vertical slats.',
+    materials: 'Plywood & Carved Solid Oak Wood',
+    leadTime: '3 – 4 Weeks',
+    delivery: 'White-glove delivery and placement.',
     finishes: [
-      { name: 'Natural White Oak', hex: '#D7C4A5', colorClass: 'bg-[#D7C4A5]' },
-      { name: 'Smoked Walnut', hex: '#533C29', colorClass: 'bg-[#533C29]' },
-      { name: 'Blackened Ash', hex: '#262423', colorClass: 'bg-[#262423]' }
+      { name: 'Warm Natural Oak', hex: '#C8A986' },
+      { name: 'Smoked Walnut', hex: '#533C29' }
     ],
-    sizes: ['135 cm (Seats 5-6)', '160 cm (Seats 8)'],
-    inStock: true,
-    leadTime: '10 - 12 business days',
-    delivery: 'Hand delivered and placed by Prime installation experts.'
+    sizes: ['180 cm Standard', '210 cm Large', 'Custom Dimensions'],
+    primaryImage: '/images/products/image10.png',
+    secondaryImage: '/images/products/image2.png',
+    gallery: ['/images/products/image10.png', '/images/products/image2.png']
   },
   {
-    id: 'kairo-sculptural-armchair',
-    name: 'Kairo Sculptural Armchair',
-    category: 'Chairs & Armchairs',
-    categoryId: 'chairs',
-    price: 21200,
+    id: 'prime-axis',
+    name: 'Prime Axis Console',
+    category: 'Consoles',
+    categoryId: 'consoles',
+    price: null,
     isFeatured: false,
-    isNew: true,
-    badge: 'Artisanal',
-    rating: 4.9,
-    reviewsCount: 16,
-    primaryImage: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1200&q=80',
-    secondaryImage: 'https://images.unsplash.com/photo-1580481077111-9f79cb25a4e7?auto=format&fit=crop&w=1200&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1580481077111-9f79cb25a4e7?auto=format&fit=crop&w=1200&q=80'
-    ],
-    tagline: 'Curved wooden frame with organic armrests and woven cane or linen accents.',
-    description: 'Inspired by modern Egyptian architectural lines and organic mid-century Scandinavian chairs, Kairo combines steam-bent solid beech wood with plush woven upholstery.',
+    isNew: false,
+    badge: 'Custom Order',
+    tagline: 'Balanced Architectural Entryway Console',
+    description: 'A sleek wooden design with balanced lines, adding a striking modern touch to your entryway.',
     dimensions: {
-      standard: '74 cm (W) x 80 cm (D) x 76 cm (H)'
+      standard: '150 cm (W) x 40 cm (D) x 80 cm (H)'
     },
-    materials: 'Steam-bent solid Egyptian Beech and European White Oak with hand-sanded satin finish.',
+    materials: 'Plywood & Natural Oak Wood',
+    leadTime: '2 – 3 Weeks',
+    delivery: 'Delivered fully assembled.',
     finishes: [
-      { name: 'Natural White Oak', hex: '#D7C4A5', colorClass: 'bg-[#D7C4A5]' },
-      { name: 'Smoked Walnut', hex: '#533C29', colorClass: 'bg-[#533C29]' }
+      { name: 'Natural Oak', hex: '#D7C4A5' },
+      { name: 'Smoked Walnut', hex: '#533C29' }
     ],
-    sizes: ['Standard'],
-    inStock: true,
-    leadTime: '7 - 10 business days',
-    delivery: 'Dispatched in premium protective packaging.'
+    sizes: ['150 cm Standard', 'Custom Dimensions'],
+    primaryImage: '/images/products/image17.jpg',
+    secondaryImage: '/images/products/image6.png',
+    gallery: ['/images/products/image17.jpg', '/images/products/image6.png']
   },
   {
-    id: 'prime-curve-dresser',
-    name: 'Prime Curve Dresser',
-    category: 'Dressers & Vanities',
+    id: 'prime-core-coffee-table',
+    name: 'Prime Core Coffee Table',
+    category: 'Tables',
+    categoryId: 'tables',
+    price: null,
+    isFeatured: false,
+    isNew: false,
+    badge: 'Custom Order',
+    tagline: 'Round Wooden Centerpiece Coffee Table',
+    description: 'A warm, round wooden centerpiece adding sleek functionality to your living space.',
+    dimensions: {
+      standard: '95 cm (Diameter) x 40 cm (H)'
+    },
+    materials: 'Plywood & Solid Oak Wood',
+    leadTime: '2 – 3 Weeks',
+    delivery: 'Delivered fully assembled.',
+    finishes: [
+      { name: 'Warm Oak', hex: '#C8A986' },
+      { name: 'Smoked Walnut', hex: '#533C29' }
+    ],
+    sizes: ['95 cm Diameter', '110 cm Diameter', 'Custom Dimensions'],
+    primaryImage: '/images/products/image34.png',
+    secondaryImage: '/images/products/image35.jpg',
+    gallery: ['/images/products/image34.png', '/images/products/image35.jpg']
+  },
+  {
+    id: 'prime-palace-table',
+    name: 'Prime Palace Table',
+    category: 'Tables',
+    categoryId: 'tables',
+    price: null,
+    isFeatured: false,
+    isNew: false,
+    badge: 'Custom Order',
+    tagline: 'Gold-Framed Nesting Table Set',
+    description: 'A luxurious gold-framed nesting set that adds refined grandeur to your living room.',
+    dimensions: {
+      standard: 'Nesting Set of 2 Tables'
+    },
+    materials: 'Natural Wood Veneer & Brushed Gold Metal Frame',
+    leadTime: '2 – 3 Weeks',
+    delivery: 'Delivered fully assembled.',
+    finishes: [
+      { name: 'Warm Oak & Brushed Gold', hex: '#C8A986' },
+      { name: 'Smoked Walnut & Brass', hex: '#533C29' }
+    ],
+    sizes: ['Standard Nesting Pair', 'Custom Dimensions'],
+    primaryImage: '/images/products/image35.jpg',
+    secondaryImage: '/images/products/image34.png',
+    gallery: ['/images/products/image35.jpg', '/images/products/image34.png']
+  },
+
+  // === BESPOKE / B2B ARCHITECTURAL PROJECTS FROM EXCEL SHEET ===
+  {
+    id: 'prime-essence',
+    name: 'Prime Essence Millwork',
+    category: 'Customize / B2B',
+    categoryId: 'customize',
+    price: null,
+    isFeatured: false,
+    isNew: false,
+    badge: 'Bespoke Millwork',
+    tagline: 'Custom Architectural Wood Design',
+    description: 'An elegant wood design capturing the pure essence of natural luxury.',
+    dimensions: { standard: 'Bespoke Site-Measured Dimensions' },
+    materials: 'Solid Oak, Plywood & Natural Wood Veneer',
+    leadTime: '4 – 6 Weeks',
+    delivery: 'On-site survey, fabrication, and white-glove installation.',
+    finishes: [{ name: 'Natural Oak', hex: '#D7C4A5' }, { name: 'Smoked Walnut', hex: '#533C29' }],
+    sizes: ['Custom Architectural Fit-Out'],
+    primaryImage: '/images/products/image39.jpg',
+    secondaryImage: '/images/products/image9.png',
+    gallery: ['/images/products/image39.jpg']
+  },
+  {
+    id: 'prime-grand-library',
+    name: 'Prime Grand Library',
+    category: 'Storage',
+    categoryId: 'storage',
+    price: null,
+    isFeatured: false,
+    isNew: false,
+    badge: 'Bespoke Library',
+    tagline: 'All-In-One Illuminated Wall Library',
+    description: 'A grand, all-in-one wall library blending spacious shelving with ambient lighting to create an extraordinary architectural statement.',
+    dimensions: { standard: 'Custom Wall-to-Wall & Floor-to-Ceiling' },
+    materials: 'Plywood, Natural Oak Veneer & Integrated LED Channels',
+    leadTime: '4 – 6 Weeks',
+    delivery: 'Complete on-site architectural joinery and lighting installation.',
+    finishes: [{ name: 'Warm Oak', hex: '#C8A986' }, { name: 'Smoked Walnut', hex: '#533C29' }],
+    sizes: ['Bespoke Wall Dimensions'],
+    primaryImage: '/images/products/image9.png',
+    secondaryImage: '/images/products/image27.png',
+    gallery: ['/images/products/image9.png', '/images/products/image27.png']
+  },
+  {
+    id: 'prime-harmony-living',
+    name: 'Prime Harmony Living Room',
+    category: 'Customize / B2B',
+    categoryId: 'customize',
+    price: null,
+    isFeatured: false,
+    isNew: false,
+    badge: 'Full Living Suite',
+    tagline: 'Complete Modern Living Room & Wood Cladding',
+    description: 'A complete modern design combining a spacious, elegant sofa and calm decor to deliver a comfortable and sophisticated living space.',
+    dimensions: { standard: 'Custom Room Layout' },
+    materials: 'Architectural Wood Wall Cladding, Solid Timber & Performance Upholstery',
+    leadTime: '4 – 6 Weeks',
+    delivery: 'Turnkey interior woodwork and furniture installation.',
+    finishes: [{ name: 'Natural Oak', hex: '#D7C4A5' }, { name: 'Smoked Walnut', hex: '#533C29' }],
+    sizes: ['Custom Living Suite'],
+    primaryImage: '/images/products/image30.png',
+    secondaryImage: '/images/products/image32.png',
+    gallery: ['/images/products/image30.png']
+  },
+  {
+    id: 'prime-legacy-dining',
+    name: 'Prime Legacy Dining',
+    category: 'Tables',
+    categoryId: 'tables',
+    price: null,
+    isFeatured: false,
+    isNew: false,
+    badge: 'Dining Suite',
+    tagline: 'Luxurious Dining Table & Upholstered Seating',
+    description: 'A luxurious design blending elegance and comfort for unforgettable family moments.',
+    dimensions: { standard: '240 x 110 cm Table + Dining Chairs' },
+    materials: 'Solid Oak / Beech Wood & Tailored Upholstery',
+    leadTime: '4 – 5 Weeks',
+    delivery: 'White-glove dining room delivery and setup.',
+    finishes: [{ name: 'Warm Walnut', hex: '#533C29' }, { name: 'Natural Oak', hex: '#D7C4A5' }],
+    sizes: ['8-Seater Suite', '10-Seater Suite', 'Custom Dimensions'],
+    primaryImage: '/images/products/image33.png',
+    secondaryImage: '/images/products/image5.jpg',
+    gallery: ['/images/products/image33.png', '/images/products/image5.jpg']
+  },
+  {
+    id: 'prime-prestige-dining',
+    name: 'Prime Prestige Dining',
+    category: 'Tables',
+    categoryId: 'tables',
+    price: null,
+    isFeatured: false,
+    isNew: false,
+    badge: 'Dining Suite',
+    tagline: 'Large Wooden Table & Elegant Upholstered Chairs',
+    description: 'A spacious, luxurious design combining a large wooden table and elegant upholstered chairs for prestigious gatherings.',
+    dimensions: { standard: '260 x 115 cm Dining Table + Seating' },
+    materials: 'Solid Hardwood, Natural Veneer & Bouclé/Velvet Chairs',
+    leadTime: '4 – 5 Weeks',
+    delivery: 'White-glove delivery and assembly.',
+    finishes: [{ name: 'Natural Oak', hex: '#D7C4A5' }, { name: 'Smoked Walnut', hex: '#533C29' }],
+    sizes: ['8-Seater', '10-Seater', '12-Seater Custom'],
+    primaryImage: '/images/products/image5.jpg',
+    secondaryImage: '/images/products/image8.jpg',
+    gallery: ['/images/products/image5.jpg', '/images/products/image8.jpg']
+  },
+  {
+    id: 'prime-gathering-dining',
+    name: 'Prime Gathering Dining',
+    category: 'Tables',
+    categoryId: 'tables',
+    price: null,
+    isFeatured: false,
+    isNew: false,
+    badge: 'Dining Suite',
+    tagline: 'Warm & Spacious Family Dining Design',
+    description: 'A warm and spacious design that gives your family gatherings a cozy, elegant touch.',
+    dimensions: { standard: '220 x 105 cm Dining Suite' },
+    materials: 'Solid Oak & Handcrafted Wooden Chairs',
+    leadTime: '4 – 5 Weeks',
+    delivery: 'White-glove delivery and room setup.',
+    finishes: [{ name: 'Warm Oak', hex: '#C8A986' }, { name: 'Smoked Walnut', hex: '#533C29' }],
+    sizes: ['6-Seater', '8-Seater', 'Custom Dimensions'],
+    primaryImage: '/images/products/image8.jpg',
+    secondaryImage: '/images/products/image33.png',
+    gallery: ['/images/products/image8.jpg', '/images/products/image33.png']
+  },
+  {
+    id: 'prime-monarch-buffet',
+    name: 'Prime Monarch Buffet',
+    category: 'Consoles',
+    categoryId: 'consoles',
+    price: null,
+    isFeatured: false,
+    isNew: false,
+    badge: 'Custom Buffet',
+    tagline: 'Warm Wood Craftsmanship with Refined Gold Handles',
+    description: 'Warm wood craftsmanship with refined gold handles, bringing understated luxury to your dining area.',
+    dimensions: { standard: '210 cm (W) x 48 cm (D) x 85 cm (H)' },
+    materials: 'Plywood, Natural Oak Veneer & Brushed Brass Hardware',
+    leadTime: '3 – 4 Weeks',
+    delivery: 'White-glove delivery and installation.',
+    finishes: [{ name: 'Warm Oak & Gold', hex: '#C8A986' }, { name: 'Smoked Walnut & Brass', hex: '#533C29' }],
+    sizes: ['210 cm Standard', 'Custom Dimensions'],
+    primaryImage: '/images/products/image3.jpg',
+    secondaryImage: '/images/products/image2.png',
+    gallery: ['/images/products/image3.jpg', '/images/products/image2.png']
+  },
+  {
+    id: 'prime-onyx-kitchen',
+    name: 'Prime Onyx Kitchen',
+    category: 'Customize / B2B',
+    categoryId: 'customize',
+    price: null,
+    isFeatured: false,
+    isNew: false,
+    badge: 'Bespoke Kitchen',
+    tagline: 'Sleek Dark Cabinets & Smartly Lit Wooden Island',
+    description: 'A modern design blending sleek dark cabinets and a smartly lit wooden island to give you a luxurious and functional space.',
+    dimensions: { standard: 'Bespoke Kitchen Architecture' },
+    materials: 'Moisture-Resistant Plywood, Natural Oak & Matte Charcoal Cabinetry',
+    leadTime: '5 – 7 Weeks',
+    delivery: 'Full kitchen engineering, fabrication, and Cairo installation.',
+    finishes: [{ name: 'Onyx Charcoal & Warm Oak', hex: '#262423' }],
+    sizes: ['Custom Kitchen Commission'],
+    primaryImage: '/images/products/image37.png',
+    secondaryImage: '/images/products/image16.png',
+    gallery: ['/images/products/image37.png', '/images/products/image16.png']
+  },
+  {
+    id: 'prime-hearth-kitchen',
+    name: 'Prime Hearth Kitchen',
+    category: 'Customize / B2B',
+    categoryId: 'customize',
+    price: null,
+    isFeatured: false,
+    isNew: false,
+    badge: 'Bespoke Kitchen',
+    tagline: 'Warm Fusion of Wood & White Kitchen Cabinetry',
+    description: 'A warm fusion of wood and white elements with a practical dining area for family warmth.',
+    dimensions: { standard: 'Bespoke Kitchen & Breakfast Island' },
+    materials: 'Moisture-Resistant Plywood, Natural Oak Veneer & Matte Lacquer',
+    leadTime: '5 – 7 Weeks',
+    delivery: 'Full on-site measurement and installation.',
+    finishes: [{ name: 'Warm Oak & Matte White', hex: '#D7C4A5' }],
+    sizes: ['Custom Kitchen Commission'],
+    primaryImage: '/images/products/image16.png',
+    secondaryImage: '/images/products/image11.png',
+    gallery: ['/images/products/image16.png', '/images/products/image11.png']
+  },
+  {
+    id: 'prime-kitchen-partition',
+    name: 'Prime Glass & Wood Kitchen Suite',
+    category: 'Customize / B2B',
+    categoryId: 'customize',
+    price: null,
+    isFeatured: false,
+    isNew: false,
+    badge: 'Bespoke Kitchen',
+    tagline: 'Architectural Wood & Fluted Glass Kitchen Partition',
+    description: 'Bespoke wooden kitchen cabinetry and architectural sliding glass partition crafted to order.',
+    dimensions: { standard: 'Custom Site-Measured Dimensions' },
+    materials: 'Solid Oak Frames, Plywood Cabinetry & Tempered Glass',
+    leadTime: '5 – 7 Weeks',
+    delivery: 'Turnkey measurement and installation.',
+    finishes: [{ name: 'Natural Oak', hex: '#D7C4A5' }],
+    sizes: ['Custom Commission'],
+    primaryImage: '/images/products/image11.png',
+    secondaryImage: '/images/products/image37.png',
+    gallery: ['/images/products/image11.png']
+  },
+  {
+    id: 'prime-suite-wardrobe',
+    name: 'Prime Suite Wardrobe',
+    category: 'Dressers',
     categoryId: 'dressers',
-    price: 29500,
+    price: null,
     isFeatured: false,
-    isNew: true,
-    badge: 'Masterpiece',
-    rating: 5.0,
-    reviewsCount: 8,
-    primaryImage: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80',
-    secondaryImage: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80'
-    ],
-    tagline: 'Masterfully curved wooden dressing unit with circular mirror and felt-lined drawer organizers.',
-    description: 'A study in organic curves and soft luxury. Hand-milled solid wood casing houses 6 deep push-to-open soft-close drawers for vanity storage.',
-    dimensions: {
-      standard: '140 cm (W) x 48 cm (D) x 86 cm (H)'
-    },
-    materials: 'European White Oak curved carcass with solid oak drawer fronts.',
-    finishes: [
-      { name: 'Natural White Oak', hex: '#D7C4A5', colorClass: 'bg-[#D7C4A5]' },
-      { name: 'Smoked Walnut', hex: '#533C29', colorClass: 'bg-[#533C29]' }
-    ],
-    sizes: ['Standard 140 cm'],
-    inStock: true,
-    leadTime: '10 - 14 business days',
-    delivery: 'Direct white glove delivery and placement in your bedroom suite.'
+    isNew: false,
+    badge: 'Bespoke Wardrobe',
+    tagline: 'Integrated Dressing Area & Organizational System',
+    description: 'A modern integrated design that gives your dressing area a luxurious, perfectly organized feel.',
+    dimensions: { standard: 'Custom Floor-to-Ceiling Wardrobe' },
+    materials: 'Plywood, Natural Wood Veneer & Integrated LED Lighting',
+    leadTime: '4 – 6 Weeks',
+    delivery: 'Full on-site measurement and installation.',
+    finishes: [{ name: 'Warm Oak Veneer', hex: '#C8A986' }, { name: 'Smoked Walnut', hex: '#533C29' }],
+    sizes: ['Custom Wardrobe Commission'],
+    primaryImage: '/images/products/image38.png',
+    secondaryImage: '/images/products/image7.png',
+    gallery: ['/images/products/image38.png', '/images/products/image7.png']
   },
   {
-    id: 'prime-portal-door',
-    name: 'Prime Portal Pivot Door',
-    category: 'Doors & Millwork',
+    id: 'prime-infinity-ceiling',
+    name: 'Prime Infinity Ceiling',
+    category: 'Doors',
     categoryId: 'doors-millwork',
-    price: 38000,
+    price: null,
     isFeatured: false,
-    isNew: true,
-    badge: 'Architectural',
-    rating: 4.9,
-    reviewsCount: 10,
-    primaryImage: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80',
-    secondaryImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80'
-    ],
-    tagline: 'Monumental natural wood interior pivot door with flush timber handles and hidden hardware.',
-    description: 'Bespoke grand entrance pivot door for luxury villas and residences. Heavyweight solid hardwood engineered core with acoustic seals.',
-    dimensions: {
-      standard: '110 cm (W) x 260 cm (H) x 6 cm (T)',
-      custom: 'Custom architectural ceiling heights up to 340 cm'
-    },
-    materials: 'Solid Smoked Walnut or European Oak with integrated heavy-duty German pivot hinge system.',
-    finishes: [
-      { name: 'Smoked Walnut', hex: '#533C29', colorClass: 'bg-[#533C29]' },
-      { name: 'Blackened Ash', hex: '#262423', colorClass: 'bg-[#262423]' },
-      { name: 'Natural White Oak', hex: '#D7C4A5', colorClass: 'bg-[#D7C4A5]' }
-    ],
-    sizes: ['Standard 260H', 'Full Height Bespoke'],
-    inStock: true,
-    leadTime: '14 - 20 business days',
-    delivery: 'Precision installation and frame anchoring by Prime master door technicians.'
+    isNew: false,
+    badge: 'Ceiling Millwork',
+    tagline: 'Refined Architectural Ceilings & Ambient Lighting',
+    description: 'A spacious open design featuring refined architectural ceilings and ambient lighting for endless elegance.',
+    dimensions: { standard: 'Custom Architectural Ceiling Grid' },
+    materials: 'Acoustic Solid Wood Slats, Veneered Panels & Linear LED Integration',
+    leadTime: '4 – 6 Weeks',
+    delivery: 'Full engineering and on-site ceiling installation.',
+    finishes: [{ name: 'Natural Oak', hex: '#D7C4A5' }, { name: 'Warm Walnut', hex: '#533C29' }],
+    sizes: ['Custom Architectural Commission'],
+    primaryImage: '/images/products/image32.png',
+    secondaryImage: '/images/products/image14.png',
+    gallery: ['/images/products/image32.png', '/images/products/image14.png']
+  },
+  {
+    id: 'prime-crown-ceiling',
+    name: 'Prime Crown Ceiling',
+    category: 'Doors',
+    categoryId: 'doors-millwork',
+    price: null,
+    isFeatured: false,
+    isNew: false,
+    badge: 'Ceiling Millwork',
+    tagline: 'Luxurious Decorative Ceiling with Ambient Lighting',
+    description: 'Luxurious decorative ceiling designs with ambient lighting for royal elegance.',
+    dimensions: { standard: 'Custom Architectural Ceiling' },
+    materials: 'Plywood, Natural Wood Veneer & Concealed Lighting Channels',
+    leadTime: '4 – 6 Weeks',
+    delivery: 'On-site structural installation.',
+    finishes: [{ name: 'Warm Oak', hex: '#C8A986' }, { name: 'Smoked Walnut', hex: '#533C29' }],
+    sizes: ['Custom Architectural Commission'],
+    primaryImage: '/images/products/image14.png',
+    secondaryImage: '/images/products/image12.png',
+    gallery: ['/images/products/image14.png', '/images/products/image12.png']
+  },
+  {
+    id: 'prime-apex-ceiling',
+    name: 'Prime Apex Ceiling & Cladding',
+    category: 'Doors',
+    categoryId: 'doors-millwork',
+    price: null,
+    isFeatured: false,
+    isNew: false,
+    badge: 'Ceiling Millwork',
+    tagline: 'Statement Architectural Wood Ceiling & Wall Millwork',
+    description: 'A bold and vibrant statement piece that adds a striking modern touch to your space.',
+    dimensions: { standard: 'Custom Architectural Fit-Out' },
+    materials: 'Natural Wood Veneer, Solid Timber & Acoustic Backing',
+    leadTime: '4 – 6 Weeks',
+    delivery: 'On-site architectural installation.',
+    finishes: [{ name: 'Natural Oak', hex: '#D7C4A5' }, { name: 'Smoked Walnut', hex: '#533C29' }],
+    sizes: ['Custom Architectural Commission'],
+    primaryImage: '/images/products/image12.png',
+    secondaryImage: '/images/products/image32.png',
+    gallery: ['/images/products/image12.png', '/images/products/image32.png']
+  }
+];
+
+export const PREVIOUS_CUSTOM_WORKS = [
+  {
+    id: 'custom-vista-dressing',
+    title: 'Prime Vista Glass-Door Dressing Room',
+    location: 'New Cairo, Egypt',
+    material: 'Plywood & Natural Veneer (24,500 EGP / m²)',
+    dimensions: 'Full Walk-In Wardrobe with Smart Internal Lighting',
+    image: '/images/products/image7.png'
+  },
+  {
+    id: 'custom-onyx-kitchen',
+    title: 'Prime Onyx Kitchen & Lit Wooden Island',
+    location: 'Sheikh Zayed, Giza',
+    material: 'Dark Matte Cabinetry & Solid Oak Island',
+    dimensions: 'Bespoke Kitchen Architecture',
+    image: '/images/products/image37.png'
+  },
+  {
+    id: 'custom-grand-library',
+    title: 'Prime Grand Illuminated Wall Library',
+    location: 'Katameya Heights, Cairo',
+    material: 'Natural Oak Veneer & Ambient LED Shelving',
+    dimensions: 'Floor-to-Ceiling Architectural Library',
+    image: '/images/products/image9.png'
+  },
+  {
+    id: 'custom-essence-millwork',
+    title: 'Prime Essence Under-Stair & Wall Joinery',
+    location: 'Heliopolis, Cairo',
+    material: 'Solid European Oak & Custom Millwork',
+    dimensions: 'Tailored Architectural Fit-Out',
+    image: '/images/products/image39.jpg'
+  },
+  {
+    id: 'custom-hearth-kitchen',
+    title: 'Prime Hearth Wood & White Family Kitchen',
+    location: 'Maadi, Cairo',
+    material: 'Natural Oak & Matte White Cabinetry',
+    dimensions: 'Custom Kitchen & Integrated Dining Island',
+    image: '/images/products/image16.png'
+  },
+  {
+    id: 'custom-infinity-ceiling',
+    title: 'Prime Infinity Architectural Ceiling & Living',
+    location: 'Zamalek, Cairo',
+    material: 'Acoustic Wood Ceiling Cladding & Ambient Lighting',
+    dimensions: 'Open-Plan Reception Millwork',
+    image: '/images/products/image32.png'
   }
 ];
 
 export const CRAFT_STEPS = [
   {
     number: '01',
-    title: 'Select',
-    description: 'Carefully selected materials and finishes.',
-    detail: 'We personally inspect every timber batch—European White Oak, American Walnut, and premium hardwoods—ensuring ideal moisture levels, grain harmony, and responsible provenance.',
-    image: 'https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?auto=format&fit=crop&w=800&q=80'
+    title: 'Material Selection',
+    description: 'Carefully chosen oak, beech, and premium veneers for strength, grain character, and longevity.',
+    detail: 'We source kiln-dried European Oak, Beech wood, and architectural-grade plywood cores to guarantee stability in Egyptian homes.',
+    image: '/images/products/image39.jpg'
   },
   {
     number: '02',
-    title: 'Shape',
-    description: 'Precision craftsmanship brings the design to life.',
-    detail: 'Combining traditional joinery inherited across four generations of Egyptian wood masters with precision European tooling to carve lasting silhouettes.',
-    image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80'
+    title: 'Precision Craftsmanship',
+    description: 'Built by skilled artisans in our Ghamra, Cairo workshop with CNC and hand-carved precision.',
+    detail: 'From intricate carved dresser fronts on the Prime Carve and Motif series to seamless curved joinery on the Prime Curve Highboard.',
+    image: '/images/products/image21.jpg'
   },
   {
     number: '03',
-    title: 'Finish',
-    description: 'Each piece receives its final texture, color, and finish.',
-    detail: 'Hand-sanding through multiple grits, followed by custom non-toxic oils, matte lacquers, and wire-brushing that highlight the natural tactile grain of the wood.',
-    image: 'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&w=800&q=80'
+    title: 'Refined Finishing',
+    description: 'Treated for durability, warmth, and a timeless natural touch.',
+    detail: 'Every surface is hand-sanded and sealed with protective matte finishes that highlight the natural grain of oak and walnut.',
+    image: '/images/products/image2.png'
   },
   {
     number: '04',
-    title: 'Deliver',
-    description: 'Your finished piece is prepared for its new home.',
-    detail: 'Wrapped in tailored fabric protectors and installed directly by our Cairo white glove team, leveled and calibrated for perfection in your space.',
-    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80'
+    title: 'Made to Live With',
+    description: 'Delivered and installed in your home for everyday comfort and lasting beauty.',
+    detail: 'Our Cairo white-glove team handles delivery, room placement, wall mounting, and precision alignment.',
+    image: '/images/products/image1.jpg'
   }
 ];
 
-export const PARTNERS_AND_CLIENTS = [
-  { name: 'Orascom Development', note: 'Luxury Resorts & Coastal Villas' },
-  { name: 'Yasmina Makram', note: 'Bespoke Interior Studio Cairo' },
-  { name: 'Style Design', note: 'Architectural Interiors' },
-  { name: 'EgyStone', note: 'Marble & Fine Woodworks' },
-  { name: 'Humania', note: 'Progressing Humanity Healthcare' },
-  { name: 'Haven Bespoke', note: 'Turnkey Architectural Solutions' }
-];
-
-export const PREVIOUS_CUSTOM_WORKS = [
+export const INSTAGRAM_POSTS = [
   {
-    id: 'custom-fluted-credenza',
-    title: 'Fluted Walnut Credenza & Marble Vanity',
-    category: 'Dressers & Consoles',
-    location: 'Katameya Dunes Villa, Cairo',
-    material: 'American Smoked Walnut & Italian Marble',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80'
+    id: 'ig-1',
+    image: '/images/products/image1.jpg',
+    caption: 'The Prime Cloud Bed (180×200) in soft bouclé and natural oak — EGP 56,000.',
+    tag: 'Prime Cloud Bed'
   },
   {
-    id: 'custom-monolith-table',
-    title: 'Monolithic Oval Dining Table (320cm)',
-    category: 'Dining Tables',
-    location: 'Palm Hills Residence, 6th of October',
-    material: 'Solid European White Oak',
-    image: 'https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=900&q=80'
+    id: 'ig-2',
+    image: '/images/products/image13.png',
+    caption: 'Curved oak veneer elegance: The Prime Curve Highboard — EGP 68,500.',
+    tag: 'Prime Curve'
   },
   {
-    id: 'custom-floating-bed',
-    title: 'Floating Bed Suite with Slat Wall Headboard',
-    category: 'Beds & Nightstands',
-    location: 'Swan Lake North Coast Villa',
-    material: 'Natural Bleached Oak & Bouclé',
-    image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80'
+    id: 'ig-3',
+    image: '/images/products/image21.jpg',
+    caption: 'Masterfully carved solid oak & plywood craftsmanship on the Prime Carve Dresser — EGP 42,500.',
+    tag: 'Prime Carve Dresser'
   },
   {
-    id: 'custom-acoustic-tv',
-    title: 'Acoustic Slat TV Media Center & Shelving',
-    category: 'TV & Media Units',
-    location: 'Mivida Compound, New Cairo',
-    material: 'Smoked Walnut & Integrated LED',
-    image: 'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=900&q=80'
+    id: 'ig-4',
+    image: '/images/products/image2.png',
+    caption: 'Contrast and warmth: The Prime Shadow Sideboard in blackened oak and natural timber — EGP 58,000.',
+    tag: 'Prime Shadow'
   },
   {
-    id: 'custom-dressing-room',
-    title: 'Walk-In Dressing Sanctuary with Glass Wardrobes',
-    category: 'Dressing Rooms',
-    location: 'Uptown Cairo Villa, Mokattam',
-    material: 'Solid Zan Hardwood & Fluted Bronze',
-    image: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=900&q=80'
+    id: 'ig-5',
+    image: '/images/products/image15.png',
+    caption: 'Floating geometric refinement: Prime Lattice TV Unit — EGP 33,750.',
+    tag: 'Prime Lattice'
   },
   {
-    id: 'custom-pivot-entrance',
-    title: 'Geometric Carved Pivot Entrance Door',
-    category: 'Doors & Millwork',
-    location: 'Private Lakeview Villa, New Cairo',
-    material: 'Kiln-Dried Blackened Ash',
-    image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=80'
+    id: 'ig-6',
+    image: '/images/products/image7.png',
+    caption: 'Bespoke Prime Vista Dressing Room with glass doors and internal LED lighting — EGP 24,500 / m².',
+    tag: 'Prime Vista Dressing'
   }
 ];

@@ -161,7 +161,7 @@ export default function ProductDetailPage() {
               {product.name}
             </h1>
             <p className="text-2xl font-serif text-charcoal-900 font-medium">
-              {formatEGP(product.price)}
+              {formatEGP(product.price, product.priceUnit)}
             </p>
             <p className="text-sm text-charcoal-600 font-light leading-relaxed pt-1">
               {product.description}
@@ -263,7 +263,11 @@ export default function ProductDetailPage() {
                 className="flex-1 py-4 bg-wood-800 text-[#FAF8F5] hover:bg-wood-900 text-xs uppercase tracking-[0.2em] font-medium transition-all shadow-sm flex items-center justify-center space-x-2"
               >
                 <ShoppingBag className="w-4 h-4" />
-                <span>Add to Bag — {formatEGP(product.price * quantity)}</span>
+                <span>
+                  {product.price
+                    ? `Add to Bag — ${formatEGP(product.price * quantity, product.priceUnit)}`
+                    : 'Request Custom Quote'}
+                </span>
               </button>
             </div>
 

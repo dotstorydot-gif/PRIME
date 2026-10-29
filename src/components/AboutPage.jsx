@@ -41,7 +41,7 @@ export default function AboutPage() {
         <div className="lg:col-span-6 relative">
           <div className="aspect-[4/3] bg-[#E2DBD0] border border-[#E9E2D5] overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80"
+              src="/images/products/image9.png"
               alt="Prime Wooden Work Cairo Interior Architecture"
               className="w-full h-full object-cover object-center"
             />

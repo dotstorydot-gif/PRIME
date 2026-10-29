@@ -77,7 +77,7 @@ export default function SearchModal() {
                 Popular Searches
               </span>
               <div className="flex flex-wrap gap-2 text-xs">
-                {['Oslo Dining Table', 'Haven Lounge Chair', 'Noma Console', 'Arco Side Table', 'White Oak', 'Custom Furniture'].map(term => (
+                {['Prime Cloud Bed', 'Prime Carve Dresser', 'Prime Shadow Sideboard', 'Prime Lattice TV Unit', 'Prime Motif Nightstand', 'Prime Vista Dressing'].map(term => (
                   <button
                     key={term}
                     onClick={() => setQuery(term)}
@@ -109,7 +109,7 @@ export default function SearchModal() {
                       <div>
                         <span className="text-[10px] uppercase tracking-wider text-wood-600 font-medium">{p.category}</span>
                         <h4 className="font-serif text-base text-charcoal-900 group-hover:text-wood-800 transition-colors">{p.name}</h4>
-                        <span className="text-xs font-semibold text-charcoal-700">{formatEGP(p.price)}</span>
+                        <span className="text-xs font-semibold text-charcoal-700">{formatEGP(p.price, p.priceUnit)}</span>
                       </div>
                     </div>
                     <ArrowRight className="w-4 h-4 text-charcoal-400 group-hover:translate-x-1 transition-transform" />

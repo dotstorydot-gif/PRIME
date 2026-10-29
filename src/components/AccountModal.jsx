@@ -14,7 +14,7 @@ export default function AccountModal() {
     phone: '+20 100 123 4567',
     tier: 'Private Client (Cairo Heritage)',
     recentOrders: [
-      { id: 'PWW-EG-829141', date: 'October 2026', item: 'Oslo Dining Table (240cm)', status: 'In Handcraft Shaping' }
+      { id: 'PWW-EG-829141', date: 'October 2026', item: 'Prime Cloud Bed (180x200)', status: 'In Handcraft Shaping' }
     ]
   });
 

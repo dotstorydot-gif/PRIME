@@ -86,7 +86,7 @@ export default function QuickViewModal() {
                 {product.name}
               </h3>
               <p className="text-xl font-serif text-charcoal-900 font-medium mt-2">
-                {formatEGP(product.price)}
+                {formatEGP(product.price, product.priceUnit)}
               </p>
               <p className="text-xs text-charcoal-600 font-light mt-3 leading-relaxed">
                 {product.tagline || product.description}

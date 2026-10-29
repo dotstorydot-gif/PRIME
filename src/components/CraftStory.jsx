@@ -26,7 +26,7 @@ export default function CraftStory() {
           {/* Large Craftsman Workshop Image */}
           <div className="relative aspect-[4/3] sm:aspect-[4/3] overflow-hidden bg-[#E5DFC5] border border-[#E9E2D5]">
             <img
-              src="https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?auto=format&fit=crop&w=1200&q=80"
+              src="/images/products/image39.jpg"
               alt="Egyptian artisan woodworker hand-carving solid timber in Cairo"
               className="w-full h-full object-cover object-center"
               loading="lazy"

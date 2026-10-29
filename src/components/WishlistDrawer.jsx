@@ -127,7 +127,7 @@ export default function WishlistDrawer() {
                     </div>
 
                     <p className="font-sans text-xs font-semibold text-charcoal-900 mt-1">
-                      {formatEGP(item.price)}
+                      {formatEGP(item.price, item.priceUnit)}
                     </p>
                   </div>
 

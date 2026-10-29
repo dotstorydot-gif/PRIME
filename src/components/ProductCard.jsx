@@ -135,7 +135,7 @@ export default function ProductCard({ product }) {
             {product.name}
           </h3>
           <p className="text-xs sm:text-sm font-sans text-charcoal-700 font-medium tracking-wide">
-            {formatEGP(product.price)}
+            {formatEGP(product.price, product.priceUnit)}
           </p>
         </div>
 

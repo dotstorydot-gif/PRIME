@@ -6,7 +6,7 @@ const StoreContext = createContext(null);
 export function StoreProvider({ children }) {
   // Navigation State
   const [currentPage, setCurrentPage] = useState('home');
-  const [selectedProductId, setSelectedProductId] = useState('oslo-dining-table');
+  const [selectedProductId, setSelectedProductId] = useState('prime-cloud-bed');
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState('all');
 
   // Modals & Drawers
@@ -20,16 +20,16 @@ export function StoreProvider({ children }) {
   // Cart State (persisted to localStorage)
   const [cart, setCart] = useState(() => {
     try {
-      const saved = localStorage.getItem('prime_wooden_cart');
+      const saved = localStorage.getItem('prime_wooden_cart_v2');
       return saved ? JSON.parse(saved) : [
         {
-          id: 'oslo-dining-table',
-          name: 'Oslo Dining Table',
-          category: 'Dining',
-          price: 42500,
+          id: 'prime-cloud-bed',
+          name: 'Prime Cloud Bed',
+          category: 'Beds',
+          price: 56000,
           image: PRODUCTS[0].primaryImage,
-          finish: 'Natural White Oak',
-          size: '240 x 105 cm (Seats 8)',
+          finish: 'Plywood & Natural Oak',
+          size: '180 x 200 cm (Queen/King Standard)',
           quantity: 1
         }
       ];
@@ -41,8 +41,8 @@ export function StoreProvider({ children }) {
   // Wishlist State (persisted to localStorage)
   const [wishlist, setWishlist] = useState(() => {
     try {
-      const saved = localStorage.getItem('prime_wooden_wishlist');
-      return saved ? JSON.parse(saved) : ['arco-side-table'];
+      const saved = localStorage.getItem('prime_wooden_wishlist_v2');
+      return saved ? JSON.parse(saved) : ['prime-carve-dresser'];
     } catch (e) {
       return [];
     }
@@ -53,13 +53,13 @@ export function StoreProvider({ children }) {
 
   useEffect(() => {
     try {
-      localStorage.setItem('prime_wooden_cart', JSON.stringify(cart));
+      localStorage.setItem('prime_wooden_cart_v2', JSON.stringify(cart));
     } catch (e) {}
   }, [cart]);
 
   useEffect(() => {
     try {
-      localStorage.setItem('prime_wooden_wishlist', JSON.stringify(wishlist));
+      localStorage.setItem('prime_wooden_wishlist_v2', JSON.stringify(wishlist));
     } catch (e) {}
   }, [wishlist]);
 
@@ -73,6 +73,18 @@ export function StoreProvider({ children }) {
 
   // Cart Operations
   const addToCart = (product, options = {}) => {
+    if (!product.price) {
+      setCustomQuotePreFill({
+        pieceType: product.category,
+        dimensions: product.dimensions?.standard || 'Custom Dimensions',
+        preferredMaterial: (product.finishes && product.finishes[0]?.name) || 'Natural Oak',
+        notes: `Requesting a custom quote for ${product.name}.`
+      });
+      setCurrentPage('custom');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      showToast(`Opened custom quote request for "${product.name}"`, 'info');
+      return;
+    }
     const finish = options.finish || (product.finishes && product.finishes[0]?.name) || 'Natural Oak';
     const size = options.size || (product.sizes && product.sizes[0]) || 'Standard';
     const quantity = options.quantity || 1;
@@ -145,12 +157,16 @@ export function StoreProvider({ children }) {
   const isInWishlist = (productId) => wishlist.includes(productId);
 
   // Currency Formatter
-  const formatEGP = (amount) => {
-    return new Intl.NumberFormat('en-EG', {
+  const formatEGP = (amount, unit = '') => {
+    if (amount === null || amount === undefined || amount === 0) {
+      return 'Price Upon Request';
+    }
+    const formatted = new Intl.NumberFormat('en-EG', {
       style: 'currency',
       currency: 'EGP',
       maximumFractionDigits: 0
     }).format(amount).replace('EGP', 'EGP ');
+    return unit ? `${formatted} ${unit}` : formatted;
   };
 
   // Cart calculations

@@ -12,24 +12,25 @@ export default function ShopPage() {
   const [filterFinish, setFilterFinish] = useState('all');
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
-  // Chosen piece categories (not room categories)
+  // Chosen piece categories (aligned with Prime Excel catalog)
   const categories = [
     { id: 'all', label: 'All' },
-    { id: 'tables', label: 'Tables' },
-    { id: 'consoles', label: 'Consoles' },
     { id: 'beds', label: 'Beds' },
-    { id: 'chairs', label: 'Chairs' },
+    { id: 'night-stands', label: 'Night Stands' },
     { id: 'dressers', label: 'Dressers' },
     { id: 'tv-units', label: 'TV Units' },
+    { id: 'consoles', label: 'Consoles' },
+    { id: 'tables', label: 'Tables' },
     { id: 'storage', label: 'Storage' },
-    { id: 'doors-millwork', label: 'Doors' },
+    { id: 'doors-millwork', label: 'Doors & Ceilings' },
+    { id: 'customize', label: 'Customize / B2B' },
   ];
 
   const timberOptions = [
     { value: 'all', label: 'All Woods' },
     { value: 'oak', label: 'Natural Oak', swatch: '#D7C4A5' },
+    { value: 'beech', label: 'Beech Wood', swatch: '#C8A986' },
     { value: 'walnut', label: 'Smoked Walnut', swatch: '#533C29' },
-    { value: 'ash', label: 'Blackened Ash', swatch: '#262423' },
   ];
 
   const sortOptions = [
@@ -50,15 +51,26 @@ export default function ShopPage() {
     // Filter by Finish if selected
     if (filterFinish !== 'all') {
       result = result.filter(item => 
-        item.finishes && item.finishes.some(f => f.name.toLowerCase().includes(filterFinish.toLowerCase()))
+        (item.finishes && item.finishes.some(f => f.name.toLowerCase().includes(filterFinish.toLowerCase()))) ||
+        (item.materials && item.materials.toLowerCase().includes(filterFinish.toLowerCase()))
       );
     }
 
     // Sorting
     if (sortBy === 'price-low') {
-      result.sort((a, b) => a.price - b.price);
+      result.sort((a, b) => {
+        if (!a.price && !b.price) return 0;
+        if (!a.price) return 1;
+        if (!b.price) return -1;
+        return a.price - b.price;
+      });
     } else if (sortBy === 'price-high') {
-      result.sort((a, b) => b.price - a.price);
+      result.sort((a, b) => {
+        if (!a.price && !b.price) return 0;
+        if (!a.price) return 1;
+        if (!b.price) return -1;
+        return b.price - a.price;
+      });
     } else if (sortBy === 'newest') {
       result.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
     }

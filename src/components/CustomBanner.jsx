@@ -14,7 +14,7 @@ export default function CustomBanner() {
           <div className="lg:col-span-6 relative">
             <div className="relative aspect-[4/3] sm:aspect-[16/12] overflow-hidden bg-[#E2DBD0] border border-[#E9E2D5]">
               <img
-                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80"
+                src="/images/products/image7.png"
                 alt="Custom built-in architectural woodwork and dressing room by Prime"
                 className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700 ease-out"
                 loading="lazy"
