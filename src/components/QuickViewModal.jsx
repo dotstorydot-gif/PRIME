@@ -69,11 +69,6 @@ export default function QuickViewModal() {
               alt={product.name}
               className="w-full h-full object-cover object-center"
             />
-            {product.badge && (
-              <span className="absolute top-4 left-4 bg-white/90 text-[10px] uppercase tracking-widest px-2.5 py-1 text-charcoal-800 font-medium">
-                {product.badge}
-              </span>
-            )}
           </div>
 
           {/* Content */}

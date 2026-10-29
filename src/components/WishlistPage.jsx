@@ -123,22 +123,15 @@ export default function WishlistPage() {
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
               />
 
-              {/* Top Badges */}
-              <div className="absolute top-3 inset-x-3 flex items-center justify-between z-10">
-                {product.badge ? (
-                  <span className="bg-[#FAF8F5]/90 backdrop-blur-sm text-[10px] uppercase tracking-widest px-2.5 py-1 text-charcoal-800 font-medium border border-[#E9E2D5]">
-                    {product.badge}
-                  </span>
-                ) : <span />}
-
-                {/* Remove from Wishlist button */}
+              {/* Remove from Wishlist button on Top Right */}
+              <div className="absolute top-3 right-3 z-10">
                 <button
                   type="button"
                   onClick={(e) => {
                     e.stopPropagation();
                     toggleWishlist(product.id);
                   }}
-                  className="w-8 h-8 rounded-full bg-wood-800 text-white hover:bg-red-800 transition-colors flex items-center justify-center shadow-sm"
+                  className="w-8 h-8 rounded-full bg-[#1d2743] text-white hover:bg-red-800 transition-colors flex items-center justify-center shadow-sm"
                   title="Remove from saved"
                 >
                   <Trash2 className="w-3.5 h-3.5" />

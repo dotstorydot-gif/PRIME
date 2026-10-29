@@ -42,49 +42,25 @@ export default function ProductCard({ product }) {
       onClick={() => viewProduct(product.id)}
     >
       {/* Product Image Frame */}
-      <div className="relative aspect-[4/3] sm:aspect-[1/1] overflow-hidden bg-[#F0EDE6] border border-[#E9E2D5]/70 transition-all duration-300 group-hover:border-wood-300">
+      <div className="relative aspect-[4/3] sm:aspect-[1/1] overflow-hidden bg-[#F0EDE6] border border-[#E9E2D5]/70 transition-all duration-300 group-hover:border-neutral-300 group-hover:shadow-md">
         
-        {/* Primary and Hover Secondary Images */}
+        {/* Product Image */}
         <img
           src={product.primaryImage}
           alt={product.name}
-          className={`absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 ease-out ${
-            isHovered && product.secondaryImage 
-              ? 'opacity-0 scale-105' 
-              : 'opacity-100 scale-100'
-          }`}
+          className="w-full h-full object-cover object-center transform transition-transform duration-500 ease-out group-hover:scale-105"
           loading="lazy"
         />
 
-        {product.secondaryImage && (
-          <img
-            src={product.secondaryImage}
-            alt={`${product.name} alternate view`}
-            className={`absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 ease-out ${
-              isHovered 
-                ? 'opacity-100 scale-105' 
-                : 'opacity-0 scale-100'
-            }`}
-            loading="lazy"
-          />
-        )}
-
-        {/* Top Badges / Wishlist */}
-        <div className="absolute top-3 inset-x-3 flex items-center justify-between z-10">
-          {product.badge ? (
-            <span className="bg-[#FAF8F5]/90 backdrop-blur-sm text-[10px] uppercase tracking-widest px-2.5 py-1 text-charcoal-800 font-medium border border-[#E9E2D5]">
-              {product.badge}
-            </span>
-          ) : <span />}
-
-          {/* Wishlist Button */}
+        {/* Wishlist Button on Top Right (no title/badge on image) */}
+        <div className="absolute top-3 right-3 z-10">
           <button
             type="button"
             onClick={handleWishlistToggle}
             className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
               wishlisted 
                 ? 'bg-[#1d2743] text-[#fae6c3]' 
-                : 'bg-[#FAF8F5]/90 backdrop-blur-sm text-charcoal-700 hover:text-[#1d2743] hover:bg-white'
+                : 'bg-white/90 backdrop-blur-sm text-charcoal-700 hover:text-[#1d2743] hover:bg-white shadow-sm'
             }`}
             aria-label={wishlisted ? 'Remove from wishlist' : 'Save to wishlist'}
             title={wishlisted ? 'Remove from saved' : 'Save to wishlist'}
