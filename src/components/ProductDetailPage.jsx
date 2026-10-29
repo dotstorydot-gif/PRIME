@@ -154,13 +154,25 @@ export default function ProductDetailPage() {
           
           {/* Header Info */}
           <div className="space-y-3 pb-6 border-b border-[#E9E2D5]">
-            <span className="text-xs uppercase tracking-[0.25em] text-wood-500 font-semibold block">
-              {product.category}
-            </span>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xs uppercase tracking-[0.25em] text-[#1d2743] font-bold">
+                {product.category}
+              </span>
+              {product.tag && (
+                <span className="text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-sand-200/80 text-[#1d2743] font-medium border border-sand-300">
+                  {product.tag}
+                </span>
+              )}
+              {product.b2bTag && (
+                <span className="text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-neutral-100 text-neutral-600 font-medium border border-neutral-200">
+                  {product.b2bTag}
+                </span>
+              )}
+            </div>
             <h1 className="font-serif text-3xl sm:text-5xl text-charcoal-900 font-normal tracking-tight">
               {product.name}
             </h1>
-            <p className="text-2xl font-serif text-charcoal-900 font-medium">
+            <p className="text-2xl font-serif text-[#1d2743] font-semibold">
               {formatEGP(product.price, product.priceUnit)}
             </p>
             <p className="text-sm text-charcoal-600 font-light leading-relaxed pt-1">

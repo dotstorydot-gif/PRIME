@@ -74,13 +74,25 @@ export default function QuickViewModal() {
           {/* Content */}
           <div className="p-6 sm:p-8 flex flex-col justify-between space-y-6">
             <div>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-wood-500 font-semibold block">
-                {product.category}
-              </span>
+              <div className="flex flex-wrap items-center gap-1.5 mb-1">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#1d2743] font-bold">
+                  {product.category}
+                </span>
+                {product.tag && (
+                  <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-sand-200/80 text-[#1d2743] font-medium border border-sand-300">
+                    {product.tag}
+                  </span>
+                )}
+                {product.b2bTag && (
+                  <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-600 font-medium border border-neutral-200">
+                    {product.b2bTag}
+                  </span>
+                )}
+              </div>
               <h3 className="font-serif text-2xl sm:text-3xl text-charcoal-900 font-normal mt-1">
                 {product.name}
               </h3>
-              <p className="text-xl font-serif text-charcoal-900 font-medium mt-2">
+              <p className="text-xl font-serif text-[#1d2743] font-semibold mt-2">
                 {formatEGP(product.price, product.priceUnit)}
               </p>
               <p className="text-xs text-charcoal-600 font-light mt-3 leading-relaxed">

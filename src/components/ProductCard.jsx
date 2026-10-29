@@ -103,14 +103,29 @@ export default function ProductCard({ product }) {
 
       {/* Product Details matching screenshot layout */}
       <div className="pt-4 flex items-start justify-between">
-        <div className="space-y-1">
-          <span className="text-[10px] uppercase tracking-[0.2em] text-wood-500 font-semibold block">
-            {product.category}
-          </span>
-          <h3 className="font-serif text-lg sm:text-xl text-charcoal-900 font-medium group-hover:text-wood-800 transition-colors">
+        <div className="space-y-1.5 flex-1 min-w-0 pr-2">
+          {/* Tags from Excel */}
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="text-[10px] uppercase tracking-[0.2em] text-[#1d2743] font-bold">
+              {product.category}
+            </span>
+            {product.tag && product.tag.toLowerCase() !== product.category.toLowerCase() && (
+              <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-sand-200/80 text-[#1d2743] font-medium border border-sand-300">
+                {product.tag}
+              </span>
+            )}
+            {product.b2bTag && (
+              <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-600 font-medium border border-neutral-200">
+                {product.b2bTag}
+              </span>
+            )}
+          </div>
+
+          <h3 className="font-serif text-lg sm:text-xl text-charcoal-900 font-medium group-hover:text-[#1d2743] transition-colors">
             {product.name}
           </h3>
-          <p className="text-xs sm:text-sm font-sans text-charcoal-700 font-medium tracking-wide">
+
+          <p className="text-xs sm:text-sm font-sans text-charcoal-900 font-semibold tracking-wide">
             {formatEGP(product.price, product.priceUnit)}
           </p>
         </div>
@@ -119,8 +134,8 @@ export default function ProductCard({ product }) {
         <button
           type="button"
           onClick={handleQuickAdd}
-          className="mt-1 p-2 text-charcoal-600 hover:text-wood-800 transition-colors border border-transparent hover:border-[#E9E2D5]"
-          title="Add to bag"
+          className="mt-1 p-2 text-charcoal-600 hover:text-[#1d2743] transition-colors border border-transparent hover:border-neutral-200 rounded-md"
+          title={product.price ? "Add to bag" : "Request Custom Quote"}
         >
           <Plus className="w-4 h-4" />
         </button>
