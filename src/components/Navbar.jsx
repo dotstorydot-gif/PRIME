@@ -36,15 +36,14 @@ export default function Navbar() {
   return (
     <>
       {/* Top Heritage Marquee Bar */}
-      <div className="bg-[#1C1A18] text-[#FAF8F5] text-[11px] tracking-widest uppercase py-2 px-4 text-center font-medium border-b border-wood-800">
+      <div className="bg-[#1C1A18] text-[#FAF8F5] text-[11px] tracking-widest uppercase py-2 px-4 text-center font-medium border-b border-wood-800 hidden md:block">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <span className="hidden md:inline text-sand-400">Est. 1948 · Cairo Workshop</span>
-          <span className="mx-auto md:mx-0">Handcrafted in Egypt · White-Glove Installation on Orders Over 50,000 EGP</span>
+          <span className="text-sand-400">Est. 1948 · Cairo Workshop</span>
           <a 
             href="https://wa.me/201222935556" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="hidden md:inline text-sand-400 hover:text-white transition-colors"
+            className="text-sand-400 hover:text-white transition-colors"
           >
             Call / WhatsApp: (+20) 122 293 5556
           </a>
