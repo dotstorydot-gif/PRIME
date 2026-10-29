@@ -47,11 +47,6 @@ export default function CategoryGrid() {
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent transition-opacity duration-300 group-hover:from-black/80" />
-              
-              {/* Overlay Badge */}
-              <div className="absolute top-3 left-3 bg-[#FAF8F5]/90 backdrop-blur-sm px-2.5 py-1 text-[10px] uppercase tracking-widest font-medium text-charcoal-800 border border-[#E9E2D5]/70">
-                {cat.pieceType}
-              </div>
 
               {/* Bottom Label and Explore Arrow */}
               <div className="absolute inset-x-0 bottom-0 p-5 flex items-end justify-between text-white z-10">
