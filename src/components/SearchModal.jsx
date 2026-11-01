@@ -16,11 +16,15 @@ export default function SearchModal() {
 
   const searchResults = useMemo(() => {
     if (!query.trim()) return [];
-    const q = query.toLowerCase();
+    const q = query.toLowerCase().trim();
     return PRODUCTS.filter(
       p => p.name.toLowerCase().includes(q) || 
            p.category.toLowerCase().includes(q) ||
-           (p.tagline && p.tagline.toLowerCase().includes(q))
+           (p.tag && p.tag.toLowerCase().includes(q)) ||
+           (p.b2bTag && p.b2bTag.toLowerCase().includes(q)) ||
+           (p.tagline && p.tagline.toLowerCase().includes(q)) ||
+           (p.description && p.description.toLowerCase().includes(q)) ||
+           (p.materials && p.materials.toLowerCase().includes(q))
     );
   }, [query]);
 
@@ -107,8 +111,20 @@ export default function SearchModal() {
                     <div className="flex items-center space-x-4">
                       <img src={p.primaryImage} alt={p.name} className="w-12 h-12 object-cover border border-[#E9E2D5]" />
                       <div>
-                        <span className="text-[10px] uppercase tracking-wider text-wood-600 font-medium">{p.category}</span>
-                        <h4 className="font-serif text-base text-charcoal-900 group-hover:text-wood-800 transition-colors">{p.name}</h4>
+                        <div className="flex flex-wrap items-center gap-1.5">
+                          <span className="text-[10px] uppercase tracking-wider text-[#1d2743] font-bold">{p.category}</span>
+                          {p.tag && (
+                            <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.2 bg-sand-200/80 text-[#1d2743] font-medium border border-sand-300 rounded-sm">
+                              {p.tag}
+                            </span>
+                          )}
+                          {p.b2bTag && (
+                            <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.2 bg-neutral-100 text-neutral-600 font-medium border border-neutral-200 rounded-sm">
+                              {p.b2bTag}
+                            </span>
+                          )}
+                        </div>
+                        <h4 className="font-serif text-base text-charcoal-900 group-hover:text-[#1d2743] transition-colors">{p.name}</h4>
                         <span className="text-xs font-semibold text-charcoal-700">{formatEGP(p.price, p.priceUnit)}</span>
                       </div>
                     </div>
