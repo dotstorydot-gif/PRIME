@@ -103,17 +103,17 @@ export default function ShopPage() {
       </div>
 
       {/* Filter and Sort Toolbar */}
-      <div className="border-y border-[#E9E2D5] py-4 mb-10 flex flex-wrap items-center justify-between gap-4">
+      <div className="border-y border-[#E9E2D5] py-3.5 mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
         
-        {/* Desktop Category Pills: Chosen Piece Categories */}
-        <div className="hidden lg:flex items-center space-x-5 xl:space-x-7 overflow-x-auto no-scrollbar py-1">
+        {/* Category Pills: Chosen Piece Categories on one clean line */}
+        <div className="hidden lg:flex items-center space-x-4 xl:space-x-5 overflow-x-auto no-scrollbar py-1 shrink-0">
           {categories.map((cat) => {
             const isSelected = isTabActive(cat.id);
             return (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategoryFilter(cat.id)}
-                className={`text-xs uppercase tracking-[0.18em] transition-all whitespace-nowrap pb-1 relative ${
+                className={`text-[11px] xl:text-xs uppercase tracking-[0.14em] transition-all whitespace-nowrap pb-1 relative shrink-0 ${
                   isSelected 
                     ? 'text-charcoal-900 font-semibold border-b-2 border-charcoal-900' 
                     : 'text-charcoal-600 hover:text-charcoal-900 font-medium'
@@ -135,7 +135,7 @@ export default function ShopPage() {
         </button>
 
         {/* Right side: Sort Dropdown & Finish selector */}
-        <div className="flex items-center space-x-3 sm:space-x-4 ml-auto">
+        <div className="flex items-center space-x-3 sm:space-x-4 shrink-0 self-end md:self-center">
           {/* Wood Finish Filter */}
           <div className="hidden sm:block">
             <CustomDropdown
