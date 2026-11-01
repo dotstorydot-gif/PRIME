@@ -46,12 +46,6 @@ export default function AboutPage() {
               className="w-full h-full object-cover object-center"
             />
           </div>
-          <div className="absolute -bottom-4 -right-4 bg-[#1d2743] text-[#FAF8F5] p-5 hidden sm:block shadow-lg max-w-xs border border-white/10">
-            <span className="font-serif text-2xl block">1948</span>
-            <span className="text-[10px] uppercase tracking-widest text-[#fae6c3] font-medium">
-              (Askar Son's) · 1948 – 1988
-            </span>
-          </div>
         </div>
 
         <div className="lg:col-span-6 space-y-6 text-charcoal-700 font-light text-sm sm:text-base leading-relaxed">
