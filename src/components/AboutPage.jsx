@@ -89,35 +89,34 @@ export default function AboutPage() {
           </p>
         </div>
 
-        {/* 4 Steps Grid: Text-Only Luxury Editorial Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        {/* 4 Steps: Clean Editorial Horizontal Flow Without Boxes */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 pt-4">
           {CRAFT_STEPS.map((step) => (
-            <div 
-              key={step.number} 
-              className="bg-white border border-[#E9E2D5] p-8 sm:p-10 flex flex-col justify-between space-y-6 transition-all duration-300 hover:border-[#1d2743]/40 hover:shadow-sm"
-            >
-              <div className="space-y-4">
-                <div className="flex items-center justify-between border-b border-[#E9E2D5]/70 pb-4">
-                  <span className="font-serif text-3xl sm:text-4xl text-[#1d2743] font-light">
-                    0{step.number}
-                  </span>
-                  <span className="text-[10px] uppercase tracking-[0.25em] px-2.5 py-1 bg-[#1d2743]/5 text-[#1d2743] font-semibold rounded-full border border-[#1d2743]/10">
-                    Stage {step.number}
-                  </span>
-                </div>
-
-                <h3 className="font-serif text-2xl sm:text-3xl text-charcoal-900 font-medium">
-                  {step.title}
-                </h3>
-
-                <p className="text-xs uppercase tracking-wider text-[#1d2743] font-semibold leading-relaxed">
-                  {step.description}
-                </p>
-
-                <p className="text-sm text-charcoal-600 font-light leading-relaxed pt-1">
-                  {step.detail}
-                </p>
+            <div key={step.number} className="space-y-4 group">
+              {/* Step Top Bar with Big Elegant Roman/Serif Numeral */}
+              <div className="flex items-baseline justify-between border-b border-[#1d2743]/20 pb-3">
+                <span className="font-serif text-3xl sm:text-4xl text-[#1d2743] font-light tracking-tight">
+                  0{step.number}
+                </span>
+                <span className="text-[10px] uppercase tracking-[0.25em] text-neutral-400 font-medium">
+                  Phase {step.number}
+                </span>
               </div>
+
+              {/* Title */}
+              <h3 className="font-serif text-2xl text-charcoal-900 font-normal">
+                {step.title}
+              </h3>
+
+              {/* Short Uppercase Subheading */}
+              <p className="text-[11px] uppercase tracking-wider text-[#1d2743] font-semibold leading-relaxed">
+                {step.description}
+              </p>
+
+              {/* Narrative Detail */}
+              <p className="text-xs sm:text-sm text-charcoal-600 font-light leading-relaxed">
+                {step.detail}
+              </p>
             </div>
           ))}
         </div>
