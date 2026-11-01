@@ -25,7 +25,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-curve-highboard",
-    name: "Prime Curve Highboard",
+    name: "Prime Curve",
     category: "Storage",
     categoryId: "storage",
     categories: ["storage", "consoles"],
@@ -49,7 +49,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-shadow-sideboard",
-    name: "Prime Shadow Sideboard",
+    name: "Prime Shadow",
     category: "Consoles",
     categoryId: "consoles",
     categories: ["consoles", "storage"],
@@ -97,7 +97,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-lattice-tv-unit",
-    name: "Prime Lattice TV Unit",
+    name: "Prime Lattice",
     category: "TV Units",
     categoryId: "tv-units",
     categories: ["tv-units"],
@@ -121,7 +121,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-bliss-bed-30",
-    name: "Prime Bliss Upholstered Bed & Nightstand",
+    name: "Prime Bliss",
     category: "Beds",
     categoryId: "beds",
     categories: ["beds", "night-stands"],
@@ -145,7 +145,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-bold-console",
-    name: "Prime Bold Console",
+    name: "Prime Bold",
     category: "Consoles",
     categoryId: "consoles",
     categories: ["consoles", "tables"],
@@ -169,7 +169,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-groove-console",
-    name: "Prime Groove Console",
+    name: "Prime Groove",
     category: "Consoles",
     categoryId: "consoles",
     categories: ["consoles", "customize"],
@@ -217,7 +217,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-pillar-display-unit",
-    name: "Prime Pillar Display Unit",
+    name: "Prime Pillar",
     category: "Storage",
     categoryId: "storage",
     categories: ["storage", "customize"],
@@ -241,7 +241,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-vista-dressing",
-    name: "Prime Vista Dressing Room",
+    name: "Prime Vista Dressing",
     category: "Dressers",
     categoryId: "dressers",
     categories: ["dressers", "customize"],
@@ -265,7 +265,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-echo-nightstand",
-    name: "Prime Echo Nightstand",
+    name: "Prime Echo",
     category: "Night Stands",
     categoryId: "night-stands",
     categories: ["night-stands"],
@@ -289,7 +289,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-minimal-nightstand",
-    name: "Prime Minimal Nightstand",
+    name: "Prime Minimal",
     category: "Night Stands",
     categoryId: "night-stands",
     categories: ["night-stands"],
@@ -337,7 +337,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-orbit-side-table",
-    name: "Prime Orbit Side Table",
+    name: "Prime Orbit",
     category: "Tables",
     categoryId: "tables",
     categories: ["tables"],
@@ -385,7 +385,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-palace-table",
-    name: "Prime Palace Nesting Tables",
+    name: "Prime Palace Table",
     category: "Tables",
     categoryId: "tables",
     categories: ["tables"],
@@ -433,7 +433,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-axis-console",
-    name: "Prime Axis Console",
+    name: "Prime Axis",
     category: "Consoles",
     categoryId: "consoles",
     categories: ["consoles", "tables"],
@@ -457,7 +457,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-lumina-tv-unit",
-    name: "Prime Lumina TV Unit",
+    name: "Prime Lumina",
     category: "TV Units",
     categoryId: "tv-units",
     categories: ["tv-units"],
@@ -481,7 +481,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-monarch-buffet",
-    name: "Prime Monarch Buffet",
+    name: "Prime Monarch",
     category: "Consoles",
     categoryId: "consoles",
     categories: ["consoles", "customize"],
@@ -505,7 +505,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-halo-unit",
-    name: "Prime Halo Unit Dresser",
+    name: "Prime Halo Unit",
     category: "Dressers",
     categoryId: "dressers",
     categories: ["dressers"],
@@ -625,7 +625,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-legacy-dining",
-    name: "Prime Legacy Dining Table",
+    name: "Prime Legacy Dining",
     category: "Tables",
     categoryId: "tables",
     categories: ["tables", "customize"],
@@ -649,7 +649,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-prestige-dining",
-    name: "Prime Prestige Dining Suite",
+    name: "Prime Prestige Dining",
     category: "Tables",
     categoryId: "tables",
     categories: ["tables", "customize"],
@@ -673,7 +673,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-gathering-dining",
-    name: "Prime Gathering Dining Table",
+    name: "Prime Gathering",
     category: "Tables",
     categoryId: "tables",
     categories: ["tables", "customize"],
@@ -697,7 +697,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-portal-door",
-    name: "Prime Portal Interior Door",
+    name: "Prime Portal",
     category: "Doors & Ceilings",
     categoryId: "doors-millwork",
     categories: ["doors-millwork"],
@@ -721,7 +721,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-grand-library",
-    name: "Prime Grand Illuminated Wall Library",
+    name: "Prime Grand Library",
     category: "Storage",
     categoryId: "storage",
     categories: ["storage", "customize"],
@@ -745,7 +745,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-onyx-kitchen",
-    name: "Prime Onyx Kitchen & Lit Wooden Island",
+    name: "Prime Onyx Kitchen",
     category: "Customize / B2B",
     categoryId: "customize",
     categories: ["customize"],
@@ -769,7 +769,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-hearth-kitchen",
-    name: "Prime Hearth Wood & White Family Kitchen",
+    name: "Prime Hearth Kitchen",
     category: "Customize / B2B",
     categoryId: "customize",
     categories: ["customize"],
@@ -793,7 +793,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-suite-wardrobe",
-    name: "Prime Suite Wardrobe System",
+    name: "Prime Suite",
     category: "Dressers",
     categoryId: "dressers",
     categories: ["dressers", "storage", "customize"],
@@ -817,7 +817,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-harmony-living-room",
-    name: "Prime Harmony Living Room Suite",
+    name: "Prime Harmony Living Room",
     category: "Customize / B2B",
     categoryId: "customize",
     categories: ["customize"],
@@ -841,7 +841,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-infinity-ceiling",
-    name: "Prime Infinity Architectural Ceiling",
+    name: "Prime Infinity",
     category: "Doors & Ceilings",
     categoryId: "doors-millwork",
     categories: ["doors-millwork", "customize"],
@@ -865,7 +865,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-crown-ceiling",
-    name: "Prime Crown Decorative Ceiling",
+    name: "Prime Crown",
     category: "Doors & Ceilings",
     categoryId: "doors-millwork",
     categories: ["doors-millwork", "customize"],
@@ -889,7 +889,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-apex-ceiling",
-    name: "Prime Apex Ceiling & Cladding",
+    name: "Prime Apex",
     category: "Doors & Ceilings",
     categoryId: "doors-millwork",
     categories: ["doors-millwork", "customize"],
@@ -937,7 +937,7 @@ export const PRODUCTS = [
   },
 {
     id: "prime-essence",
-    name: "Prime Essence Under-Stair & Wall Joinery",
+    name: "Prime Essence",
     category: "Customize / B2B",
     categoryId: "customize",
     categories: ["customize", "doors-millwork", "storage"],
@@ -972,7 +972,7 @@ export const PREVIOUS_CUSTOM_WORKS = [
   },
   {
     id: 'custom-prime-curve',
-    title: 'Prime Curve Highboard',
+    title: 'Prime Curve',
     location: 'Storage',
     material: 'Highboard — Plywood, oak veneer',
     dimensions: 'A luxurious curved design offering sleek storage.',
@@ -980,7 +980,7 @@ export const PREVIOUS_CUSTOM_WORKS = [
   },
   {
     id: 'custom-prime-shadow',
-    title: 'Prime Shadow Sideboard',
+    title: 'Prime Shadow',
     location: 'Console',
     material: 'Plywood, oak wood',
     dimensions: 'A sleek dark design that adds a warm and unique touch to your space.',
@@ -996,7 +996,7 @@ export const PREVIOUS_CUSTOM_WORKS = [
   },
   {
     id: 'custom-prime-pillar',
-    title: 'Prime Pillar Display Unit',
+    title: 'Prime Pillar',
     location: 'Display Unit',
     material: 'Material: plywood , oak wood',
     dimensions: 'An open wooden display unit featuring spacious shelving and a refined architectural structure.',
@@ -1004,7 +1004,7 @@ export const PREVIOUS_CUSTOM_WORKS = [
   },
   {
     id: 'custom-prime-groove',
-    title: 'Prime Groove Console',
+    title: 'Prime Groove',
     location: 'Console',
     material: 'Plywood, oak wood',
     dimensions: 'A warm wooden design with sleek textured lines.',
@@ -1020,7 +1020,7 @@ export const PREVIOUS_CUSTOM_WORKS = [
   },
   {
     id: 'custom-prime-bold',
-    title: 'Prime Bold Console',
+    title: 'Prime Bold',
     location: 'Console',
     material: 'Console — Plywood , beech wood',
     dimensions: 'A bold and vibrant statement piece that adds a striking modern touch to your space.',
@@ -1116,7 +1116,7 @@ export const PREVIOUS_CUSTOM_WORKS = [
   },
   {
     id: 'custom-prime-monarch-buffet',
-    title: 'Prime Monarch Buffet',
+    title: 'Prime Monarch',
     location: 'Buffet',
     material: 'Plywood, Natural Oak Veneer & Brushed Brass Hardware',
     dimensions: 'Warm wood craftsmanship with refined gold handles, bringing understated luxury to your dining area.',
