@@ -27,12 +27,11 @@ export default function Footer() {
           {/* Column 1: Brand & Atelier */}
           <div className="space-y-4">
             <div className="h-12 flex flex-col justify-start">
-              <span className="font-serif text-2xl tracking-[0.16em] font-medium text-white uppercase block leading-none">
-                PRIME
-              </span>
-              <span className="text-[9px] tracking-[0.28em] font-sans text-[#fae6c3] uppercase block mt-1.5 font-medium">
-                WOODEN WORK · CAIRO
-              </span>
+              <img 
+                src="/images/prime-logo-light.png" 
+                alt="PRIME Wood Arthouse" 
+                className="h-11 sm:h-12 w-auto object-contain object-left" 
+              />
             </div>
 
             <p className="text-xs text-neutral-300 font-light leading-relaxed">

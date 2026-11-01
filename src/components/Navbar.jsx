@@ -60,16 +60,14 @@ export default function Navbar() {
               {/* Brand Logo */}
               <button 
                 onClick={() => navigateTo('home')}
-                className="text-left group focus:outline-none flex items-center space-x-2.5"
+                className="text-left group focus:outline-none flex items-center"
+                aria-label="Prime Wood Arthouse Home"
               >
-                <svg className="w-8 h-8 shrink-0" viewBox="0 0 100 100" fill="none">
-                  <circle cx="50" cy="50" r="46" fill="#1d2743" />
-                  <path d="M30 50 Q50 20 70 50 T30 50" stroke="#ffffff" strokeWidth="4" fill="none" strokeLinecap="round" />
-                  <path d="M25 60 Q50 30 75 60" stroke="#ffffff" strokeWidth="4" fill="none" strokeLinecap="round" />
-                </svg>
-                <span className="font-serif text-2xl sm:text-3xl tracking-[0.18em] font-medium text-[#1d2743] uppercase">
-                  PRIME
-                </span>
+                <img 
+                  src="/images/prime-logo-dark.png" 
+                  alt="PRIME Wood Arthouse" 
+                  className="h-10 sm:h-12 w-auto object-contain transition-opacity duration-200 group-hover:opacity-85" 
+                />
               </button>
             </div>
 
@@ -166,16 +164,17 @@ export default function Navbar() {
           />
           <div className="fixed inset-y-0 left-0 max-w-xs w-full bg-white shadow-xl flex flex-col z-10 p-6 border-r border-neutral-200">
             <div className="flex items-center justify-between pb-6 border-b border-neutral-200">
-              <div className="flex items-center space-x-2">
-                <svg className="w-7 h-7 shrink-0" viewBox="0 0 100 100" fill="none">
-                  <circle cx="50" cy="50" r="46" fill="#1d2743" />
-                  <path d="M30 50 Q50 20 70 50 T30 50" stroke="#ffffff" strokeWidth="4" fill="none" strokeLinecap="round" />
-                  <path d="M25 60 Q50 30 75 60" stroke="#ffffff" strokeWidth="4" fill="none" strokeLinecap="round" />
-                </svg>
-                <span className="font-serif text-2xl tracking-[0.16em] font-medium text-[#1d2743] uppercase">
-                  PRIME
-                </span>
-              </div>
+              <button 
+                onClick={() => { setMobileMenuOpen(false); navigateTo('home'); }}
+                className="text-left focus:outline-none"
+                aria-label="Prime Wood Arthouse Home"
+              >
+                <img 
+                  src="/images/prime-logo-dark.png" 
+                  alt="PRIME Wood Arthouse" 
+                  className="h-9 w-auto object-contain" 
+                />
+              </button>
               <button
                 onClick={() => setMobileMenuOpen(false)}
                 className="p-2 text-[#1d2743] hover:text-[#182032]"
