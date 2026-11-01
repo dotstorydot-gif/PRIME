@@ -1218,52 +1218,220 @@ export const PRODUCTS = [
 
 export const PREVIOUS_CUSTOM_WORKS = [
   {
-    id: 'custom-vista-dressing',
-    title: 'Prime Vista Glass-Door Dressing Room',
-    location: 'New Cairo, Egypt',
-    material: 'Plywood & Natural Veneer (24,500 EGP / m²)',
-    dimensions: 'Full Walk-In Wardrobe with Smart Internal Lighting',
+    id: 'custom-prime-bliss-bed',
+    title: 'Prime Bliss Bed',
+    location: 'Upholstered Bed',
+    material: 'Upholstered Bed 180*200 — Plywood, oak wood',
+    dimensions: 'A soft, comforting design that fills your bedroom with an enchanting sense of relaxation and peace.',
+    image: '/images/products/image29.png'
+  },
+  {
+    id: 'custom-prime-curve',
+    title: 'Prime Curve Highboard',
+    location: 'Storage',
+    material: 'Highboard — Plywood, oak veneer',
+    dimensions: 'A luxurious curved design offering sleek storage.',
+    image: '/images/products/image13.png'
+  },
+  {
+    id: 'custom-prime-shadow',
+    title: 'Prime Shadow Sideboard',
+    location: 'Console',
+    material: 'Plywood, oak wood',
+    dimensions: 'A sleek dark design that adds a warm and unique touch to your space.',
+    image: '/images/products/image2.png'
+  },
+  {
+    id: 'custom-prime-carve-dresser',
+    title: 'Prime Carve Dresser',
+    location: 'Wood Cabinet',
+    material: 'Wood Cabinet — Plywood, oak wood',
+    dimensions: 'A masterfully carved wooden design bringing timeless elegance to your space.',
+    image: '/images/products/image21.jpg'
+  },
+  {
+    id: 'custom-prime-pillar',
+    title: 'Prime Pillar Display Unit',
+    location: 'Display Unit',
+    material: 'Material: plywood , oak wood',
+    dimensions: 'An open wooden display unit featuring spacious shelving and a refined architectural structure.',
+    image: '/images/products/image27.png'
+  },
+  {
+    id: 'custom-prime-groove',
+    title: 'Prime Groove Console',
+    location: 'Console',
+    material: 'Plywood, oak wood',
+    dimensions: 'A warm wooden design with sleek textured lines.',
+    image: '/images/products/image6.png'
+  },
+  {
+    id: 'custom-prime-vista-dressing',
+    title: 'Prime Vista Dressing',
+    location: 'Dressing Room',
+    material: 'Dressing room — Plywood and veneer',
+    dimensions: 'A modern, sleek wardrobe featuring glass doors and smart internal lighting for ultimate organization and style.',
     image: '/images/products/image7.png'
   },
   {
-    id: 'custom-onyx-kitchen',
-    title: 'Prime Onyx Kitchen & Lit Wooden Island',
-    location: 'Sheikh Zayed, Giza',
-    material: 'Dark Matte Cabinetry & Solid Oak Island',
-    dimensions: 'Bespoke Kitchen Architecture',
-    image: '/images/products/image37.png'
+    id: 'custom-prime-bold',
+    title: 'Prime Bold Console',
+    location: 'Console',
+    material: 'Console — Plywood , beech wood',
+    dimensions: 'A bold and vibrant statement piece that adds a striking modern touch to your space.',
+    image: '/images/products/image31.png'
   },
   {
-    id: 'custom-grand-library',
-    title: 'Prime Grand Illuminated Wall Library',
-    location: 'Katameya Heights, Cairo',
-    material: 'Natural Oak Veneer & Ambient LED Shelving',
-    dimensions: 'Floor-to-Ceiling Architectural Library',
-    image: '/images/products/image9.png'
+    id: 'custom-prime-core-side-table',
+    title: 'Prime Core Side Table',
+    location: 'Side Table',
+    material: 'Side table — Plywood, oak wood',
+    dimensions: 'A classic wooden design with distinct modern touches.',
+    image: '/images/products/image23.png'
   },
   {
-    id: 'custom-essence-millwork',
-    title: 'Prime Essence Under-Stair & Wall Joinery',
-    location: 'Heliopolis, Cairo',
-    material: 'Solid European Oak & Custom Millwork',
-    dimensions: 'Tailored Architectural Fit-Out',
+    id: 'custom-prime-aura-bed',
+    title: 'Prime Aura Bed',
+    location: 'Kitchen',
+    material: 'Plywood, Natural Oak & Linen Upholstery',
+    dimensions: 'Modern elegance and simplicity, featuring an elevated wooden frame with a sleek comfortable headboard.',
+    image: '/images/products/image24.png'
+  },
+  {
+    id: 'custom-prime-echo-console',
+    title: 'Prime Echo Console',
+    location: 'Console',
+    material: 'Plywood & Carved Solid Oak Wood',
+    dimensions: 'A warm wooden sideboard combining textured carved doors and sleek legs to add a unique artistic touch to your home.',
+    image: '/images/products/image10.png'
+  },
+  {
+    id: 'custom-prime-axis',
+    title: 'Prime Axis Console',
+    location: 'Console',
+    material: 'Plywood & Natural Oak Wood',
+    dimensions: 'A sleek wooden design with balanced lines, adding a striking modern touch to your entryway.',
+    image: '/images/products/image17.jpg'
+  },
+  {
+    id: 'custom-prime-core-coffee-table',
+    title: 'Prime Core Coffee Table',
+    location: 'Coffee Table',
+    material: 'Plywood & Solid Oak Wood',
+    dimensions: 'A warm, round wooden centerpiece adding sleek functionality to your living space.',
+    image: '/images/products/image34.png'
+  },
+  {
+    id: 'custom-prime-essence',
+    title: 'Prime Essence Millwork',
+    location: 'Architectural Woodwork',
+    material: 'Solid Oak, Plywood & Natural Wood Veneer',
+    dimensions: 'An elegant wood design capturing the pure essence of natural luxury.',
     image: '/images/products/image39.jpg'
   },
   {
-    id: 'custom-hearth-kitchen',
-    title: 'Prime Hearth Wood & White Family Kitchen',
-    location: 'Maadi, Cairo',
-    material: 'Natural Oak & Matte White Cabinetry',
-    dimensions: 'Custom Kitchen & Integrated Dining Island',
+    id: 'custom-prime-grand-library',
+    title: 'Prime Grand Library',
+    location: 'Book Store / Library',
+    material: 'Plywood, Natural Oak Veneer & Integrated LED Channels',
+    dimensions: 'A grand, all-in-one wall library blending spacious shelving with ambient lighting to create an extraordinary architectural statement.',
+    image: '/images/products/image9.png'
+  },
+  {
+    id: 'custom-prime-harmony-living',
+    title: 'Prime Harmony Living Room',
+    location: 'Living Room',
+    material: 'Architectural Wood Wall Cladding, Solid Timber & Performance Upholstery',
+    dimensions: 'A complete modern design combining a spacious, elegant sofa and calm decor to deliver a comfortable and sophisticated living space.',
+    image: '/images/products/image30.png'
+  },
+  {
+    id: 'custom-prime-legacy-dining',
+    title: 'Prime Legacy Dining',
+    location: 'Dining Table',
+    material: 'Solid Oak / Beech Wood & Tailored Upholstery',
+    dimensions: 'A luxurious design blending elegance and comfort for unforgettable family moments.',
+    image: '/images/products/image33.png'
+  },
+  {
+    id: 'custom-prime-prestige-dining',
+    title: 'Prime Prestige Dining',
+    location: 'Dining Table',
+    material: 'Solid Hardwood, Natural Veneer & Bouclé/Velvet Chairs',
+    dimensions: 'A spacious, luxurious design combining a large wooden table and elegant upholstered chairs for prestigious gatherings.',
+    image: '/images/products/image5.jpg'
+  },
+  {
+    id: 'custom-prime-gathering-dining',
+    title: 'Prime Gathering Dining',
+    location: 'Dining Table',
+    material: 'Solid Oak & Handcrafted Wooden Chairs',
+    dimensions: 'A warm and spacious design that gives your family gatherings a cozy, elegant touch.',
+    image: '/images/products/image8.jpg'
+  },
+  {
+    id: 'custom-prime-monarch-buffet',
+    title: 'Prime Monarch Buffet',
+    location: 'Buffet',
+    material: 'Plywood, Natural Oak Veneer & Brushed Brass Hardware',
+    dimensions: 'Warm wood craftsmanship with refined gold handles, bringing understated luxury to your dining area.',
+    image: '/images/products/image3.jpg'
+  },
+  {
+    id: 'custom-prime-onyx-kitchen',
+    title: 'Prime Onyx Kitchen',
+    location: 'Kitchen',
+    material: 'Moisture-Resistant Plywood, Natural Oak & Matte Charcoal Cabinetry',
+    dimensions: 'A modern design blending sleek dark cabinets and a smartly lit wooden island to give you a luxurious and functional space.',
+    image: '/images/products/image37.png'
+  },
+  {
+    id: 'custom-prime-hearth-kitchen',
+    title: 'Prime Hearth Kitchen',
+    location: 'Kitchen',
+    material: 'Moisture-Resistant Plywood, Natural Oak Veneer & Matte Lacquer',
+    dimensions: 'A warm fusion of wood and white elements with a practical dining area for family warmth.',
     image: '/images/products/image16.png'
   },
   {
-    id: 'custom-infinity-ceiling',
-    title: 'Prime Infinity Architectural Ceiling & Living',
-    location: 'Zamalek, Cairo',
-    material: 'Acoustic Wood Ceiling Cladding & Ambient Lighting',
-    dimensions: 'Open-Plan Reception Millwork',
+    id: 'custom-prime-kitchen-partition',
+    title: 'Prime Glass & Wood Kitchen Suite',
+    location: 'Kitchen Suite',
+    material: 'Solid Oak Frames, Plywood Cabinetry & Tempered Glass',
+    dimensions: 'Bespoke wooden kitchen cabinetry and architectural sliding glass partition crafted to order.',
+    image: '/images/products/image11.png'
+  },
+  {
+    id: 'custom-prime-suite-wardrobe',
+    title: 'Prime Suite Wardrobe',
+    location: 'Wardrobe',
+    material: 'Plywood, Natural Wood Veneer & Integrated LED Lighting',
+    dimensions: 'A modern integrated design that gives your dressing area a luxurious, perfectly organized feel.',
+    image: '/images/products/image38.png'
+  },
+  {
+    id: 'custom-prime-infinity-ceiling',
+    title: 'Prime Infinity Ceiling',
+    location: 'Ceiling Millwork',
+    material: 'Acoustic Solid Wood Slats, Veneered Panels & Linear LED Integration',
+    dimensions: 'A spacious open design featuring refined architectural ceilings and ambient lighting for endless elegance.',
     image: '/images/products/image32.png'
+  },
+  {
+    id: 'custom-prime-crown-ceiling',
+    title: 'Prime Crown Ceiling',
+    location: 'Ceiling Millwork',
+    material: 'Plywood, Natural Wood Veneer & Concealed Lighting Channels',
+    dimensions: 'Luxurious decorative ceiling designs with ambient lighting for royal elegance.',
+    image: '/images/products/image14.png'
+  },
+  {
+    id: 'custom-prime-apex-ceiling',
+    title: 'Prime Apex Ceiling & Cladding',
+    location: 'Ceiling Millwork',
+    material: 'Natural Wood Veneer, Solid Timber & Acoustic Backing',
+    dimensions: 'A bold and vibrant statement piece that adds a striking modern touch to your space.',
+    image: '/images/products/image12.png'
   }
 ];
 
