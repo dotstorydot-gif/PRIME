@@ -66,7 +66,7 @@ export default function AboutPage() {
         {/* Story Chapter 1: The Cairo Heritage */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-6 relative">
-            <div className="aspect-[16/10] bg-[#FAF8F5] border border-[#D8D2C2] overflow-hidden shadow-sm">
+            <div className="aspect-[16/10] bg-[#FAF8F5] border-2 sm:border-4 border-[#1D2743] overflow-hidden shadow-lg">
               <img
                 src="/images/heritage-1948.jpg"
                 alt="Prime Wooden Work 1948 Askar Sons Cairo Workshop Heritage"
