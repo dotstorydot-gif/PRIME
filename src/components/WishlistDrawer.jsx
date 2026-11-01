@@ -81,7 +81,7 @@ export default function WishlistDrawer() {
                   setIsWishlistOpen(false);
                   navigateTo('shop');
                 }}
-                className="mt-2 px-6 py-3 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-widest font-medium hover:bg-wood-900 transition-colors"
+                className="mt-2 px-6 py-3 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-widest font-medium hover:bg-[#141B2E] transition-colors"
               >
                 Browse Collection
               </button>
@@ -135,7 +135,7 @@ export default function WishlistDrawer() {
                   <div className="flex items-center space-x-3 mt-3">
                     <button
                       onClick={() => handleMoveToBag(item)}
-                      className="flex-1 py-2 px-3 bg-[#1D2743] text-[#F1E7CC] hover:bg-wood-900 text-[11px] uppercase tracking-widest font-medium transition-colors flex items-center justify-center space-x-1.5"
+                      className="flex-1 py-2 px-3 bg-[#1D2743] text-[#F1E7CC] hover:bg-[#141B2E] text-[11px] uppercase tracking-widest font-medium transition-colors flex items-center justify-center space-x-1.5"
                     >
                       <ShoppingBag className="w-3.5 h-3.5" />
                       <span>Add to Bag</span>
@@ -163,7 +163,7 @@ export default function WishlistDrawer() {
                 savedProducts.forEach(p => addToCart(p));
                 setIsWishlistOpen(false);
               }}
-              className="w-full py-3.5 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-colors flex items-center justify-center space-x-2"
+              className="w-full py-3.5 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#141B2E] transition-colors flex items-center justify-center space-x-2"
             >
               <ShoppingBag className="w-4 h-4" />
               <span>Add All to Bag</span>

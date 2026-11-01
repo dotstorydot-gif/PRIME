@@ -73,7 +73,7 @@ export default function CartDrawer() {
                   setIsCartOpen(false);
                   navigateTo('shop');
                 }}
-                className="mt-2 px-6 py-3 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-widest font-medium hover:bg-wood-900 transition-colors"
+                className="mt-2 px-6 py-3 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-widest font-medium hover:bg-[#141B2E] transition-colors"
               >
                 Browse Shop
               </button>
@@ -171,7 +171,7 @@ export default function CartDrawer() {
                   setIsCartOpen(false);
                   navigateTo('checkout');
                 }}
-                className="w-full py-4 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-colors flex items-center justify-center space-x-2 shadow-sm"
+                className="w-full py-4 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#141B2E] transition-colors flex items-center justify-center space-x-2 shadow-sm"
               >
                 <span>Proceed to Checkout</span>
                 <ArrowRight className="w-4 h-4" />

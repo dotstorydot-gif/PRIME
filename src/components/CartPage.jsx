@@ -26,7 +26,7 @@ export default function CartPage() {
         </p>
         <button
           onClick={() => navigateTo('shop')}
-          className="inline-flex items-center justify-center px-8 py-4 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-widest font-medium hover:bg-wood-900 transition-colors"
+          className="inline-flex items-center justify-center px-8 py-4 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-widest font-medium hover:bg-[#141B2E] transition-colors"
         >
           Explore Collection
         </button>
@@ -149,7 +149,7 @@ export default function CartPage() {
 
             <button
               onClick={() => navigateTo('checkout')}
-              className="w-full py-4 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-all flex items-center justify-center space-x-2 shadow-sm"
+              className="w-full py-4 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#141B2E] transition-all flex items-center justify-center space-x-2 shadow-sm"
             >
               <span>Proceed to Checkout</span>
               <ArrowRight className="w-4 h-4" />

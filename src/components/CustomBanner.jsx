@@ -65,7 +65,7 @@ export default function CustomBanner() {
             <div>
               <button
                 onClick={() => navigateTo('custom')}
-                className="inline-flex items-center justify-center px-8 py-4 bg-wood-800 text-[#FAF8F5] text-xs sm:text-sm font-medium tracking-[0.2em] uppercase transition-all duration-300 hover:bg-wood-900 focus:outline-none shadow-sm group"
+                className="inline-flex items-center justify-center px-8 py-4 bg-[#1D2743] hover:bg-[#141B2E] text-[#F1E7CC] text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase transition-all duration-300 border border-[#F1E7CC]/30 hover:border-[#F1E7CC] focus:outline-none shadow-sm group"
               >
                 <span>Start a Custom Request</span>
                 <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />

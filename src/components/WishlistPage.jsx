@@ -40,7 +40,7 @@ export default function WishlistPage() {
         <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
             onClick={() => navigateTo('shop')}
-            className="w-full sm:w-auto px-8 py-4 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-colors shadow-sm"
+            className="w-full sm:w-auto px-8 py-4 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#141B2E] transition-colors shadow-sm"
           >
             Explore Shop Collection
           </button>
@@ -99,7 +99,7 @@ export default function WishlistPage() {
 
           <button
             onClick={handleAddAllToBag}
-            className="px-6 py-3.5 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-colors flex items-center space-x-2 shadow-sm"
+            className="px-6 py-3.5 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#141B2E] transition-colors flex items-center space-x-2 shadow-sm"
           >
             <ShoppingBag className="w-3.5 h-3.5" />
             <span>Add All to Bag</span>
@@ -161,7 +161,7 @@ export default function WishlistPage() {
                 <button
                   type="button"
                   onClick={() => addToCart(product)}
-                  className="flex-1 py-3 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.18em] font-medium hover:bg-wood-900 transition-colors flex items-center justify-center space-x-2"
+                  className="flex-1 py-3 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.18em] font-medium hover:bg-[#141B2E] transition-colors flex items-center justify-center space-x-2"
                 >
                   <ShoppingBag className="w-3.5 h-3.5" />
                   <span>Add to Bag</span>

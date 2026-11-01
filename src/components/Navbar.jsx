@@ -255,7 +255,7 @@ export default function Navbar() {
                   navigateTo('custom');
                   setMobileMenuOpen(false);
                 }}
-                className="w-full mt-2 py-3 bg-wood-800 text-[#FAF8F5] text-xs uppercase tracking-widest font-medium hover:bg-wood-900 transition-colors"
+                className="w-full mt-2 py-3 bg-[#1D2743] hover:bg-[#141B2E] text-[#F1E7CC] text-xs uppercase tracking-widest font-semibold border border-[#F1E7CC]/30 transition-colors"
               >
                 Start Custom Request
               </button>

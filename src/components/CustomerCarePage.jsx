@@ -307,7 +307,7 @@ export default function CustomerCarePage({ initialTab = 'shipping' }) {
               href="https://wa.me/201222935556?text=Hello%20Prime%20team,%20I%20have%20a%20question%20regarding%20delivery%20access"
               target="_blank" 
               rel="noopener noreferrer"
-              className="shrink-0 bg-wood-800 hover:bg-wood-900 text-white text-xs uppercase tracking-[0.2em] font-medium py-3 px-6 transition-colors"
+              className="shrink-0 bg-[#1D2743] hover:bg-[#141B2E] text-[#F1E7CC] border border-[#F1E7CC]/30 text-xs uppercase tracking-[0.2em] font-medium py-3 px-6 transition-colors"
             >
               Consult On Access
             </a>
@@ -432,7 +432,7 @@ export default function CustomerCarePage({ initialTab = 'shipping' }) {
               href="https://wa.me/201222935556?text=Hello%20Prime%20team,%20I%20would%20like%20to%20request%20a%20return%20or%20exchange"
               target="_blank" 
               rel="noopener noreferrer"
-              className="bg-wood-800 hover:bg-wood-900 text-white text-xs uppercase tracking-[0.2em] font-medium py-3 px-6 transition-colors"
+              className="bg-[#1D2743] hover:bg-[#141B2E] text-[#F1E7CC] border border-[#F1E7CC]/30 text-xs uppercase tracking-[0.2em] font-medium py-3 px-6 transition-colors"
             >
               Start Return on WhatsApp
             </a>
@@ -532,7 +532,7 @@ export default function CustomerCarePage({ initialTab = 'shipping' }) {
                 href="https://wa.me/201222935556"
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="bg-wood-800 hover:bg-wood-900 text-white text-xs uppercase tracking-[0.2em] font-medium py-3 px-5 transition-colors"
+                className="bg-[#1D2743] hover:bg-[#141B2E] text-[#F1E7CC] border border-[#F1E7CC]/30 text-xs uppercase tracking-[0.2em] font-medium py-3 px-5 transition-colors"
               >
                 WhatsApp Us
               </a>

@@ -212,7 +212,7 @@ export default function AccountModal() {
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-colors shadow-sm"
+                  className="w-full py-3.5 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#141B2E] transition-colors shadow-sm"
                 >
                   Sign In to Client Portal
                 </button>
@@ -251,7 +251,7 @@ export default function AccountModal() {
                 />
                 <button
                   type="submit"
-                  className="px-5 py-2.5 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-widest font-medium hover:bg-wood-900"
+                  className="px-5 py-2.5 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-widest font-medium hover:bg-[#141B2E]"
                 >
                   Track
                 </button>

@@ -131,7 +131,7 @@ export default function QuickViewModal() {
                 <button
                   type="button"
                   onClick={handleAdd}
-                  className="flex-1 py-3.5 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-colors flex items-center justify-center space-x-2"
+                  className="flex-1 py-3.5 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#141B2E] transition-colors flex items-center justify-center space-x-2"
                 >
                   <ShoppingBag className="w-4 h-4" />
                   <span>Add to Bag</span>

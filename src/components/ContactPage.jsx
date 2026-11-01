@@ -146,12 +146,12 @@ export default function ContactPage() {
             </div>
 
             {/* WhatsApp Button matching site buttons with WhatsApp logo */}
-            <div className="pt-4 border-t border-[#E9E2D5]">
+            <div className="pt-4 border-t border-[#D8D2C2]">
               <a
                 href="https://wa.me/201222935556?text=Hello%20Prime%20Wooden%20Work%2C%20I%20would%20like%20to%20inquire%20about%20a%20woodwork%20piece."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-4 px-6 bg-wood-800 hover:bg-wood-900 text-white text-xs uppercase tracking-[0.2em] font-medium transition-colors shadow-sm flex items-center justify-center space-x-2.5 group"
+                className="w-full py-4 px-6 bg-[#1D2743] hover:bg-[#141B2E] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-semibold transition-all duration-300 shadow-md flex items-center justify-center space-x-2.5 border border-[#F1E7CC]/40 hover:border-[#F1E7CC] group"
               >
                 <WhatsAppIcon className="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" />
                 <span>Chat on WhatsApp</span>

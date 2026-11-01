@@ -502,7 +502,7 @@ export default function CheckoutPage() {
             {/* Place Order CTA Button */}
             <button
               type="submit"
-              className="w-full py-4 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.22em] font-medium hover:bg-wood-900 transition-all flex items-center justify-center space-x-2 shadow-sm"
+              className="w-full py-4 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.22em] font-medium hover:bg-[#141B2E] transition-all flex items-center justify-center space-x-2 shadow-sm"
             >
               <Lock className="w-3.5 h-3.5" />
               <span>Place Order — {formatEGP(total)}</span>
