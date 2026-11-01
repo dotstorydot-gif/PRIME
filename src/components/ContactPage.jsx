@@ -36,32 +36,38 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-16">
-      
-      {/* Header */}
-      <div className="max-w-3xl space-y-3">
-        <div className="inline-flex items-center space-x-2">
-          <span className="w-8 h-[1px] bg-wood-600" />
-          <span className="text-xs uppercase tracking-[0.25em] text-wood-600 font-semibold">
-            Cairo Studio & Showroom
-          </span>
+    <div>
+      {/* Editorial Luxury Header Banner in Prime Navy */}
+      <section className="bg-[#1D2743] text-white py-14 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-[#D8D2C2]/20 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#F1E7CC_1px,transparent_1px)] [background-size:24px_24px]" />
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <div className="inline-flex items-center space-x-2.5 mb-3">
+            <span className="w-8 h-[1px] bg-[#F1E7CC]" />
+            <span className="text-xs uppercase tracking-[0.28em] text-[#F1E7CC] font-semibold">
+              CAIRO ATELIER & SHOWROOM
+            </span>
+            <span className="w-8 h-[1px] bg-[#F1E7CC]" />
+          </div>
+          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#F1E7CC] font-normal tracking-tight">
+            Connect with Prime
+          </h1>
+          <p className="mt-3 text-[#D8D2C2] font-sans text-base sm:text-lg font-light leading-relaxed max-w-2xl mx-auto">
+            Visit our historic workshop and raw wood material library in Cairo, schedule an on-site architectural consultation, or discuss a bespoke commission.
+          </p>
         </div>
-        <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl text-charcoal-900 font-normal tracking-tight">
-          Connect with Prime
-        </h1>
-        <p className="text-charcoal-600 font-sans text-base sm:text-xl font-light leading-relaxed">
-          Visit our historic workshop and raw wood material library in Cairo, schedule an on-site architectural consultation, or discuss a bespoke commission.
-        </p>
-      </div>
+      </section>
+
+      <div className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-16">
 
       {/* Aligned 2-Column Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         
         {/* Left Column: Factory Information & WhatsApp Button */}
         <div className="lg:col-span-5">
-          <div className="bg-[#FAF8F5] border border-[#E9E2D5] p-6 sm:p-8 lg:p-10 space-y-6">
-            <div className="border-b border-[#E9E2D5] pb-4">
-              <span className="text-[10px] uppercase tracking-widest text-wood-600 font-semibold block mb-1">
+          <div className="bg-[#FAF8F5] border border-[#D8D2C2] p-6 sm:p-8 lg:p-10 space-y-6">
+            <div className="border-b border-[#D8D2C2] pb-4">
+              <span className="text-[10px] uppercase tracking-widest text-[#1D2743] font-semibold block mb-1">
                 Atelier Location
               </span>
               <h2 className="font-serif text-2xl sm:text-3xl text-charcoal-900 font-normal">
@@ -73,7 +79,7 @@ export default function ContactPage() {
               
               {/* Location — Clickable to Google Maps */}
               <div className="flex items-start space-x-3.5">
-                <MapPin className="w-4 h-4 text-wood-700 shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-[#1D2743] shrink-0 mt-0.5" />
                 <div>
                   <strong className="block font-medium text-charcoal-900 uppercase tracking-wider text-[11px] mb-0.5">
                     Factory & Design Studio
@@ -82,26 +88,26 @@ export default function ContactPage() {
                     href="https://maps.google.com/?q=3+El+Madaress+St+Off+Port+Said+St+Ghamra+Cairo+Egypt"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-wood-800 transition-colors inline-flex items-center space-x-1 group"
+                    className="hover:text-[#1D2743] transition-colors inline-flex items-center space-x-1 group"
                   >
                     <span>3 El Madaress St., Off Port Said St., Ghamra, Cairo</span>
-                    <ExternalLink className="w-3 h-3 text-wood-600 transition-transform group-hover:translate-x-0.5" />
+                    <ExternalLink className="w-3 h-3 text-[#1D2743] transition-transform group-hover:translate-x-0.5" />
                   </a>
                 </div>
               </div>
 
               {/* Telephone — Clickable tel: */}
               <div className="flex items-start space-x-3.5">
-                <Phone className="w-4 h-4 text-wood-700 shrink-0 mt-0.5" />
+                <Phone className="w-4 h-4 text-[#1D2743] shrink-0 mt-0.5" />
                 <div>
                   <strong className="block font-medium text-charcoal-900 uppercase tracking-wider text-[11px] mb-0.5">
                     Direct Telephone
                   </strong>
                   <div className="space-y-0.5">
-                    <a href="tel:+201222935556" className="hover:text-wood-800 transition-colors block font-mono">
+                    <a href="tel:+201222935556" className="hover:text-[#1D2743] transition-colors block font-mono">
                       (+20) 122 293 5556
                     </a>
-                    <a href="tel:+201277488868" className="hover:text-wood-800 transition-colors block font-mono">
+                    <a href="tel:+201277488868" className="hover:text-[#1D2743] transition-colors block font-mono">
                       (+20) 127 748 8868
                     </a>
                   </div>
@@ -110,16 +116,16 @@ export default function ContactPage() {
 
               {/* Email — Clickable mailto: */}
               <div className="flex items-start space-x-3.5">
-                <Mail className="w-4 h-4 text-wood-700 shrink-0 mt-0.5" />
+                <Mail className="w-4 h-4 text-[#1D2743] shrink-0 mt-0.5" />
                 <div>
                   <strong className="block font-medium text-charcoal-900 uppercase tracking-wider text-[11px] mb-0.5">
                     Electronic Mail
                   </strong>
                   <div className="space-y-0.5">
-                    <a href="mailto:info@primewoodenworks.com" className="hover:text-wood-800 transition-colors block">
+                    <a href="mailto:info@primewoodenworks.com" className="hover:text-[#1D2743] transition-colors block">
                       info@primewoodenworks.com
                     </a>
-                    <a href="mailto:custom@primewoodenworks.com" className="hover:text-wood-800 transition-colors block">
+                    <a href="mailto:custom@primewoodenworks.com" className="hover:text-[#1D2743] transition-colors block">
                       custom@primewoodenworks.com
                     </a>
                   </div>
@@ -128,13 +134,13 @@ export default function ContactPage() {
 
               {/* Hours */}
               <div className="flex items-start space-x-3.5">
-                <Clock className="w-4 h-4 text-wood-700 shrink-0 mt-0.5" />
+                <Clock className="w-4 h-4 text-[#1D2743] shrink-0 mt-0.5" />
                 <div>
                   <strong className="block font-medium text-charcoal-900 uppercase tracking-wider text-[11px] mb-0.5">
                     Hours of Operation
                   </strong>
                   <p>Saturday – Thursday: 9:00 AM – 7:00 PM</p>
-                  <p className="text-wood-700 font-medium">Friday: Showroom Viewings by Appointment</p>
+                  <p className="text-[#1D2743] font-medium">Friday: Showroom Viewings by Appointment</p>
                 </div>
               </div>
             </div>
@@ -157,10 +163,10 @@ export default function ContactPage() {
 
         {/* Right Column: Message & Consultation Form */}
         <div className="lg:col-span-7">
-          <div className="bg-[#FAF8F5] border border-[#E9E2D5] p-6 sm:p-8 lg:p-10 h-full">
+          <div className="bg-[#FAF8F5] border border-[#D8D2C2] p-6 sm:p-8 lg:p-10 h-full">
             {submitted ? (
               <div className="text-center py-16 space-y-4">
-                <CheckCircle2 className="w-14 h-14 text-wood-700 mx-auto" />
+                <CheckCircle2 className="w-14 h-14 text-[#1D2743] mx-auto" />
                 <h3 className="font-serif text-3xl text-charcoal-900 font-normal">
                   Thank You for Connecting
                 </h3>
@@ -178,8 +184,8 @@ export default function ContactPage() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="border-b border-[#E9E2D5] pb-4">
-                  <span className="text-[10px] uppercase tracking-widest text-wood-600 font-semibold block mb-1">
+                <div className="border-b border-[#D8D2C2] pb-4">
+                  <span className="text-[10px] uppercase tracking-widest text-[#1D2743] font-semibold block mb-1">
                     Direct Inquiry
                   </span>
                   <h2 className="font-serif text-2xl sm:text-3xl text-charcoal-900 font-normal">
@@ -198,7 +204,7 @@ export default function ContactPage() {
                       placeholder="e.g. Layla Soliman"
                       value={formData.name}
                       onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                      className="w-full bg-white border border-[#E9E2D5] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700"
+                      className="w-full bg-white border border-[#D8D2C2] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-[#1D2743]"
                     />
                   </div>
 
@@ -212,7 +218,7 @@ export default function ContactPage() {
                       placeholder="(+20) 100 000 0000"
                       value={formData.phone}
                       onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                      className="w-full bg-white border border-[#E9E2D5] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700"
+                      className="w-full bg-white border border-[#D8D2C2] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-[#1D2743]"
                     />
                   </div>
 
@@ -226,7 +232,7 @@ export default function ContactPage() {
                       placeholder="layla@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                      className="w-full bg-white border border-[#E9E2D5] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700"
+                      className="w-full bg-white border border-[#D8D2C2] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-[#1D2743]"
                     />
                   </div>
 
@@ -237,7 +243,7 @@ export default function ContactPage() {
                     <select
                       value={formData.subject}
                       onChange={(e) => setFormData(prev => ({ ...prev, subject: e.target.value }))}
-                      className="w-full bg-white border border-[#E9E2D5] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700 cursor-pointer"
+                      className="w-full bg-white border border-[#D8D2C2] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-[#1D2743] cursor-pointer"
                     >
                       <option value="Showroom Visit & Consultation">Showroom Visit & Consultation</option>
                       <option value="Custom Furniture Quote">Custom Furniture Quote</option>
@@ -257,14 +263,14 @@ export default function ContactPage() {
                       placeholder="Tell us about your home, project timeline, room dimensions, or specific questions..."
                       value={formData.message}
                       onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
-                      className="w-full bg-white border border-[#E9E2D5] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700 font-light leading-relaxed"
+                      className="w-full bg-white border border-[#D8D2C2] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-[#1D2743] font-light leading-relaxed"
                     />
                   </div>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full sm:w-auto px-10 py-4 bg-wood-800 text-white text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-colors shadow-sm"
+                  className="w-full sm:w-auto px-10 py-4 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-semibold hover:bg-[#141B2E] transition-colors shadow-sm"
                 >
                   Send Inquiry
                 </button>
@@ -274,7 +280,7 @@ export default function ContactPage() {
         </div>
 
       </div>
-
     </div>
+  </div>
   );
 }

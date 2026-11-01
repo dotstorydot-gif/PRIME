@@ -21,7 +21,7 @@ export default function WishlistPage() {
   if (savedProducts.length === 0) {
     return (
       <div className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center space-y-8">
-        <div className="w-20 h-20 rounded-full bg-[#EFECE6] border border-[#E9E2D5] flex items-center justify-center mx-auto text-wood-500">
+        <div className="w-20 h-20 rounded-full bg-[#EFECE6] border border-[#D8D2C2] flex items-center justify-center mx-auto text-wood-500">
           <Heart className="w-9 h-9" />
         </div>
 
@@ -40,13 +40,13 @@ export default function WishlistPage() {
         <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
             onClick={() => navigateTo('shop')}
-            className="w-full sm:w-auto px-8 py-4 bg-wood-800 text-white text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-colors shadow-sm"
+            className="w-full sm:w-auto px-8 py-4 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-colors shadow-sm"
           >
             Explore Shop Collection
           </button>
           <button
             onClick={() => navigateTo('custom')}
-            className="w-full sm:w-auto px-8 py-4 border border-[#E9E2D5] bg-white text-charcoal-800 text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#FAF8F5] transition-colors"
+            className="w-full sm:w-auto px-8 py-4 border border-[#D8D2C2] bg-white text-charcoal-800 text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#FAF8F5] transition-colors"
           >
             Custom Piece Atelier
           </button>
@@ -66,7 +66,7 @@ export default function WishlistPage() {
     <div className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       
       {/* Editorial Header */}
-      <div className="mb-12 border-b border-[#E9E2D5] pb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div className="mb-12 border-b border-[#D8D2C2] pb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
           <div className="flex items-center space-x-2 text-xs uppercase tracking-widest text-charcoal-500 mb-3">
             <button 
@@ -77,7 +77,7 @@ export default function WishlistPage() {
               <span>Continue Shopping</span>
             </button>
             <span>/</span>
-            <span className="text-wood-700 font-semibold">Favorites</span>
+            <span className="text-[#1D2743] font-semibold">Favorites</span>
           </div>
 
           <span className="text-xs uppercase tracking-[0.25em] text-wood-500 font-semibold block mb-1">
@@ -99,7 +99,7 @@ export default function WishlistPage() {
 
           <button
             onClick={handleAddAllToBag}
-            className="px-6 py-3.5 bg-wood-800 text-white text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-colors flex items-center space-x-2 shadow-sm"
+            className="px-6 py-3.5 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-colors flex items-center space-x-2 shadow-sm"
           >
             <ShoppingBag className="w-3.5 h-3.5" />
             <span>Add All to Bag</span>
@@ -110,7 +110,7 @@ export default function WishlistPage() {
       {/* Full-Screen Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
         {savedProducts.map((product) => (
-          <div key={product.id} className="flex flex-col h-full bg-[#FAF8F5] border border-[#E9E2D5] overflow-hidden group">
+          <div key={product.id} className="flex flex-col h-full bg-[#FAF8F5] border border-[#D8D2C2] overflow-hidden group">
             
             {/* Image Box */}
             <div 
@@ -145,7 +145,7 @@ export default function WishlistPage() {
                 <span className="text-[10px] uppercase tracking-[0.2em] text-wood-500 font-semibold block mb-1">
                   {product.category}
                 </span>
-                <h3 className="font-serif text-xl text-charcoal-900 font-normal group-hover:text-wood-800 transition-colors">
+                <h3 className="font-serif text-xl text-charcoal-900 font-normal group-hover:text-[#1D2743] transition-colors">
                   {product.name}
                 </h3>
                 <p className="text-sm font-sans font-semibold text-charcoal-900 mt-1">
@@ -157,11 +157,11 @@ export default function WishlistPage() {
               </div>
 
               {/* Buttons */}
-              <div className="pt-2 border-t border-[#E9E2D5] flex items-center space-x-3">
+              <div className="pt-2 border-t border-[#D8D2C2] flex items-center space-x-3">
                 <button
                   type="button"
                   onClick={() => addToCart(product)}
-                  className="flex-1 py-3 bg-wood-800 text-white text-xs uppercase tracking-[0.18em] font-medium hover:bg-wood-900 transition-colors flex items-center justify-center space-x-2"
+                  className="flex-1 py-3 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.18em] font-medium hover:bg-wood-900 transition-colors flex items-center justify-center space-x-2"
                 >
                   <ShoppingBag className="w-3.5 h-3.5" />
                   <span>Add to Bag</span>
@@ -170,7 +170,7 @@ export default function WishlistPage() {
                 <button
                   type="button"
                   onClick={() => viewProduct(product.id)}
-                  className="py-3 px-3.5 border border-[#E9E2D5] bg-white text-charcoal-700 hover:text-charcoal-950 text-xs uppercase tracking-wider font-medium transition-colors"
+                  className="py-3 px-3.5 border border-[#D8D2C2] bg-white text-charcoal-700 hover:text-charcoal-950 text-xs uppercase tracking-wider font-medium transition-colors"
                   title="View full piece details"
                 >
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -184,7 +184,7 @@ export default function WishlistPage() {
       </div>
 
       {/* Architectural Guarantee Footer */}
-      <div className="mt-20 p-8 sm:p-10 bg-[#FAF8F5] border border-[#E9E2D5] flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div className="mt-20 p-8 sm:p-10 bg-[#FAF8F5] border border-[#D8D2C2] flex flex-col sm:flex-row items-center justify-between gap-6">
         <div className="space-y-1">
           <h4 className="font-serif text-2xl text-charcoal-900 font-normal">
             Need Bespoke Sizing for Your Saved Pieces?
@@ -195,7 +195,7 @@ export default function WishlistPage() {
         </div>
         <button
           onClick={() => navigateTo('custom')}
-          className="px-6 py-3 border border-wood-800 text-wood-900 hover:bg-wood-100 text-xs uppercase tracking-widest font-medium transition-colors shrink-0"
+          className="px-6 py-3 border border-[#1D2743] text-wood-900 hover:bg-wood-100 text-xs uppercase tracking-widest font-medium transition-colors shrink-0"
         >
           Consult Custom Atelier
         </button>

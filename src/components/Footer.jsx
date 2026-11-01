@@ -18,11 +18,11 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#182032] text-[#FAF8F5] pt-20 pb-12 border-t border-[#1d2743]">
+    <footer className="bg-[#1D2743] text-[#FAF8F5] pt-20 pb-12 border-t border-[#D8D2C2]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Footer Grid: 4 Balanced Columns with Harmonious Top Baselines */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 pb-16 border-b border-white/10 items-start">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 pb-16 border-b border-[#D8D2C2]/15 items-start">
           
           {/* Column 1: Brand & Atelier */}
           <div className="space-y-4">
@@ -34,40 +34,40 @@ export default function Footer() {
               />
             </div>
 
-            <p className="text-xs text-neutral-300 font-light leading-relaxed">
+            <p className="text-xs text-[#D8D2C2]/90 font-light leading-relaxed">
               Contemporary furniture, thoughtfully crafted in Egypt from honest hardwoods since 1948. Built to bring architectural warmth and lasting presence to your space.
             </p>
 
-            <div className="pt-3 border-t border-white/10 space-y-2.5 text-xs text-neutral-300 font-light">
+            <div className="pt-3 border-t border-[#D8D2C2]/15 space-y-2.5 text-xs text-[#D8D2C2]/90 font-light">
               <a 
                 href="https://maps.google.com/?q=3+El+Madaress+St+Off+Port+Said+St+Ghamra+Cairo+Egypt" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="hover:text-[#fae6c3] transition-colors flex items-start space-x-2.5 group"
+                className="hover:text-[#F1E7CC] transition-colors flex items-start space-x-2.5 group"
                 title="Open workshop location in Google Maps"
               >
-                <MapPin className="w-3.5 h-3.5 text-[#fae6c3] shrink-0 mt-0.5 group-hover:text-white" />
+                <MapPin className="w-3.5 h-3.5 text-[#F1E7CC] shrink-0 mt-0.5 group-hover:text-white" />
                 <span className="underline-offset-4 group-hover:underline">
                   3 El Madaress St., Ghamra, Cairo ↗
                 </span>
               </a>
 
               <div className="flex items-center space-x-2.5">
-                <Phone className="w-3.5 h-3.5 text-[#fae6c3] shrink-0" />
+                <Phone className="w-3.5 h-3.5 text-[#F1E7CC] shrink-0" />
                 <div className="flex items-center space-x-2">
-                  <a href="tel:+201222935556" className="hover:text-[#fae6c3] transition-colors">
+                  <a href="tel:+201222935556" className="hover:text-[#F1E7CC] transition-colors">
                     (+20) 122 293 5556
                   </a>
                   <span>/</span>
-                  <a href="tel:+201277488868" className="hover:text-[#fae6c3] transition-colors">
+                  <a href="tel:+201277488868" className="hover:text-[#F1E7CC] transition-colors">
                     (+20) 127 748 8868
                   </a>
                 </div>
               </div>
 
               <div className="flex items-center space-x-2.5">
-                <Mail className="w-3.5 h-3.5 text-[#fae6c3] shrink-0" />
-                <a href="mailto:info@primewoodenworks.com" className="hover:text-[#fae6c3] transition-colors">
+                <Mail className="w-3.5 h-3.5 text-[#F1E7CC] shrink-0" />
+                <a href="mailto:info@primewoodenworks.com" className="hover:text-[#F1E7CC] transition-colors">
                   info@primewoodenworks.com
                 </a>
               </div>
@@ -77,39 +77,39 @@ export default function Footer() {
           {/* Column 2: Explore Navigation */}
           <div className="space-y-4">
             <div className="h-12 flex items-start pt-1">
-              <h4 className="text-[11px] uppercase tracking-[0.25em] text-white font-semibold">
+              <h4 className="text-[11px] uppercase tracking-[0.25em] text-[#F1E7CC] font-semibold">
                 Explore
               </h4>
             </div>
 
-            <ul className="space-y-3 text-xs text-neutral-400 font-light">
+            <ul className="space-y-3 text-xs text-[#D8D2C2]/80 font-light">
               <li>
-                <button onClick={() => navigateTo('home')} className="hover:text-white transition-colors text-left">
+                <button onClick={() => navigateTo('home')} className="hover:text-[#F1E7CC] transition-colors text-left">
                   Home
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateTo('shop')} className="hover:text-white transition-colors text-left">
+                <button onClick={() => navigateTo('shop')} className="hover:text-[#F1E7CC] transition-colors text-left">
                   Shop Pieces
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateTo('custom')} className="hover:text-white transition-colors text-left">
+                <button onClick={() => navigateTo('custom')} className="hover:text-[#F1E7CC] transition-colors text-left">
                   Custom Furniture
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateTo('about')} className="hover:text-white transition-colors text-left">
+                <button onClick={() => navigateTo('about')} className="hover:text-[#F1E7CC] transition-colors text-left">
                   About Us
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateTo('contact')} className="hover:text-white transition-colors text-left">
+                <button onClick={() => navigateTo('contact')} className="hover:text-[#F1E7CC] transition-colors text-left">
                   Contact & Atelier
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateTo('wishlist')} className="hover:text-white transition-colors text-left">
+                <button onClick={() => navigateTo('wishlist')} className="hover:text-[#F1E7CC] transition-colors text-left">
                   Saved Pieces
                 </button>
               </li>
@@ -119,29 +119,29 @@ export default function Footer() {
           {/* Column 3: Customer Care */}
           <div className="space-y-4">
             <div className="h-12 flex items-start pt-1">
-              <h4 className="text-[11px] uppercase tracking-[0.25em] text-white font-semibold">
+              <h4 className="text-[11px] uppercase tracking-[0.25em] text-[#F1E7CC] font-semibold">
                 Customer Care
               </h4>
             </div>
 
-            <ul className="space-y-3 text-xs text-neutral-400 font-light">
+            <ul className="space-y-3 text-xs text-[#D8D2C2]/80 font-light">
               <li>
-                <button onClick={() => navigateTo('shipping')} className="hover:text-white transition-colors text-left">
+                <button onClick={() => navigateTo('shipping')} className="hover:text-[#F1E7CC] transition-colors text-left">
                   Shipping & Delivery
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateTo('returns')} className="hover:text-white transition-colors text-left">
+                <button onClick={() => navigateTo('returns')} className="hover:text-[#F1E7CC] transition-colors text-left">
                   Returns
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateTo('faq')} className="hover:text-white transition-colors text-left">
+                <button onClick={() => navigateTo('faq')} className="hover:text-[#F1E7CC] transition-colors text-left">
                   FAQs
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateTo('care-guide')} className="hover:text-white transition-colors text-left">
+                <button onClick={() => navigateTo('care-guide')} className="hover:text-[#F1E7CC] transition-colors text-left">
                   Care Guide
                 </button>
               </li>
@@ -151,32 +151,32 @@ export default function Footer() {
           {/* Column 4: Newsletter & Community */}
           <div className="space-y-4">
             <div className="h-12 flex items-start pt-1">
-              <h4 className="text-[11px] uppercase tracking-[0.25em] text-white font-semibold">
+              <h4 className="text-[11px] uppercase tracking-[0.25em] text-[#F1E7CC] font-semibold">
                 Stay Connected
               </h4>
             </div>
 
-            <p className="text-xs text-neutral-400 font-light leading-relaxed">
+            <p className="text-xs text-[#D8D2C2]/80 font-light leading-relaxed">
               Receive private invitations to new timber collection releases, workshop open days in Cairo, and interior architecture stories.
             </p>
 
             <form onSubmit={handleSubscribe} className="pt-1">
-              <div className="flex items-center border-b border-white/20 focus-within:border-wood-300 pb-2 transition-colors">
+              <div className="flex items-center border-b border-[#D8D2C2]/30 focus-within:border-[#F1E7CC] pb-2 transition-colors">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email address"
-                  className="bg-transparent text-xs text-white placeholder-neutral-500 focus:outline-none w-full font-light tracking-wide py-0.5"
+                  className="bg-transparent text-xs text-white placeholder-[#D8D2C2]/50 focus:outline-none w-full font-light tracking-wide py-0.5"
                   disabled={subscribed}
                 />
                 <button
                   type="submit"
                   disabled={subscribed}
-                  className="text-xs uppercase tracking-[0.2em] font-medium text-[#fae6c3] hover:text-white transition-colors ml-3 shrink-0 flex items-center space-x-1"
+                  className="text-xs uppercase tracking-[0.2em] font-medium text-[#F1E7CC] hover:text-white transition-colors ml-3 shrink-0 flex items-center space-x-1"
                 >
                   {subscribed ? (
-                    <span className="flex items-center space-x-1 text-green-300">
+                    <span className="flex items-center space-x-1 text-emerald-300">
                       <Check className="w-3.5 h-3.5" />
                       <span>Subscribed</span>
                     </span>
@@ -187,12 +187,12 @@ export default function Footer() {
               </div>
             </form>
 
-            <div className="pt-2 flex items-center space-x-4 text-xs text-neutral-400">
+            <div className="pt-2 flex items-center space-x-4 text-xs text-[#D8D2C2]/80">
               <a 
                 href="https://instagram.com" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="hover:text-white transition-colors"
+                className="hover:text-[#F1E7CC] transition-colors"
               >
                 Instagram
               </a>
@@ -201,7 +201,7 @@ export default function Footer() {
                 href="https://facebook.com" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="hover:text-white transition-colors"
+                className="hover:text-[#F1E7CC] transition-colors"
               >
                 Facebook
               </a>
@@ -222,12 +222,12 @@ export default function Footer() {
         </div>
 
         {/* Bottom Credits */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-neutral-500 font-light tracking-wider space-y-4 sm:space-y-0">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#D8D2C2]/60 font-light tracking-wider space-y-4 sm:space-y-0">
           <p>© 2026 Prime Wooden Work. All rights reserved.</p>
           <div className="flex items-center space-x-6">
             <span>Made with pride in Cairo, Egypt</span>
             <span>·</span>
-            <span className="font-serif italic text-neutral-400">Honest Timber Arthouse</span>
+            <span className="font-serif italic text-[#D8D2C2]/80">Honest Timber Arthouse</span>
           </div>
         </div>
 

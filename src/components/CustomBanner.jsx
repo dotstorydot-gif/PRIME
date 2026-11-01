@@ -6,13 +6,13 @@ export default function CustomBanner() {
   const { navigateTo } = useStore();
 
   return (
-    <section className="bg-[#EFECE6]/70 py-20 lg:py-28 my-12 border-y border-[#E9E2D5]">
+    <section className="bg-[#EFECE6]/70 py-20 lg:py-28 my-12 border-y border-[#D8D2C2]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Left: Elegant Custom Architectural Furniture Imagery */}
           <div className="lg:col-span-6 relative">
-            <div className="relative aspect-[4/3] sm:aspect-[16/12] overflow-hidden bg-[#E2DBD0] border border-[#E9E2D5]">
+            <div className="relative aspect-[4/3] sm:aspect-[16/12] overflow-hidden bg-[#E2DBD0] border border-[#D8D2C2]">
               <img
                 src="/images/products/image7.png"
                 alt="Custom built-in architectural woodwork and dressing room by Prime"
@@ -22,7 +22,7 @@ export default function CustomBanner() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
               
               {/* Badge */}
-              <div className="absolute bottom-4 left-4 bg-[#FAF8F5]/95 backdrop-blur-sm px-4 py-2 text-[10px] uppercase tracking-widest font-medium text-charcoal-800 border border-[#E9E2D5]">
+              <div className="absolute bottom-4 left-4 bg-[#FAF8F5]/95 backdrop-blur-sm px-4 py-2 text-[10px] uppercase tracking-widest font-medium text-charcoal-800 border border-[#D8D2C2]">
                 Bespoke Joinery & Millwork
               </div>
             </div>

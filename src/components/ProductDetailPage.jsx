@@ -78,7 +78,7 @@ export default function ProductDetailPage() {
         <ChevronRight className="w-3 h-3 text-charcoal-400" />
         <span className="text-charcoal-900">{product.category}</span>
         <ChevronRight className="w-3 h-3 text-charcoal-400" />
-        <span className="text-wood-600 truncate max-w-xs">{product.name}</span>
+        <span className="text-[#1D2743] truncate max-w-xs">{product.name}</span>
       </nav>
 
       {/* Main Two-Column Layout */}
@@ -88,7 +88,7 @@ export default function ProductDetailPage() {
         <div className="lg:col-span-7 space-y-4">
           
           {/* Main Large Display Image */}
-          <div className="relative aspect-[4/3] sm:aspect-[1/1] overflow-hidden bg-[#F0EDE6] border border-[#E9E2D5]">
+          <div className="relative aspect-[4/3] sm:aspect-[1/1] overflow-hidden bg-[#F0EDE6] border border-[#D8D2C2]">
             <img
               src={images[activeImageIndex] || product.primaryImage}
               alt={`${product.name} detailed view`}
@@ -118,8 +118,8 @@ export default function ProductDetailPage() {
                   onClick={() => setActiveImageIndex(idx)}
                   className={`aspect-square overflow-hidden bg-[#F0EDE6] border-2 transition-all ${
                     activeImageIndex === idx 
-                      ? 'border-wood-700 ring-1 ring-wood-700' 
-                      : 'border-[#E9E2D5] opacity-75 hover:opacity-100'
+                      ? 'border-[#1D2743] ring-1 ring-[#1D2743]' 
+                      : 'border-[#D8D2C2] opacity-75 hover:opacity-100'
                   }`}
                 >
                   <img
@@ -133,17 +133,17 @@ export default function ProductDetailPage() {
           )}
 
           {/* Craft Guarantee Box */}
-          <div className="bg-[#FAF8F5] p-5 border border-[#E9E2D5] grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-charcoal-700 mt-6">
+          <div className="bg-[#FAF8F5] p-5 border border-[#D8D2C2] grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-charcoal-700 mt-6">
             <div className="flex items-center space-x-2.5">
-              <Truck className="w-4 h-4 text-wood-600 shrink-0" />
+              <Truck className="w-4 h-4 text-[#1D2743] shrink-0" />
               <span>White Glove Cairo Delivery</span>
             </div>
             <div className="flex items-center space-x-2.5">
-              <ShieldCheck className="w-4 h-4 text-wood-600 shrink-0" />
+              <ShieldCheck className="w-4 h-4 text-[#1D2743] shrink-0" />
               <span>10-Year Structural Guarantee</span>
             </div>
             <div className="flex items-center space-x-2.5">
-              <Sparkles className="w-4 h-4 text-wood-600 shrink-0" />
+              <Sparkles className="w-4 h-4 text-[#1D2743] shrink-0" />
               <span>Handcrafted in Ghamra, Cairo</span>
             </div>
           </div>
@@ -153,7 +153,7 @@ export default function ProductDetailPage() {
         <div className="lg:col-span-5 space-y-8">
           
           {/* Header Info */}
-          <div className="space-y-3 pb-6 border-b border-[#E9E2D5]">
+          <div className="space-y-3 pb-6 border-b border-[#D8D2C2]">
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-xs uppercase tracking-[0.25em] text-[#1d2743] font-bold">
                 {product.category}
@@ -185,7 +185,7 @@ export default function ProductDetailPage() {
             <div className="space-y-3">
               <label className="text-xs uppercase tracking-widest font-semibold text-charcoal-800 flex justify-between">
                 <span>Timber Finish</span>
-                <span className="font-serif italic font-normal text-wood-700">{selectedFinish}</span>
+                <span className="font-serif italic font-normal text-[#1D2743]">{selectedFinish}</span>
               </label>
               <div className="flex flex-wrap gap-3">
                 {product.finishes.map((f) => {
@@ -196,8 +196,8 @@ export default function ProductDetailPage() {
                       onClick={() => setSelectedFinish(f.name)}
                       className={`flex items-center space-x-2 px-3.5 py-2 border text-xs tracking-wider uppercase transition-all ${
                         isCurrent 
-                          ? 'border-wood-800 bg-wood-100/60 font-semibold text-wood-950' 
-                          : 'border-[#E9E2D5] bg-[#FAF8F5] text-charcoal-600 hover:border-wood-400'
+                          ? 'border-[#1D2743] bg-wood-100/60 font-semibold text-wood-950' 
+                          : 'border-[#D8D2C2] bg-[#FAF8F5] text-charcoal-600 hover:border-wood-400'
                       }`}
                     >
                       <span 
@@ -228,12 +228,12 @@ export default function ProductDetailPage() {
                       onClick={() => setSelectedSize(s)}
                       className={`w-full text-left px-4 py-3 border text-xs tracking-wider flex items-center justify-between transition-all ${
                         isCurrent 
-                          ? 'border-wood-800 bg-[#FAF8F5] font-semibold text-charcoal-900' 
-                          : 'border-[#E9E2D5] text-charcoal-600 hover:border-charcoal-400'
+                          ? 'border-[#1D2743] bg-[#FAF8F5] font-semibold text-charcoal-900' 
+                          : 'border-[#D8D2C2] text-charcoal-600 hover:border-charcoal-400'
                       }`}
                     >
                       <span>{s}</span>
-                      {isCurrent && <Check className="w-4 h-4 text-wood-700" />}
+                      {isCurrent && <Check className="w-4 h-4 text-[#1D2743]" />}
                     </button>
                   );
                 })}
@@ -246,7 +246,7 @@ export default function ProductDetailPage() {
             <div className="flex items-center space-x-4">
               
               {/* Quantity Selector */}
-              <div className="flex items-center border border-[#E9E2D5] bg-[#FAF8F5] px-3 py-3 text-xs">
+              <div className="flex items-center border border-[#D8D2C2] bg-[#FAF8F5] px-3 py-3 text-xs">
                 <button
                   type="button"
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -289,13 +289,13 @@ export default function ProductDetailPage() {
               onClick={handleCustomize}
               className="w-full py-3.5 border border-[#1d2743] text-[#1d2743] hover:bg-[#fae6c3]/20 text-xs uppercase tracking-[0.2em] font-medium transition-all flex items-center justify-center space-x-2 rounded-md"
             >
-              <Compass className="w-4 h-4 text-wood-600" />
+              <Compass className="w-4 h-4 text-[#1D2743]" />
               <span>Customize This Piece</span>
             </button>
           </div>
 
           {/* Accordion Specs & Information */}
-          <div className="pt-6 border-t border-[#E9E2D5] divide-y divide-[#E9E2D5]">
+          <div className="pt-6 border-t border-[#D8D2C2] divide-y divide-[#E9E2D5]">
             
             {/* Dimensions */}
             <div>
@@ -310,7 +310,7 @@ export default function ProductDetailPage() {
                 <div className="pb-4 text-xs text-charcoal-600 space-y-1.5 font-light leading-relaxed">
                   <p><strong>Standard:</strong> {product.dimensions?.standard || '240 cm (W) x 105 cm (D) x 76 cm (H)'}</p>
                   {product.dimensions?.large && <p><strong>Large:</strong> {product.dimensions.large}</p>}
-                  <p className="text-wood-600 pt-1 italic">Tailored custom dimensions available upon request.</p>
+                  <p className="text-[#1D2743] pt-1 italic">Tailored custom dimensions available upon request.</p>
                 </div>
               )}
             </div>
@@ -347,7 +347,7 @@ export default function ProductDetailPage() {
                   <p>{product.delivery}</p>
                   <button 
                     onClick={() => navigateTo('shipping')}
-                    className="text-wood-700 underline underline-offset-2 hover:text-wood-900 block pt-1 font-medium"
+                    className="text-[#1D2743] underline underline-offset-2 hover:text-wood-900 block pt-1 font-medium"
                   >
                     View White-Glove Delivery Details & Zones →
                   </button>
@@ -372,7 +372,7 @@ export default function ProductDetailPage() {
                   <p>• Re-nourish annually with Prime natural beeswax conditioning paste.</p>
                   <button 
                     onClick={() => navigateTo('care-guide')}
-                    className="text-wood-700 underline underline-offset-2 hover:text-wood-900 block pt-1 font-medium"
+                    className="text-[#1D2743] underline underline-offset-2 hover:text-wood-900 block pt-1 font-medium"
                   >
                     View Full Solid Wood Care & Preservation Guide →
                   </button>
@@ -387,7 +387,7 @@ export default function ProductDetailPage() {
       </div>
 
       {/* You May Also Like Section */}
-      <div className="mt-24 pt-16 border-t border-[#E9E2D5]">
+      <div className="mt-24 pt-16 border-t border-[#D8D2C2]">
         <div className="mb-10 text-center">
           <span className="text-xs uppercase tracking-[0.25em] text-wood-500 font-semibold block mb-2">
             Curated Pairings

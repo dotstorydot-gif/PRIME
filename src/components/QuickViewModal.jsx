@@ -50,7 +50,7 @@ export default function QuickViewModal() {
       />
 
       {/* Modal Dialog */}
-      <div className="relative bg-[#FAF8F5] border border-[#E9E2D5] max-w-3xl w-full shadow-2xl z-10 overflow-hidden">
+      <div className="relative bg-[#FAF8F5] border border-[#D8D2C2] max-w-3xl w-full shadow-2xl z-10 overflow-hidden">
         
         {/* Close Button */}
         <button
@@ -112,8 +112,8 @@ export default function QuickViewModal() {
                         onClick={() => setSelectedFinish(f.name)}
                         className={`px-3 py-1.5 text-[11px] border tracking-wider transition-all flex items-center space-x-1.5 ${
                           selectedFinish === f.name 
-                            ? 'border-wood-800 bg-wood-100 font-medium' 
-                            : 'border-[#E9E2D5] bg-white text-charcoal-600 hover:border-wood-400'
+                            ? 'border-[#1D2743] bg-wood-100 font-medium' 
+                            : 'border-[#D8D2C2] bg-white text-charcoal-600 hover:border-wood-400'
                         }`}
                       >
                         <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: f.hex }} />
@@ -126,12 +126,12 @@ export default function QuickViewModal() {
             </div>
 
             {/* Actions */}
-            <div className="space-y-3 pt-4 border-t border-[#E9E2D5]">
+            <div className="space-y-3 pt-4 border-t border-[#D8D2C2]">
               <div className="flex items-center space-x-3">
                 <button
                   type="button"
                   onClick={handleAdd}
-                  className="flex-1 py-3.5 bg-wood-800 text-white text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-colors flex items-center justify-center space-x-2"
+                  className="flex-1 py-3.5 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-colors flex items-center justify-center space-x-2"
                 >
                   <ShoppingBag className="w-4 h-4" />
                   <span>Add to Bag</span>
@@ -141,7 +141,7 @@ export default function QuickViewModal() {
                   type="button"
                   onClick={() => toggleWishlist(product.id)}
                   className={`p-3.5 border transition-colors ${
-                    wishlisted ? 'border-wood-800 bg-wood-800 text-white' : 'border-[#E9E2D5] hover:border-charcoal-400 text-charcoal-700'
+                    wishlisted ? 'border-[#1D2743] bg-[#1D2743] text-[#F1E7CC]' : 'border-[#D8D2C2] hover:border-charcoal-400 text-charcoal-700'
                   }`}
                   title="Wishlist"
                 >
@@ -152,7 +152,7 @@ export default function QuickViewModal() {
               <button
                 type="button"
                 onClick={handleFullView}
-                className="w-full text-center text-xs uppercase tracking-widest text-wood-700 hover:text-wood-900 font-medium py-1"
+                className="w-full text-center text-xs uppercase tracking-widest text-[#1D2743] hover:text-wood-900 font-medium py-1"
               >
                 View Full Product Details →
               </button>

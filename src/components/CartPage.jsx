@@ -26,7 +26,7 @@ export default function CartPage() {
         </p>
         <button
           onClick={() => navigateTo('shop')}
-          className="inline-flex items-center justify-center px-8 py-4 bg-wood-800 text-white text-xs uppercase tracking-widest font-medium hover:bg-wood-900 transition-colors"
+          className="inline-flex items-center justify-center px-8 py-4 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-widest font-medium hover:bg-wood-900 transition-colors"
         >
           Explore Collection
         </button>
@@ -38,7 +38,7 @@ export default function CartPage() {
     <div className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       
       {/* Page Title */}
-      <div className="mb-12 border-b border-[#E9E2D5] pb-6 flex items-center justify-between">
+      <div className="mb-12 border-b border-[#D8D2C2] pb-6 flex items-center justify-between">
         <div>
           <span className="text-xs uppercase tracking-[0.25em] text-wood-500 font-semibold block mb-1">
             Review Bag
@@ -49,7 +49,7 @@ export default function CartPage() {
         </div>
         <button
           onClick={() => navigateTo('shop')}
-          className="text-xs uppercase tracking-widest font-medium text-charcoal-600 hover:text-wood-800 transition-colors inline-flex items-center space-x-1"
+          className="text-xs uppercase tracking-widest font-medium text-charcoal-600 hover:text-[#1D2743] transition-colors inline-flex items-center space-x-1"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Continue Shopping</span>
@@ -59,12 +59,12 @@ export default function CartPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         
         {/* Left: Cart Items Table/List */}
-        <div className="lg:col-span-8 divide-y divide-[#E9E2D5] border-y border-[#E9E2D5]">
+        <div className="lg:col-span-8 divide-y divide-[#E9E2D5] border-y border-[#D8D2C2]">
           {cart.map((item) => (
             <div key={item.cartItemId || item.id} className="py-6 flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-6">
               
               {/* Image */}
-              <div className="w-24 h-24 bg-[#EFECE6] border border-[#E9E2D5] shrink-0 overflow-hidden">
+              <div className="w-24 h-24 bg-[#EFECE6] border border-[#D8D2C2] shrink-0 overflow-hidden">
                 <img
                   src={item.image}
                   alt={item.name}
@@ -87,7 +87,7 @@ export default function CartPage() {
               </div>
 
               {/* Quantity Controls */}
-              <div className="flex items-center border border-[#E9E2D5] bg-white text-xs w-fit">
+              <div className="flex items-center border border-[#D8D2C2] bg-white text-xs w-fit">
                 <button
                   onClick={() => updateQuantity(item.cartItemId || item.id, item.quantity - 1)}
                   className="p-2 text-charcoal-600 hover:text-black"
@@ -125,8 +125,8 @@ export default function CartPage() {
 
         {/* Right: Order Summary */}
         <div className="lg:col-span-4">
-          <div className="bg-[#FAF8F5] border border-[#E9E2D5] p-6 sm:p-8 space-y-6">
-            <h3 className="font-serif text-2xl text-charcoal-900 font-normal border-b border-[#E9E2D5] pb-4">
+          <div className="bg-[#FAF8F5] border border-[#D8D2C2] p-6 sm:p-8 space-y-6">
+            <h3 className="font-serif text-2xl text-charcoal-900 font-normal border-b border-[#D8D2C2] pb-4">
               Order Summary
             </h3>
 
@@ -141,7 +141,7 @@ export default function CartPage() {
                   {deliveryFee === 0 ? 'Complimentary' : formatEGP(deliveryFee)}
                 </span>
               </div>
-              <div className="flex justify-between text-base font-semibold text-charcoal-900 pt-3 border-t border-[#E9E2D5]">
+              <div className="flex justify-between text-base font-semibold text-charcoal-900 pt-3 border-t border-[#D8D2C2]">
                 <span>Total Amount</span>
                 <span>{formatEGP(total)}</span>
               </div>
@@ -149,19 +149,19 @@ export default function CartPage() {
 
             <button
               onClick={() => navigateTo('checkout')}
-              className="w-full py-4 bg-wood-800 text-white text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-all flex items-center justify-center space-x-2 shadow-sm"
+              className="w-full py-4 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-all flex items-center justify-center space-x-2 shadow-sm"
             >
               <span>Proceed to Checkout</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
-            <div className="pt-4 border-t border-[#E9E2D5] space-y-2 text-[11px] text-charcoal-500 font-light">
+            <div className="pt-4 border-t border-[#D8D2C2] space-y-2 text-[11px] text-charcoal-500 font-light">
               <p className="flex items-center space-x-2">
-                <ShieldCheck className="w-3.5 h-3.5 text-wood-600 shrink-0" />
+                <ShieldCheck className="w-3.5 h-3.5 text-[#1D2743] shrink-0" />
                 <span>10-year craft & joinery guarantee</span>
               </p>
               <p className="flex items-center space-x-2">
-                <Truck className="w-3.5 h-3.5 text-wood-600 shrink-0" />
+                <Truck className="w-3.5 h-3.5 text-[#1D2743] shrink-0" />
                 <span>Direct delivery & room-of-choice placement</span>
               </p>
             </div>

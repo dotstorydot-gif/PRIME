@@ -39,6 +39,14 @@ export default {
           900: '#182032',
           950: '#0F1624'
         },
+        brand: {
+          navy: '#1D2743',
+          cream: '#F1E7CC',
+          stone: '#D8D2C2',
+          ink: '#111827',
+          'navy-dark': '#141B2E',
+          'cream-light': '#FBF8F0',
+        },
         cream: {
           100: '#fdf7ee',
           200: '#f7ebda',

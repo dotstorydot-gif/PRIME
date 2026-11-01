@@ -67,7 +67,7 @@ export default function AccountModal() {
         onClick={() => setIsAccountOpen(false)}
       />
 
-      <div className="relative bg-[#FAF8F5] border border-[#E9E2D5] max-w-lg w-full shadow-2xl z-10 overflow-hidden">
+      <div className="relative bg-[#FAF8F5] border border-[#D8D2C2] max-w-lg w-full shadow-2xl z-10 overflow-hidden">
         {/* Close Button */}
         <button
           onClick={() => setIsAccountOpen(false)}
@@ -78,8 +78,8 @@ export default function AccountModal() {
         </button>
 
         {/* Modal Header */}
-        <div className="p-6 sm:p-8 border-b border-[#E9E2D5] bg-[#FAF8F5]">
-          <span className="text-[10px] uppercase tracking-[0.25em] text-wood-600 font-semibold block mb-1">
+        <div className="p-6 sm:p-8 border-b border-[#D8D2C2] bg-[#FAF8F5]">
+          <span className="text-[10px] uppercase tracking-[0.25em] text-[#1D2743] font-semibold block mb-1">
             Prime Wooden Work Atelier
           </span>
           <h2 className="font-serif text-2xl sm:text-3xl text-charcoal-900 font-normal">
@@ -87,12 +87,12 @@ export default function AccountModal() {
           </h2>
 
           {/* Navigation Tabs */}
-          <div className="flex border-b border-[#E9E2D5] mt-6 -mb-6 sm:-mb-8 space-x-6 text-xs uppercase tracking-wider font-medium">
+          <div className="flex border-b border-[#D8D2C2] mt-6 -mb-6 sm:-mb-8 space-x-6 text-xs uppercase tracking-wider font-medium">
             <button
               onClick={() => setActiveTab('login')}
               className={`pb-3 transition-colors relative ${
                 activeTab === 'login' 
-                  ? 'text-wood-800 font-semibold border-b-2 border-wood-700' 
+                  ? 'text-[#1D2743] font-semibold border-b-2 border-wood-700' 
                   : 'text-charcoal-500 hover:text-charcoal-900'
               }`}
             >
@@ -102,7 +102,7 @@ export default function AccountModal() {
               onClick={() => setActiveTab('track')}
               className={`pb-3 transition-colors relative ${
                 activeTab === 'track' 
-                  ? 'text-wood-800 font-semibold border-b-2 border-wood-700' 
+                  ? 'text-[#1D2743] font-semibold border-b-2 border-wood-700' 
                   : 'text-charcoal-500 hover:text-charcoal-900'
               }`}
             >
@@ -112,7 +112,7 @@ export default function AccountModal() {
               onClick={() => setActiveTab('concierge')}
               className={`pb-3 transition-colors relative ${
                 activeTab === 'concierge' 
-                  ? 'text-wood-800 font-semibold border-b-2 border-wood-700' 
+                  ? 'text-[#1D2743] font-semibold border-b-2 border-wood-700' 
                   : 'text-charcoal-500 hover:text-charcoal-900'
               }`}
             >
@@ -126,14 +126,14 @@ export default function AccountModal() {
           <div className="p-6 sm:p-8 space-y-6">
             {isLoggedIn ? (
               <div className="space-y-6">
-                <div className="flex items-center space-x-4 bg-wood-50 p-4 border border-[#E9E2D5]">
+                <div className="flex items-center space-x-4 bg-wood-50 p-4 border border-[#D8D2C2]">
                   <div className="w-12 h-12 rounded-full bg-wood-800 text-[#FAF8F5] flex items-center justify-center font-serif text-lg">
                     KM
                   </div>
                   <div>
                     <h3 className="font-serif text-lg text-charcoal-900 font-medium">{userProfile.name}</h3>
                     <p className="text-xs text-charcoal-600">{userProfile.email}</p>
-                    <span className="text-[10px] uppercase tracking-widest text-wood-700 font-semibold">
+                    <span className="text-[10px] uppercase tracking-widest text-[#1D2743] font-semibold">
                       {userProfile.tier}
                     </span>
                   </div>
@@ -144,7 +144,7 @@ export default function AccountModal() {
                     Active Commissions & Orders
                   </h4>
                   {userProfile.recentOrders.map((ord) => (
-                    <div key={ord.id} className="p-3.5 bg-white border border-[#E9E2D5] text-xs flex justify-between items-center">
+                    <div key={ord.id} className="p-3.5 bg-white border border-[#D8D2C2] text-xs flex justify-between items-center">
                       <div>
                         <p className="font-semibold text-charcoal-900">{ord.item}</p>
                         <p className="text-[10px] text-charcoal-500">{ord.id} · {ord.date}</p>
@@ -162,7 +162,7 @@ export default function AccountModal() {
                       setIsAccountOpen(false);
                       navigateTo('custom');
                     }}
-                    className="text-xs uppercase tracking-wider text-wood-700 hover:text-wood-900 font-medium underline"
+                    className="text-xs uppercase tracking-wider text-[#1D2743] hover:text-wood-900 font-medium underline"
                   >
                     Start a New Custom Request →
                   </button>
@@ -193,7 +193,7 @@ export default function AccountModal() {
                     placeholder="e.g. client@example.com"
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}
-                    className="w-full bg-white border border-[#E9E2D5] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700"
+                    className="w-full bg-white border border-[#D8D2C2] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700"
                   />
                 </div>
 
@@ -206,13 +206,13 @@ export default function AccountModal() {
                     placeholder="••••••••"
                     value={loginPass}
                     onChange={(e) => setLoginPass(e.target.value)}
-                    className="w-full bg-white border border-[#E9E2D5] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700"
+                    className="w-full bg-white border border-[#D8D2C2] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 bg-wood-800 text-white text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-colors shadow-sm"
+                  className="w-full py-3.5 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-colors shadow-sm"
                 >
                   Sign In to Client Portal
                 </button>
@@ -224,7 +224,7 @@ export default function AccountModal() {
                       setIsLoggedIn(true);
                       showToast('Demonstration account signed in', 'success');
                     }}
-                    className="text-[11px] text-wood-700 hover:text-wood-900 uppercase tracking-wider underline font-medium"
+                    className="text-[11px] text-[#1D2743] hover:text-wood-900 uppercase tracking-wider underline font-medium"
                   >
                     Instant Preview Mode (Guest / VIP Demo)
                   </button>
@@ -247,11 +247,11 @@ export default function AccountModal() {
                   placeholder="e.g. PWW-EG-829141 or 0100..."
                   value={trackOrderId}
                   onChange={(e) => setTrackOrderId(e.target.value)}
-                  className="flex-1 bg-white border border-[#E9E2D5] px-3.5 py-2.5 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700"
+                  className="flex-1 bg-white border border-[#D8D2C2] px-3.5 py-2.5 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700"
                 />
                 <button
                   type="submit"
-                  className="px-5 py-2.5 bg-wood-800 text-white text-xs uppercase tracking-widest font-medium hover:bg-wood-900"
+                  className="px-5 py-2.5 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-widest font-medium hover:bg-wood-900"
                 >
                   Track
                 </button>
@@ -259,10 +259,10 @@ export default function AccountModal() {
             </form>
 
             {trackedOrderResult ? (
-              <div className="bg-white p-5 border border-[#E9E2D5] space-y-4">
-                <div className="flex justify-between items-start border-b border-[#E9E2D5] pb-3">
+              <div className="bg-white p-5 border border-[#D8D2C2] space-y-4">
+                <div className="flex justify-between items-start border-b border-[#D8D2C2] pb-3">
                   <div>
-                    <span className="text-[10px] text-wood-600 font-semibold uppercase tracking-wider">
+                    <span className="text-[10px] text-[#1D2743] font-semibold uppercase tracking-wider">
                       Order Reference
                     </span>
                     <h4 className="font-serif text-lg text-charcoal-900">{trackedOrderResult.id}</h4>
@@ -277,7 +277,7 @@ export default function AccountModal() {
                   <p className="text-charcoal-600"><strong>Estimated Dispatch:</strong> {trackedOrderResult.estimatedDelivery}</p>
                 </div>
 
-                <div className="space-y-2 pt-2 border-t border-[#E9E2D5]">
+                <div className="space-y-2 pt-2 border-t border-[#D8D2C2]">
                   <p className="text-[11px] uppercase tracking-wider font-semibold text-charcoal-700">Workshop Stages</p>
                   {trackedOrderResult.timeline.map((step, idx) => (
                     <div key={idx} className="flex items-center space-x-2 text-xs">
@@ -294,7 +294,7 @@ export default function AccountModal() {
                 </div>
               </div>
             ) : (
-              <div className="text-xs text-charcoal-500 font-light p-4 bg-[#F0EDE6] border border-[#E9E2D5]">
+              <div className="text-xs text-charcoal-500 font-light p-4 bg-[#F0EDE6] border border-[#D8D2C2]">
                 Enter the reference number received in your order confirmation email or SMS to track material milling, assembly, and white-glove transport in real-time.
               </div>
             )}
@@ -322,7 +322,7 @@ export default function AccountModal() {
                 <span>(+20) 122 293 5556</span>
               </a>
 
-              <div className="p-4 bg-white border border-[#E9E2D5] space-y-1">
+              <div className="p-4 bg-white border border-[#D8D2C2] space-y-1">
                 <strong className="block text-charcoal-900 uppercase tracking-wider text-[11px]">Showroom & Material Library</strong>
                 <p className="text-charcoal-600">3 El Madaress St., Off Port Said St., Ghamra, Cairo</p>
                 <p className="text-charcoal-500">Saturday – Thursday: 9:00 AM – 7:00 PM</p>

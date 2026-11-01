@@ -45,11 +45,11 @@ export default function SearchModal() {
       />
 
       <div className="relative max-w-3xl mx-auto mt-20 sm:mt-24 px-4 z-10">
-        <div className="bg-[#FAF8F5] border border-[#E9E2D5] shadow-2xl overflow-hidden">
+        <div className="bg-[#FAF8F5] border border-[#D8D2C2] shadow-2xl overflow-hidden">
           
           {/* Search Header Input */}
-          <div className="p-4 sm:p-6 border-b border-[#E9E2D5] flex items-center space-x-4">
-            <Search className="w-5 h-5 text-wood-700 shrink-0" />
+          <div className="p-4 sm:p-6 border-b border-[#D8D2C2] flex items-center space-x-4">
+            <Search className="w-5 h-5 text-[#1D2743] shrink-0" />
             <input
               ref={inputRef}
               type="text"
@@ -109,7 +109,7 @@ export default function SearchModal() {
                     className="py-3 flex items-center justify-between cursor-pointer group hover:bg-[#F4EFE6] px-2 transition-colors"
                   >
                     <div className="flex items-center space-x-4">
-                      <img src={p.primaryImage} alt={p.name} className="w-12 h-12 object-cover border border-[#E9E2D5]" />
+                      <img src={p.primaryImage} alt={p.name} className="w-12 h-12 object-cover border border-[#D8D2C2]" />
                       <div>
                         <div className="flex flex-wrap items-center gap-1.5">
                           <span className="text-[10px] uppercase tracking-wider text-[#1d2743] font-bold">{p.category}</span>

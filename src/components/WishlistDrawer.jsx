@@ -37,12 +37,12 @@ export default function WishlistDrawer() {
         onClick={() => setIsWishlistOpen(false)}
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-md w-full bg-[#FAF8F5] shadow-2xl flex flex-col z-10 border-l border-[#E9E2D5]">
+      <div className="fixed inset-y-0 right-0 max-w-md w-full bg-[#FAF8F5] shadow-2xl flex flex-col z-10 border-l border-[#D8D2C2]">
         
         {/* Header */}
-        <div className="p-6 border-b border-[#E9E2D5] flex items-center justify-between">
+        <div className="p-6 border-b border-[#D8D2C2] flex items-center justify-between">
           <div className="flex items-center space-x-2.5">
-            <Heart className="w-5 h-5 text-wood-700 fill-wood-700" />
+            <Heart className="w-5 h-5 text-[#1D2743] fill-wood-700" />
             <h2 className="font-serif text-2xl text-charcoal-900 font-medium">Saved Pieces</h2>
             <span className="text-xs text-charcoal-500 font-sans">
               ({savedProducts.length})
@@ -58,9 +58,9 @@ export default function WishlistDrawer() {
         </div>
 
         {/* Informational Sub-header */}
-        <div className="bg-[#F0EDE6] px-6 py-2.5 text-xs text-charcoal-700 font-sans border-b border-[#E9E2D5] flex items-center justify-between">
+        <div className="bg-[#F0EDE6] px-6 py-2.5 text-xs text-charcoal-700 font-sans border-b border-[#D8D2C2] flex items-center justify-between">
           <span>Curated for your space</span>
-          <span className="text-[10px] uppercase tracking-widest text-wood-700 font-semibold">
+          <span className="text-[10px] uppercase tracking-widest text-[#1D2743] font-semibold">
             Handcrafted in Cairo
           </span>
         </div>
@@ -81,7 +81,7 @@ export default function WishlistDrawer() {
                   setIsWishlistOpen(false);
                   navigateTo('shop');
                 }}
-                className="mt-2 px-6 py-3 bg-wood-800 text-white text-xs uppercase tracking-widest font-medium hover:bg-wood-900 transition-colors"
+                className="mt-2 px-6 py-3 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-widest font-medium hover:bg-wood-900 transition-colors"
               >
                 Browse Collection
               </button>
@@ -92,7 +92,7 @@ export default function WishlistDrawer() {
                 {/* Image */}
                 <div 
                   onClick={() => handleProductClick(item.id)}
-                  className="w-20 h-20 bg-[#EFECE6] shrink-0 border border-[#E9E2D5] overflow-hidden cursor-pointer group"
+                  className="w-20 h-20 bg-[#EFECE6] shrink-0 border border-[#D8D2C2] overflow-hidden cursor-pointer group"
                 >
                   <img
                     src={item.primaryImage}
@@ -112,7 +112,7 @@ export default function WishlistDrawer() {
                         <span className="text-[10px] uppercase tracking-wider text-wood-500 font-semibold block">
                           {item.category}
                         </span>
-                        <h4 className="font-serif text-base text-charcoal-900 font-medium truncate group-hover:text-wood-800 transition-colors">
+                        <h4 className="font-serif text-base text-charcoal-900 font-medium truncate group-hover:text-[#1D2743] transition-colors">
                           {item.name}
                         </h4>
                       </div>
@@ -135,7 +135,7 @@ export default function WishlistDrawer() {
                   <div className="flex items-center space-x-3 mt-3">
                     <button
                       onClick={() => handleMoveToBag(item)}
-                      className="flex-1 py-2 px-3 bg-wood-800 text-white hover:bg-wood-900 text-[11px] uppercase tracking-widest font-medium transition-colors flex items-center justify-center space-x-1.5"
+                      className="flex-1 py-2 px-3 bg-[#1D2743] text-[#F1E7CC] hover:bg-wood-900 text-[11px] uppercase tracking-widest font-medium transition-colors flex items-center justify-center space-x-1.5"
                     >
                       <ShoppingBag className="w-3.5 h-3.5" />
                       <span>Add to Bag</span>
@@ -143,7 +143,7 @@ export default function WishlistDrawer() {
 
                     <button
                       onClick={() => handleProductClick(item.id)}
-                      className="py-2 px-2.5 border border-[#E9E2D5] text-charcoal-700 hover:text-charcoal-950 text-[11px] transition-colors"
+                      className="py-2 px-2.5 border border-[#D8D2C2] text-charcoal-700 hover:text-charcoal-950 text-[11px] transition-colors"
                       title="View details"
                     >
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -157,13 +157,13 @@ export default function WishlistDrawer() {
 
         {/* Footer */}
         {savedProducts.length > 0 && (
-          <div className="p-6 border-t border-[#E9E2D5] bg-[#FAF8F5] space-y-3">
+          <div className="p-6 border-t border-[#D8D2C2] bg-[#FAF8F5] space-y-3">
             <button
               onClick={() => {
                 savedProducts.forEach(p => addToCart(p));
                 setIsWishlistOpen(false);
               }}
-              className="w-full py-3.5 bg-wood-800 text-white text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-colors flex items-center justify-center space-x-2"
+              className="w-full py-3.5 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-wood-900 transition-colors flex items-center justify-center space-x-2"
             >
               <ShoppingBag className="w-4 h-4" />
               <span>Add All to Bag</span>
@@ -174,7 +174,7 @@ export default function WishlistDrawer() {
                 setIsWishlistOpen(false);
                 navigateTo('shop');
               }}
-              className="w-full py-2 text-center text-xs text-charcoal-600 hover:text-wood-800 uppercase tracking-widest transition-colors font-medium"
+              className="w-full py-2 text-center text-xs text-charcoal-600 hover:text-[#1D2743] uppercase tracking-widest transition-colors font-medium"
             >
               Continue Exploring
             </button>

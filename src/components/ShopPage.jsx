@@ -110,97 +110,105 @@ export default function ShopPage() {
   };
 
   return (
-    <div className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      
-      {/* Editorial Header matching screenshot media_1792326157868_a66b0ff4.png */}
-      <div className="max-w-3xl mb-12 sm:mb-16">
-        <span className="text-xs uppercase tracking-[0.25em] text-wood-500 font-semibold block mb-2">
-          Top Collection
-        </span>
-        <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl text-charcoal-900 font-normal tracking-tight">
-          Shop Furniture
-        </h1>
-        <p className="mt-4 text-charcoal-600 font-sans text-base sm:text-lg font-light leading-relaxed">
-          Considered pieces for living, dining and resting—made with natural materials and a lasting point of view.
-        </p>
-      </div>
-
-      {/* Primary Category Navigation Bar */}
-      <div className="border-t border-[#E9E2D5] pt-4 pb-3">
-        <div className="flex items-center space-x-6 xl:space-x-8 overflow-x-auto no-scrollbar py-1">
-          {categories.map((cat) => {
-            const isSelected = isTabActive(cat.id);
-            return (
-              <button
-                key={cat.id}
-                onClick={() => setSelectedCategoryFilter(cat.id)}
-                className={`text-[11px] xl:text-xs uppercase tracking-[0.16em] transition-all whitespace-nowrap pb-1.5 relative shrink-0 ${
-                  isSelected 
-                    ? 'text-charcoal-900 font-semibold border-b-2 border-[#1d2743]' 
-                    : 'text-charcoal-500 hover:text-charcoal-900 font-medium'
-                }`}
-              >
-                {cat.label}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Secondary Refinement & Filters Toolbar */}
-      <div className="border-y border-[#E9E2D5] py-3 mb-10 flex items-center justify-between gap-4">
-        {/* Left: Item Counter & Active Filter Reset */}
-        <div className="flex items-center space-x-3 text-xs uppercase tracking-widest text-charcoal-600 font-medium">
-          <span>{filteredProducts.length} {filteredProducts.length === 1 ? 'PIECE' : 'PIECES'}</span>
-          {selectedCategoryFilter !== 'all' && (
-            <>
-              <span className="text-[#E9E2D5]">|</span>
-              <button 
-                onClick={() => setSelectedCategoryFilter('all')}
-                className="text-wood-600 hover:text-wood-800 underline lowercase tracking-normal text-xs"
-              >
-                view all pieces
-              </button>
-            </>
-          )}
-        </div>
-
-        {/* Right: Wood Finish & Sort Dropdowns */}
-        <div className="flex items-center space-x-4 sm:space-x-6 shrink-0">
-          {/* Mobile Filter Button */}
-          <button
-            onClick={() => setIsMobileFilterOpen(true)}
-            className="sm:hidden inline-flex items-center space-x-2 text-xs uppercase tracking-widest text-charcoal-800 font-medium py-1.5 px-2.5 border border-[#E9E2D5]"
-          >
-            <SlidersHorizontal className="w-3.5 h-3.5" />
-            <span>Filters</span>
-          </button>
-
-          {/* Desktop Wood Finish Filter */}
-          <div className="hidden sm:block">
-            <CustomDropdown
-              labelPrefix="TIMBER:"
-              value={filterFinish}
-              onChange={setFilterFinish}
-              options={timberOptions}
-              align="right"
-            />
+    <div>
+      {/* Editorial Luxury Header Banner in Prime Navy */}
+      <section className="bg-[#1D2743] text-white py-14 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-[#D8D2C2]/20 relative overflow-hidden">
+        {/* Subtle texture grid */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#F1E7CC_1px,transparent_1px)] [background-size:24px_24px]" />
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="inline-flex items-center space-x-2.5 mb-3">
+            <span className="w-8 h-[1px] bg-[#F1E7CC]" />
+            <span className="text-xs uppercase tracking-[0.28em] text-[#F1E7CC] font-semibold">
+              PRIME · WOOD ARTHOUSE
+            </span>
           </div>
+          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl text-[#F1E7CC] font-normal tracking-tight">
+            Furniture Collection
+          </h1>
+          <p className="mt-3 text-[#D8D2C2] font-sans text-base sm:text-lg font-light leading-relaxed max-w-2xl">
+            Considered pieces for living, dining and resting—handcrafted in Cairo from honest hardwoods with an enduring point of view.
+          </p>
+        </div>
+      </section>
 
-          <div className="h-3.5 w-[1px] bg-[#E9E2D5] hidden sm:block" />
-
-          {/* Sort By Dropdown */}
-          <div>
-            <CustomDropdown
-              labelPrefix="SORT:"
-              value={sortBy}
-              onChange={setSortBy}
-              options={sortOptions}
-              align="right"
-            />
+      <div className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        {/* Primary Category Navigation Bar */}
+        <div className="border-t border-[#D8D2C2] pt-4 pb-3">
+          <div className="flex items-center space-x-6 xl:space-x-8 overflow-x-auto no-scrollbar py-1">
+            {categories.map((cat) => {
+              const isSelected = isTabActive(cat.id);
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCategoryFilter(cat.id)}
+                  className={`text-[11px] xl:text-xs uppercase tracking-[0.16em] transition-all whitespace-nowrap pb-1.5 relative shrink-0 ${
+                    isSelected 
+                      ? 'text-[#1D2743] font-semibold border-b-2 border-[#1D2743]' 
+                      : 'text-charcoal-600 hover:text-[#1D2743] font-medium'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              );
+            })}
           </div>
         </div>
-      </div>
+
+        {/* Secondary Refinement & Filters Toolbar */}
+        <div className="border-y border-[#D8D2C2] py-3 mb-10 flex items-center justify-between gap-4">
+          {/* Left: Item Counter & Active Filter Reset */}
+          <div className="flex items-center space-x-3 text-xs uppercase tracking-widest text-charcoal-700 font-medium">
+            <span>{filteredProducts.length} {filteredProducts.length === 1 ? 'PIECE' : 'PIECES'}</span>
+            {selectedCategoryFilter !== 'all' && (
+              <>
+                <span className="text-[#D8D2C2]">|</span>
+                <button 
+                  onClick={() => setSelectedCategoryFilter('all')}
+                  className="text-[#1D2743] hover:underline lowercase tracking-normal text-xs font-semibold"
+                >
+                  view all pieces
+                </button>
+              </>
+            )}
+          </div>
+
+          {/* Right: Wood Finish & Sort Dropdowns */}
+          <div className="flex items-center space-x-4 sm:space-x-6 shrink-0">
+            {/* Mobile Filter Button */}
+            <button
+              onClick={() => setIsMobileFilterOpen(true)}
+              className="sm:hidden inline-flex items-center space-x-2 text-xs uppercase tracking-widest text-[#1D2743] font-medium py-1.5 px-2.5 border border-[#D8D2C2] hover:bg-[#FAF8F5]"
+            >
+              <SlidersHorizontal className="w-3.5 h-3.5" />
+              <span>Filters</span>
+            </button>
+
+            {/* Desktop Wood Finish Filter */}
+            <div className="hidden sm:block">
+              <CustomDropdown
+                labelPrefix="TIMBER:"
+                value={filterFinish}
+                onChange={setFilterFinish}
+                options={timberOptions}
+                align="right"
+              />
+            </div>
+
+            <div className="h-3.5 w-[1px] bg-[#D8D2C2] hidden sm:block" />
+
+            {/* Sort By Dropdown */}
+            <div>
+              <CustomDropdown
+                labelPrefix="SORT:"
+                value={sortBy}
+                onChange={setSortBy}
+                options={sortOptions}
+                align="right"
+              />
+            </div>
+          </div>
+        </div>
 
       {/* Product Grid */}
       {filteredProducts.length > 0 ? (
@@ -304,7 +312,7 @@ export default function ShopPage() {
 
             <button
               onClick={() => setIsMobileFilterOpen(false)}
-              className="w-full py-3 bg-wood-800 text-white text-xs uppercase tracking-widest font-medium"
+              className="w-full py-3.5 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-widest font-semibold hover:bg-[#141B2E] transition-colors"
             >
               View Results ({filteredProducts.length})
             </button>
@@ -312,6 +320,7 @@ export default function ShopPage() {
         </div>
       )}
 
+      </div>
     </div>
   );
 }

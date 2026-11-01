@@ -129,24 +129,33 @@ export default function CustomFurniturePage() {
   };
 
   return (
-    <div className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-      
-      {/* Editorial Header matching prompt */}
-      <div className="text-center max-w-2xl mx-auto mb-16">
-        <span className="text-xs uppercase tracking-[0.25em] text-wood-500 font-semibold block mb-2">
-          Bespoke Atelier · Cairo
-        </span>
-        <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-charcoal-900 font-normal tracking-tight">
-          Create Something Made for You
-        </h1>
-        <p className="mt-4 text-charcoal-600 font-sans text-base sm:text-lg font-light leading-relaxed">
-          “Tell us what you have in mind and our team will help turn your idea into a finished piece.”
-        </p>
-      </div>
+    <div>
+      {/* Editorial Luxury Header Banner in Prime Navy */}
+      <section className="bg-[#1D2743] text-white py-14 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-[#D8D2C2]/20 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#F1E7CC_1px,transparent_1px)] [background-size:24px_24px]" />
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <div className="inline-flex items-center space-x-2.5 mb-3">
+            <span className="w-8 h-[1px] bg-[#F1E7CC]" />
+            <span className="text-xs uppercase tracking-[0.28em] text-[#F1E7CC] font-semibold">
+              BESPOKE ATELIER · CAIRO
+            </span>
+            <span className="w-8 h-[1px] bg-[#F1E7CC]" />
+          </div>
+          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#F1E7CC] font-normal tracking-tight">
+            Create Something Made for You
+          </h1>
+          <p className="mt-3 text-[#D8D2C2] font-sans text-base sm:text-lg font-light leading-relaxed max-w-2xl mx-auto">
+            “Tell us what you have in mind and our master woodworkers will turn your idea, sketch, or space into a finished heirloom piece.”
+          </p>
+        </div>
+      </section>
+
+      <div className="py-10 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
 
       {isSubmitted ? (
         /* Confirmation State matching user requirements */
-        <div className="bg-[#FAF8F5] border border-[#E9E2D5] p-8 sm:p-14 text-center max-w-2xl mx-auto shadow-sm">
+        <div className="bg-[#FAF8F5] border border-[#D8D2C2] p-8 sm:p-14 text-center max-w-2xl mx-auto shadow-sm">
           <div className="w-16 h-16 rounded-full bg-wood-100 text-wood-800 flex items-center justify-center mx-auto mb-6">
             <CheckCircle2 className="w-8 h-8 text-wood-700" />
           </div>
@@ -191,12 +200,12 @@ export default function CustomFurniturePage() {
         </div>
       ) : (
         /* The Interactive Custom Furniture Request Form */
-        <form onSubmit={handleSubmit} className="bg-[#FAF8F5] border border-[#E9E2D5] p-6 sm:p-12 shadow-sm space-y-12">
+        <form onSubmit={handleSubmit} className="bg-[#FAF8F5] border border-[#D8D2C2] p-6 sm:p-12 shadow-sm space-y-12">
           
           {/* 1. What are you looking for? */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <span className="w-6 h-6 rounded-full bg-wood-800 text-white text-xs flex items-center justify-center font-medium">1</span>
+              <span className="w-6 h-6 rounded-full bg-[#1D2743] text-[#F1E7CC] text-xs flex items-center justify-center font-medium">1</span>
               <h3 className="font-serif text-xl sm:text-2xl text-charcoal-900 font-normal">
                 What are you looking for?
               </h3>
@@ -212,8 +221,8 @@ export default function CustomFurniturePage() {
                     onClick={() => setFormData(prev => ({ ...prev, pieceType: type }))}
                     className={`p-3.5 text-xs text-left tracking-wide transition-all border ${
                       isSelected 
-                        ? 'border-wood-800 bg-wood-100/60 font-semibold text-charcoal-900' 
-                        : 'border-[#E9E2D5] bg-white text-charcoal-600 hover:border-wood-300'
+                        ? 'border-[#1D2743] bg-[#1D2743] font-semibold text-[#F1E7CC]' 
+                        : 'border-[#E9E2D5] bg-white text-charcoal-600 hover:border-[#1D2743]'
                     }`}
                   >
                     {type}
@@ -226,7 +235,7 @@ export default function CustomFurniturePage() {
           {/* 2. Approximate dimensions */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <span className="w-6 h-6 rounded-full bg-wood-800 text-white text-xs flex items-center justify-center font-medium">2</span>
+              <span className="w-6 h-6 rounded-full bg-[#1D2743] text-[#F1E7CC] text-xs flex items-center justify-center font-medium">2</span>
               <h3 className="font-serif text-xl sm:text-2xl text-charcoal-900 font-normal">
                 Approximate dimensions (cm)
               </h3>
@@ -245,7 +254,7 @@ export default function CustomFurniturePage() {
                   placeholder="e.g. 240"
                   value={formData.width}
                   onChange={(e) => setFormData(prev => ({ ...prev, width: e.target.value }))}
-                  className="w-full bg-white border border-[#E9E2D5] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700"
+                  className="w-full bg-white border border-[#D8D2C2] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-[#1D2743]"
                 />
               </div>
               <div>
@@ -257,7 +266,7 @@ export default function CustomFurniturePage() {
                   placeholder="e.g. 76"
                   value={formData.height}
                   onChange={(e) => setFormData(prev => ({ ...prev, height: e.target.value }))}
-                  className="w-full bg-white border border-[#E9E2D5] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700"
+                  className="w-full bg-white border border-[#D8D2C2] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-[#1D2743]"
                 />
               </div>
               <div>
@@ -269,7 +278,7 @@ export default function CustomFurniturePage() {
                   placeholder="e.g. 105"
                   value={formData.depth}
                   onChange={(e) => setFormData(prev => ({ ...prev, depth: e.target.value }))}
-                  className="w-full bg-white border border-[#E9E2D5] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700"
+                  className="w-full bg-white border border-[#D8D2C2] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-[#1D2743]"
                 />
               </div>
             </div>
@@ -280,7 +289,7 @@ export default function CustomFurniturePage() {
             {/* Preferred Material */}
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
-                <span className="w-6 h-6 rounded-full bg-wood-800 text-white text-xs flex items-center justify-center font-medium">3</span>
+                <span className="w-6 h-6 rounded-full bg-[#1D2743] text-[#F1E7CC] text-xs flex items-center justify-center font-medium">3</span>
                 <h3 className="font-serif text-xl text-charcoal-900 font-normal">
                   Preferred material
                 </h3>
@@ -288,7 +297,7 @@ export default function CustomFurniturePage() {
               <select
                 value={formData.material}
                 onChange={(e) => setFormData(prev => ({ ...prev, material: e.target.value }))}
-                className="w-full bg-white border border-[#E9E2D5] px-4 py-3.5 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700 cursor-pointer"
+                className="w-full bg-white border border-[#D8D2C2] px-4 py-3.5 text-xs text-charcoal-800 focus:outline-none focus:border-[#1D2743] cursor-pointer"
               >
                 {materials.map(m => (
                   <option key={m} value={m}>{m}</option>
@@ -299,7 +308,7 @@ export default function CustomFurniturePage() {
             {/* Preferred finish/color */}
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
-                <span className="w-6 h-6 rounded-full bg-wood-800 text-white text-xs flex items-center justify-center font-medium">4</span>
+                <span className="w-6 h-6 rounded-full bg-[#1D2743] text-[#F1E7CC] text-xs flex items-center justify-center font-medium">4</span>
                 <h3 className="font-serif text-xl text-charcoal-900 font-normal">
                   Preferred finish / color
                 </h3>
@@ -307,7 +316,7 @@ export default function CustomFurniturePage() {
               <select
                 value={formData.finish}
                 onChange={(e) => setFormData(prev => ({ ...prev, finish: e.target.value }))}
-                className="w-full bg-white border border-[#E9E2D5] px-4 py-3.5 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700 cursor-pointer"
+                className="w-full bg-white border border-[#D8D2C2] px-4 py-3.5 text-xs text-charcoal-800 focus:outline-none focus:border-[#1D2743] cursor-pointer"
               >
                 {finishes.map(f => (
                   <option key={f} value={f}>{f}</option>
@@ -319,7 +328,7 @@ export default function CustomFurniturePage() {
           {/* 5. Describe your idea */}
           <div className="space-y-3">
             <div className="flex items-center space-x-2">
-              <span className="w-6 h-6 rounded-full bg-wood-800 text-white text-xs flex items-center justify-center font-medium">5</span>
+              <span className="w-6 h-6 rounded-full bg-[#1D2743] text-[#F1E7CC] text-xs flex items-center justify-center font-medium">5</span>
               <h3 className="font-serif text-xl text-charcoal-900 font-normal">
                 Describe your idea
               </h3>
@@ -329,14 +338,14 @@ export default function CustomFurniturePage() {
               placeholder="Tell us about the space, desired functionality, special edge radiuses, fluting details, or wood tone preferences..."
               value={formData.description}
               onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-              className="w-full bg-white border border-[#E9E2D5] px-4 py-3.5 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700 leading-relaxed font-light"
+              className="w-full bg-white border border-[#D8D2C2] px-4 py-3.5 text-xs text-charcoal-800 focus:outline-none focus:border-[#1D2743] leading-relaxed font-light"
             />
           </div>
 
           {/* 6. Upload inspiration image — Both Possibilities */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <span className="w-6 h-6 rounded-full bg-wood-800 text-white text-xs flex items-center justify-center font-medium">6</span>
+              <span className="w-6 h-6 rounded-full bg-[#1D2743] text-[#F1E7CC] text-xs flex items-center justify-center font-medium">6</span>
               <h3 className="font-serif text-xl sm:text-2xl text-charcoal-900 font-normal">
                 Inspiration Image
               </h3>
@@ -352,8 +361,8 @@ export default function CustomFurniturePage() {
                 onClick={() => setInspirationMode('portfolio')}
                 className={`px-4 py-2 text-xs uppercase tracking-wider font-medium transition-all ${
                   inspirationMode === 'portfolio'
-                    ? 'bg-wood-800 text-white shadow-sm'
-                    : 'bg-[#FAF8F5] border border-[#E9E2D5] text-charcoal-700 hover:bg-white'
+                    ? 'bg-[#1D2743] text-[#F1E7CC] shadow-sm'
+                    : 'bg-[#FAF8F5] border border-[#D8D2C2] text-charcoal-700 hover:bg-white'
                 }`}
               >
                 ✦ Prime Custom Portfolio ({PREVIOUS_CUSTOM_WORKS.length})
@@ -363,8 +372,8 @@ export default function CustomFurniturePage() {
                 onClick={() => setInspirationMode('upload')}
                 className={`px-4 py-2 text-xs uppercase tracking-wider font-medium transition-all ${
                   inspirationMode === 'upload'
-                    ? 'bg-wood-800 text-white shadow-sm'
-                    : 'bg-[#FAF8F5] border border-[#E9E2D5] text-charcoal-700 hover:bg-white'
+                    ? 'bg-[#1D2743] text-[#F1E7CC] shadow-sm'
+                    : 'bg-[#FAF8F5] border border-[#D8D2C2] text-charcoal-700 hover:bg-white'
                 }`}
               >
                 ⇪ Upload Outside Photo / Sketch
@@ -430,7 +439,7 @@ export default function CustomFurniturePage() {
                           className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                         />
                         {isSelected && (
-                          <div className="absolute top-2 right-2 bg-wood-800 text-white rounded-full p-1 shadow">
+                          <div className="absolute top-2 right-2 bg-[#1D2743] text-[#F1E7CC] rounded-full p-1 shadow">
                             <Check className="w-3.5 h-3.5" />
                           </div>
                         )}
@@ -473,7 +482,7 @@ export default function CustomFurniturePage() {
           {/* 7. Contact information */}
           <div className="space-y-4 pt-4 border-t border-[#E9E2D5]">
             <div className="flex items-center space-x-2">
-              <span className="w-6 h-6 rounded-full bg-wood-800 text-white text-xs flex items-center justify-center font-medium">7</span>
+              <span className="w-6 h-6 rounded-full bg-[#1D2743] text-[#F1E7CC] text-xs flex items-center justify-center font-medium">7</span>
               <h3 className="font-serif text-xl sm:text-2xl text-charcoal-900 font-normal">
                 Contact information
               </h3>
@@ -490,7 +499,7 @@ export default function CustomFurniturePage() {
                   placeholder="e.g. Youssef Mansour"
                   value={formData.name}
                   onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                  className="w-full bg-white border border-[#E9E2D5] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700"
+                  className="w-full bg-white border border-[#D8D2C2] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-[#1D2743]"
                 />
               </div>
 
@@ -504,7 +513,7 @@ export default function CustomFurniturePage() {
                   placeholder="(+20) 100 000 0000"
                   value={formData.phone}
                   onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                  className="w-full bg-white border border-[#E9E2D5] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700"
+                  className="w-full bg-white border border-[#D8D2C2] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-[#1D2743]"
                 />
               </div>
 
@@ -518,7 +527,7 @@ export default function CustomFurniturePage() {
                   placeholder="name@example.com"
                   value={formData.email}
                   onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                  className="w-full bg-white border border-[#E9E2D5] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700"
+                  className="w-full bg-white border border-[#D8D2C2] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-[#1D2743]"
                 />
               </div>
 
@@ -529,7 +538,7 @@ export default function CustomFurniturePage() {
                 <select
                   value={formData.city}
                   onChange={(e) => setFormData(prev => ({ ...prev, city: e.target.value }))}
-                  className="w-full bg-white border border-[#E9E2D5] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-wood-700 cursor-pointer"
+                  className="w-full bg-white border border-[#D8D2C2] px-4 py-3 text-xs text-charcoal-800 focus:outline-none focus:border-[#1D2743] cursor-pointer"
                 >
                   <option value="New Cairo / 5th Settlement">New Cairo / 5th Settlement</option>
                   <option value="Sheikh Zayed / 6th October">Sheikh Zayed / 6th October</option>
@@ -547,7 +556,7 @@ export default function CustomFurniturePage() {
           <div className="pt-6 border-t border-[#E9E2D5]">
             <button
               type="submit"
-              className="w-full sm:w-auto px-10 py-4 bg-wood-800 text-[#FAF8F5] text-xs uppercase tracking-[0.22em] font-medium hover:bg-wood-900 transition-all shadow-sm"
+              className="w-full sm:w-auto px-10 py-4 bg-[#1D2743] text-[#F1E7CC] text-xs uppercase tracking-[0.22em] font-medium hover:bg-[#141B2E] transition-all shadow-sm"
             >
               Request a Quote
             </button>
@@ -559,6 +568,7 @@ export default function CustomFurniturePage() {
         </form>
       )}
 
+      </div>
     </div>
   );
 }
