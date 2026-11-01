@@ -125,21 +125,19 @@ export default function ShopPage() {
         </p>
       </div>
 
-      {/* Filter and Sort Toolbar */}
-      <div className="border-y border-[#E9E2D5] py-3.5 mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
-        
-        {/* Category Pills: Chosen Piece Categories on one clean line */}
-        <div className="hidden lg:flex items-center space-x-4 xl:space-x-5 overflow-x-auto no-scrollbar py-1 shrink-0">
+      {/* Primary Category Navigation Bar */}
+      <div className="border-t border-[#E9E2D5] pt-4 pb-3">
+        <div className="flex items-center space-x-6 xl:space-x-8 overflow-x-auto no-scrollbar py-1">
           {categories.map((cat) => {
             const isSelected = isTabActive(cat.id);
             return (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategoryFilter(cat.id)}
-                className={`text-[11px] xl:text-xs uppercase tracking-[0.14em] transition-all whitespace-nowrap pb-1 relative shrink-0 ${
+                className={`text-[11px] xl:text-xs uppercase tracking-[0.16em] transition-all whitespace-nowrap pb-1.5 relative shrink-0 ${
                   isSelected 
-                    ? 'text-charcoal-900 font-semibold border-b-2 border-charcoal-900' 
-                    : 'text-charcoal-600 hover:text-charcoal-900 font-medium'
+                    ? 'text-charcoal-900 font-semibold border-b-2 border-[#1d2743]' 
+                    : 'text-charcoal-500 hover:text-charcoal-900 font-medium'
                 }`}
               >
                 {cat.label}
@@ -147,19 +145,38 @@ export default function ShopPage() {
             );
           })}
         </div>
+      </div>
 
-        {/* Mobile Filter Button */}
-        <button
-          onClick={() => setIsMobileFilterOpen(true)}
-          className="lg:hidden inline-flex items-center space-x-2 text-xs uppercase tracking-widest text-charcoal-800 font-medium py-2 px-3 border border-[#E9E2D5]"
-        >
-          <SlidersHorizontal className="w-3.5 h-3.5" />
-          <span>Filters ({selectedCategoryFilter !== 'all' ? '1' : '0'})</span>
-        </button>
+      {/* Secondary Refinement & Filters Toolbar */}
+      <div className="border-y border-[#E9E2D5] py-3 mb-10 flex items-center justify-between gap-4">
+        {/* Left: Item Counter & Active Filter Reset */}
+        <div className="flex items-center space-x-3 text-xs uppercase tracking-widest text-charcoal-600 font-medium">
+          <span>{filteredProducts.length} {filteredProducts.length === 1 ? 'PIECE' : 'PIECES'}</span>
+          {selectedCategoryFilter !== 'all' && (
+            <>
+              <span className="text-[#E9E2D5]">|</span>
+              <button 
+                onClick={() => setSelectedCategoryFilter('all')}
+                className="text-wood-600 hover:text-wood-800 underline lowercase tracking-normal text-xs"
+              >
+                view all pieces
+              </button>
+            </>
+          )}
+        </div>
 
-        {/* Right side: Sort Dropdown & Finish selector */}
-        <div className="flex items-center space-x-3 sm:space-x-4 shrink-0 self-end md:self-center">
-          {/* Wood Finish Filter */}
+        {/* Right: Wood Finish & Sort Dropdowns */}
+        <div className="flex items-center space-x-4 sm:space-x-6 shrink-0">
+          {/* Mobile Filter Button */}
+          <button
+            onClick={() => setIsMobileFilterOpen(true)}
+            className="sm:hidden inline-flex items-center space-x-2 text-xs uppercase tracking-widest text-charcoal-800 font-medium py-1.5 px-2.5 border border-[#E9E2D5]"
+          >
+            <SlidersHorizontal className="w-3.5 h-3.5" />
+            <span>Filters</span>
+          </button>
+
+          {/* Desktop Wood Finish Filter */}
           <div className="hidden sm:block">
             <CustomDropdown
               labelPrefix="TIMBER:"
@@ -170,7 +187,7 @@ export default function ShopPage() {
             />
           </div>
 
-          <div className="h-4 w-[1px] bg-[#E9E2D5] hidden sm:block" />
+          <div className="h-3.5 w-[1px] bg-[#E9E2D5] hidden sm:block" />
 
           {/* Sort By Dropdown */}
           <div>
@@ -183,20 +200,6 @@ export default function ShopPage() {
             />
           </div>
         </div>
-
-      </div>
-
-      {/* Item Counter */}
-      <div className="mb-6 flex items-center justify-between text-xs text-charcoal-500 uppercase tracking-widest font-medium">
-        <span>{filteredProducts.length} {filteredProducts.length === 1 ? 'PIECE' : 'PIECES'}</span>
-        {selectedCategoryFilter !== 'all' && (
-          <button 
-            onClick={() => setSelectedCategoryFilter('all')}
-            className="text-wood-600 hover:text-wood-800 underline lowercase"
-          >
-            clear category filter
-          </button>
-        )}
       </div>
 
       {/* Product Grid */}
