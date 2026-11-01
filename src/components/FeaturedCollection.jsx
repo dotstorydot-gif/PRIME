@@ -8,7 +8,26 @@ export default function FeaturedCollection() {
   const { navigateTo } = useStore();
   const scrollContainerRef = useRef(null);
 
-  const featured = PRODUCTS.filter(p => p.isFeatured);
+  const featuredOrder = [
+    'prime-cloud-bed',
+    'prime-curve-highboard',
+    'prime-shadow-sideboard',
+    'prime-carve-dresser',
+    'prime-lattice-tv-unit',
+    'prime-bold-console',
+    'prime-bliss-bed-30',
+    'prime-groove-console',
+    'prime-motif-nightstand',
+    'prime-orbit-side-table'
+  ];
+
+  const featured = PRODUCTS
+    .filter(p => p.isFeatured)
+    .sort((a, b) => {
+      const idxA = featuredOrder.indexOf(a.id);
+      const idxB = featuredOrder.indexOf(b.id);
+      return (idxA !== -1 ? idxA : 999) - (idxB !== -1 ? idxB : 999);
+    });
 
   const scroll = (direction) => {
     if (scrollContainerRef.current) {
