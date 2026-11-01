@@ -47,8 +47,9 @@ export default function ShopPage() {
     if (selectedCategoryFilter && selectedCategoryFilter !== 'all') {
       const filterKey = selectedCategoryFilter.toLowerCase();
       result = result.filter(item => {
-        // Direct categoryId match
+        // Direct categoryId or categories array match
         if (item.categoryId === selectedCategoryFilter) return true;
+        if (Array.isArray(item.categories) && item.categories.includes(selectedCategoryFilter)) return true;
 
         // Tag match (from Excel ecommerce column C)
         const itemTag = (item.tag || '').toLowerCase();
