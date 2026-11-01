@@ -89,33 +89,34 @@ export default function AboutPage() {
           </p>
         </div>
 
-        {/* 4 Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        {/* 4 Steps Grid: Text-Only Luxury Editorial Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {CRAFT_STEPS.map((step) => (
-            <div key={step.number} className="bg-[#FAF8F5] border border-[#E9E2D5] overflow-hidden flex flex-col group">
-              <div className="aspect-[16/10] overflow-hidden bg-[#E9E2D5] relative">
-                <img
-                  src={step.image}
-                  alt={step.title}
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1 font-serif text-sm">
-                  Stage {step.number}
+            <div 
+              key={step.number} 
+              className="bg-white border border-[#E9E2D5] p-8 sm:p-10 flex flex-col justify-between space-y-6 transition-all duration-300 hover:border-[#1d2743]/40 hover:shadow-sm"
+            >
+              <div className="space-y-4">
+                <div className="flex items-center justify-between border-b border-[#E9E2D5]/70 pb-4">
+                  <span className="font-serif text-3xl sm:text-4xl text-[#1d2743] font-light">
+                    0{step.number}
+                  </span>
+                  <span className="text-[10px] uppercase tracking-[0.25em] px-2.5 py-1 bg-[#1d2743]/5 text-[#1d2743] font-semibold rounded-full border border-[#1d2743]/10">
+                    Stage {step.number}
+                  </span>
                 </div>
-              </div>
 
-              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-3">
-                <div>
-                  <h3 className="font-serif text-2xl text-charcoal-900 font-medium">
-                    {step.title}
-                  </h3>
-                  <p className="text-xs uppercase tracking-wider text-wood-700 font-semibold mt-1">
-                    {step.description}
-                  </p>
-                  <p className="text-xs sm:text-sm text-charcoal-600 font-light leading-relaxed mt-3">
-                    {step.detail}
-                  </p>
-                </div>
+                <h3 className="font-serif text-2xl sm:text-3xl text-charcoal-900 font-medium">
+                  {step.title}
+                </h3>
+
+                <p className="text-xs uppercase tracking-wider text-[#1d2743] font-semibold leading-relaxed">
+                  {step.description}
+                </p>
+
+                <p className="text-sm text-charcoal-600 font-light leading-relaxed pt-1">
+                  {step.detail}
+                </p>
               </div>
             </div>
           ))}
