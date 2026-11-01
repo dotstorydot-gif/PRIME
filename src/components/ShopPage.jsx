@@ -43,32 +43,9 @@ export default function ShopPage() {
   const filteredProducts = useMemo(() => {
     let result = [...PRODUCTS];
 
-    // Filter by piece Category or Tag
+    // Filter by piece Category: Strict 1-to-1 match (no mix!)
     if (selectedCategoryFilter && selectedCategoryFilter !== 'all') {
-      const filterKey = selectedCategoryFilter.toLowerCase();
-      result = result.filter(item => {
-        // Direct categoryId or categories array match
-        if (item.categoryId === selectedCategoryFilter) return true;
-        if (Array.isArray(item.categories) && item.categories.includes(selectedCategoryFilter)) return true;
-
-        // Tag match (from Excel ecommerce column C)
-        const itemTag = (item.tag || '').toLowerCase();
-        if (itemTag === filterKey) return true;
-        if (filterKey === 'night-stands' && (itemTag === 'night stand' || itemTag === 'nightstand')) return true;
-        if (filterKey === 'tv-units' && (itemTag === 'tv unit' || itemTag === 'tv-unit')) return true;
-        if (filterKey === 'doors-millwork' && (itemTag === 'door' || itemTag.includes('ceiling') || itemTag.includes('millwork'))) return true;
-        if (filterKey === 'customize' && (itemTag === 'customize' || itemTag.includes('b2b'))) return true;
-
-        // B2B Tag match (from Excel column D)
-        const b2b = (item.b2bTag || '').toLowerCase();
-        if (b2b.includes(filterKey)) return true;
-        if (filterKey === 'consoles' && b2b.includes('console')) return true;
-        if (filterKey === 'tables' && (b2b.includes('table') || b2b.includes('dining'))) return true;
-        if (filterKey === 'storage' && (b2b.includes('storage') || b2b.includes('library') || b2b.includes('book'))) return true;
-        if (filterKey === 'dressers' && (b2b.includes('dressing') || b2b.includes('wardrobe') || b2b.includes('cabinet'))) return true;
-
-        return false;
-      });
+      result = result.filter(item => item.categoryId === selectedCategoryFilter);
     }
 
     // Filter by Finish if selected
