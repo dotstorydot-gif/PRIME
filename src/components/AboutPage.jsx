@@ -39,17 +39,17 @@ export default function AboutPage() {
       {/* Story Chapter 1: The Cairo Heritage */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         <div className="lg:col-span-6 relative">
-          <div className="aspect-[4/3] bg-[#E2DBD0] border border-[#E9E2D5] overflow-hidden">
+          <div className="aspect-[16/10] bg-[#E2DBD0] border border-[#E9E2D5] overflow-hidden shadow-sm">
             <img
-              src="/images/products/image9.png"
-              alt="Prime Wooden Work Cairo Interior Architecture"
+              src="/images/heritage-1948.jpg"
+              alt="Prime Wooden Work 1948 Askar Sons Cairo Workshop Heritage"
               className="w-full h-full object-cover object-center"
             />
           </div>
-          <div className="absolute -bottom-4 -right-4 bg-wood-800 text-[#FAF8F5] p-5 hidden sm:block shadow-lg max-w-xs">
+          <div className="absolute -bottom-4 -right-4 bg-[#1d2743] text-[#FAF8F5] p-5 hidden sm:block shadow-lg max-w-xs border border-white/10">
             <span className="font-serif text-2xl block">1948</span>
-            <span className="text-[10px] uppercase tracking-widest text-wood-200">
-              Founded in Ghamra, Cairo
+            <span className="text-[10px] uppercase tracking-widest text-[#fae6c3] font-medium">
+              (Askar Son's) · 1948 – 1988
             </span>
           </div>
         </div>
