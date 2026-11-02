@@ -23,6 +23,7 @@ import AccountModal from './components/AccountModal';
 import SearchModal from './components/SearchModal';
 import QuickViewModal from './components/QuickViewModal';
 import Toast from './components/Toast';
+import SplashScreen from './components/SplashScreen';
 
 function MainContent() {
   const { currentPage } = useStore();
@@ -59,6 +60,7 @@ function MainContent() {
 export default function App() {
   return (
     <StoreProvider>
+      <SplashScreen />
       <div className="flex flex-col min-h-screen bg-[#FAF8F5] text-[#1C1A18] selection:bg-wood-200 selection:text-wood-900 font-sans">
         <Navbar />
         <MainContent />
