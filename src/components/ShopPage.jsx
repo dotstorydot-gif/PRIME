@@ -112,7 +112,8 @@ export default function ShopPage() {
       <div className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         {/* Primary Category Navigation Bar */}
         <div className="border-t border-[#D8D2C2] pt-4 pb-3">
-          <div className="flex items-center space-x-6 xl:space-x-8 overflow-x-auto no-scrollbar py-1">
+          <div className="overflow-x-auto no-scrollbar py-1">
+            <div className="w-full min-w-full flex items-center justify-between gap-4 lg:gap-0">
             {categories.map((cat) => {
               const isSelected = isTabActive(cat.id);
               return (
@@ -129,6 +130,7 @@ export default function ShopPage() {
                 </button>
               );
             })}
+            </div>
           </div>
         </div>
 
