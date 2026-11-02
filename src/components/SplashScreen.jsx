@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useStore } from '../context/StoreContext';
 
 export default function SplashScreen() {
-  const { navigateTo } = useStore();
   const [isVisible, setIsVisible] = useState(true);
   const [isFading, setIsFading] = useState(false);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Ensure on launch / restart the page is at top
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-
     // Smooth progress bar animation
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
@@ -18,36 +13,32 @@ export default function SplashScreen() {
           clearInterval(progressInterval);
           return 100;
         }
-        return Math.min(prev + 4, 100);
+        return Math.min(prev + 5, 100);
       });
-    }, 80);
+    }, 70);
 
-    // Fade out after 2.2 seconds
+    // Fade out after 2.1 seconds
     const fadeTimer = setTimeout(() => {
       setIsFading(true);
-    }, 2200);
+    }, 2100);
 
-    // Completely remove splash screen and open Home after 2.8 seconds
+    // Completely unmount splash screen from DOM after fade completes
     const finishTimer = setTimeout(() => {
       setIsVisible(false);
-      navigateTo('home');
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    }, 2850);
+    }, 2700);
 
     return () => {
       clearInterval(progressInterval);
       clearTimeout(fadeTimer);
       clearTimeout(finishTimer);
     };
-  }, [navigateTo]);
+  }, []);
 
   const handleSkip = () => {
     setIsFading(true);
     setTimeout(() => {
       setIsVisible(false);
-      navigateTo('home');
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    }, 300);
+    }, 200);
   };
 
   if (!isVisible) return null;
@@ -55,7 +46,7 @@ export default function SplashScreen() {
   return (
     <div
       onClick={handleSkip}
-      className={`fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#1D2743] transition-opacity duration-700 ease-out select-none cursor-pointer ${
+      className={`fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#1D2743] transition-opacity duration-600 ease-out select-none cursor-pointer ${
         isFading ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
       aria-label="Prime Wood Arthouse Loading Screen"
