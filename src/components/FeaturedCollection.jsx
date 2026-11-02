@@ -14,20 +14,14 @@ export default function FeaturedCollection() {
     'prime-shadow-sideboard',
     'prime-carve-dresser',
     'prime-lattice-tv-unit',
-    'prime-bold-console',
-    'prime-bliss-bed-30',
+    'prime-palace-table',
     'prime-groove-console',
-    'prime-motif-nightstand',
-    'prime-orbit-side-table'
   ];
 
-  const featured = PRODUCTS
-    .filter(p => p.isFeatured)
-    .sort((a, b) => {
-      const idxA = featuredOrder.indexOf(a.id);
-      const idxB = featuredOrder.indexOf(b.id);
-      return (idxA !== -1 ? idxA : 999) - (idxB !== -1 ? idxB : 999);
-    });
+  const featured = featuredOrder
+    .map(id => PRODUCTS.find(p => p.id === id))
+    .filter(Boolean)
+    .slice(0, 7);
 
   const scroll = (direction) => {
     if (scrollContainerRef.current) {
