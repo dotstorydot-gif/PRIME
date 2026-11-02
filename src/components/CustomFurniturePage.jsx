@@ -113,14 +113,6 @@ export default function CustomFurniturePage() {
     showToast(`Selected "${work.title}" from custom portfolio`, 'success');
   };
 
-  const handleSelectFromShowcase = (work) => {
-    handleSelectWork(work);
-    const formEl = document.getElementById('custom-request-form');
-    if (formEl) {
-      formEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.name || !formData.phone || !formData.email) {
@@ -195,84 +187,6 @@ export default function CustomFurniturePage() {
           <p className="mt-3 text-[#D8D2C2] font-sans text-base sm:text-lg font-light leading-relaxed max-w-2xl mx-auto">
             “Tell us what you have in mind and our master woodworkers will turn your idea, sketch, or space into a finished heirloom piece.”
           </p>
-        </div>
-      </section>
-
-      {/* Featured Showcase: The 5 Customize / B2B Pieces */}
-      <section className="bg-[#FAF8F5] py-12 sm:py-16 px-4 sm:px-6 lg:px-8 border-b border-[#D8D2C2]">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-[#D8D2C2]">
-            <div>
-              <span className="text-xs uppercase tracking-[0.25em] text-[#1D2743] font-bold block mb-1.5">
-                ✦ BESPOKE COMMISSIONS & INTERIORS
-              </span>
-              <h2 className="font-serif text-2xl sm:text-4xl text-[#111827] font-medium tracking-tight">
-                Customize / B2B Portfolio
-              </h2>
-              <p className="text-xs sm:text-sm text-charcoal-600 mt-1 font-light max-w-xl">
-                Real custom projects crafted by Prime Wood Arthouse. Click any project to use it as inspiration for your bespoke request.
-              </p>
-            </div>
-            <div className="mt-4 md:mt-0">
-              <span className="text-xs uppercase tracking-widest text-[#1D2743] font-semibold bg-[#F1E7CC]/60 px-3 py-1.5 border border-[#D8D2C2]">
-                5 Signature Bespoke Works
-              </span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {customizeB2BItems.map((item) => (
-              <div 
-                key={item.id}
-                onClick={() => handleSelectFromShowcase(item)}
-                className="group cursor-pointer bg-white border border-[#D8D2C2] transition-all duration-300 hover:border-[#1D2743] hover:shadow-lg flex flex-col"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden bg-[#EFECE6]">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-2.5 left-2.5">
-                    <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#1D2743] text-[#F1E7CC] font-semibold shadow">
-                      CUSTOMIZE / B2B
-                    </span>
-                  </div>
-                  <div className="absolute top-2.5 right-2.5">
-                    <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/90 backdrop-blur-sm text-[#1D2743] font-medium border border-[#D8D2C2]">
-                      {item.tag}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-4 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="font-serif text-lg text-[#111827] font-medium group-hover:text-[#1D2743] transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-[11px] text-charcoal-600 font-light mt-1 line-clamp-2">
-                      {item.dimensions}
-                    </p>
-                    <p className="text-xs font-semibold text-[#1D2743] mt-2">
-                      {item.price}
-                    </p>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleSelectFromShowcase(item);
-                    }}
-                    className="mt-4 w-full py-2 bg-[#FAF8F5] group-hover:bg-[#1D2743] text-[#1D2743] group-hover:text-[#F1E7CC] border border-[#D8D2C2] group-hover:border-[#1D2743] text-[10px] uppercase tracking-widest font-semibold transition-all flex items-center justify-center space-x-1"
-                  >
-                    <span>Request Similar Custom Piece</span>
-                    <ArrowRight className="w-3 h-3" />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
