@@ -31,7 +31,6 @@ export default function ProductDetailPage() {
 
   const product = PRODUCTS.find(p => p.id === selectedProductId) || PRODUCTS[0];
 
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [selectedFinish, setSelectedFinish] = useState(product.finishes ? product.finishes[0].name : 'Natural White Oak');
   const [selectedSize, setSelectedSize] = useState(product.sizes ? product.sizes[0] : 'Standard');
   const [quantity, setQuantity] = useState(1);
@@ -40,9 +39,7 @@ export default function ProductDetailPage() {
   const wishlisted = isInWishlist(product.id);
 
   // Gallery items (fallback to primary & secondary if no gallery)
-  const images = product.gallery && product.gallery.length > 0 
-    ? product.gallery 
-    : [product.primaryImage, product.secondaryImage].filter(Boolean);
+  const productImg = product.primaryImage;
 
   const relatedProducts = PRODUCTS.filter(p => p.id !== product.id).slice(0, 3);
 
@@ -100,51 +97,26 @@ export default function ProductDetailPage() {
         {/* Left: Product Imagery Gallery */}
         <div className="lg:col-span-7 space-y-4">
           
-          {/* Main Large Display Image */}
-          <div className="relative aspect-[4/3] sm:aspect-[1/1] overflow-hidden bg-[#F0EDE6] border border-[#D8D2C2]">
+          {/* Sole Authentic Product Picture */}
+          <div className="relative aspect-[4/3] sm:aspect-[1/1] overflow-hidden bg-[#FAF8F5] border border-[#D8D2C2] shadow-sm">
             <img
-              src={images[activeImageIndex] || product.primaryImage}
+              src={product.primaryImage}
               alt={`${product.name} detailed view`}
-              className="w-full h-full object-cover object-center transition-all duration-500 ease-out"
+              className="w-full h-full object-cover object-center"
             />
-            
             {/* Top Right Wishlist Icon */}
             <button
               onClick={() => toggleWishlist(product.id)}
               className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center transition-all ${
                 wishlisted 
-                  ? 'bg-[#1d2743] text-[#fae6c3]' 
-                  : 'bg-white/90 backdrop-blur-sm text-charcoal-700 hover:text-[#1d2743]'
+                  ? 'bg-[#1D2743] text-[#F1E7CC]' 
+                  : 'bg-white/90 backdrop-blur-sm text-charcoal-700 hover:text-[#1D2743]'
               }`}
               title="Save to Wishlist"
             >
               <Heart className={`w-4 h-4 ${wishlisted ? 'fill-current' : ''}`} />
             </button>
           </div>
-
-          {/* Thumbnail Strip */}
-          {images.length > 1 && (
-            <div className="grid grid-cols-4 gap-3 sm:gap-4">
-              {images.map((img, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setActiveImageIndex(idx)}
-                  className={`aspect-square overflow-hidden bg-[#F0EDE6] border-2 transition-all ${
-                    activeImageIndex === idx 
-                      ? 'border-[#1D2743] ring-1 ring-[#1D2743]' 
-                      : 'border-[#D8D2C2] opacity-75 hover:opacity-100'
-                  }`}
-                >
-                  <img
-                    src={img}
-                    alt={`Thumbnail ${idx + 1}`}
-                    className="w-full h-full object-cover object-center"
-                  />
-                </button>
-              ))}
-            </div>
-          )}
-
           {/* Craft Guarantee Box */}
           <div className="bg-[#FAF8F5] p-5 border border-[#D8D2C2] grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-charcoal-700 mt-6">
             <div className="flex items-center space-x-2.5">

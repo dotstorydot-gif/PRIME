@@ -20,8 +20,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Plywood & Natural Oak", "hex": "#D7C4A5"}, {"name": "Warm Boucl\u00e9 & Oak", "hex": "#E5DDD0"}, {"name": "Smoked Walnut Trim", "hex": "#533C29"}],
     sizes: ["180 x 200 cm (Queen/King Standard)", "200 x 200 cm (Super King)", "Custom Dimensions"],
     primaryImage: "/images/products/image1.jpg",
-    secondaryImage: "/images/products/image22.png",
-    gallery: ["/images/products/image1.jpg", "/images/products/image22.png", "/images/products/image29.png"]
+    secondaryImage: "/images/products/image1.jpg",
+    gallery: ["/images/products/image1.jpg"]
   },
 {
     id: "prime-curve-highboard",
@@ -44,8 +44,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural Oak Veneer", "hex": "#D7C4A5"}, {"name": "Smoked Walnut", "hex": "#533C29"}],
     sizes: ["Standard Highboard", "Custom Dimensions"],
     primaryImage: "/images/products/image13.png",
-    secondaryImage: "/images/products/image2.png",
-    gallery: ["/images/products/image13.png", "/images/products/image2.png"]
+    secondaryImage: "/images/products/image13.png",
+    gallery: ["/images/products/image13.png"]
   },
 {
     id: "prime-shadow-sideboard",
@@ -68,8 +68,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Blackened Oak & Natural Wood Accents", "hex": "#262423"}, {"name": "Solid European Oak", "hex": "#D7C4A5"}],
     sizes: ["200 cm Standard", "240 cm Large"],
     primaryImage: "/images/products/image2.png",
-    secondaryImage: "/images/products/image13.png",
-    gallery: ["/images/products/image2.png", "/images/products/image13.png"]
+    secondaryImage: "/images/products/image2.png",
+    gallery: ["/images/products/image2.png"]
   },
 {
     id: "prime-carve-dresser",
@@ -92,8 +92,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Solid European Oak", "hex": "#D7C4A5"}, {"name": "Smoked Walnut", "hex": "#533C29"}],
     sizes: ["150 cm Standard", "180 cm Large", "Custom Dimensions"],
     primaryImage: "/images/products/image21.jpg",
-    secondaryImage: "/images/products/image28.png",
-    gallery: ["/images/products/image21.jpg", "/images/products/image28.png", "/images/products/image19.png"]
+    secondaryImage: "/images/products/image21.jpg",
+    gallery: ["/images/products/image21.jpg"]
   },
 {
     id: "prime-lattice-tv-unit",
@@ -116,8 +116,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural White Oak", "hex": "#D7C4A5"}, {"name": "Smoked Walnut", "hex": "#533C29"}],
     sizes: ["200 cm Standard", "240 cm Custom"],
     primaryImage: "/images/products/image15.png",
-    secondaryImage: "/images/products/image36.png",
-    gallery: ["/images/products/image15.png", "/images/products/image36.png"]
+    secondaryImage: "/images/products/image15.png",
+    gallery: ["/images/products/image15.png"]
   },
 {
     id: "prime-bliss-bed-30",
@@ -140,8 +140,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Plywood & Oak Wood", "hex": "#C8A986"}, {"name": "Warm Cream Upholstery", "hex": "#EAE3D5"}, {"name": "Smoked Walnut", "hex": "#533C29"}],
     sizes: ["180 x 200 cm (Standard)", "200 x 200 cm (King)", "Custom Dimensions"],
     primaryImage: "/images/products/image29.png",
-    secondaryImage: "/images/products/image24.png",
-    gallery: ["/images/products/image29.png", "/images/products/image24.png", "/images/products/image1.jpg"]
+    secondaryImage: "/images/products/image29.png",
+    gallery: ["/images/products/image29.png"]
   },
 {
     id: "prime-bold-console",
@@ -164,8 +164,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Cobalt Blue Beech Wood", "hex": "#2B4C7E"}, {"name": "Natural Beech Wood", "hex": "#C8A986"}, {"name": "Matte Blackened Ash", "hex": "#262423"}],
     sizes: ["120 cm Standard", "140 cm Custom"],
     primaryImage: "/images/products/image31.png",
-    secondaryImage: "/images/products/image17.jpg",
-    gallery: ["/images/products/image31.png", "/images/products/image17.jpg"]
+    secondaryImage: "/images/products/image31.png",
+    gallery: ["/images/products/image31.png"]
   },
 {
     id: "prime-groove-console",
@@ -188,8 +188,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Rich Warm Oak", "hex": "#C8A986"}, {"name": "Dark Walnut", "hex": "#533C29"}],
     sizes: ["180 cm Low Console", "Custom Dimensions"],
     primaryImage: "/images/products/image6.png",
-    secondaryImage: "/images/products/image10.png",
-    gallery: ["/images/products/image6.png", "/images/products/image10.png"]
+    secondaryImage: "/images/products/image6.png",
+    gallery: ["/images/products/image6.png"]
   },
 {
     id: "prime-motif-nightstand",
@@ -212,8 +212,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural Oak", "hex": "#D7C4A5"}, {"name": "Smoked Walnut", "hex": "#533C29"}],
     sizes: ["55 cm Standard", "Single or Pair"],
     primaryImage: "/images/products/image19.png",
-    secondaryImage: "/images/products/image26.png",
-    gallery: ["/images/products/image19.png", "/images/products/image26.png", "/images/products/image4.png"]
+    secondaryImage: "/images/products/image19.png",
+    gallery: ["/images/products/image19.png"]
   },
 {
     id: "prime-pillar-display-unit",
@@ -236,8 +236,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural European Oak", "hex": "#D7C4A5"}, {"name": "Smoked Walnut", "hex": "#533C29"}],
     sizes: ["100 cm Single Unit", "Modular Multi-Unit Set"],
     primaryImage: "/images/products/image27.png",
-    secondaryImage: "/images/products/image9.png",
-    gallery: ["/images/products/image27.png", "/images/products/image9.png"]
+    secondaryImage: "/images/products/image27.png",
+    gallery: ["/images/products/image27.png"]
   },
 {
     id: "prime-vista-dressing",
@@ -260,8 +260,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural Oak Veneer & Smoked Glass", "hex": "#D7C4A5"}, {"name": "Dark Walnut Veneer & Bronze Glass", "hex": "#533C29"}],
     sizes: ["Custom per m\u00b2"],
     primaryImage: "/images/products/image7.png",
-    secondaryImage: "/images/products/image38.png",
-    gallery: ["/images/products/image7.png", "/images/products/image38.png"]
+    secondaryImage: "/images/products/image7.png",
+    gallery: ["/images/products/image7.png"]
   },
 {
     id: "prime-echo-nightstand",
@@ -284,8 +284,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural White Oak", "hex": "#D7C4A5"}, {"name": "Warm Walnut", "hex": "#533C29"}],
     sizes: ["50 cm Standard"],
     primaryImage: "/images/products/image26.png",
-    secondaryImage: "/images/products/image19.png",
-    gallery: ["/images/products/image26.png", "/images/products/image19.png"]
+    secondaryImage: "/images/products/image26.png",
+    gallery: ["/images/products/image26.png"]
   },
 {
     id: "prime-minimal-nightstand",
@@ -308,8 +308,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural Oak", "hex": "#D7C4A5"}, {"name": "Smoked Walnut", "hex": "#533C29"}],
     sizes: ["45 cm Standard"],
     primaryImage: "/images/products/image4.png",
-    secondaryImage: "/images/products/image19.png",
-    gallery: ["/images/products/image4.png", "/images/products/image19.png"]
+    secondaryImage: "/images/products/image4.png",
+    gallery: ["/images/products/image4.png"]
   },
 {
     id: "prime-core-side-table",
@@ -332,8 +332,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural White Oak", "hex": "#D7C4A5"}, {"name": "Beech Wood Honey Stain", "hex": "#C8A986"}],
     sizes: ["55 cm Standard"],
     primaryImage: "/images/products/image23.png",
-    secondaryImage: "/images/products/image20.png",
-    gallery: ["/images/products/image23.png", "/images/products/image20.png"]
+    secondaryImage: "/images/products/image23.png",
+    gallery: ["/images/products/image23.png"]
   },
 {
     id: "prime-orbit-side-table",
@@ -356,8 +356,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Matte Black Beech", "hex": "#262423"}, {"name": "Natural Beech Wood", "hex": "#C8A986"}],
     sizes: ["Standard 50x40 cm"],
     primaryImage: "/images/products/image20.png",
-    secondaryImage: "/images/products/image23.png",
-    gallery: ["/images/products/image20.png", "/images/products/image23.png"]
+    secondaryImage: "/images/products/image20.png",
+    gallery: ["/images/products/image20.png"]
   },
 {
     id: "prime-core-coffee-table",
@@ -380,8 +380,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Smoked Dark Oak", "hex": "#4A3525"}, {"name": "Natural European Oak", "hex": "#D7C4A5"}],
     sizes: ["90 cm Round", "110 cm Round", "Nesting Set"],
     primaryImage: "/images/products/image34.png",
-    secondaryImage: "/images/products/image35.jpg",
-    gallery: ["/images/products/image34.png", "/images/products/image35.jpg"]
+    secondaryImage: "/images/products/image34.png",
+    gallery: ["/images/products/image34.png"]
   },
 {
     id: "prime-palace-table",
@@ -404,8 +404,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Satin Gold Frame & Natural Wood Top", "hex": "#C8A986"}],
     sizes: ["Pair Nesting Set"],
     primaryImage: "/images/products/image35.jpg",
-    secondaryImage: "/images/products/image34.png",
-    gallery: ["/images/products/image35.jpg", "/images/products/image34.png"]
+    secondaryImage: "/images/products/image35.jpg",
+    gallery: ["/images/products/image35.jpg"]
   },
 {
     id: "prime-echo-console",
@@ -428,8 +428,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural Oak", "hex": "#D7C4A5"}, {"name": "Smoked Walnut", "hex": "#533C29"}],
     sizes: ["160 cm", "180 cm", "Custom"],
     primaryImage: "/images/products/image10.png",
-    secondaryImage: "/images/products/image17.jpg",
-    gallery: ["/images/products/image10.png", "/images/products/image17.jpg"]
+    secondaryImage: "/images/products/image10.png",
+    gallery: ["/images/products/image10.png"]
   },
 {
     id: "prime-axis-console",
@@ -452,8 +452,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural Oak & Black Metal Accents", "hex": "#D7C4A5"}],
     sizes: ["140 cm", "160 cm"],
     primaryImage: "/images/products/image17.jpg",
-    secondaryImage: "/images/products/image10.png",
-    gallery: ["/images/products/image17.jpg", "/images/products/image10.png"]
+    secondaryImage: "/images/products/image17.jpg",
+    gallery: ["/images/products/image17.jpg"]
   },
 {
     id: "prime-lumina-tv-unit",
@@ -476,8 +476,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Smoked Oak & Charcoal Backpanel", "hex": "#4A3525"}, {"name": "Natural White Oak & Warm White", "hex": "#D7C4A5"}],
     sizes: ["220 cm", "260 cm", "Custom"],
     primaryImage: "/images/products/image36.png",
-    secondaryImage: "/images/products/image15.png",
-    gallery: ["/images/products/image36.png", "/images/products/image15.png"]
+    secondaryImage: "/images/products/image36.png",
+    gallery: ["/images/products/image36.png"]
   },
 {
     id: "prime-monarch-buffet",
@@ -500,8 +500,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Smoked Walnut & Satin Brass", "hex": "#533C29"}, {"name": "Natural White Oak & Brass", "hex": "#D7C4A5"}],
     sizes: ["190 cm Standard", "Custom"],
     primaryImage: "/images/products/image3.jpg",
-    secondaryImage: "/images/products/image2.png",
-    gallery: ["/images/products/image3.jpg", "/images/products/image2.png"]
+    secondaryImage: "/images/products/image3.jpg",
+    gallery: ["/images/products/image3.jpg"]
   },
 {
     id: "prime-halo-unit",
@@ -524,8 +524,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural White Oak", "hex": "#D7C4A5"}, {"name": "Warm Walnut", "hex": "#533C29"}],
     sizes: ["120 cm Standard"],
     primaryImage: "/images/products/image28.png",
-    secondaryImage: "/images/products/image21.jpg",
-    gallery: ["/images/products/image28.png", "/images/products/image21.jpg"]
+    secondaryImage: "/images/products/image28.png",
+    gallery: ["/images/products/image28.png"]
   },
 {
     id: "prime-haven-bed",
@@ -548,8 +548,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural Oak & Cream Boucl\u00e9", "hex": "#EAE3D5"}, {"name": "Walnut & Beige Linen", "hex": "#533C29"}],
     sizes: ["180 x 200 cm (Queen/King)", "200 x 200 cm (Super King)", "Custom Dimensions"],
     primaryImage: "/images/products/image22.png",
-    secondaryImage: "/images/products/image1.jpg",
-    gallery: ["/images/products/image22.png", "/images/products/image1.jpg"]
+    secondaryImage: "/images/products/image22.png",
+    gallery: ["/images/products/image22.png"]
   },
 {
     id: "prime-bliss-bed",
@@ -572,8 +572,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Warm Oat Fabric & Oak", "hex": "#DDD4C4"}, {"name": "Smoked Walnut", "hex": "#533C29"}],
     sizes: ["180 x 200 cm", "200 x 200 cm", "Custom Dimensions"],
     primaryImage: "/images/products/image24.png",
-    secondaryImage: "/images/products/image1.jpg",
-    gallery: ["/images/products/image24.png", "/images/products/image1.jpg"]
+    secondaryImage: "/images/products/image24.png",
+    gallery: ["/images/products/image24.png"]
   },
 {
     id: "prime-pearl-bed",
@@ -596,8 +596,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Pearl White Boucl\u00e9 & Oak", "hex": "#F5F3EF"}],
     sizes: ["180 x 200 cm", "200 x 200 cm"],
     primaryImage: "/images/products/image18.png",
-    secondaryImage: "/images/products/image1.jpg",
-    gallery: ["/images/products/image18.png", "/images/products/image1.jpg"]
+    secondaryImage: "/images/products/image18.png",
+    gallery: ["/images/products/image18.png"]
   },
 {
     id: "prime-oasis-bed",
@@ -620,8 +620,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Cream Fabric & Warm Oak", "hex": "#E0D7C6"}],
     sizes: ["180 x 200 cm", "200 x 200 cm"],
     primaryImage: "/images/products/image40.jpg",
-    secondaryImage: "/images/products/image22.png",
-    gallery: ["/images/products/image40.jpg", "/images/products/image22.png"]
+    secondaryImage: "/images/products/image40.jpg",
+    gallery: ["/images/products/image40.jpg"]
   },
 {
     id: "prime-legacy-dining",
@@ -644,8 +644,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural Solid Oak", "hex": "#D7C4A5"}, {"name": "Dark Smoked Walnut", "hex": "#533C29"}],
     sizes: ["8-Seater (240 cm)", "10-Seater (280 cm)", "12-Seater (320 cm)"],
     primaryImage: "/images/products/image33.png",
-    secondaryImage: "/images/products/image5.jpg",
-    gallery: ["/images/products/image33.png", "/images/products/image5.jpg"]
+    secondaryImage: "/images/products/image33.png",
+    gallery: ["/images/products/image33.png"]
   },
 {
     id: "prime-prestige-dining",
@@ -668,8 +668,8 @@ export const PRODUCTS = [
     finishes: [{"name": "European Natural Oak", "hex": "#D7C4A5"}, {"name": "Smoked Walnut", "hex": "#533C29"}],
     sizes: ["8 to 12 Seats"],
     primaryImage: "/images/products/image5.jpg",
-    secondaryImage: "/images/products/image33.png",
-    gallery: ["/images/products/image5.jpg", "/images/products/image33.png"]
+    secondaryImage: "/images/products/image5.jpg",
+    gallery: ["/images/products/image5.jpg"]
   },
 {
     id: "prime-gathering-dining",
@@ -692,8 +692,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Honey Oak", "hex": "#C8A986"}, {"name": "Smoked Walnut", "hex": "#533C29"}],
     sizes: ["6-8 Seats (220 cm)", "8-10 Seats (260 cm)"],
     primaryImage: "/images/products/image8.jpg",
-    secondaryImage: "/images/products/image33.png",
-    gallery: ["/images/products/image8.jpg", "/images/products/image33.png"]
+    secondaryImage: "/images/products/image8.jpg",
+    gallery: ["/images/products/image8.jpg"]
   },
 {
     id: "prime-portal-door",
@@ -716,8 +716,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural Oak Grain", "hex": "#D7C4A5"}, {"name": "Dark Walnut Stain", "hex": "#4A3525"}],
     sizes: ["Standard (90x220)", "High Ceiling (100x240)", "Custom Framing"],
     primaryImage: "/images/products/image25.png",
-    secondaryImage: "/images/products/image12.png",
-    gallery: ["/images/products/image25.png", "/images/products/image12.png"]
+    secondaryImage: "/images/products/image25.png",
+    gallery: ["/images/products/image25.png"]
   },
 {
     id: "prime-grand-library",
@@ -740,8 +740,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural White Oak & Warm White Shelving", "hex": "#D7C4A5"}, {"name": "Smoked Walnut with Brass Fixtures", "hex": "#533C29"}],
     sizes: ["Custom Blueprints"],
     primaryImage: "/images/products/image9.png",
-    secondaryImage: "/images/products/image36.png",
-    gallery: ["/images/products/image9.png", "/images/products/image36.png"]
+    secondaryImage: "/images/products/image9.png",
+    gallery: ["/images/products/image9.png"]
   },
 {
     id: "prime-onyx-kitchen",
@@ -764,8 +764,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Matte Charcoal & Slatted Oak", "hex": "#262423"}, {"name": "Warm Walnut & Quartz", "hex": "#533C29"}],
     sizes: ["Custom Architectural Kitchen"],
     primaryImage: "/images/products/image37.png",
-    secondaryImage: "/images/products/image16.png",
-    gallery: ["/images/products/image37.png", "/images/products/image16.png"]
+    secondaryImage: "/images/products/image37.png",
+    gallery: ["/images/products/image37.png"]
   },
 {
     id: "prime-hearth-kitchen",
@@ -788,8 +788,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural Oak & Clean White", "hex": "#D7C4A5"}],
     sizes: ["Custom Layout"],
     primaryImage: "/images/products/image16.png",
-    secondaryImage: "/images/products/image37.png",
-    gallery: ["/images/products/image16.png", "/images/products/image37.png"]
+    secondaryImage: "/images/products/image16.png",
+    gallery: ["/images/products/image16.png"]
   },
 {
     id: "prime-suite-wardrobe",
@@ -812,8 +812,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural White Oak Veneer", "hex": "#D7C4A5"}],
     sizes: ["Custom Blueprints"],
     primaryImage: "/images/products/image38.png",
-    secondaryImage: "/images/products/image7.png",
-    gallery: ["/images/products/image38.png", "/images/products/image7.png"]
+    secondaryImage: "/images/products/image38.png",
+    gallery: ["/images/products/image38.png"]
   },
 {
     id: "prime-harmony-living-room",
@@ -836,8 +836,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Modern Oak & Warm Fabric", "hex": "#C8A986"}],
     sizes: ["Custom Layout"],
     primaryImage: "/images/products/image30.png",
-    secondaryImage: "/images/products/image34.png",
-    gallery: ["/images/products/image30.png", "/images/products/image34.png"]
+    secondaryImage: "/images/products/image30.png",
+    gallery: ["/images/products/image30.png"]
   },
 {
     id: "prime-infinity-ceiling",
@@ -860,8 +860,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Off-White & Recessed Wood Lighting", "hex": "#EFECE6"}],
     sizes: ["Custom Blueprint"],
     primaryImage: "/images/products/image32.png",
-    secondaryImage: "/images/products/image14.png",
-    gallery: ["/images/products/image32.png", "/images/products/image14.png"]
+    secondaryImage: "/images/products/image32.png",
+    gallery: ["/images/products/image32.png"]
   },
 {
     id: "prime-crown-ceiling",
@@ -884,8 +884,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Lacquered Warm White & Oak Inset", "hex": "#EFECE6"}],
     sizes: ["Custom Blueprint"],
     primaryImage: "/images/products/image14.png",
-    secondaryImage: "/images/products/image32.png",
-    gallery: ["/images/products/image14.png", "/images/products/image32.png"]
+    secondaryImage: "/images/products/image14.png",
+    gallery: ["/images/products/image14.png"]
   },
 {
     id: "prime-apex-ceiling",
@@ -908,8 +908,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural Oak Slats & Acoustic Felt", "hex": "#D7C4A5"}],
     sizes: ["Custom Blueprint"],
     primaryImage: "/images/products/image12.png",
-    secondaryImage: "/images/products/image32.png",
-    gallery: ["/images/products/image12.png", "/images/products/image32.png"]
+    secondaryImage: "/images/products/image12.png",
+    gallery: ["/images/products/image12.png"]
   },
 {
     id: "prime-aura-bed",
@@ -932,8 +932,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural Oak", "hex": "#D7C4A5"}, {"name": "Dark Walnut", "hex": "#4A3525"}],
     sizes: ["180 x 200 cm", "200 x 200 cm", "Custom Dimensions"],
     primaryImage: "/images/products/image11.png",
-    secondaryImage: "/images/products/image24.png",
-    gallery: ["/images/products/image11.png", "/images/products/image24.png"]
+    secondaryImage: "/images/products/image11.png",
+    gallery: ["/images/products/image11.png"]
   },
 {
     id: "prime-essence",
@@ -956,8 +956,8 @@ export const PRODUCTS = [
     finishes: [{"name": "Natural White Oak", "hex": "#D7C4A5"}, {"name": "Smoked Oak", "hex": "#533C29"}],
     sizes: ["Custom Site Dimensions"],
     primaryImage: "/images/products/image39.jpg",
-    secondaryImage: "/images/products/image21.jpg",
-    gallery: ["/images/products/image39.jpg", "/images/products/image21.jpg"]
+    secondaryImage: "/images/products/image39.jpg",
+    gallery: ["/images/products/image39.jpg"]
   }
 ];
 
