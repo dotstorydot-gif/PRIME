@@ -39,27 +39,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Heritage Stats Strip */}
-      <section className="border-b border-[#D8D2C2] bg-[#FAF8F5] py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          <div>
-            <span className="font-serif text-3xl sm:text-4xl text-[#1D2743] font-normal block">1948</span>
-            <span className="text-[10px] uppercase tracking-widest text-charcoal-500 font-medium">Founded in Ghamra, Cairo</span>
-          </div>
-          <div>
-            <span className="font-serif text-3xl sm:text-4xl text-[#1D2743] font-normal block">4th</span>
-            <span className="text-[10px] uppercase tracking-widest text-charcoal-500 font-medium">Generation Carpenters</span>
-          </div>
-          <div>
-            <span className="font-serif text-3xl sm:text-4xl text-[#1D2743] font-normal block">100%</span>
-            <span className="text-[10px] uppercase tracking-widest text-charcoal-500 font-medium">Solid European Hardwoods</span>
-          </div>
-          <div>
-            <span className="font-serif text-3xl sm:text-4xl text-[#1D2743] font-normal block">3,500+</span>
-            <span className="text-[10px] uppercase tracking-widest text-charcoal-500 font-medium">Bespoke Living Spaces</span>
-          </div>
-        </div>
-      </section>
 
       <div className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-24">
         
