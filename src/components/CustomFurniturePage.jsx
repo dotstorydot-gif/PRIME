@@ -11,7 +11,8 @@ import {
   PhoneCall, 
   MessageSquare,
   ArrowRight,
-  Check
+  Check,
+  ChevronRight
 } from 'lucide-react';
 import { PREVIOUS_CUSTOM_WORKS } from '../data/products';
 
@@ -20,14 +21,15 @@ export default function CustomFurniturePage() {
 
   const [inspirationMode, setInspirationMode] = useState('portfolio'); // 'portfolio' | 'upload'
   const [selectedPreviousWorkId, setSelectedPreviousWorkId] = useState(null);
+  const [portfolioCategory, setPortfolioCategory] = useState('customize'); // Default to customize so user sees them first!
 
   const [formData, setFormData] = useState({
-    pieceType: 'Dining table',
+    pieceType: 'Kitchen & Pantry Suite',
     width: '',
     height: '',
     depth: '',
-    material: 'American White Oak',
-    finish: 'Natural Matte Clear',
+    material: 'American White Oak (Kiln-Dried)',
+    finish: 'Natural Matte Clear Bio-Oil',
     description: '',
     name: '',
     phone: '',
@@ -45,29 +47,32 @@ export default function CustomFurniturePage() {
     if (customQuotePreFill) {
       setFormData(prev => ({
         ...prev,
-        pieceType: customQuotePreFill.pieceType || 'Dining table',
+        pieceType: customQuotePreFill.pieceType || 'Kitchen & Pantry Suite',
         description: customQuotePreFill.notes || '',
-        material: customQuotePreFill.preferredMaterial || 'American White Oak'
+        material: customQuotePreFill.preferredMaterial || 'American White Oak (Kiln-Dried)'
       }));
     }
   }, [customQuotePreFill]);
 
   const pieceTypes = [
+    'Kitchen & Pantry Suite',
+    'Living Room & Wall Paneling',
+    'Under-Stair Joinery & Storage',
+    'Bespoke Glass & Wood Partition',
     'Dining table',
     'Coffee table',
-    'Console',
+    'Console & Sideboard',
     'Cabinet / Credenza',
     'Bed & Nightstands',
-    'Armchair / Chair',
     'Dressing Room / Walk-in Closet',
-    'Wall Cladding / Architectural Doors',
+    'Architectural Ceiling & Doors',
     'Other Bespoke Commission'
   ];
 
   const materials = [
     'American White Oak (Kiln-Dried)',
     'European Walnut (Rich Grain)',
-    'Blackened Solid Ash',
+    'Blackened Solid Ash / Oak',
     'Egyptian Beech (Fine Local Hardwood)',
     'Natural Teak (Outdoor / Bathroom)',
     'Exotic Burls & Mixed Inlays'
@@ -86,13 +91,34 @@ export default function CustomFurniturePage() {
     const file = e.target.files && e.target.files[0];
     if (file) {
       const url = URL.createObjectURL(file);
-      setFormData(prev => ({ ...prev, imagePreview: url }));
+      setFormData(prev => ({ ...prev, imagePreview: url, selectedCustomWorkTitle: file.name }));
       showToast('Inspiration sketch / photo attached', 'info');
     }
   };
 
   const handleRemoveImage = () => {
-    setFormData(prev => ({ ...prev, imagePreview: null }));
+    setFormData(prev => ({ ...prev, imagePreview: null, selectedCustomWorkTitle: '' }));
+    setSelectedPreviousWorkId(null);
+  };
+
+  const handleSelectWork = (work) => {
+    setSelectedPreviousWorkId(work.id);
+    setFormData(prev => ({
+      ...prev,
+      pieceType: work.pieceType || prev.pieceType || 'Other Bespoke Commission',
+      imagePreview: work.image,
+      selectedCustomWorkTitle: work.title,
+      description: prev.description ? prev.description : `Inspired by Prime piece: ${work.title} (${work.category || work.location}). Requesting tailored measurements and quote.`
+    }));
+    showToast(`Selected "${work.title}" from custom portfolio`, 'success');
+  };
+
+  const handleSelectFromShowcase = (work) => {
+    handleSelectWork(work);
+    const formEl = document.getElementById('custom-request-form');
+    if (formEl) {
+      formEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -112,21 +138,42 @@ export default function CustomFurniturePage() {
   const handleReset = () => {
     setIsSubmitted(false);
     setFormData({
-      pieceType: 'Dining table',
+      pieceType: 'Kitchen & Pantry Suite',
       width: '',
       height: '',
       depth: '',
-      material: 'American White Oak',
-      finish: 'Natural Matte Clear',
+      material: 'American White Oak (Kiln-Dried)',
+      finish: 'Natural Matte Clear Bio-Oil',
       description: '',
       name: '',
       phone: '',
       email: '',
-      city: 'Cairo',
-      imagePreview: null
+      city: 'Cairo (New Cairo / Maadi / Zamalek)',
+      imagePreview: null,
+      selectedCustomWorkTitle: ''
     });
+    setSelectedPreviousWorkId(null);
     setCustomQuotePreFill(null);
   };
+
+  const customizeB2BItems = PREVIOUS_CUSTOM_WORKS.filter(w => w.isCustomizeCategory);
+
+  const portfolioCategories = [
+    { id: 'customize', label: `Customize / B2B (${customizeB2BItems.length})` },
+    { id: 'all', label: `All Works (${PREVIOUS_CUSTOM_WORKS.length})` },
+    { id: 'kitchens', label: 'Kitchens' },
+    { id: 'living', label: 'Living & Storage' },
+    { id: 'architectural', label: 'Ceilings & Doors' },
+  ];
+
+  const displayedPortfolio = PREVIOUS_CUSTOM_WORKS.filter((work) => {
+    if (portfolioCategory === 'all') return true;
+    if (portfolioCategory === 'customize') return work.isCustomizeCategory;
+    if (portfolioCategory === 'kitchens') return work.category === 'Kitchen';
+    if (portfolioCategory === 'living') return ['Living Room', 'Storage & Library', 'Console & Buffet', 'Storage', 'Dining Buffet'].includes(work.category);
+    if (portfolioCategory === 'architectural') return ['Ceilings & Millwork', 'Doors & Millwork', 'Bespoke Joinery', 'Under-Stair Joinery', 'Dressing Room'].includes(work.category);
+    return true;
+  });
 
   return (
     <div>
@@ -151,7 +198,86 @@ export default function CustomFurniturePage() {
         </div>
       </section>
 
-      <div className="py-10 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+      {/* Featured Showcase: The 5 Customize / B2B Pieces */}
+      <section className="bg-[#FAF8F5] py-12 sm:py-16 px-4 sm:px-6 lg:px-8 border-b border-[#D8D2C2]">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-[#D8D2C2]">
+            <div>
+              <span className="text-xs uppercase tracking-[0.25em] text-[#1D2743] font-bold block mb-1.5">
+                ✦ BESPOKE COMMISSIONS & INTERIORS
+              </span>
+              <h2 className="font-serif text-2xl sm:text-4xl text-[#111827] font-medium tracking-tight">
+                Customize / B2B Portfolio
+              </h2>
+              <p className="text-xs sm:text-sm text-charcoal-600 mt-1 font-light max-w-xl">
+                Real custom projects crafted by Prime Wood Arthouse. Click any project to use it as inspiration for your bespoke request.
+              </p>
+            </div>
+            <div className="mt-4 md:mt-0">
+              <span className="text-xs uppercase tracking-widest text-[#1D2743] font-semibold bg-[#F1E7CC]/60 px-3 py-1.5 border border-[#D8D2C2]">
+                5 Signature Bespoke Works
+              </span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {customizeB2BItems.map((item) => (
+              <div 
+                key={item.id}
+                onClick={() => handleSelectFromShowcase(item)}
+                className="group cursor-pointer bg-white border border-[#D8D2C2] transition-all duration-300 hover:border-[#1D2743] hover:shadow-lg flex flex-col"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden bg-[#EFECE6]">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-2.5 left-2.5">
+                    <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#1D2743] text-[#F1E7CC] font-semibold shadow">
+                      CUSTOMIZE / B2B
+                    </span>
+                  </div>
+                  <div className="absolute top-2.5 right-2.5">
+                    <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/90 backdrop-blur-sm text-[#1D2743] font-medium border border-[#D8D2C2]">
+                      {item.tag}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-4 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="font-serif text-lg text-[#111827] font-medium group-hover:text-[#1D2743] transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-[11px] text-charcoal-600 font-light mt-1 line-clamp-2">
+                      {item.dimensions}
+                    </p>
+                    <p className="text-xs font-semibold text-[#1D2743] mt-2">
+                      {item.price}
+                    </p>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleSelectFromShowcase(item);
+                    }}
+                    className="mt-4 w-full py-2 bg-[#FAF8F5] group-hover:bg-[#1D2743] text-[#1D2743] group-hover:text-[#F1E7CC] border border-[#D8D2C2] group-hover:border-[#1D2743] text-[10px] uppercase tracking-widest font-semibold transition-all flex items-center justify-center space-x-1"
+                  >
+                    <span>Request Similar Custom Piece</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Main Request Form Container */}
+      <div id="custom-request-form" className="py-10 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto scroll-mt-20">
 
       {isSubmitted ? (
         /* Confirmation State matching user requirements */
@@ -202,6 +328,16 @@ export default function CustomFurniturePage() {
         /* The Interactive Custom Furniture Request Form */
         <form onSubmit={handleSubmit} className="bg-[#FAF8F5] border border-[#D8D2C2] p-6 sm:p-12 shadow-sm space-y-12">
           
+          {/* Form Header */}
+          <div className="border-b border-[#D8D2C2] pb-6">
+            <span className="text-xs uppercase tracking-[0.25em] text-[#1D2743] font-bold block mb-1">
+              TAILORED COMMISSION FORM
+            </span>
+            <h2 className="font-serif text-2xl sm:text-3xl text-[#111827]">
+              Submit Your Custom Woodwork Requirements
+            </h2>
+          </div>
+
           {/* 1. What are you looking for? */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
@@ -396,6 +532,9 @@ export default function CustomFurniturePage() {
                     <p className="font-serif text-sm font-medium text-charcoal-900">
                       {formData.selectedCustomWorkTitle || 'Uploaded Reference Image'}
                     </p>
+                    <span className="text-[11px] text-[#1D2743] font-medium">
+                      Piece type auto-selected: {formData.pieceType}
+                    </span>
                   </div>
                 </div>
                 <button
@@ -410,52 +549,90 @@ export default function CustomFurniturePage() {
 
             {/* Possibility 1: Previous Custom Works Gallery */}
             {inspirationMode === 'portfolio' && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
-                {PREVIOUS_CUSTOM_WORKS.map((work) => {
-                  const isSelected = selectedPreviousWorkId === work.id;
-                  return (
-                    <div
-                      key={work.id}
-                      onClick={() => {
-                        setSelectedPreviousWorkId(work.id);
-                        setFormData(prev => ({
-                          ...prev,
-                          imagePreview: work.image,
-                          selectedCustomWorkTitle: work.title,
-                          description: prev.description ? prev.description : `Inspired by Prime custom piece: ${work.title} (${work.location}).`
-                        }));
-                        showToast(`Selected "${work.title}" from custom portfolio`, 'success');
-                      }}
-                      className={`group relative cursor-pointer border p-2 transition-all bg-white ${
-                        isSelected 
-                          ? 'border-wood-800 ring-2 ring-wood-700 shadow-md' 
-                          : 'border-[#E9E2D5] hover:border-wood-400'
+              <div className="space-y-4 pt-2">
+                {/* Filter Sub-Tabs for Custom Portfolio */}
+                <div className="flex flex-wrap items-center gap-2 pb-2">
+                  <span className="text-[11px] uppercase tracking-wider text-charcoal-500 font-medium mr-1">
+                    Filter:
+                  </span>
+                  {portfolioCategories.map((tab) => (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      onClick={() => setPortfolioCategory(tab.id)}
+                      className={`px-3 py-1 text-xs uppercase tracking-wider rounded-sm transition-all ${
+                        portfolioCategory === tab.id
+                          ? 'bg-[#1D2743] text-[#F1E7CC] font-semibold'
+                          : 'bg-white border border-[#D8D2C2] text-charcoal-700 hover:bg-[#F2ECE1]'
                       }`}
                     >
-                      <div className="aspect-[16/11] overflow-hidden bg-[#EFECE6] relative">
-                        <img
-                          src={work.image}
-                          alt={work.title}
-                          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                        />
-                        {isSelected && (
-                          <div className="absolute top-2 right-2 bg-[#1D2743] text-[#F1E7CC] rounded-full p-1 shadow">
-                            <Check className="w-3.5 h-3.5" />
+                      {tab.label}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {displayedPortfolio.map((work) => {
+                    const isSelected = selectedPreviousWorkId === work.id;
+                    return (
+                      <div
+                        key={work.id}
+                        onClick={() => handleSelectWork(work)}
+                        className={`group relative cursor-pointer border p-2.5 transition-all bg-white flex flex-col justify-between ${
+                          isSelected 
+                            ? 'border-[#1D2743] ring-2 ring-[#1D2743] shadow-md' 
+                            : 'border-[#E9E2D5] hover:border-[#1D2743]'
+                        }`}
+                      >
+                        <div>
+                          <div className="aspect-[16/11] overflow-hidden bg-[#EFECE6] relative">
+                            <img
+                              src={work.image}
+                              alt={work.title}
+                              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                            />
+                            {isSelected && (
+                              <div className="absolute top-2 right-2 bg-[#1D2743] text-[#F1E7CC] rounded-full p-1 shadow">
+                                <Check className="w-3.5 h-3.5" />
+                              </div>
+                            )}
+
+                            {work.isCustomizeCategory && (
+                              <div className="absolute top-2 left-2 bg-[#1D2743] text-[#F1E7CC] text-[8px] uppercase tracking-widest font-bold px-2 py-0.5 shadow">
+                                CUSTOMIZE / B2B
+                              </div>
+                            )}
+
+                            <div className="absolute bottom-1 left-1 bg-black/60 backdrop-blur-sm text-[9px] uppercase tracking-wider text-white px-2 py-0.5">
+                              {work.category}
+                            </div>
                           </div>
-                        )}
-                        <div className="absolute bottom-1 left-1 bg-black/60 backdrop-blur-sm text-[9px] uppercase tracking-wider text-white px-2 py-0.5">
-                          {work.category}
+
+                          <div className="pt-2.5">
+                            <div className="flex items-start justify-between gap-1">
+                              <h4 className="font-serif text-sm font-medium text-charcoal-900 group-hover:text-[#1D2743] transition-colors">
+                                {work.title}
+                              </h4>
+                              {work.tag && (
+                                <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 bg-[#FAF8F5] text-[#1D2743] border border-[#D8D2C2] rounded shrink-0">
+                                  {work.tag}
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-[10px] text-charcoal-500 mt-1 line-clamp-2">{work.dimensions || work.location}</p>
+                          </div>
+                        </div>
+
+                        <div className="mt-3 pt-2 border-t border-[#F2ECE1] flex items-center justify-between text-[11px]">
+                          <span className="font-semibold text-[#1D2743]">{work.price}</span>
+                          <span className="text-wood-700 group-hover:underline text-[10px] uppercase tracking-wider font-medium">
+                            Select as reference →
+                          </span>
                         </div>
                       </div>
-                      <div className="pt-2">
-                        <h4 className="font-serif text-sm font-medium text-charcoal-900 group-hover:text-wood-800 transition-colors">
-                          {work.title}
-                        </h4>
-                        <p className="text-[10px] text-charcoal-500 mt-0.5">{work.location}</p>
-                      </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
             )}
 
@@ -552,7 +729,7 @@ export default function CustomFurniturePage() {
             </div>
           </div>
 
-          {/* Submit Button matching prompt */}
+          {/* Submit Button */}
           <div className="pt-6 border-t border-[#E9E2D5]">
             <button
               type="submit"
