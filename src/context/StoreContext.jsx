@@ -4,60 +4,33 @@ import { PRODUCTS } from '../data/products';
 const StoreContext = createContext(null);
 
 export function StoreProvider({ children }) {
-  // Initial Navigation State from URL params if present
-  const getInitialNav = () => {
-    try {
-      if (typeof window === 'undefined') return { page: 'home', productId: 'prime-cloud-bed', category: 'all' };
-      const params = new URLSearchParams(window.location.search);
-      const prodParam = params.get('product') || params.get('id');
-      const pageParam = params.get('page');
-      const catParam = params.get('category');
-
-      if (prodParam && PRODUCTS.some(p => p.id === prodParam)) {
-        return { page: 'product-detail', productId: prodParam, category: catParam || 'all' };
-      }
-      if (pageParam) {
-        return { page: pageParam, productId: 'prime-cloud-bed', category: catParam || 'all' };
-      }
-    } catch (e) {}
-    return { page: 'home', productId: 'prime-cloud-bed', category: 'all' };
-  };
-
-  const initialNav = getInitialNav();
-  const [currentPage, setCurrentPage] = useState(initialNav.page);
-  const [selectedProductId, setSelectedProductId] = useState(initialNav.productId);
-  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState(initialNav.category);
+  // Navigation State: Always start fresh on the Home page on refresh / first visit
+  const [currentPage, setCurrentPage] = useState('home');
+  const [selectedProductId, setSelectedProductId] = useState('prime-cloud-bed');
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState('all');
   const [previousPage, setPreviousPage] = useState('home');
 
-  // Listen for Browser Back & Forward Buttons (popstate event)
+  // Listen for Browser Back & Forward Buttons (popstate event) while keeping refresh always starting at Home
   useEffect(() => {
     try {
-      const initialUrl = window.location.search || '';
+      // Clear URL query parameters on load so browser refresh always loads Home cleanly
       window.history.replaceState({
-        page: currentPage,
-        productId: selectedProductId,
-        category: selectedCategoryFilter
-      }, '', window.location.pathname + initialUrl);
+        page: 'home',
+        productId: 'prime-cloud-bed',
+        category: 'all'
+      }, '', window.location.pathname);
+
+      window.scrollTo(0, 0);
 
       const handlePopState = (event) => {
         if (event.state && event.state.page) {
           const { page, productId, category } = event.state;
-          if (page) setCurrentPage(page);
+          setCurrentPage(page);
           if (productId) setSelectedProductId(productId);
           if (category !== undefined) setSelectedCategoryFilter(category);
         } else {
-          const params = new URLSearchParams(window.location.search);
-          const prodParam = params.get('product') || params.get('id');
-          const pageParam = params.get('page') || 'home';
-          const catParam = params.get('category') || 'all';
-
-          if (prodParam && PRODUCTS.some(p => p.id === prodParam)) {
-            setSelectedProductId(prodParam);
-            setCurrentPage('product-detail');
-          } else {
-            setCurrentPage(pageParam);
-          }
-          setSelectedCategoryFilter(catParam);
+          setCurrentPage('home');
+          setSelectedCategoryFilter('all');
         }
       };
 
@@ -231,7 +204,7 @@ export function StoreProvider({ children }) {
   const cartItemCount = cart.reduce((acc, item) => acc + item.quantity, 0);
   const deliveryFee = cartSubtotal > 50000 || cartSubtotal === 0 ? 0 : 750; // Free delivery over 50,000 EGP
 
-  // Navigation Helpers with Browser History (Back / Forward) Support
+  // Navigation Helpers: History-aware (Back / Forward) while keeping clean URL so Refresh opens Home
   const navigateTo = (page, params = {}, replace = false) => {
     if (params.productId) {
       setSelectedProductId(params.productId);
@@ -247,23 +220,19 @@ export function StoreProvider({ children }) {
     setCurrentPage(page);
 
     try {
-      const urlParams = new URLSearchParams();
-      if (page !== 'home') urlParams.set('page', page);
-      if (params.productId) urlParams.set('product', params.productId);
       const catToUse = params.category || selectedCategoryFilter;
-      if (catToUse && catToUse !== 'all') urlParams.set('category', catToUse);
-      const queryStr = urlParams.toString() ? `?${urlParams.toString()}` : window.location.pathname;
-
       const historyState = {
         page,
         productId: params.productId || selectedProductId,
-        category: catToUse
+        category: catToUse,
+        previousPage: currentPage
       };
 
+      // Keep URL clean as window.location.pathname so hitting refresh always reloads Home from the start
       if (replace) {
-        window.history.replaceState(historyState, '', queryStr);
+        window.history.replaceState(historyState, '', window.location.pathname);
       } else {
-        window.history.pushState(historyState, '', queryStr);
+        window.history.pushState(historyState, '', window.location.pathname);
       }
     } catch (e) {}
 
@@ -276,20 +245,13 @@ export function StoreProvider({ children }) {
     setCurrentPage('product-detail');
 
     try {
-      const urlParams = new URLSearchParams();
-      urlParams.set('page', 'product-detail');
-      urlParams.set('product', productId);
-      if (selectedCategoryFilter && selectedCategoryFilter !== 'all') {
-        urlParams.set('category', selectedCategoryFilter);
-      }
-      const queryStr = `?${urlParams.toString()}`;
-
+      // Push history state so the back icon returns to previous view, but keep URL clean so refresh reloads Home
       window.history.pushState({
         page: 'product-detail',
         productId,
         category: selectedCategoryFilter,
         previousPage: currentPage
-      }, '', queryStr);
+      }, '', window.location.pathname);
     } catch (e) {}
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
