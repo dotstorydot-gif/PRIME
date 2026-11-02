@@ -4,10 +4,67 @@ import { PRODUCTS } from '../data/products';
 const StoreContext = createContext(null);
 
 export function StoreProvider({ children }) {
-  // Navigation State
-  const [currentPage, setCurrentPage] = useState('home');
-  const [selectedProductId, setSelectedProductId] = useState('prime-cloud-bed');
-  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState('all');
+  // Initial Navigation State from URL params if present
+  const getInitialNav = () => {
+    try {
+      if (typeof window === 'undefined') return { page: 'home', productId: 'prime-cloud-bed', category: 'all' };
+      const params = new URLSearchParams(window.location.search);
+      const prodParam = params.get('product') || params.get('id');
+      const pageParam = params.get('page');
+      const catParam = params.get('category');
+
+      if (prodParam && PRODUCTS.some(p => p.id === prodParam)) {
+        return { page: 'product-detail', productId: prodParam, category: catParam || 'all' };
+      }
+      if (pageParam) {
+        return { page: pageParam, productId: 'prime-cloud-bed', category: catParam || 'all' };
+      }
+    } catch (e) {}
+    return { page: 'home', productId: 'prime-cloud-bed', category: 'all' };
+  };
+
+  const initialNav = getInitialNav();
+  const [currentPage, setCurrentPage] = useState(initialNav.page);
+  const [selectedProductId, setSelectedProductId] = useState(initialNav.productId);
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState(initialNav.category);
+  const [previousPage, setPreviousPage] = useState('home');
+
+  // Listen for Browser Back & Forward Buttons (popstate event)
+  useEffect(() => {
+    try {
+      const initialUrl = window.location.search || '';
+      window.history.replaceState({
+        page: currentPage,
+        productId: selectedProductId,
+        category: selectedCategoryFilter
+      }, '', window.location.pathname + initialUrl);
+
+      const handlePopState = (event) => {
+        if (event.state && event.state.page) {
+          const { page, productId, category } = event.state;
+          if (page) setCurrentPage(page);
+          if (productId) setSelectedProductId(productId);
+          if (category !== undefined) setSelectedCategoryFilter(category);
+        } else {
+          const params = new URLSearchParams(window.location.search);
+          const prodParam = params.get('product') || params.get('id');
+          const pageParam = params.get('page') || 'home';
+          const catParam = params.get('category') || 'all';
+
+          if (prodParam && PRODUCTS.some(p => p.id === prodParam)) {
+            setSelectedProductId(prodParam);
+            setCurrentPage('product-detail');
+          } else {
+            setCurrentPage(pageParam);
+          }
+          setSelectedCategoryFilter(catParam);
+        }
+      };
+
+      window.addEventListener('popstate', handlePopState);
+      return () => window.removeEventListener('popstate', handlePopState);
+    } catch (e) {}
+  }, []);
 
   // Modals & Drawers
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -174,8 +231,8 @@ export function StoreProvider({ children }) {
   const cartItemCount = cart.reduce((acc, item) => acc + item.quantity, 0);
   const deliveryFee = cartSubtotal > 50000 || cartSubtotal === 0 ? 0 : 750; // Free delivery over 50,000 EGP
 
-  // Navigation Helpers
-  const navigateTo = (page, params = {}) => {
+  // Navigation Helpers with Browser History (Back / Forward) Support
+  const navigateTo = (page, params = {}, replace = false) => {
     if (params.productId) {
       setSelectedProductId(params.productId);
     }
@@ -185,14 +242,69 @@ export function StoreProvider({ children }) {
     if (params.customPreFill) {
       setCustomQuotePreFill(params.customPreFill);
     }
+
+    setPreviousPage(currentPage);
     setCurrentPage(page);
+
+    try {
+      const urlParams = new URLSearchParams();
+      if (page !== 'home') urlParams.set('page', page);
+      if (params.productId) urlParams.set('product', params.productId);
+      const catToUse = params.category || selectedCategoryFilter;
+      if (catToUse && catToUse !== 'all') urlParams.set('category', catToUse);
+      const queryStr = urlParams.toString() ? `?${urlParams.toString()}` : window.location.pathname;
+
+      const historyState = {
+        page,
+        productId: params.productId || selectedProductId,
+        category: catToUse
+      };
+
+      if (replace) {
+        window.history.replaceState(historyState, '', queryStr);
+      } else {
+        window.history.pushState(historyState, '', queryStr);
+      }
+    } catch (e) {}
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const viewProduct = (productId) => {
+    setPreviousPage(currentPage);
     setSelectedProductId(productId);
     setCurrentPage('product-detail');
+
+    try {
+      const urlParams = new URLSearchParams();
+      urlParams.set('page', 'product-detail');
+      urlParams.set('product', productId);
+      if (selectedCategoryFilter && selectedCategoryFilter !== 'all') {
+        urlParams.set('category', selectedCategoryFilter);
+      }
+      const queryStr = `?${urlParams.toString()}`;
+
+      window.history.pushState({
+        page: 'product-detail',
+        productId,
+        category: selectedCategoryFilter,
+        previousPage: currentPage
+      }, '', queryStr);
+    } catch (e) {}
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const goBack = () => {
+    try {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        navigateTo(previousPage || 'shop');
+      }
+    } catch (e) {
+      navigateTo(previousPage || 'shop');
+    }
   };
 
   return (
@@ -230,7 +342,8 @@ export function StoreProvider({ children }) {
       isInWishlist,
       formatEGP,
       toast,
-      showToast
+      showToast,
+      goBack
     }}>
       {children}
     </StoreContext.Provider>

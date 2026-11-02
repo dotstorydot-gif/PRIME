@@ -3,6 +3,7 @@ import { useStore } from '../context/StoreContext';
 import { PRODUCTS } from '../data/products';
 import ProductCard from './ProductCard';
 import { 
+  ArrowLeft,
   Heart, 
   ShoppingBag, 
   Compass, 
@@ -24,7 +25,8 @@ export default function ProductDetailPage() {
     toggleWishlist, 
     isInWishlist, 
     formatEGP, 
-    navigateTo 
+    navigateTo,
+    goBack
   } = useStore();
 
   const product = PRODUCTS.find(p => p.id === selectedProductId) || PRODUCTS[0];
@@ -66,20 +68,31 @@ export default function ProductDetailPage() {
   return (
     <div className="py-10 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       
-      {/* Breadcrumb Navigation */}
-      <nav className="flex items-center space-x-2 text-xs uppercase tracking-widest text-charcoal-500 mb-8 font-medium">
-        <button onClick={() => navigateTo('home')} className="hover:text-charcoal-900 transition-colors">
-          Home
+      {/* Back Button & Breadcrumbs Bar */}
+      <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#D8D2C2]">
+        <button
+          onClick={goBack}
+          className="inline-flex items-center space-x-2 text-xs uppercase tracking-widest text-[#1D2743] hover:text-[#111827] font-semibold transition-colors group cursor-pointer"
+          title="Return to previous page"
+        >
+          <ArrowLeft className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1 text-[#1D2743]" />
+          <span>Back</span>
         </button>
-        <ChevronRight className="w-3 h-3 text-charcoal-400" />
-        <button onClick={() => navigateTo('shop')} className="hover:text-charcoal-900 transition-colors">
-          Shop
-        </button>
-        <ChevronRight className="w-3 h-3 text-charcoal-400" />
-        <span className="text-charcoal-900">{product.category}</span>
-        <ChevronRight className="w-3 h-3 text-charcoal-400" />
-        <span className="text-[#1D2743] truncate max-w-xs">{product.name}</span>
-      </nav>
+
+        <nav className="hidden sm:flex items-center space-x-2 text-xs uppercase tracking-widest text-charcoal-500 font-medium">
+          <button onClick={() => navigateTo('home')} className="hover:text-[#1D2743] transition-colors">
+            Home
+          </button>
+          <ChevronRight className="w-3 h-3 text-charcoal-400" />
+          <button onClick={() => navigateTo('shop')} className="hover:text-[#1D2743] transition-colors">
+            Shop
+          </button>
+          <ChevronRight className="w-3 h-3 text-charcoal-400" />
+          <span className="text-charcoal-900">{product.category}</span>
+          <ChevronRight className="w-3 h-3 text-charcoal-400" />
+          <span className="text-[#1D2743] font-semibold truncate max-w-xs">{product.name}</span>
+        </nav>
+      </div>
 
       {/* Main Two-Column Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
