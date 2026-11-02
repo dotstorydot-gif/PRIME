@@ -77,14 +77,14 @@ export default function AboutPage() {
 
         {/* Story Chapter 2: The Craftsmanship Lifecycle */}
         <div className="space-y-12 border-t border-[#D8D2C2] pt-16">
-          <div className="max-w-2xl">
+          <div className="max-w-2xl mx-auto text-center">
             <span className="text-[10px] uppercase tracking-[0.25em] text-[#1D2743] font-bold block mb-1">
               Chapter II · The Process
             </span>
             <h2 className="font-serif text-3xl sm:text-5xl text-[#111827] font-normal tracking-tight">
               From Raw Material to Your Home
             </h2>
-            <p className="mt-2 text-charcoal-600 font-sans text-sm sm:text-base font-light">
+            <p className="mt-2 text-charcoal-600 font-sans text-sm sm:text-base font-light mx-auto">
               Every table, bed, and custom console undergoes four deliberate stages of master craftsmanship.
             </p>
           </div>
