@@ -33,6 +33,18 @@
   background: #9E7D59;
 }
 
+/* Hide scrollbar utility for clean editorial carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
 /* Restrained luxury hover effects */
 .image-zoom-container {
   overflow: hidden;

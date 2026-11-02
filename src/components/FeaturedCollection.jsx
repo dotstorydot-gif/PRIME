@@ -10,12 +10,12 @@ export default function FeaturedCollection() {
 
   const featuredOrder = [
     'prime-cloud-bed',
-    'prime-curve-highboard',
     'prime-shadow-sideboard',
     'prime-carve-dresser',
     'prime-lattice-tv-unit',
-    'prime-palace-table',
-    'prime-groove-console',
+    'prime-monarch-buffet',
+    'prime-legacy-dining',
+    'prime-lumina-tv-unit',
   ];
 
   const featured = featuredOrder
@@ -25,8 +25,12 @@ export default function FeaturedCollection() {
 
   const scroll = (direction) => {
     if (scrollContainerRef.current) {
-      const scrollAmount = 380;
-      scrollContainerRef.current.scrollBy({
+      const container = scrollContainerRef.current;
+      const firstCard = container.firstElementChild;
+      const cardWidth = firstCard ? firstCard.getBoundingClientRect().width : 340;
+      const gap = window.innerWidth >= 640 ? 32 : 24;
+      const scrollAmount = cardWidth + gap;
+      container.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth'
       });
