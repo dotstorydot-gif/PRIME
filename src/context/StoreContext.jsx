@@ -3,6 +3,15 @@ import { PRODUCTS } from '../data/products';
 
 const StoreContext = createContext(null);
 
+
+// Only the showroom gets its own URL; all other pages keep the site's clean root URL.
+const EXPERIENCE_RE = /\/experience\/?$/;
+const isExperiencePath = () => EXPERIENCE_RE.test(window.location.pathname);
+const urlForPage = (page) => {
+  const root = window.location.pathname.replace(EXPERIENCE_RE, '/');
+  return page === 'experience' ? `${root.replace(/\/$/, '')}/experience` : root;
+};
+
 export function StoreProvider({ children }) {
   // Navigation State: Always start fresh on the Home page on refresh / first visit
   const [currentPage, setCurrentPage] = useState('home');
@@ -14,11 +23,14 @@ export function StoreProvider({ children }) {
   useEffect(() => {
     try {
       // Clear URL query parameters on load so browser refresh always loads Home cleanly
+      // Deep link: /experience opens the showroom; every other path keeps the existing "refresh = Home" behaviour
+      const startPage = isExperiencePath() ? 'experience' : 'home';
+      if (startPage === 'experience') setCurrentPage('experience');
       window.history.replaceState({
-        page: 'home',
+        page: startPage,
         productId: 'prime-cloud-bed',
         category: 'all'
-      }, '', window.location.pathname);
+      }, '', urlForPage(startPage));
 
       window.scrollTo(0, 0);
 
@@ -230,9 +242,9 @@ export function StoreProvider({ children }) {
 
       // Keep URL clean as window.location.pathname so hitting refresh always reloads Home from the start
       if (replace) {
-        window.history.replaceState(historyState, '', window.location.pathname);
+        window.history.replaceState(historyState, '', urlForPage(page));
       } else {
-        window.history.pushState(historyState, '', window.location.pathname);
+        window.history.pushState(historyState, '', urlForPage(page));
       }
     } catch (e) {}
 
@@ -251,7 +263,7 @@ export function StoreProvider({ children }) {
         productId,
         category: selectedCategoryFilter,
         previousPage: currentPage
-      }, '', window.location.pathname);
+      }, '', urlForPage('product-detail'));
     } catch (e) {}
 
     window.scrollTo({ top: 0, behavior: 'smooth' });

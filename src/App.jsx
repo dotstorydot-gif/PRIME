@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { StoreProvider, useStore } from './context/StoreContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -25,6 +25,9 @@ import QuickViewModal from './components/QuickViewModal';
 import Toast from './components/Toast';
 import SplashScreen from './components/SplashScreen';
 
+// Isolated feature: loaded only when visiting /experience
+const ExperiencePage = lazy(() => import('./features/experience/ExperiencePage'));
+
 function MainContent() {
   const { currentPage } = useStore();
 
@@ -46,6 +49,11 @@ function MainContent() {
       {currentPage === 'cart' && <CartPage />}
       {currentPage === 'checkout' && <CheckoutPage />}
       {currentPage === 'wishlist' && <WishlistPage />}
+      {currentPage === 'experience' && (
+        <Suspense fallback={<div className="min-h-screen bg-[#F4EEE5]" />}>
+          <ExperiencePage />
+        </Suspense>
+      )}
 
       {/* Customer Care Pages */}
       {currentPage === 'shipping' && <CustomerCarePage initialTab="shipping" />}
