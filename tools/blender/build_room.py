@@ -240,7 +240,7 @@ M = {
     "linen_sand": mat_pbr("Sand", "linen", 0.35, "#C4A57F", 0.6, bump=0.3, sheen=0.3),
     "grasscloth": mat_pbr("Grasscloth", "linen", 0.5, "#D9CBB4", 0.75, bump=0.35),
     "walnut": mat_pbr("Walnut", "oakpanel", 1.0, "#5A3A26", 0.85, bump=0.08),
-    "chairfab": mat_pbr("ChairFabric", "linen", 0.3, "#CDBB9C", 0.7, bump=0.3, sheen=0.3),
+    "chairfab": mat_pbr("ChairFabric", "linen", 0.3, "#D4C29E", 0.65, bump=0.3, sheen=0.3),
     "brass": principled("Brass", srgb("#C9A55C"), 0.3, 1.0)[0],
     "shade": principled("Shade", srgb("#EDE2CF"), 0.9)[0],
     "pendantglow": mat_emit("PendantGlow", "#FFE2B8", 12),
@@ -392,16 +392,38 @@ def living_styling():
 def dining_styling():
     # rug under the table (three: centre z=-0.3 -> y=0.3)
     box("Rug", (3.6, 2.6, 0.012), (0, 0.3, 0.006), M["rug"])
-    # upholstered dining chairs (staging only; Prime's catalogue has no chairs)
+    # oval-back upholstered dining chairs (staging only; Prime's catalogue has no chairs):
+    # dark walnut frame and tapered legs to sit with the Legacy table, champagne upholstery
+    def torus(name, major, minor, loc, rot, scale, mat):
+        bpy.ops.mesh.primitive_torus_add(major_radius=major, minor_radius=minor, major_segments=64, minor_segments=16,
+                                         location=loc, rotation=rot)
+        ob = bpy.context.active_object; ob.name = name; ob.scale = scale
+        bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+        ob.data.materials.append(mat); bpy.ops.object.shade_smooth(); BAKE.append(ob)
+        return ob
+
     def chair(name, x, y, rot):
         g = []
-        g.append(box(f"{name}Seat", (0.48, 0.48, 0.08), (0, 0, 0.47), M["chairfab"], bevel=0.02))
-        g.append(box(f"{name}Back", (0.46, 0.06, 0.5), (0, -0.23, 0.8), M["chairfab"], rot=(-0.08, 0, 0), bevel=0.025))
-        for i, (lx, ly) in enumerate([(-0.2, -0.2), (0.2, -0.2), (-0.2, 0.2), (0.2, 0.2)]):
-            g.append(box(f"{name}Leg{i}", (0.035, 0.035, 0.44), (lx, ly, 0.22), M["walnut"]))
+        # seat: walnut rail + upholstered cushion with a soft crown
+        g.append(box(f"{name}Rail", (0.5, 0.48, 0.06), (0, 0, 0.42), M["walnut"], bevel=0.008))
+        g.append(box(f"{name}Seat", (0.5, 0.49, 0.075), (0, 0.005, 0.485), M["chairfab"], bevel=0.03))
+        # tapered legs, rear legs splayed back slightly
+        for i, (lx, ly, tilt) in enumerate([(-0.215, 0.2, 0.0), (0.215, 0.2, 0.0), (-0.215, -0.2, -0.08), (0.215, -0.2, -0.08)]):
+            g.append(cyl(f"{name}Leg{i}", 0.016, 0.022, 0.4, (lx, ly - tilt * 0.2, 0.2), M["walnut"], verts=16, rot=(tilt, 0, 0)))
+        # back posts rising from the seat to the oval frame
+        for i, lx in enumerate((-0.13, 0.13)):
+            g.append(cyl(f"{name}Post{i}", 0.014, 0.014, 0.16, (lx, -0.225, 0.58), M["walnut"], verts=12, rot=(-0.12, 0, 0)))
+        # oval walnut frame + upholstered back panel, reclined ~8 degrees
+        g.append(torus(f"{name}Frame", 0.2, 0.018, (0, -0.25, 0.86), (math.pi / 2 - 0.14, 0, 0), (1.0, 1.28, 1.0), M["walnut"]))
+        bpy.ops.mesh.primitive_cylinder_add(vertices=64, radius=0.19, depth=0.035, location=(0, -0.25, 0.86), rotation=(math.pi / 2 - 0.14, 0, 0))
+        pan = bpy.context.active_object; pan.name = f"{name}Panel"; pan.scale = (1.0, 1.27, 1.0)
+        bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+        bev = pan.modifiers.new("soft", 'BEVEL'); bev.width = 0.012; bev.segments = 4
+        pan.data.materials.append(M["chairfab"]); bpy.ops.object.shade_smooth(); BAKE.append(pan)
+        g.append(pan)
         for o in g:
             o.location = Vector((x, y, 0)) + Euler((0, 0, rot)).to_matrix() @ o.location
-            o.rotation_euler = (o.rotation_euler.x, o.rotation_euler.y, rot)
+            o.rotation_euler = (Euler((0, 0, rot)).to_matrix() @ o.rotation_euler.to_matrix()).to_euler()
     ty = 0.3
     for i, x in enumerate((-0.75, 0.0, 0.75)):
         chair(f"ChairN{i}", x, ty + 0.78, math.pi)   # back side of the table, facing -y
