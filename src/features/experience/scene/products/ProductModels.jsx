@@ -54,7 +54,7 @@ export function OrbitSideTable() {
   const m = useMats(() => ({
     black: std({ color: '#1E1C1B', roughness: 0.62 }),
     front: std({ color: '#1E1C1B', roughness: 0.62, bumpMap: archRelief(), bumpScale: 2.5 }),
-    brass: std({ color: '#C8A35A', metalness: 1, roughness: 0.3 }),
+    brass: std({ color: '#D2B26A', metalness: 0.55, roughness: 0.3 }),
   }));
   const legs = [[-0.2, 0.15], [0.2, 0.15], [-0.2, -0.15], [0.2, -0.15]];
   return (
@@ -173,98 +173,142 @@ export function CurveHighboard() {
 
 /* ---------------------------------------------------------------- dining room */
 
-/* Prime Legacy Dining · 240 L × 110 W × 76 H cm · dark walnut top on twin sculpted pedestals and a plinth stretcher */
+/* Prime Legacy Dining · 240 L × 110 W × 76 H cm
+   From the product photo: dark espresso walnut; thick top with a stepped edge (top slab, bead,
+   recessed apron); base = one curved half-drum pedestal at each end on a neck and stepped plinth foot,
+   joined low down by a stretcher. */
 export function LegacyDiningTable() {
   const m = useMats(() => ({
-    walnut: std({ map: woodGrain('legacy', '#4E3324', '#2A1A10', { seed: 31, repeat: [1, 1] }), roughness: 0.42 }),
+    walnut: std({ map: woodGrain('legacy', '#3E2A1E', '#20140C', { seed: 31, rings: 90 }), roughness: 0.35 }),
   }));
+  const half = useMemo(() => new THREE.CylinderGeometry(0.3, 0.3, 0.74, 48, 1, false, Math.PI / 2, Math.PI), []);
   return (
     <group>
-      <RoundedBox args={[2.4, 0.05, 1.1]} radius={0.012} smoothness={4} position={[0, 0.735, 0]} material={m.walnut} castShadow receiveShadow />
-      <mesh position={[0, 0.69, 0]} material={m.walnut} castShadow>
-        <boxGeometry args={[2.2, 0.05, 0.94]} />
+      {/* top: slab + bead + apron = stepped moulded edge */}
+      <RoundedBox args={[2.4, 0.035, 1.1]} radius={0.008} smoothness={3} position={[0, 0.7425, 0]} material={m.walnut} castShadow receiveShadow />
+      <RoundedBox args={[2.36, 0.022, 1.06]} radius={0.008} smoothness={3} position={[0, 0.714, 0]} material={m.walnut} castShadow />
+      <mesh position={[0, 0.66, 0]} material={m.walnut} castShadow>
+        <boxGeometry args={[2.16, 0.085, 0.9]} />
       </mesh>
-      {[-0.7, 0.7].map((x) => (
+      {[-0.72, 0.72].map((x) => (
         <group key={x} position={[x, 0, 0]}>
-          {/* curved pedestal: drum flaring towards the top */}
-          <mesh position={[0, 0.39, 0]} material={m.walnut} castShadow receiveShadow>
-            <cylinderGeometry args={[0.2, 0.13, 0.58, 48]} />
+          {/* curved half-drum under the apron (flat side up, axis across the table) */}
+          <mesh geometry={half} rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.615, 0]} material={m.walnut} castShadow receiveShadow />
+          {/* neck */}
+          <mesh position={[0, 0.22, 0]} material={m.walnut} castShadow>
+            <boxGeometry args={[0.16, 0.36, 0.42]} />
           </mesh>
-          {/* plinth foot */}
-          <mesh position={[0, 0.05, 0]} material={m.walnut} castShadow receiveShadow>
-            <boxGeometry args={[0.36, 0.1, 0.8]} />
+          {/* stepped plinth foot */}
+          <mesh position={[0, 0.03, 0]} material={m.walnut} castShadow receiveShadow>
+            <boxGeometry args={[0.34, 0.06, 0.86]} />
+          </mesh>
+          <mesh position={[0, 0.075, 0]} material={m.walnut} castShadow>
+            <boxGeometry args={[0.26, 0.03, 0.74]} />
           </mesh>
         </group>
       ))}
-      <mesh position={[0, 0.06, 0]} material={m.walnut} castShadow>
-        <boxGeometry args={[1.4, 0.08, 0.12]} />
+      <mesh position={[0, 0.14, 0]} material={m.walnut} castShadow>
+        <boxGeometry args={[1.3, 0.07, 0.1]} />
       </mesh>
     </group>
   );
 }
 
-/* Prime Monarch Buffet · 190 W × 48 D × 85 H cm · walnut, four flush doors, satin-brass plate pulls, square walnut legs */
+/* Prime Monarch Buffet · 190 W × 48 D × 85 H cm
+   From the product photo: medium walnut with horizontal grain; a 69 cm case floating on 16 cm square
+   walnut legs placed directly under the two brass plates; four doors in two pairs with a central gap;
+   tall satin-brass plates spanning each pair's meeting seam. */
 export function MonarchBuffet() {
   const m = useMats(() => ({
-    walnut: std({ map: woodGrain('monarch', '#6E4A30', '#3E2716', { seed: 41, rings: 80 }), roughness: 0.45 }),
-    brass: std({ color: '#C9A55C', metalness: 1, roughness: 0.28 }),
+    walnut: std({ map: woodGrain('monarch', '#74503A', '#4A2F1D', { seed: 41, rings: 70 }), roughness: 0.42 }),
+    brass: std({ color: '#D2B26A', metalness: 0.55, roughness: 0.3, emissive: '#3a2a08', emissiveIntensity: 0.25 }),
   }));
+  const legH = 0.16, caseH = 0.665, topT = 0.025, W = 1.9, D = 0.48;
+  const pairX = W / 4 + 0.0; // centre of each door pair (seam position)
   return (
     <group>
-      <mesh position={[0, 0.5, 0]} material={m.walnut} castShadow receiveShadow>
-        <boxGeometry args={[1.9, 0.7, 0.48]} />
+      <mesh position={[0, legH + caseH / 2, 0]} material={m.walnut} castShadow receiveShadow>
+        <boxGeometry args={[W, caseH, D]} />
       </mesh>
-      {[-0.475, 0, 0.475].map((x) => (
-        <mesh key={x} position={[x, 0.5, 0.2405]}>
-          <planeGeometry args={[0.005, 0.68]} />
-          <meshBasicMaterial color="#1c120a" />
+      {/* separate top panel with its own seam line */}
+      <mesh position={[0, legH + caseH + topT / 2, 0]} material={m.walnut} castShadow receiveShadow>
+        <boxGeometry args={[W, topT, D]} />
+      </mesh>
+      {/* door seams: two per pair + wider central gap */}
+      {[-pairX, pairX].map((x) => (
+        <mesh key={x} position={[x, legH + caseH / 2, D / 2 + 0.0005]}>
+          <planeGeometry args={[0.004, caseH]} />
+          <meshBasicMaterial color="#24150b" />
         </mesh>
       ))}
-      {[-0.475, 0.475].map((x) => (
-        <mesh key={x} position={[x, 0.5, 0.243]} material={m.brass} castShadow>
-          <boxGeometry args={[0.1, 0.3, 0.006]} />
+      <mesh position={[0, legH + caseH / 2, D / 2 + 0.0005]}>
+        <planeGeometry args={[0.009, caseH]} />
+        <meshBasicMaterial color="#24150b" />
+      </mesh>
+      {/* brass plates across each pair's meeting seam */}
+      {[-pairX, pairX].map((x) => (
+        <mesh key={x} position={[x, legH + caseH * 0.62, D / 2 + 0.004]} material={m.brass} castShadow>
+          <boxGeometry args={[0.105, 0.28, 0.006]} />
         </mesh>
       ))}
-      {[[-0.82, 0.18], [0.82, 0.18], [-0.82, -0.18], [0.82, -0.18]].map(([x, z], i) => (
-        <mesh key={i} position={[x, 0.075, z]} material={m.walnut} castShadow>
-          <boxGeometry args={[0.045, 0.15, 0.045]} />
+      {/* square legs under the brass plates, front and back */}
+      {[-pairX, pairX].flatMap((x) => [D / 2 - 0.06, -D / 2 + 0.06].map((z) => (
+        <mesh key={`${x}${z}`} position={[x, legH / 2, z]} material={m.walnut} castShadow>
+          <boxGeometry args={[0.045, legH, 0.045]} />
         </mesh>
-      ))}
+      )))}
     </group>
   );
 }
 
-/* Prime Pillar Display Unit · 100 W × 40 D × 210 H cm · natural oak open case, five shelves, sculpted tapering frame posts */
+/* Prime Pillar Display Unit · 100 W × 40 D × 210 H cm
+   From the product photo: natural oak open case (five compartments) carried by four sculpted posts that
+   stand just outside the case, front and back: thickest at the low joint, tapering to the floor, and
+   rising past the top into outward-flaring horn tips; a low rail joins each pair of posts. */
+function postGeometry() {
+  // profile (radius, height) for a lathe: slim foot, swelling joint, long shaft, flared horn tip
+  const pts = [
+    [0.012, 0], [0.018, 0.08], [0.026, 0.17], [0.03, 0.2], [0.024, 0.32], [0.02, 1.0],
+    [0.02, 1.75], [0.024, 1.95], [0.028, 2.02], [0.016, 2.08], [0.004, 2.1],
+  ].map(([r, y]) => new THREE.Vector2(r, y));
+  return new THREE.LatheGeometry(pts, 20);
+}
+
 export function PillarDisplayUnit() {
   const m = useMats(() => ({
-    oak: std({ map: woodGrain('pillar', '#E0CBA8', '#BFA47D', { seed: 51, rings: 90 }), roughness: 0.6 }),
+    oak: std({ map: woodGrain('pillar', '#E3CFAE', '#C4AA82', { seed: 51, rings: 90 }), roughness: 0.6 }),
   }));
-  const W = 0.86, D = 0.36, H = 1.85, base = 0.17, t = 0.022;
+  const post = useMemo(postGeometry, []);
+  const W = 0.88, D = 0.36, H = 1.82, base = 0.2, t = 0.03;
   return (
     <group>
-      {/* case: sides, back, top, bottom */}
+      {/* case: thick sides, back, top, bottom + four shelves (five compartments) */}
       {[-W / 2 + t / 2, W / 2 - t / 2].map((x) => (
         <mesh key={x} position={[x, base + H / 2, 0]} material={m.oak} castShadow receiveShadow>
           <boxGeometry args={[t, H, D]} />
         </mesh>
       ))}
-      <mesh position={[0, base + H / 2, -D / 2 + t / 2]} material={m.oak} receiveShadow>
-        <boxGeometry args={[W, H, t]} />
+      <mesh position={[0, base + H / 2, -D / 2 + 0.006]} material={m.oak} receiveShadow>
+        <boxGeometry args={[W, H, 0.012]} />
       </mesh>
       {[0, 1, 2, 3, 4, 5].map((i) => (
-        <mesh key={i} position={[0, base + t / 2 + (i * (H - t)) / 5, 0]} material={m.oak} castShadow receiveShadow>
-          <boxGeometry args={[W - 2 * t, t, D - t]} />
+        <mesh key={i} position={[0, base + t / 2 + (i * (H - t)) / 5, 0.005]} material={m.oak} castShadow receiveShadow>
+          <boxGeometry args={[W - 2 * t, i === 0 || i === 5 ? t : 0.022, D - 0.012]} />
         </mesh>
       ))}
-      {/* sculpted frame posts rising past the case, tapering to the floor */}
-      {[[-0.5, 0.17], [0.5, 0.17], [-0.5, -0.17], [0.5, -0.17]].map(([x, z], i) => (
-        <mesh key={i} position={[x, 1.05, z]} material={m.oak} castShadow>
-          <cylinderGeometry args={[0.024, 0.016, 2.1, 20]} />
+      {/* sculpted posts just outside the case, slightly splayed outwards */}
+      {[-1, 1].flatMap((sx) => [0.13, -0.13].map((z) => (
+        <mesh key={`${sx}${z}`} geometry={post} position={[sx * (W / 2 + 0.035), 0, z]} rotation={[0, 0, -sx * 0.025]} material={m.oak} castShadow />
+      )))}
+      {/* low rails joining the posts under the case */}
+      {[0.13, -0.13].map((z) => (
+        <mesh key={z} position={[0, 0.19, z]} material={m.oak} castShadow>
+          <boxGeometry args={[W + 0.07, 0.035, 0.03]} />
         </mesh>
       ))}
-      {[0.17, -0.17].map((z) => (
-        <mesh key={z} position={[0, base - 0.02, z]} material={m.oak}>
-          <boxGeometry args={[1.0, 0.03, 0.03]} />
+      {[-1, 1].map((sx) => (
+        <mesh key={sx} position={[sx * (W / 2 + 0.035), 0.19, 0]} material={m.oak}>
+          <boxGeometry args={[0.03, 0.035, 0.26]} />
         </mesh>
       ))}
     </group>
