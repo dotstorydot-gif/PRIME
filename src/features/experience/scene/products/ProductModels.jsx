@@ -175,13 +175,26 @@ export function CurveHighboard() {
 
 /* Prime Legacy Dining · 240 L × 110 W × 76 H cm
    From the product photo: dark espresso walnut; thick top with a stepped edge (top slab, bead,
-   recessed apron); base = one curved half-drum pedestal at each end on a neck and stepped plinth foot,
-   joined low down by a stretcher. */
+   recessed apron). Base: at each end a large circular hoop (flat wooden ring) standing across the
+   table's width, resting on a rectangular plinth foot; a low stretcher joins the two ends. */
+function hoopGeometry(outer, inner, depth) {
+  const shape = new THREE.Shape();
+  shape.absarc(0, 0, outer, 0, Math.PI * 2, false);
+  const hole = new THREE.Path();
+  hole.absarc(0, 0, inner, 0, Math.PI * 2, true);
+  shape.holes.push(hole);
+  const g = new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: true, bevelThickness: 0.006, bevelSize: 0.006, bevelSegments: 3, curveSegments: 64 });
+  g.translate(0, 0, -depth / 2);
+  return g;
+}
+
 export function LegacyDiningTable() {
   const m = useMats(() => ({
     walnut: std({ map: woodGrain('legacy', '#3E2A1E', '#20140C', { seed: 31, rings: 90 }), roughness: 0.35 }),
   }));
-  const half = useMemo(() => new THREE.CylinderGeometry(0.3, 0.3, 0.74, 48, 1, false, Math.PI / 2, Math.PI), []);
+  const hoop = useMemo(() => hoopGeometry(0.29, 0.2, 0.09), []);
+  const footTop = 0.08;
+  const hoopCy = footTop + 0.29; // ring sits on the foot, its top meets the apron
   return (
     <group>
       {/* top: slab + bead + apron = stepped moulded edge */}
@@ -192,23 +205,23 @@ export function LegacyDiningTable() {
       </mesh>
       {[-0.72, 0.72].map((x) => (
         <group key={x} position={[x, 0, 0]}>
-          {/* curved half-drum under the apron (flat side up, axis across the table) */}
-          <mesh geometry={half} rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.615, 0]} material={m.walnut} castShadow receiveShadow />
-          {/* neck */}
-          <mesh position={[0, 0.22, 0]} material={m.walnut} castShadow>
-            <boxGeometry args={[0.16, 0.36, 0.42]} />
+          {/* circular hoop across the table width */}
+          <mesh geometry={hoop} rotation={[0, Math.PI / 2, 0]} position={[0, hoopCy, 0]} material={m.walnut} castShadow receiveShadow />
+          {/* short block linking hoop to apron */}
+          <mesh position={[0, 0.635, 0]} material={m.walnut}>
+            <boxGeometry args={[0.09, 0.03, 0.22]} />
           </mesh>
-          {/* stepped plinth foot */}
-          <mesh position={[0, 0.03, 0]} material={m.walnut} castShadow receiveShadow>
-            <boxGeometry args={[0.34, 0.06, 0.86]} />
+          {/* rectangular plinth foot (stepped) */}
+          <mesh position={[0, 0.025, 0]} material={m.walnut} castShadow receiveShadow>
+            <boxGeometry args={[0.2, 0.05, 0.86]} />
           </mesh>
-          <mesh position={[0, 0.075, 0]} material={m.walnut} castShadow>
-            <boxGeometry args={[0.26, 0.03, 0.74]} />
+          <mesh position={[0, 0.065, 0]} material={m.walnut} castShadow>
+            <boxGeometry args={[0.14, 0.03, 0.62]} />
           </mesh>
         </group>
       ))}
-      <mesh position={[0, 0.14, 0]} material={m.walnut} castShadow>
-        <boxGeometry args={[1.3, 0.07, 0.1]} />
+      <mesh position={[0, 0.11, 0]} material={m.walnut} castShadow>
+        <boxGeometry args={[1.36, 0.06, 0.09]} />
       </mesh>
     </group>
   );
