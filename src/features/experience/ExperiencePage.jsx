@@ -4,16 +4,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowDown } from 'lucide-react';
 import { PRODUCTS } from '../../data/products';
 import { useStore } from '../../context/StoreContext';
-import { CAMERA_STOPS, LIVING_ROOM_PRODUCTS } from './data/livingRoom';
+import CustomDropdown from '../../components/CustomDropdown';
+import { ROOMS, getRoom } from './data/rooms';
 
 gsap.registerPlugin(ScrollTrigger);
 
 // Three.js is split into its own chunk, downloaded only on this page.
-const sceneImport = () => import('./scene/LivingRoomScene');
-const LivingRoomScene = lazy(sceneImport);
+const sceneImport = () => import('./scene/ShowroomScene');
+const ShowroomScene = lazy(sceneImport);
 const LoadingVeil = lazy(() => sceneImport().then((m) => ({ default: m.LoadingVeil })));
 
-const LAST = CAMERA_STOPS.length - 1;
+const ROOM_OPTIONS = ROOMS.map((r) => ({ value: r.id, label: r.name }));
 
 function hasWebGL() {
   try {
@@ -44,14 +45,17 @@ export default function ExperiencePage() {
   );
   const container = useRef(null);
   const progressRef = useRef(0);
+  const [roomId, setRoomId] = useState(ROOMS[0].id);
+  const room = getRoom(roomId);
+  const last = room.stops.length - 1;
   const [stop, setStop] = useState(0);
   const [selectedId, setSelectedId] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
 
-  // Real catalogue data only: name + formatted price for every piece placed in the room.
+  // Real catalogue data only: name + formatted price for every piece placed in any room.
   const products = useMemo(() => {
     const out = {};
-    LIVING_ROOM_PRODUCTS.forEach(({ id }) => {
+    ROOMS.flatMap((r) => r.products).forEach(({ id }) => {
       const p = PRODUCTS.find((x) => x.id === id);
       if (p) out[id] = { name: p.name, price: formatEGP(p.price, p.priceUnit) };
     });
@@ -64,18 +68,19 @@ export default function ExperiencePage() {
       trigger: container.current,
       start: 'top top',
       end: 'bottom bottom',
-      snap: reducedMotion ? 1 / LAST : { snapTo: 1 / LAST, duration: { min: 0.4, max: 1.1 }, delay: 0.12, ease: 'power2.inOut' },
+      snap: reducedMotion ? 1 / last : { snapTo: 1 / last, duration: { min: 0.4, max: 1.1 }, delay: 0.12, ease: 'power2.inOut' },
       onUpdate: (self) => {
         progressRef.current = self.progress;
-        const s = Math.round(self.progress * LAST);
+        const s = Math.round(self.progress * last);
         setStop((prev) => (prev === s ? prev : s));
       },
     });
     return () => st.kill();
-  }, [webgl, reducedMotion]);
+  }, [webgl, reducedMotion, last, roomId]);
 
-  // close the info panel when the camera moves on to another piece
-  useEffect(() => setSelectedId(null), [stop]);
+  // close the info panel when the camera moves on, or the room changes
+  useEffect(() => setSelectedId(null), [stop, roomId]);
+
   useEffect(() => {
     // always enter at the doorway, never mid-walk from a restored scroll position
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -86,17 +91,27 @@ export default function ExperiencePage() {
     };
   }, []);
 
+  const changeRoom = (id) => {
+    if (id === roomId) return;
+    progressRef.current = 0;
+    setStop(0);
+    setHoveredId(null);
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    setRoomId(id);
+    requestAnimationFrame(() => ScrollTrigger.refresh());
+  };
+
   const onHover = useCallback((id) => setHoveredId(id), []);
   const onSelect = useCallback((id) => setSelectedId(id), []);
 
   const goTo = (i) => {
     const el = container.current;
     const top = el.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({ top: top + ((el.offsetHeight - window.innerHeight) * i) / LAST, behavior: reducedMotion ? 'auto' : 'smooth' });
+    window.scrollTo({ top: top + ((el.offsetHeight - window.innerHeight) * i) / last, behavior: reducedMotion ? 'auto' : 'smooth' });
   };
 
-  const focus = CAMERA_STOPS[stop].focus;
-  const caption = focus ? products[focus]?.name : CAMERA_STOPS[stop].caption;
+  const current = room.stops[Math.min(stop, last)];
+  const caption = current.focus ? products[current.focus]?.name : current.caption;
 
   if (!webgl) {
     return (
@@ -111,10 +126,11 @@ export default function ExperiencePage() {
 
   return (
     <div className="bg-[#F4EEE5]">
-      <section ref={container} className="relative" style={{ height: `${CAMERA_STOPS.length * 100}vh` }}>
+      <section ref={container} className="relative" style={{ height: `${room.stops.length * 100}vh` }}>
         <div className="sticky top-0 h-[100svh] w-full overflow-hidden">
           <Suspense fallback={<div className="h-full w-full bg-[#F4EEE5]" />}>
-            <LivingRoomScene
+            <ShowroomScene
+              room={room}
               progressRef={progressRef}
               reducedMotion={reducedMotion}
               lowPower={lowPower}
@@ -128,20 +144,32 @@ export default function ExperiencePage() {
             <LoadingVeil />
           </Suspense>
 
+          {/* Room switcher */}
+          <div className="absolute left-5 top-24 z-20 md:left-12 md:top-28">
+            <CustomDropdown
+              labelPrefix="Room"
+              value={roomId}
+              onChange={changeRoom}
+              options={ROOM_OPTIONS}
+              align="left"
+              className="rounded-sm bg-white/90 px-2 py-1.5 shadow-sm backdrop-blur"
+            />
+          </div>
+
           {/* Title, fades once the walk begins */}
           <div
-            className={`pointer-events-none absolute inset-x-0 top-28 text-center transition-opacity duration-700 md:top-32 ${stop === 0 ? 'opacity-100' : 'opacity-0'}`}
+            className={`pointer-events-none absolute inset-x-0 top-40 text-center transition-opacity duration-700 md:top-32 ${stop === 0 ? 'opacity-100' : 'opacity-0'}`}
           >
             <p className="text-[11px] uppercase tracking-[0.35em] text-[#8A6A45]">Experience Our Furniture</p>
-            <h1 className="mt-3 font-serif text-4xl text-[#1d2743] md:text-6xl">The Living Room</h1>
+            <h1 key={room.id} className="mt-3 font-serif text-4xl text-[#1d2743] animate-fadeIn md:text-6xl">The {room.name}</h1>
           </div>
 
           {/* Caption */}
           <div className="pointer-events-none absolute bottom-8 left-5 md:bottom-10 md:left-12">
             <p className="text-[10px] uppercase tracking-[0.3em] text-[#8A6A45]">
-              {String(stop + 1).padStart(2, '0')} / {String(CAMERA_STOPS.length).padStart(2, '0')}
+              {room.name} · {String(stop + 1).padStart(2, '0')} / {String(room.stops.length).padStart(2, '0')}
             </p>
-            <p key={caption} className="mt-1 font-serif text-2xl text-[#1d2743] animate-fadeIn md:text-3xl">{caption}</p>
+            <p key={`${room.id}-${caption}`} className="mt-1 font-serif text-2xl text-[#1d2743] animate-fadeIn md:text-3xl">{caption}</p>
           </div>
 
           {stop === 0 ? (
@@ -155,9 +183,9 @@ export default function ExperiencePage() {
           )}
 
           <nav aria-label="Walkthrough" className="absolute right-4 top-1/2 flex -translate-y-1/2 flex-col gap-3 md:right-8">
-            {CAMERA_STOPS.map((s, i) => (
+            {room.stops.map((s, i) => (
               <button
-                key={i}
+                key={`${room.id}-${i}`}
                 onClick={() => goTo(i)}
                 aria-label={s.focus ? `Go to ${products[s.focus]?.name}` : 'Go to room overview'}
                 aria-current={i === stop}

@@ -1,25 +1,26 @@
-"""
-Prime Wooden Works - Living room showroom (architecture + styling + lighting).
+﻿"""
+Prime Wooden Works - showroom rooms (living / dining) (architecture + styling + lighting).
 
 Builds the room procedurally, bakes physically based lighting (Cycles path
 tracing: direct + indirect / global illumination + colour) into per-object
 lightmap textures, and exports a compressed GLB for the website.
 
 Run headless:
-  blender -b -P tools/blender/build_living_room.py -- --out public/experience/living-room.glb [--samples 256] [--res 2048]
+  blender -b -P tools/blender/build_room.py -- --room living|dining --out public/experience/<room>-room.glb [--samples 256] [--res 2048]
 
 Coordinates match the website scene: Blender (x, y, z) -> three.js (x, z, -y).
 Product pieces are NOT part of this file; they are loaded separately so accurate
 product models can be dropped in without re-baking the room.
 """
 import bpy, bmesh, math, os, sys
-from mathutils import Vector
+from mathutils import Vector, Euler
 
 argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 def arg(name, default):
     return argv[argv.index(name) + 1] if name in argv else default
 
-OUT = os.path.abspath(arg("--out", "living-room.glb"))
+ROOM = arg("--room", "living")  # living | dining
+OUT = os.path.abspath(arg("--out", f"{ROOM}-room.glb"))
 SAMPLES = int(arg("--samples", "256"))
 RES = int(arg("--res", "2048"))
 PREVIEW = arg("--preview", "")  # optional path: also render a still from the entrance
@@ -65,6 +66,8 @@ def plane(name, size, loc, mat, rot=(0, 0, 0), bake=True):
     me = bpy.data.meshes.new(name)
     sx, sy = size[0] / 2, size[1] / 2
     me.from_pydata([(-sx, -sy, 0), (sx, -sy, 0), (sx, sy, 0), (-sx, sy, 0)], [], [(0, 1, 2, 3)])
+    uv = me.uv_layers.new(name="UVMap")
+    for i, c in enumerate([(0, 0), (1, 0), (1, 1), (0, 1)]): uv.data[i].uv = c
     ob = link(bpy.data.objects.new(name, me))
     ob.location = loc; ob.rotation_euler = rot
     ob.data.materials.append(mat)
@@ -188,17 +191,60 @@ def mat_emit(name, hexcol, strength):
     o = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(e.outputs[0], o.inputs[0])
     return m
 
+ASSETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
+
+def mat_pbr(name, short, tile_m, tint=None, tint_amt=0.0, bump=0.2, rot90=False, sheen=0.0):
+    """Photo-scanned PBR material (Poly Haven, CC0), box-projected at real-world scale."""
+    m, b, nt = principled(name, (1, 1, 1), 0.5)
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    mp = nt.nodes.new("ShaderNodeMapping")
+    mp.inputs["Scale"].default_value = (1 / tile_m,) * 3
+    if rot90:
+        mp.inputs["Rotation"].default_value = (0, math.pi / 2, math.pi / 2)
+    nt.links.new(tc.outputs["Object"], mp.inputs["Vector"])
+
+    def img(kind, colour):
+        n = nt.nodes.new("ShaderNodeTexImage")
+        n.image = bpy.data.images.load(os.path.join(ASSETS, f"{short}_{kind}.jpg"), check_existing=True)
+        n.image.colorspace_settings.name = 'sRGB' if colour else 'Non-Color'
+        n.projection = 'BOX'; n.projection_blend = 0.25
+        nt.links.new(mp.outputs["Vector"], n.inputs["Vector"])
+        return n
+
+    diff, rough = img("diff", True), img("rough", False)
+    col = diff.outputs["Color"]
+    if tint:
+        # keep the scanned surface detail (luminance) but set the interior's colour palette
+        grey = nt.nodes.new("ShaderNodeHueSaturation"); grey.inputs["Saturation"].default_value = 0.0
+        nt.links.new(col, grey.inputs["Color"])
+        mix = nt.nodes.new("ShaderNodeMix"); mix.data_type = 'RGBA'; mix.blend_type = 'SOFT_LIGHT'
+        mix.inputs["Factor"].default_value = tint_amt
+        mix.inputs["A"].default_value = (*srgb(tint), 1)
+        nt.links.new(grey.outputs["Color"], mix.inputs["B"])
+        col = mix.outputs["Result"]
+    nt.links.new(col, b.inputs["Base Color"])
+    nt.links.new(rough.outputs["Color"], b.inputs["Roughness"])
+    if sheen: b.inputs["Sheen Weight"].default_value = sheen
+    add_bump(nt, b, rough.outputs["Color"], bump, 0.003)
+    return m
+
 M = {
-    "wall": mat_plaster("Plaster", "#EDE4D6"),
-    "ceiling": mat_plaster("Ceiling", "#F6F1EA"),
-    "floor": mat_oak_floor(),
-    "trav": mat_travertine(),
+    "wall": mat_pbr("Plaster", "plaster", 2.2, "#EFE4D4", 0.5, bump=0.12),
+    "ceiling": mat_pbr("Ceiling", "plaster", 2.2, "#F7F2EA", 0.3, bump=0.06),
+    "floor": mat_pbr("OakFloor", "floor", 2.4, bump=0.15),
+    "trav": mat_pbr("OakPanel", "oakpanel", 1.6, bump=0.1),
     "skirt": principled("Skirting", srgb("#E9E0D2"), 0.5)[0],
     "steel": principled("Steel", srgb("#232323"), 0.35, 0.8)[0],
-    "boucle": mat_fabric("Boucle", "#ECE5D8"),
-    "linen_olive": mat_fabric("Olive", "#8C916E", 120),
-    "linen_sand": mat_fabric("Sand", "#C2A983", 120),
-    "rug": mat_fabric("Jute", "#D8C8AE", 60),
+    "boucle": mat_pbr("Boucle", "boucle", 0.45, "#EDE5D7", 0.6, bump=0.4, sheen=0.4),
+    "linen_olive": mat_pbr("Olive", "linen", 0.35, "#86906A", 0.6, bump=0.3, sheen=0.3),
+    "linen_sand": mat_pbr("Sand", "linen", 0.35, "#C4A57F", 0.6, bump=0.3, sheen=0.3),
+    "grasscloth": mat_pbr("Grasscloth", "linen", 0.5, "#D9CBB4", 0.75, bump=0.35),
+    "walnut": mat_pbr("Walnut", "oakpanel", 1.0, "#5A3A26", 0.85, bump=0.08),
+    "chairfab": mat_pbr("ChairFabric", "linen", 0.3, "#CDBB9C", 0.7, bump=0.3, sheen=0.3),
+    "brass": principled("Brass", srgb("#C9A55C"), 0.3, 1.0)[0],
+    "shade": principled("Shade", srgb("#EDE2CF"), 0.9)[0],
+    "pendantglow": mat_emit("PendantGlow", "#FFE2B8", 12),
+    "rug": mat_pbr("Jute", "linen", 0.6, "#B9A384", 0.8, bump=0.5),
     "tv": principled("TV", srgb("#0A0A0B"), 0.08)[0],
     "ceramic": principled("Ceramic", srgb("#E2D9C9"), 0.75)[0],
     "ceramic2": principled("Ceramic2", srgb("#B9A381"), 0.7)[0],
@@ -207,7 +253,7 @@ M = {
     "canvas": mat_plaster("Canvas", "#E9DDCB"),
     "led": mat_emit("CoveLED", "#FFD9A8", 18),
     "downlight": mat_emit("Downlight", "#FFF0DA", 30),
-    "sky": mat_emit("Daylight", "#FFF3E0", 3.2),
+    "sky": mat_emit("Daylight", "#FFFFFF", 1.0),
 }
 
 # ---------------------------------------------------------------- architecture
@@ -226,7 +272,10 @@ box("WallRightSill", (WALL_T, WIN_Y1 - WIN_Y0, WIN_Z0), (rx, (WIN_Y0 + WIN_Y1) /
 box("WallRightHead", (WALL_T, WIN_Y1 - WIN_Y0, H - WIN_Z1), (rx, (WIN_Y0 + WIN_Y1) / 2, (WIN_Z1 + H) / 2), M["wall"])
 
 # travertine feature wall behind the TV unit (back wall, centre)
-box("FeatureWall", (3.4, 0.04, BAND_Z0), (0, YB - 0.02, BAND_Z0 / 2), M["trav"])
+if ROOM == "living":
+    box("FeatureWall", (3.4, 0.04, BAND_Z0), (0, YB - 0.02, BAND_Z0 / 2), M["trav"])
+else:
+    box("FeatureWall", (4.2, 0.03, BAND_Z0), (0, YB - 0.015, BAND_Z0 / 2), M["grasscloth"])
 
 # dropped ceiling band with hidden cove LED
 bt = BAND_Z1 - BAND_Z0
@@ -281,33 +330,104 @@ win_d.energy = 420; win_d.color = (1.0, 0.95, 0.88)
 win = link(bpy.data.objects.new("WindowFill", win_d))
 win.location = (X1 + 0.05, wy, wz); win.rotation_euler = (0, -math.pi / 2, 0)
 
+# real outdoor HDRI: lights the room through the window (sky GI) and is the view outside
 world = bpy.data.worlds.new("World"); scene.world = world; world.use_nodes = True
-bg = world.node_tree.nodes["Background"]; bg.inputs["Color"].default_value = (*srgb("#F2E8DA"), 1); bg.inputs["Strength"].default_value = 0.35
+wnt = world.node_tree
+bg = wnt.nodes["Background"]; bg.inputs["Strength"].default_value = 1.0
+env = wnt.nodes.new("ShaderNodeTexEnvironment")
+env.image = bpy.data.images.load(os.path.join(ASSETS, "sky.hdr"))
+wmap = wnt.nodes.new("ShaderNodeMapping"); wmap.inputs["Rotation"].default_value = (0, 0, math.radians(110))
+wnt.links.new(wnt.nodes.new("ShaderNodeTexCoord").outputs["Generated"], wmap.inputs["Vector"])
+wnt.links.new(wmap.outputs["Vector"], env.inputs["Vector"])
+wnt.links.new(env.outputs["Color"], bg.inputs["Color"])
+
+# Window view for the website: render the HDRI as seen through the window into an image
+# that is mapped on the backdrop (camera-only, so it never blocks light during the bake).
+view_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_bake", ROOM, "window_view.jpg")
+os.makedirs(os.path.dirname(view_path), exist_ok=True)
+vcam_d = bpy.data.cameras.new("ViewCam"); vcam_d.lens = 14
+vcam = link(bpy.data.objects.new("ViewCam", vcam_d))
+vcam.location = (X1 - 2.0, wy, 1.5); vcam.rotation_euler = (math.pi / 2, 0, -math.pi / 2)
+for ob in scene.objects:
+    if ob.type == 'MESH': ob.hide_render = True
+scene.render.engine = 'CYCLES'; scene.cycles.samples = 16
+scene.camera = vcam; scene.render.resolution_x, scene.render.resolution_y = 1800, 1200
+scene.render.image_settings.file_format = 'JPEG'; scene.render.filepath = view_path
+bpy.ops.render.render(write_still=True)
+for ob in scene.objects:
+    if ob.type == 'MESH': ob.hide_render = False
+bpy.data.objects.remove(vcam)
+skym = M["sky"]; snt = skym.node_tree
+snode = snt.nodes.new("ShaderNodeTexImage"); snode.image = bpy.data.images.load(view_path)
+snt.links.new(snode.outputs["Color"], next(n for n in snt.nodes if n.type == 'EMISSION').inputs["Color"])
+backdrop.visible_diffuse = backdrop.visible_glossy = backdrop.visible_transmission = backdrop.visible_volume_scatter = False
 
 # ---------------------------------------------------------------- styling (not Prime products; never interactive)
-# rug
-box("Rug", (3.3, 2.6, 0.012), (0, -0.55, 0.006), M["rug"])
-# sofa (three z=1.78 -> y=-1.78), facing +y toward the TV wall
-sy = -1.78
-box("SofaBase", (2.5, 0.98, 0.3), (0, sy, 0.25), M["boucle"], bevel=0.06)
-box("SofaSeatL", (1.18, 0.8, 0.16), (-0.6, sy + 0.05, 0.47), M["boucle"], bevel=0.06)
-box("SofaSeatR", (1.18, 0.8, 0.16), (0.6, sy + 0.05, 0.47), M["boucle"], bevel=0.06)
-box("SofaBack", (2.5, 0.24, 0.48), (0, sy - 0.37, 0.62), M["boucle"], bevel=0.08)
-box("SofaArmL", (0.22, 0.98, 0.38), (-1.2, sy, 0.5), M["boucle"], bevel=0.08)
-box("SofaArmR", (0.22, 0.98, 0.38), (1.2, sy, 0.5), M["boucle"], bevel=0.08)
-box("CushionA", (0.5, 0.14, 0.42), (-0.85, sy - 0.2, 0.74), M["linen_sand"], rot=(0.2, 0.05, 0.15), bevel=0.05)
-box("CushionB", (0.48, 0.14, 0.4), (0.9, sy - 0.2, 0.74), M["linen_olive"], rot=(0.2, -0.04, -0.2), bevel=0.05)
-# wall TV above the TV unit
-box("TV", (1.6, 0.035, 0.92), (0, YB - 0.06, 1.5), M["tv"])
-# artwork on the left wall above the sideboard (three z=-0.4 -> y=0.4)
-box("ArtFrame", (0.04, 0.95, 1.18), (X0 + 0.03, 0.4, 1.68), M["frame"])
-box("ArtCanvas", (0.01, 0.85, 1.08), (X0 + 0.055, 0.4, 1.68), M["canvas"])
-# ceramics
-vase = [(0.0, 0.0), (0.05, 0.0), (0.085, 0.06), (0.09, 0.12), (0.07, 0.2), (0.03, 0.24), (0.035, 0.26)]
-lathe("VaseTV", vase, (-0.72, 2.82, 0.70), M["ceramic"])
-lathe("VaseTable", vase, (-0.15, -0.15, 0.42), M["ceramic2"], 0.6)
-lathe("VaseSideboard", vase, (-3.32, 0.95, 0.75), M["ceramic"], 0.9)
-box("CoffeeBooks", (0.3, 0.22, 0.04), (0.18, 0.0, 0.44), M["book"])
+def living_styling():
+    # rug
+    box("Rug", (3.3, 2.6, 0.012), (0, -0.55, 0.006), M["rug"])
+    # sofa (three z=1.78 -> y=-1.78), facing +y toward the TV wall
+    sy = -1.78
+    box("SofaBase", (2.5, 0.98, 0.3), (0, sy, 0.25), M["boucle"], bevel=0.06)
+    box("SofaSeatL", (1.18, 0.8, 0.16), (-0.6, sy + 0.05, 0.47), M["boucle"], bevel=0.06)
+    box("SofaSeatR", (1.18, 0.8, 0.16), (0.6, sy + 0.05, 0.47), M["boucle"], bevel=0.06)
+    box("SofaBack", (2.5, 0.24, 0.48), (0, sy - 0.37, 0.62), M["boucle"], bevel=0.08)
+    box("SofaArmL", (0.22, 0.98, 0.38), (-1.2, sy, 0.5), M["boucle"], bevel=0.08)
+    box("SofaArmR", (0.22, 0.98, 0.38), (1.2, sy, 0.5), M["boucle"], bevel=0.08)
+    box("CushionA", (0.5, 0.14, 0.42), (-0.85, sy - 0.2, 0.74), M["linen_sand"], rot=(0.2, 0.05, 0.15), bevel=0.05)
+    box("CushionB", (0.48, 0.14, 0.4), (0.9, sy - 0.2, 0.74), M["linen_olive"], rot=(0.2, -0.04, -0.2), bevel=0.05)
+    # wall TV above the TV unit
+    box("TV", (1.6, 0.035, 0.92), (0, YB - 0.06, 1.5), M["tv"])
+    # artwork on the left wall above the sideboard (three z=-0.4 -> y=0.4)
+    box("ArtFrame", (0.04, 0.95, 1.18), (X0 + 0.03, 0.4, 1.68), M["frame"])
+    box("ArtCanvas", (0.01, 0.85, 1.08), (X0 + 0.055, 0.4, 1.68), M["canvas"])
+    # ceramics
+    vase = [(0.0, 0.0), (0.05, 0.0), (0.085, 0.06), (0.09, 0.12), (0.07, 0.2), (0.03, 0.24), (0.035, 0.26)]
+    lathe("VaseTV", vase, (-0.72, 2.82, 0.70), M["ceramic"])
+    lathe("VaseTable", vase, (-0.15, -0.15, 0.42), M["ceramic2"], 0.6)
+    lathe("VaseSideboard", vase, (-3.32, 0.95, 0.75), M["ceramic"], 0.9)
+    box("CoffeeBooks", (0.3, 0.22, 0.04), (0.18, 0.0, 0.44), M["book"])
+
+
+def dining_styling():
+    # rug under the table (three: centre z=-0.3 -> y=0.3)
+    box("Rug", (3.6, 2.6, 0.012), (0, 0.3, 0.006), M["rug"])
+    # upholstered dining chairs (staging only; Prime's catalogue has no chairs)
+    def chair(name, x, y, rot):
+        g = []
+        g.append(box(f"{name}Seat", (0.48, 0.48, 0.08), (0, 0, 0.47), M["chairfab"], bevel=0.02))
+        g.append(box(f"{name}Back", (0.46, 0.06, 0.5), (0, -0.23, 0.8), M["chairfab"], rot=(-0.08, 0, 0), bevel=0.025))
+        for i, (lx, ly) in enumerate([(-0.2, -0.2), (0.2, -0.2), (-0.2, 0.2), (0.2, 0.2)]):
+            g.append(box(f"{name}Leg{i}", (0.035, 0.035, 0.44), (lx, ly, 0.22), M["walnut"]))
+        for o in g:
+            o.location = Vector((x, y, 0)) + Euler((0, 0, rot)).to_matrix() @ o.location
+            o.rotation_euler = (o.rotation_euler.x, o.rotation_euler.y, rot)
+    ty = 0.3
+    for i, x in enumerate((-0.75, 0.0, 0.75)):
+        chair(f"ChairN{i}", x, ty + 0.78, math.pi)   # back side of the table, facing -y
+        chair(f"ChairS{i}", x, ty - 0.78, 0.0)       # front side, facing +y
+    chair("ChairE", 1.55, ty, math.pi / 2)
+    chair("ChairW", -1.55, ty, -math.pi / 2)
+    # pendant above the table
+    cyl("PendantShade", 0.32, 0.36, 0.22, (0, ty, 1.68), M["shade"], verts=64)
+    cyl("PendantRod", 0.006, 0.006, BAND_Z1 - 1.79, (0, ty, (BAND_Z1 + 1.79) / 2 + 0.1), M["brass"], verts=12)
+    cyl("PendantDiffuser", 0.3, 0.3, 0.01, (0, ty, 1.565), M["pendantglow"], verts=64, bake=False)
+    pl = bpy.data.lights.new("PendantLight", 'POINT'); pl.energy = 160; pl.color = (1.0, 0.85, 0.65); pl.shadow_soft_size = 0.25
+    link(bpy.data.objects.new("PendantLight", pl)).location = (0, ty, 1.5)
+    # art above the buffet
+    box("ArtFrame", (1.5, 0.04, 0.95), (0, YB - 0.05, 1.75), M["frame"])
+    box("ArtCanvas", (1.4, 0.01, 0.85), (0, YB - 0.075, 1.75), M["canvas"])
+    # styling on table and buffet (buffet top 0.85 at three z=-2.74 -> y=2.74)
+    vase = [(0.0, 0.0), (0.05, 0.0), (0.085, 0.06), (0.09, 0.12), (0.07, 0.2), (0.03, 0.24), (0.035, 0.26)]
+    lathe("VaseBuffetA", vase, (-0.55, 2.74, 0.85), M["ceramic"], 1.3)
+    lathe("VaseBuffetB", vase, (0.6, 2.74, 0.85), M["ceramic2"], 0.9)
+    lathe("Centrepiece", vase, (0.0, ty, 0.76), M["ceramic"], 0.8)
+    box("TableRunner", (1.4, 0.38, 0.004), (0, ty, 0.762), M["grasscloth"])
+
+if ROOM == "living":
+    living_styling()
+else:
+    dining_styling()
 
 # ---------------------------------------------------------------- render settings
 scene.render.engine = 'CYCLES'
@@ -332,6 +452,7 @@ cyc.use_denoising = True
 cyc.max_bounces = 8; cyc.diffuse_bounces = 5
 scene.view_settings.view_transform = 'AgX'
 scene.view_settings.look = 'AgX - Medium High Contrast'
+scene.view_settings.exposure = 0.9
 
 # ---------------------------------------------------------------- optional preview still
 if PREVIEW:
@@ -341,48 +462,102 @@ if PREVIEW:
     cam.rotation_euler = (Vector((0.5, 1.4, 0.75)) - cam.location).to_track_quat('-Z', 'Y').to_euler()
     scene.camera = cam
     scene.render.resolution_x, scene.render.resolution_y = 1600, 1000
-    scene.render.filepath = os.path.abspath(PREVIEW)
+    scene.render.image_settings.file_format = 'PNG'; scene.render.filepath = os.path.abspath(PREVIEW)
     bpy.ops.render.render(write_still=True)
     print("[prime] preview written", PREVIEW)
 
 # ---------------------------------------------------------------- bake lighting into textures
-scene.render.bake.use_pass_direct = True
-scene.render.bake.use_pass_indirect = True
-scene.render.bake.use_pass_color = True
-scene.render.bake.margin = 8
+# Two passes per surface, combined in numpy:
+#   1. COLOUR (albedo) at full resolution - noise-free, keeps the scanned material detail sharp
+#   2. LIGHT (direct + indirect GI, no colour) at 1/4 resolution, many samples, then smoothed
+# final = tonemap(albedo * light * exposure), using the same exposure as the Blender preview.
+import numpy as np
+
+EXPOSURE = 1.45  # web exposure (ACES curve below is brighter than Blender's AgX)
+scene.render.bake.margin = 16
+scene.render.bake.margin_type = 'EXTEND'
 cyc.bake_type = 'DIFFUSE'
 
 def area(ob):
     return sum(p.area for p in ob.data.polygons) * max(ob.scale) ** 2
 
-tex_dir = os.path.join(os.path.dirname(OUT), "_bake")
+def blur(a, r):
+    """separable box blur, 3 passes ~ gaussian; a: (h, w, c)"""
+    if r < 1: return a
+    k = 2 * r + 1
+    for _ in range(3):
+        for axis in (0, 1):
+            p = np.pad(a, [(r, r) if i == axis else (0, 0) for i in range(3)], mode='edge')
+            c = np.cumsum(p, axis=axis, dtype=np.float64)
+            c = np.concatenate([np.zeros_like(np.take(c, [0], axis=axis)), c], axis=axis)
+            a = (np.take(c, range(k, c.shape[axis]), axis=axis) - np.take(c, range(0, c.shape[axis] - k), axis=axis)) / k
+    return a.astype(np.float32)
+
+def srgb_to_lin(c):
+    return np.where(c <= 0.04045, c / 12.92, ((c + 0.055) / 1.055) ** 2.4)
+
+def lin_to_srgb(c):
+    c = np.clip(c, 0, 1)
+    return np.where(c <= 0.0031308, c * 12.92, 1.055 * c ** (1 / 2.4) - 0.055)
+
+def tonemap(x):
+    # ACES filmic fit (Narkowicz) - soft highlight roll-off like a camera
+    return np.clip((x * (2.51 * x + 0.03)) / (x * (2.43 * x + 0.59) + 0.14), 0, 1)
+
+def bake_into(img, color, direct_indirect, samples):
+    scene.render.bake.use_pass_color = color
+    scene.render.bake.use_pass_direct = direct_indirect
+    scene.render.bake.use_pass_indirect = direct_indirect
+    cyc.samples = samples
+    nt.nodes.active = node; node.image = img
+    bpy.ops.object.bake(type='DIFFUSE')
+
+tex_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_bake", ROOM)
 os.makedirs(tex_dir, exist_ok=True)
 
 for ob in BAKE:
-    # unique material per object so each can have its own bake target
     ob.data.materials[0] = ob.data.materials[0].copy()
     bpy.ops.object.select_all(action='DESELECT')
     bpy.context.view_layer.objects.active = ob; ob.select_set(True)
     bpy.ops.object.mode_set(mode='EDIT'); bpy.ops.mesh.select_all(action='SELECT')
-    bpy.ops.uv.smart_project(angle_limit=math.radians(66), island_margin=0.01)
+    bpy.ops.uv.smart_project(angle_limit=math.radians(66), island_margin=0.02)
     bpy.ops.object.mode_set(mode='OBJECT')
     a = area(ob)
     size = RES if a > 6 else RES // 2 if a > 1.5 else RES // 4 if a > 0.3 else 256
-    img = bpy.data.images.new(f"bake_{ob.name}", size, size)
+    lsize = max(64, size // 4)
     nt = ob.data.materials[0].node_tree
-    node = nt.nodes.new("ShaderNodeTexImage"); node.image = img
-    nt.nodes.active = node
-    print(f"[prime] baking {ob.name} @ {size}px")
-    bpy.ops.object.bake(type='DIFFUSE')
-    img.filepath_raw = os.path.join(tex_dir, f"{ob.name}.png"); img.file_format = 'PNG'; img.save()
-    # swap the shader for the baked result (website renders it unlit)
+    node = nt.nodes.new("ShaderNodeTexImage")
+
+    print(f"[prime] baking {ob.name}: colour {size}px, light {lsize}px")
+    img_c = bpy.data.images.new(f"c_{ob.name}", size, size, float_buffer=True)
+    bake_into(img_c, True, False, 4)
+    img_l = bpy.data.images.new(f"l_{ob.name}", lsize, lsize, float_buffer=True)
+    bake_into(img_l, False, True, SAMPLES)
+
+    light = np.array(img_l.pixels[:], dtype=np.float32).reshape(lsize, lsize, 4)[..., :3]
+    light = blur(light, max(1, lsize // 96))
+    img_l.pixels[:] = np.concatenate([light, np.ones((lsize, lsize, 1), np.float32)], 2).ravel()
+    img_l.scale(size, size)  # bilinear upsample to the colour resolution
+    light = np.array(img_l.pixels[:], dtype=np.float32).reshape(size, size, 4)[..., :3]
+    albedo = np.array(img_c.pixels[:], dtype=np.float32).reshape(size, size, 4)[..., :3]  # linear
+
+    hdr = albedo * light * EXPOSURE
+    lum = (hdr * np.array([0.2126, 0.7152, 0.0722], np.float32)).sum(-1, keepdims=True)
+    hdr = lum + (hdr - lum) * 0.72  # gentle desaturation, like a photographic film response
+    out = lin_to_srgb(tonemap(hdr))
+    final = bpy.data.images.new(f"bake_{ob.name}", size, size)  # 8-bit sRGB
+    final.pixels[:] = np.concatenate([out, np.ones((size, size, 1), np.float32)], 2).ravel()
+    final.filepath_raw = os.path.join(tex_dir, f"{ob.name}.png"); final.file_format = 'PNG'; final.save()
+    node.image = final
+    bpy.data.images.remove(img_c); bpy.data.images.remove(img_l)
+
     for n in list(nt.nodes):
-        if n not in (node,) and n.type != 'OUTPUT_MATERIAL':
+        if n.name != node.name and n.type != "OUTPUT_MATERIAL":
             nt.nodes.remove(n)
-    out = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL')
+    outn = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL')
     bsdf = nt.nodes.new("ShaderNodeBsdfPrincipled")
     nt.links.new(node.outputs["Color"], bsdf.inputs["Base Color"])
-    nt.links.new(bsdf.outputs[0], out.inputs[0])
+    nt.links.new(bsdf.outputs[0], outn.inputs[0])
     ob.data.materials[0].name = "BAKED_" + ob.name
 
 # emissive objects: export emission colour as base colour, flagged by name
@@ -391,10 +566,14 @@ for ob in EMISSIVE:
     if not m.name.startswith("EMIT_"):
         e = next((n for n in m.node_tree.nodes if n.type == 'EMISSION'), None)
         col = e.inputs["Color"].default_value[:] if e else (1, 1, 1, 1)
+        tex = next((n.image for n in m.node_tree.nodes if n.type == 'TEX_IMAGE'), None)
         m.node_tree.nodes.clear()
         bsdf = m.node_tree.nodes.new("ShaderNodeBsdfPrincipled")
         out = m.node_tree.nodes.new("ShaderNodeOutputMaterial")
         bsdf.inputs["Base Color"].default_value = col
+        if tex:  # e.g. the window view keeps its image
+            tn = m.node_tree.nodes.new("ShaderNodeTexImage"); tn.image = tex
+            m.node_tree.links.new(tn.outputs["Color"], bsdf.inputs["Base Color"])
         m.node_tree.links.new(bsdf.outputs[0], out.inputs[0])
         m.name = "EMIT_" + m.name
 

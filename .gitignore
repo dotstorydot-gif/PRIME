@@ -25,3 +25,7 @@ dist-ssr
 
 # Temporary / OS files
 Thumbs.db
+
+# Blender intermediate bake output
+tools/blender/_bake/
+public/experience/_bake/

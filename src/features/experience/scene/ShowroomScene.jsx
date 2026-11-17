@@ -1,17 +1,15 @@
-import React, { useMemo, useRef } from 'react';
+import React, { Suspense, useMemo, useRef } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Environment, Html, Lightformer, PerformanceMonitor, useProgress } from '@react-three/drei';
+import { ContactShadows, Environment, Html, Lightformer, PerformanceMonitor, useProgress } from '@react-three/drei';
 import * as THREE from 'three';
-import LivingRoomShell from './LivingRoomShell';
+import BakedRoom from './BakedRoom';
 import InteractiveProduct from './InteractiveProduct';
-import * as Models from './products/LivingProducts';
-import { CAMERA_STOPS, LIVING_ROOM_PRODUCTS } from '../data/livingRoom';
+import * as Models from './products/ProductModels';
 
-const posCurve = new THREE.CatmullRomCurve3(CAMERA_STOPS.map((s) => new THREE.Vector3(...s.pos)), false, 'centripetal');
-const tgtCurve = new THREE.CatmullRomCurve3(CAMERA_STOPS.map((s) => new THREE.Vector3(...s.target)), false, 'centripetal');
+const curve = (pts) => new THREE.CatmullRomCurve3(pts.map((p) => new THREE.Vector3(...p)), false, 'centripetal');
 
 // progressRef.current ∈ [0,1] comes from GSAP ScrollTrigger.
-function CameraRig({ progressRef, reducedMotion, interactive }) {
+function CameraRig({ room, progressRef, reducedMotion, interactive }) {
   const { camera, pointer, size } = useThree();
   const p = useRef(0);
 
@@ -22,7 +20,18 @@ function CameraRig({ progressRef, reducedMotion, interactive }) {
   }, [camera, size.width, size.height]);
   const pos = useMemo(() => new THREE.Vector3(), []);
   const tgt = useMemo(() => new THREE.Vector3(), []);
-  const look = useRef(new THREE.Vector3(...CAMERA_STOPS[0].target));
+  const { posCurve, tgtCurve } = useMemo(
+    () => ({ posCurve: curve(room.stops.map((s) => s.pos)), tgtCurve: curve(room.stops.map((s) => s.target)) }),
+    [room]
+  );
+  const look = useRef(new THREE.Vector3(...room.stops[0].target));
+  // entering a new room: cut straight to its doorway, no fly-across between rooms
+  React.useEffect(() => {
+    p.current = 0;
+    camera.position.set(...room.stops[0].pos);
+    look.current.set(...room.stops[0].target);
+    camera.lookAt(look.current);
+  }, [room, camera]);
 
   useFrame((_, dt) => {
     const k = reducedMotion ? 1 : 1 - Math.exp(-dt * 3);
@@ -82,7 +91,7 @@ export function LoadingVeil() {
   return (
     <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center bg-[#F4EEE5]">
       <div className="text-center">
-        <p className="text-[11px] uppercase tracking-[0.3em] text-[#1d2743]/70">Preparing the living room</p>
+        <p className="text-[11px] uppercase tracking-[0.3em] text-[#1d2743]/70">Preparing the room</p>
         <div className="mx-auto mt-4 h-[2px] w-48 overflow-hidden bg-[#1d2743]/10">
           <div className="h-full bg-[#B88A5A] transition-all" style={{ width: `${progress}%` }} />
         </div>
@@ -91,16 +100,16 @@ export function LoadingVeil() {
   );
 }
 
-export default function LivingRoomScene({ progressRef, reducedMotion, lowPower, products, selectedId, hoveredId, onHover, onSelect, onView }) {
+export default function ShowroomScene({ room, progressRef, reducedMotion, lowPower, products, selectedId, hoveredId, onHover, onSelect, onView }) {
   const [dpr, setDpr] = React.useState(lowPower ? 1 : 1.5);
-  const selected = LIVING_ROOM_PRODUCTS.find((p) => p.id === selectedId);
-  const hovered = LIVING_ROOM_PRODUCTS.find((p) => p.id === hoveredId);
+  const selected = room.products.find((p) => p.id === selectedId);
+  const hovered = room.products.find((p) => p.id === hoveredId);
 
   return (
     <Canvas
       shadows={{ type: THREE.PCFSoftShadowMap }}
       dpr={dpr}
-      camera={{ fov: 50, near: 0.05, far: 40, position: CAMERA_STOPS[0].pos }}
+      camera={{ fov: 50, near: 0.05, far: 40, position: room.stops[0].pos }}
       gl={{ antialias: !lowPower, powerPreference: 'high-performance' }}
       onCreated={({ gl }) => {
         gl.toneMapping = THREE.ACESFilmicToneMapping;
@@ -137,10 +146,15 @@ export default function LivingRoomScene({ progressRef, reducedMotion, lowPower, 
         <Lightformer form="rect" intensity={0.35} color="#E9D9C2" position={[-6, 1.5, 0]} rotation-y={Math.PI / 2} scale={[6, 3, 1]} />
       </Environment>
 
-      <CameraRig progressRef={progressRef} reducedMotion={reducedMotion} interactive={!lowPower} />
-      <LivingRoomShell />
+      <CameraRig room={room} progressRef={progressRef} reducedMotion={reducedMotion} interactive={!lowPower} />
+      {/* each room's baked shell streams in on demand; only the current room is loaded */}
+      <Suspense fallback={null}>
+        <BakedRoom key={room.id} url={room.glb} />
+      </Suspense>
+      {/* soft contact shadows where the live product models meet the baked floor */}
+      <ContactShadows key={`cs-${room.id}`} position={[0, 0.002, 0]} scale={9} far={1.2} blur={2.4} opacity={0.55} resolution={1024} frames={1} color="#3a2a1a" />
 
-      {LIVING_ROOM_PRODUCTS.filter((e) => products[e.id]).map((e) => {
+      {room.products.filter((e) => products[e.id]).map((e) => {
         const Model = Models[e.model];
         return (
           <InteractiveProduct
