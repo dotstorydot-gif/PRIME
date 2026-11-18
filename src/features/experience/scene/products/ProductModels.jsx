@@ -437,3 +437,185 @@ export function CarveDresser() {
     </group>
   );
 }
+
+/* Prime Suite · custom wall-to-wall wardrobe (shown 4.0 m run × 60 D × 245 H cm) · cream shaker doors, long steel pulls, one mirror door */
+export function SuiteWardrobe({ length = 4.0 }) {
+  const m = useMats(() => ({
+    cream: std({ color: '#EAE3D3', roughness: 0.6 }),
+    rail: std({ color: '#E2DACA', roughness: 0.6 }),
+    steel: std({ color: '#B9BCBE', metalness: 0.8, roughness: 0.3 }),
+    mirror: std({ color: '#DCE2E6', metalness: 1, roughness: 0.04 }),
+    plinth: std({ color: '#CFC6B4', roughness: 0.7 }),
+  }));
+  const H = 2.45, D = 0.6, n = 8, dw = length / n;
+  const dh = H - 0.1;
+  return (
+    <group>
+      <mesh position={[0, 0.04, -0.03]} material={m.plinth}>
+        <boxGeometry args={[length, 0.08, D - 0.06]} />
+      </mesh>
+      <mesh position={[0, 0.08 + (H - 0.08) / 2, -0.01]} material={m.cream} castShadow receiveShadow>
+        <boxGeometry args={[length, H - 0.08, D - 0.02]} />
+      </mesh>
+      {Array.from({ length: n }, (_, i) => {
+        const x = -length / 2 + dw * (i + 0.5);
+        const mirror = i === 2;
+        const handleX = i % 2 === 0 ? dw / 2 - 0.05 : -dw / 2 + 0.05; // pulls meet at each pair's centre
+        const rails = [
+          [0, dh / 2 - 0.04, dw - 0.006, 0.08],
+          [0, -dh / 2 + 0.04, dw - 0.006, 0.08],
+          [-(dw - 0.006) / 2 + 0.035, 0, 0.07, dh],
+          [(dw - 0.006) / 2 - 0.035, 0, 0.07, dh],
+        ];
+        return (
+          <group key={i} position={[x, 0.08 + (H - 0.08) / 2, D / 2]}>
+            <mesh position={[0, 0, 0.005]} material={m.cream} castShadow receiveShadow>
+              <boxGeometry args={[dw - 0.006, dh, 0.02]} />
+            </mesh>
+            {mirror ? (
+              <mesh position={[0, 0, 0.0165]} material={m.mirror}>
+                <planeGeometry args={[dw - 0.14, H - 0.24]} />
+              </mesh>
+            ) : (
+              // shaker frame: raised rails around a flat centre panel
+              rails.map(([px, py, w, h], k) => (
+                <mesh key={k} position={[px, py, 0.019]} material={m.rail}>
+                  <boxGeometry args={[w, h, 0.008]} />
+                </mesh>
+              ))
+            )}
+            <mesh position={[handleX, -0.08, 0.04]} material={m.steel} castShadow>
+              <cylinderGeometry args={[0.007, 0.007, 0.36, 12]} />
+            </mesh>
+          </group>
+        );
+      })}
+    </group>
+  );
+}
+
+/* Prime Vista Dressing · walk-in system (shown 4.0 m × 60 D × 250 H cm) · oak veneer open shelving, hanging rails,
+   drawers, LED channel, smoked-glass sliding doors in graphite frames */
+export function VistaDressing() {
+  const m = useMats(() => ({
+    oak: std({ map: woodGrain('oaklight', '#C9A57B', '#9C7A52', { seed: 31 }), roughness: 0.55 }),
+    steel: std({ color: '#8E9295', metalness: 0.85, roughness: 0.3 }),
+    led: new THREE.MeshBasicMaterial({ color: '#FFF3DE' }),
+    frame: std({ color: '#3A3D41', metalness: 0.6, roughness: 0.4 }),
+    glass: std({ color: '#5C676D', roughness: 0.05, metalness: 0.2, transparent: true, opacity: 0.22, depthWrite: false }),
+    clothes: ['#2F3A4E', '#6B6F78', '#D8D2C6', '#9A7F6B', '#3E3E42', '#C9B49A', '#E8E2D6', '#7A8A9A'].map((c) =>
+      std({ color: c, roughness: 0.95 })
+    ),
+  }));
+  const W = 4.0, H = 2.5, D = 0.6, cols = 5, cw = W / cols, t = 0.025;
+  const colX = (i) => -W / 2 + cw * (i + 0.5);
+  const shelf = (key, x, y) => (
+    <mesh key={key} position={[x, y, 0]} material={m.oak} receiveShadow>
+      <boxGeometry args={[cw - t, t, D - 0.04]} />
+    </mesh>
+  );
+  const hanging = (key, x, yRail, len, seed) => (
+    <group key={key}>
+      <mesh position={[x, yRail, 0]} rotation={[0, 0, Math.PI / 2]} material={m.steel}>
+        <cylinderGeometry args={[0.009, 0.009, cw - t, 10]} />
+      </mesh>
+      {Array.from({ length: 14 }, (_, i) => {
+        const l = len - ((i * 7 + seed) % 5) * 0.04;
+        return (
+          <mesh key={i} position={[x - cw / 2 + 0.06 + i * ((cw - 0.12) / 13), yRail - 0.04 - l / 2, 0]} material={m.clothes[(i * 3 + seed) % 8]} castShadow>
+            <boxGeometry args={[0.022, l, 0.46]} />
+          </mesh>
+        );
+      })}
+    </group>
+  );
+  const doorFrame = [
+    [-0.645, 0, 0.03, H - 0.04],
+    [0.645, 0, 0.03, H - 0.04],
+    [0, (H - 0.04) / 2 - 0.015, 1.32, 0.03],
+    [0, -(H - 0.04) / 2 + 0.015, 1.32, 0.03],
+  ];
+  return (
+    <group>
+      {/* carcass: back, top, base, uprights */}
+      <mesh position={[0, H / 2, -D / 2 + 0.01]} material={m.oak} receiveShadow>
+        <boxGeometry args={[W, H, 0.02]} />
+      </mesh>
+      <mesh position={[0, H - t / 2, 0]} material={m.oak} castShadow>
+        <boxGeometry args={[W, t, D]} />
+      </mesh>
+      <mesh position={[0, 0.05, 0]} material={m.oak}>
+        <boxGeometry args={[W, 0.1, D]} />
+      </mesh>
+      {Array.from({ length: cols + 1 }, (_, i) => (
+        <mesh key={i} position={[-W / 2 + cw * i, H / 2, 0]} material={m.oak} castShadow receiveShadow>
+          <boxGeometry args={[t, H, D]} />
+        </mesh>
+      ))}
+      {/* LED channel under the top */}
+      <mesh position={[0, H - 0.04, D / 2 - 0.04]} material={m.led}>
+        <boxGeometry args={[W - 0.05, 0.012, 0.02]} />
+      </mesh>
+      {/* col 0: folded stacks */}
+      {[0.45, 0.8, 1.15, 1.5, 1.85, 2.2].map((y) => shelf(`a${y}`, colX(0), y))}
+      {[0.45, 0.8, 1.15, 1.5].map((y, i) => (
+        <mesh key={`f${y}`} position={[colX(0), y + 0.07, 0.02]} material={m.clothes[(i * 5 + 2) % 8]}>
+          <boxGeometry args={[0.5, 0.12, 0.36]} />
+        </mesh>
+      ))}
+      {/* col 1: double hanging */}
+      {shelf('b1', colX(1), 2.2)}
+      {hanging('h1', colX(1), 2.12, 0.85, 0)}
+      {shelf('b2', colX(1), 1.15)}
+      {hanging('h2', colX(1), 1.07, 0.8, 3)}
+      {/* col 2: drawers + shelves */}
+      {[0.25, 0.5, 0.75].map((y) => (
+        <group key={`d${y}`}>
+          <mesh position={[colX(2), y, D / 2 - 0.02]} material={m.oak} castShadow>
+            <boxGeometry args={[cw - t - 0.01, 0.23, 0.02]} />
+          </mesh>
+          <mesh position={[colX(2), y + 0.06, D / 2 - 0.004]} rotation={[0, 0, Math.PI / 2]} material={m.steel}>
+            <cylinderGeometry args={[0.006, 0.006, 0.3, 8]} />
+          </mesh>
+        </group>
+      ))}
+      {[0.9, 1.3, 1.7, 2.1].map((y) => shelf(`c${y}`, colX(2), y))}
+      {/* col 3: long hanging */}
+      {shelf('e1', colX(3), 2.2)}
+      {hanging('h3', colX(3), 2.12, 1.35, 5)}
+      {/* col 4: storage boxes + angled shoe shelves */}
+      {[1.5, 1.9, 2.2].map((y) => shelf(`g${y}`, colX(4), y))}
+      {[1.55, 1.95].map((y) => (
+        <mesh key={`bx${y}`} position={[colX(4), y + 0.11, 0]} material={m.clothes[6]}>
+          <boxGeometry args={[0.6, 0.2, 0.4]} />
+        </mesh>
+      ))}
+      {[0.3, 0.6, 0.9, 1.2].map((y, r) => (
+        <group key={`s${y}`} position={[colX(4), y, 0]} rotation={[0.25, 0, 0]}>
+          {shelf('x', 0, 0)}
+          {[-0.25, -0.08, 0.09, 0.26].map((sx, i) => (
+            <mesh key={i} position={[sx, 0.04, 0.05]} material={m.clothes[(i + r * 3) % 8]}>
+              <boxGeometry args={[0.1, 0.07, 0.26]} />
+            </mesh>
+          ))}
+        </group>
+      ))}
+      {/* smoked-glass sliding doors on two tracks, the middle one slid open */}
+      {[[-1.33, 0.36], [-0.95, 0.4], [1.33, 0.36]].map(([x, z], i) => (
+        <group key={i} position={[x, H / 2, z]}>
+          <mesh material={m.glass}>
+            <boxGeometry args={[1.32, H - 0.04, 0.008]} />
+          </mesh>
+          {doorFrame.map(([fx, fy, w, h], k) => (
+            <mesh key={k} position={[fx, fy, 0]} material={m.frame} castShadow>
+              <boxGeometry args={[w, h, 0.025]} />
+            </mesh>
+          ))}
+        </group>
+      ))}
+      <mesh position={[0, H + 0.015, 0.38]} material={m.frame}>
+        <boxGeometry args={[W, 0.03, 0.09]} />
+      </mesh>
+    </group>
+  );
+}

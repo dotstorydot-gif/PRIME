@@ -1,5 +1,5 @@
 ﻿"""
-Prime Wooden Works - one connected showroom house: living room -> dining room -> bedroom,
+Prime Wooden Works - one connected showroom house: living room -> dining room -> bedroom -> closets,
 joined by doorways (architecture + styling + lighting).
 
 Builds the room procedurally, bakes physically based lighting (Cycles path
@@ -319,8 +319,9 @@ def shell(kind, front_wall, back_door):
         box("FeatureWall", (3.4, 0.04, BAND_Z0), (0, YB - 0.02, BAND_Z0 / 2), M["trav"])
     elif kind == "dining":
         box("FeatureWall", (3.6, 0.03, BAND_Z0), (0, YB - 0.015, BAND_Z0 / 2), M["grasscloth"])
-    else:  # bedroom: oak-panelled headboard wall
+    elif kind == "bedroom":  # oak-panelled headboard wall
         box("FeatureWall", (3.6, 0.04, BAND_Z0), (0, YB - 0.02, BAND_Z0 / 2), M["trav"])
+    # closets: the Prime wardrobes (live models) line the walls, so the walls stay plain
 
     # dropped ceiling band with hidden cove LED
     bt = BAND_Z1 - BAND_Z0
@@ -461,7 +462,15 @@ def bedroom_styling():
     # bench-free foot: a throw folded on the bed is part of the live model; nothing else here
 
 
-ROOMS = [("living", living_styling), ("dining", dining_styling), ("bedroom", bedroom_styling)]
+def closet_styling():
+    # Prime Vista Dressing (live model) along the back wall, Prime Suite wardrobe wall on the left.
+    box("Rug", (1.6, 3.2, 0.012), (0.4, 0.2, 0.006), M["rug"])
+    # round upholstered ottoman in the middle of the dressing room
+    cyl("Ottoman", 0.42, 0.42, 0.42, (0.4, 0.2, 0.21), M["boucle"], verts=64)
+    cyl("OttomanTop", 0.4, 0.38, 0.03, (0.4, 0.2, 0.435), M["boucle"], verts=64)
+
+
+ROOMS = [("living", living_styling), ("dining", dining_styling), ("bedroom", bedroom_styling), ("closet", closet_styling)]
 for i, (kind, styling) in enumerate(ROOMS):
     before = set(scene.objects)
     shell(kind, front_wall=(i == 0), back_door=(i < len(ROOMS) - 1))

@@ -7,6 +7,7 @@
 
 const DINING = -7.15; // z offset of the dining room's frame
 const BED = -14.3; // z offset of the bedroom's frame
+const CLOSET = -21.45; // z offset of the closets' frame
 const z = (local, off) => local + off;
 
 export const HOUSE = {
@@ -15,6 +16,7 @@ export const HOUSE = {
     { id: 'living', name: 'Living Room', centre: [0, 0.5] },
     { id: 'dining', name: 'Dining Room', centre: [0, 0.5 + DINING] },
     { id: 'bedroom', name: 'Bedroom', centre: [0, 0.5 + BED] },
+    { id: 'closets', name: 'Closets', centre: [0, 0.5 + CLOSET] },
   ],
   products: [
     // living room
@@ -32,6 +34,9 @@ export const HOUSE = {
     { key: 'motifL', id: 'prime-motif-nightstand', model: 'MotifNightstand', position: [-1.5, 0, z(-2.77, BED)], rotationY: 0, anchor: [-1.5, 1.2, z(-2.7, BED)] },
     { key: 'motifR', id: 'prime-motif-nightstand', model: 'MotifNightstand', position: [1.5, 0, z(-2.77, BED)], rotationY: 0, anchor: [1.5, 1.2, z(-2.7, BED)] },
     { key: 'carve', id: 'prime-carve-dresser', model: 'CarveDresser', position: [-3.34, 0, z(0.5, BED)], rotationY: Math.PI / 2, anchor: [-3.2, 1.2, z(0.5, BED)] },
+    // closets (dressing room)
+    { key: 'vista', id: 'prime-vista-dressing', model: 'VistaDressing', position: [0.6, 0, z(-2.69, CLOSET)], rotationY: 0, anchor: [0.6, 2.75, z(-2.5, CLOSET)] },
+    { key: 'suite', id: 'prime-suite-wardrobe', model: 'SuiteWardrobe', position: [-3.29, 0, z(-0.4, CLOSET)], rotationY: Math.PI / 2, anchor: [-2.9, 2.0, z(-0.4, CLOSET)] },
   ],
   // One continuous camera path. `stop` points are where scrolling settles (one per screen of scroll);
   // the others are waypoints that carry the camera through the doorways.
@@ -53,6 +58,11 @@ export const HOUSE = {
     { room: 'bedroom', stop: true, pos: [1.5, 1.65, z(1.7, BED)], target: [0, 0.5, z(-1.8, BED)], focus: 'prime-cloud-bed' },
     { room: 'bedroom', stop: true, pos: [2.5, 1.15, z(-0.9, BED)], target: [1.5, 0.4, z(-2.77, BED)], focus: 'prime-motif-nightstand' },
     { room: 'bedroom', stop: true, pos: [-0.9, 1.35, z(0.5, BED)], target: [-3.34, 0.6, z(0.5, BED)], focus: 'prime-carve-dresser' },
+    { room: 'bedroom', pos: [-2.45, 1.6, -15.9], target: [-2.7, 1.45, -20.5] },
+    { room: 'closets', pos: [-2.7, 1.62, -17.4], target: [-2.4, 1.35, -21.8] },
+    { room: 'closets', stop: true, pos: [-2.2, 1.7, -18.1], target: [0.8, 1.05, -22.8], caption: 'Into the closets' },
+    { room: 'closets', stop: true, pos: [0.6, 1.5, z(1.2, CLOSET)], target: [0.6, 1.2, z(-2.7, CLOSET)], focus: 'prime-vista-dressing' },
+    { room: 'closets', stop: true, pos: [1.6, 1.5, z(-0.4, CLOSET)], target: [-3.29, 1.15, z(-0.4, CLOSET)], focus: 'prime-suite-wardrobe' },
   ],
 };
 
