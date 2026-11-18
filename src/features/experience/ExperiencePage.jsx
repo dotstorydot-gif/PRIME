@@ -5,7 +5,7 @@ import { ArrowDown } from 'lucide-react';
 import { PRODUCTS } from '../../data/products';
 import { useStore } from '../../context/StoreContext';
 import CustomDropdown from '../../components/CustomDropdown';
-import { ROOMS, getRoom } from './data/rooms';
+import { HOUSE, STOPS, firstStopOf, roomName } from './data/rooms';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,7 +14,8 @@ const sceneImport = () => import('./scene/ShowroomScene');
 const ShowroomScene = lazy(sceneImport);
 const LoadingVeil = lazy(() => sceneImport().then((m) => ({ default: m.LoadingVeil })));
 
-const ROOM_OPTIONS = ROOMS.map((r) => ({ value: r.id, label: r.name }));
+const ROOM_OPTIONS = HOUSE.rooms.map((r) => ({ value: r.id, label: r.name }));
+const last = STOPS.length - 1;
 
 function hasWebGL() {
   try {
@@ -45,17 +46,14 @@ export default function ExperiencePage() {
   );
   const container = useRef(null);
   const progressRef = useRef(0);
-  const [roomId, setRoomId] = useState(ROOMS[0].id);
-  const room = getRoom(roomId);
-  const last = room.stops.length - 1;
   const [stop, setStop] = useState(0);
   const [selectedId, setSelectedId] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
 
-  // Real catalogue data only: name + formatted price for every piece placed in any room.
+  // Real catalogue data only: name + formatted price for every piece placed in the house.
   const products = useMemo(() => {
     const out = {};
-    ROOMS.flatMap((r) => r.products).forEach(({ id }) => {
+    HOUSE.products.forEach(({ id }) => {
       const p = PRODUCTS.find((x) => x.id === id);
       if (p) out[id] = { name: p.name, price: formatEGP(p.price, p.priceUnit) };
     });
@@ -76,10 +74,10 @@ export default function ExperiencePage() {
       },
     });
     return () => st.kill();
-  }, [webgl, reducedMotion, last, roomId]);
+  }, [webgl, reducedMotion]);
 
-  // close the info panel when the camera moves on, or the room changes
-  useEffect(() => setSelectedId(null), [stop, roomId]);
+  // close the info panel when the camera moves on
+  useEffect(() => setSelectedId(null), [stop]);
 
   useEffect(() => {
     // always enter at the doorway, never mid-walk from a restored scroll position
@@ -91,16 +89,6 @@ export default function ExperiencePage() {
     };
   }, []);
 
-  const changeRoom = (id) => {
-    if (id === roomId) return;
-    progressRef.current = 0;
-    setStop(0);
-    setHoveredId(null);
-    window.scrollTo({ top: 0, behavior: 'auto' });
-    setRoomId(id);
-    requestAnimationFrame(() => ScrollTrigger.refresh());
-  };
-
   const onHover = useCallback((id) => setHoveredId(id), []);
   const onSelect = useCallback((id) => setSelectedId(id), []);
 
@@ -110,8 +98,13 @@ export default function ExperiencePage() {
     window.scrollTo({ top: top + ((el.offsetHeight - window.innerHeight) * i) / last, behavior: reducedMotion ? 'auto' : 'smooth' });
   };
 
-  const current = room.stops[Math.min(stop, last)];
+  const current = STOPS[Math.min(stop, last)];
   const caption = current.focus ? products[current.focus]?.name : current.caption;
+  const roomId = current.room;
+  const roomStops = STOPS.filter((s) => s.room === roomId).length;
+  const roomStop = stop - firstStopOf(roomId);
+  // the room menu walks the camera through the house to that room, it never cuts
+  const changeRoom = (id) => id !== roomId && goTo(firstStopOf(id));
 
   if (!webgl) {
     return (
@@ -126,11 +119,10 @@ export default function ExperiencePage() {
 
   return (
     <div className="bg-[#F4EEE5]">
-      <section ref={container} className="relative" style={{ height: `${room.stops.length * 100}vh` }}>
+      <section ref={container} className="relative" style={{ height: `${STOPS.length * 100}vh` }}>
         <div className="sticky top-0 h-[100svh] w-full overflow-hidden">
           <Suspense fallback={<div className="h-full w-full bg-[#F4EEE5]" />}>
             <ShowroomScene
-              room={room}
               progressRef={progressRef}
               reducedMotion={reducedMotion}
               lowPower={lowPower}
@@ -161,15 +153,15 @@ export default function ExperiencePage() {
             className={`pointer-events-none absolute inset-x-0 top-40 text-center transition-opacity duration-700 md:top-32 ${stop === 0 ? 'opacity-100' : 'opacity-0'}`}
           >
             <p className="text-[11px] uppercase tracking-[0.35em] text-[#8A6A45]">Experience Our Furniture</p>
-            <h1 key={room.id} className="mt-3 font-serif text-4xl text-[#1d2743] animate-fadeIn md:text-6xl">The {room.name}</h1>
+            <h1 className="mt-3 font-serif text-4xl text-[#1d2743] animate-fadeIn md:text-6xl">Explore Our Spaces</h1>
           </div>
 
           {/* Caption */}
           <div className="pointer-events-none absolute bottom-8 left-5 md:bottom-10 md:left-12">
             <p className="text-[10px] uppercase tracking-[0.3em] text-[#8A6A45]">
-              {room.name} · {String(stop + 1).padStart(2, '0')} / {String(room.stops.length).padStart(2, '0')}
+              {roomName(roomId)} · {String(roomStop + 1).padStart(2, '0')} / {String(roomStops).padStart(2, '0')}
             </p>
-            <p key={`${room.id}-${caption}`} className="mt-1 font-serif text-2xl text-[#1d2743] animate-fadeIn md:text-3xl">{caption}</p>
+            <p key={`${roomId}-${caption}`} className="mt-1 font-serif text-2xl text-[#1d2743] animate-fadeIn md:text-3xl">{caption}</p>
           </div>
 
           {stop === 0 ? (
@@ -183,11 +175,12 @@ export default function ExperiencePage() {
           )}
 
           <nav aria-label="Walkthrough" className="absolute right-4 top-1/2 flex -translate-y-1/2 flex-col gap-3 md:right-8">
-            {room.stops.map((s, i) => (
+            {STOPS.map((s, i) => (
               <button
-                key={`${room.id}-${i}`}
+                key={i}
                 onClick={() => goTo(i)}
-                aria-label={s.focus ? `Go to ${products[s.focus]?.name}` : 'Go to room overview'}
+                aria-label={s.focus ? `Go to ${products[s.focus]?.name}` : `Go to the ${roomName(s.room)}`}
+                style={i > 0 && STOPS[i - 1].room !== s.room ? { marginTop: 10 } : undefined}
                 aria-current={i === stop}
                 className={`h-2.5 w-2.5 rounded-full border border-[#1d2743] transition ${i === stop ? 'scale-125 bg-[#1d2743]' : 'bg-white/40'}`}
               />

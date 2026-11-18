@@ -4,7 +4,7 @@
 import React, { useMemo } from 'react';
 import * as THREE from 'three';
 import { RoundedBox } from '@react-three/drei';
-import { archRelief, carvedPebbles, woodGrain } from '../textures';
+import { archRelief, carvedPebbles, carvedScales, noise, woodGrain } from '../textures';
 
 const std = (opts) => new THREE.MeshStandardMaterial(opts);
 
@@ -324,6 +324,116 @@ export function PillarDisplayUnit() {
           <boxGeometry args={[0.03, 0.035, 0.26]} />
         </mesh>
       ))}
+    </group>
+  );
+}
+
+/* Prime Cloud Bed · 180 × 200 cm mattress · soft upholstered rounded base, three-panel split headboard */
+export function CloudBed() {
+  const m = useMats(() => {
+    const b = noise('boucle', { size: 256, lo: 150, hi: 255, repeat: [10, 10] });
+    return {
+      boucle: std({ color: '#E8E0D2', roughness: 0.96, bumpMap: b, bumpScale: 1.2 }),
+      linen: std({ color: '#F1ECE3', roughness: 0.9 }),
+      duvet: std({ color: '#EAE3D7', roughness: 0.92 }),
+    };
+  });
+  return (
+    <group>
+      {/* recessed plinth: the soft base hovers a few cm off the floor, as in the photo */}
+      <mesh position={[0, 0.03, 0.04]}>
+        <boxGeometry args={[1.9, 0.06, 2.08]} />
+        <meshStandardMaterial color="#4a4036" roughness={0.9} />
+      </mesh>
+      {/* rounded upholstered base, wraps the mattress */}
+      <RoundedBox args={[2.12, 0.28, 2.3]} radius={0.13} smoothness={8} position={[0, 0.2, 0.04]} material={m.boucle} castShadow receiveShadow />
+      {/* mattress + duvet + pillows */}
+      <RoundedBox args={[1.8, 0.22, 2.0]} radius={0.06} smoothness={4} position={[0, 0.36, 0.08]} material={m.linen} receiveShadow />
+      <RoundedBox args={[1.86, 0.06, 1.42]} radius={0.03} smoothness={4} position={[0, 0.48, 0.38]} material={m.duvet} castShadow receiveShadow />
+      {[-0.45, 0.45].map((x) => (
+        <RoundedBox key={x} args={[0.7, 0.42, 0.15]} radius={0.07} smoothness={4} position={[x, 0.66, -0.8]} rotation={[-0.32, 0, 0]} material={m.linen} castShadow />
+      ))}
+      {/* split headboard: three tall soft panels with rounded tops */}
+      {[-0.78, 0, 0.78].map((x) => (
+        <RoundedBox key={x} args={[0.76, 0.98, 0.12]} radius={0.05} smoothness={6} position={[x, 0.76, -1.12]} material={m.boucle} castShadow receiveShadow />
+      ))}
+    </group>
+  );
+}
+
+/* Prime Motif Nightstand · 55 W × 42 D × 50 H cm · rounded oak case, hand-carved two-drawer front, splayed frame legs */
+export function MotifNightstand() {
+  const m = useMats(() => {
+    const s = carvedScales('motif', '#6A5440', '#8A735C', '#4A3A2B');
+    s.map.repeat.set(1.4, 1); s.bump.repeat.set(1.4, 1);
+    return {
+      oak: std({ map: woodGrain('oakmid', '#8C6E4E', '#5E4630', { seed: 13 }), roughness: 0.55 }),
+      front: std({ map: s.map, bumpMap: s.bump, bumpScale: 2.2, roughness: 0.7 }),
+    };
+  });
+  return (
+    <group>
+      <RoundedBox args={[0.55, 0.36, 0.42]} radius={0.06} smoothness={6} position={[0, 0.32, 0]} material={m.oak} castShadow receiveShadow />
+      <mesh position={[0, 0.32, 0.2105]} material={m.front}>
+        <planeGeometry args={[0.47, 0.29]} />
+      </mesh>
+      <mesh position={[0, 0.32, 0.212]}>
+        <planeGeometry args={[0.47, 0.006]} />
+        <meshBasicMaterial color="#2a1f15" />
+      </mesh>
+      {[-0.245, 0.245].map((x) =>
+        [-0.17, 0.17].map((z) => (
+          <mesh key={`${x}${z}`} position={[x + Math.sign(x) * 0.012, 0.075, z]} rotation={[0, 0, Math.sign(x) * 0.12]} material={m.oak} castShadow>
+            <boxGeometry args={[0.03, 0.17, 0.035]} />
+          </mesh>
+        ))
+      )}
+    </group>
+  );
+}
+
+/* Prime Carve Dresser · 150 W × 50 D × 85 H cm · walnut case, two hand-carved doors, brass bar pulls, turned legs */
+export function CarveDresser() {
+  const m = useMats(() => {
+    const s = carvedScales('carve', '#4E3222', '#6E4A33', '#2E1C12');
+    s.map.repeat.set(0.55, 0.55); s.bump.repeat.set(0.55, 0.55);
+    return {
+      walnut: std({ map: woodGrain('walnutdeep', '#5A3A26', '#2E1C10', { seed: 17 }), roughness: 0.5 }),
+      carve: std({ map: s.map, bumpMap: s.bump, bumpScale: 2.4, roughness: 0.75 }),
+      brass: std({ color: '#D2B26A', metalness: 0.55, roughness: 0.3 }),
+    };
+  });
+  return (
+    <group>
+      <mesh position={[0, 0.5, 0]} material={m.walnut} castShadow receiveShadow>
+        <boxGeometry args={[1.5, 0.7, 0.5]} />
+      </mesh>
+      {[-0.375, 0.375].map((x) => (
+        <group key={x} position={[x, 0.5, 0.2505]}>
+          <mesh material={m.carve}>
+            <planeGeometry args={[0.6, 0.56]} />
+          </mesh>
+        </group>
+      ))}
+      <mesh position={[0, 0.5, 0.252]}>
+        <planeGeometry args={[0.006, 0.66]} />
+        <meshBasicMaterial color="#1a0f08" />
+      </mesh>
+      {[-0.045, 0.045].map((x) => (
+        <mesh key={x} position={[x, 0.52, 0.275]} material={m.brass} castShadow>
+          <cylinderGeometry args={[0.008, 0.008, 0.3, 12]} />
+        </mesh>
+      ))}
+      <mesh position={[0, 0.135, 0]} material={m.walnut} castShadow>
+        <boxGeometry args={[1.42, 0.03, 0.42]} />
+      </mesh>
+      {[-0.62, 0.62].map((x) =>
+        [-0.17, 0.17].map((z) => (
+          <mesh key={`${x}${z}`} position={[x, 0.06, z]} material={m.walnut} castShadow>
+            <cylinderGeometry args={[0.022, 0.017, 0.12, 16]} />
+          </mesh>
+        ))
+      )}
     </group>
   );
 }

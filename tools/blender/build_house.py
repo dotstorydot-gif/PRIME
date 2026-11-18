@@ -1,12 +1,13 @@
 ﻿"""
-Prime Wooden Works - showroom rooms (living / dining) (architecture + styling + lighting).
+Prime Wooden Works - one connected showroom house: living room -> dining room -> bedroom,
+joined by doorways (architecture + styling + lighting).
 
 Builds the room procedurally, bakes physically based lighting (Cycles path
 tracing: direct + indirect / global illumination + colour) into per-object
 lightmap textures, and exports a compressed GLB for the website.
 
 Run headless:
-  blender -b -P tools/blender/build_room.py -- --room living|dining --out public/experience/<room>-room.glb [--samples 256] [--res 2048]
+  blender -b -P tools/blender/build_house.py -- --out public/experience/house.glb [--samples 256] [--res 2048]
 
 Coordinates match the website scene: Blender (x, y, z) -> three.js (x, z, -y).
 Product pieces are NOT part of this file; they are loaded separately so accurate
@@ -19,8 +20,9 @@ argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 def arg(name, default):
     return argv[argv.index(name) + 1] if name in argv else default
 
-ROOM = arg("--room", "living")  # living | dining
-OUT = os.path.abspath(arg("--out", f"{ROOM}-room.glb"))
+OUT = os.path.abspath(arg("--out", "house.glb"))
+TEX_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_bake", "house")
+os.makedirs(TEX_DIR, exist_ok=True)
 SAMPLES = int(arg("--samples", "256"))
 RES = int(arg("--res", "2048"))
 PREVIEW = arg("--preview", "")  # optional path: also render a still from the entrance
@@ -244,6 +246,7 @@ M = {
     "brass": principled("Brass", srgb("#C9A55C"), 0.3, 1.0)[0],
     "shade": principled("Shade", srgb("#EDE2CF"), 0.9)[0],
     "pendantglow": mat_emit("PendantGlow", "#FFE2B8", 12),
+    "curtain": mat_pbr("Curtain", "linen", 0.4, "#F1EADF", 0.7, bump=0.2, sheen=0.3),
     "rug": mat_pbr("Jute", "linen", 0.6, "#B9A384", 0.8, bump=0.5),
     "tv": principled("TV", srgb("#0A0A0B"), 0.08)[0],
     "ceramic": principled("Ceramic", srgb("#E2D9C9"), 0.75)[0],
@@ -257,53 +260,37 @@ M = {
 }
 
 # ---------------------------------------------------------------- architecture
+# One continuous house. Every room is built in its own local frame (the same
+# 7.2 x 7 m shell the single rooms used) and then shifted along +y (= deeper
+# into the house; three.js -z). Rooms share their partition walls; each
+# partition has a walnut-cased doorway on the left so the walk is continuous.
+DOOR_X0, DOOR_X1, DOOR_H = -3.3, -2.1, 2.3
+ROOM_PITCH = (YB - YF) + WALL_T          # 7.15 m from one room's frame to the next
 W, D = X1 - X0, YB - YF
 cx, cy = (X0 + X1) / 2, (YB + YF) / 2
-plane("Floor", (W, D), (cx, cy, 0), M["floor"])
-plane("Ceiling", (W, D), (cx, cy, H), M["ceiling"], rot=(math.pi, 0, 0))
-box("WallBack", (W + 2 * WALL_T, WALL_T, H), (cx, YB + WALL_T / 2, H / 2), M["wall"])
-box("WallFront", (W + 2 * WALL_T, WALL_T, H), (cx, YF - WALL_T / 2, H / 2), M["wall"])
-box("WallLeft", (WALL_T, D, H), (X0 - WALL_T / 2, cy, H / 2), M["wall"])
-# right wall around the window opening
-rx = X1 + WALL_T / 2
-box("WallRightBack", (WALL_T, YB - WIN_Y1, H), (rx, (YB + WIN_Y1) / 2, H / 2), M["wall"])
-box("WallRightFront", (WALL_T, WIN_Y0 - YF, H), (rx, (WIN_Y0 + YF) / 2, H / 2), M["wall"])
-box("WallRightSill", (WALL_T, WIN_Y1 - WIN_Y0, WIN_Z0), (rx, (WIN_Y0 + WIN_Y1) / 2, WIN_Z0 / 2), M["wall"])
-box("WallRightHead", (WALL_T, WIN_Y1 - WIN_Y0, H - WIN_Z1), (rx, (WIN_Y0 + WIN_Y1) / 2, (WIN_Z1 + H) / 2), M["wall"])
-
-# travertine feature wall behind the TV unit (back wall, centre)
-if ROOM == "living":
-    box("FeatureWall", (3.4, 0.04, BAND_Z0), (0, YB - 0.02, BAND_Z0 / 2), M["trav"])
-else:
-    box("FeatureWall", (4.2, 0.03, BAND_Z0), (0, YB - 0.015, BAND_Z0 / 2), M["grasscloth"])
-
-# dropped ceiling band with hidden cove LED
-bt = BAND_Z1 - BAND_Z0
-box("BandBack", (W, BAND_W, bt), (cx, YB - BAND_W / 2, (BAND_Z0 + BAND_Z1) / 2), M["ceiling"])
-box("BandFront", (W, BAND_W, bt), (cx, YF + BAND_W / 2, (BAND_Z0 + BAND_Z1) / 2), M["ceiling"])
-box("BandLeft", (BAND_W, D - 2 * BAND_W, bt), (X0 + BAND_W / 2, cy, (BAND_Z0 + BAND_Z1) / 2), M["ceiling"])
-box("BandRight", (BAND_W, D - 2 * BAND_W, bt), (X1 - BAND_W / 2, cy, (BAND_Z0 + BAND_Z1) / 2), M["ceiling"])
-ix0, ix1, iy0, iy1 = X0 + BAND_W, X1 - BAND_W, YF + BAND_W, YB - BAND_W
-z_led = BAND_Z1 + 0.012
-box("CoveB", (ix1 - ix0, 0.03, 0.02), (cx, iy1 + 0.06, z_led), M["led"], bake=False)
-box("CoveF", (ix1 - ix0, 0.03, 0.02), (cx, iy0 - 0.06, z_led), M["led"], bake=False)
-box("CoveL", (0.03, iy1 - iy0, 0.02), (ix0 - 0.06, cy, z_led), M["led"], bake=False)
-box("CoveR", (0.03, iy1 - iy0, 0.02), (ix1 + 0.06, cy, z_led), M["led"], bake=False)
-
-# skirting
-box("SkirtBack", (W, 0.015, 0.09), (cx, YB - 0.0075 - 0.04, 0.045), M["skirt"])
-box("SkirtLeft", (0.015, D, 0.09), (X0 + 0.0075, cy, 0.045), M["skirt"])
-
-# steel window frame
 wy, wz = (WIN_Y0 + WIN_Y1) / 2, (WIN_Z0 + WIN_Z1) / 2
-for y in (WIN_Y0, wy, WIN_Y1):
-    box(f"Mullion{y:.2f}", (0.06, 0.05, WIN_Z1 - WIN_Z0), (X1 + 0.03, y, wz), M["steel"])
-for z in (WIN_Z0, 1.75, WIN_Z1):
-    box(f"Transom{z:.2f}", (0.06, WIN_Y1 - WIN_Y0, 0.05), (X1 + 0.03, wy, z), M["steel"])
-backdrop = plane("DaylightBackdrop", (9, 6), (X1 + 3.0, wy, 1.5), M["sky"], rot=(0, -math.pi / 2, 0), bake=False)
-backdrop.visible_shadow = False  # let the sun stream through the window
+BACKDROPS = []
 
-# ---------------------------------------------------------------- downlights (flush in band) + spot lights
+def doorway_wall(name, y):
+    """Partition wall at local y with a cased doorway between DOOR_X0..DOOR_X1."""
+    xa, xb = X0 - WALL_T, X1 + WALL_T
+    box(f"{name}L", (DOOR_X0 - xa, WALL_T, H), ((xa + DOOR_X0) / 2, y, H / 2), M["wall"])
+    box(f"{name}R", (xb - DOOR_X1, WALL_T, H), ((DOOR_X1 + xb) / 2, y, H / 2), M["wall"])
+    dw, dc = DOOR_X1 - DOOR_X0, (DOOR_X0 + DOOR_X1) / 2
+    box(f"{name}Head", (dw, WALL_T, H - DOOR_H), (dc, y, (DOOR_H + H) / 2), M["wall"])
+    # walnut lining in the reveal + architraves on both faces
+    lt = WALL_T + 0.03
+    box(f"{name}JambL", (0.025, lt, DOOR_H), (DOOR_X0 + 0.0125, y, DOOR_H / 2), M["walnut"])
+    box(f"{name}JambR", (0.025, lt, DOOR_H), (DOOR_X1 - 0.0125, y, DOOR_H / 2), M["walnut"])
+    box(f"{name}JambT", (dw, lt, 0.025), (dc, y, DOOR_H - 0.0125), M["walnut"])
+    for s in (-1, 1):
+        fy = y + s * (WALL_T / 2 + 0.01)
+        box(f"{name}Arch{s}L", (0.07, 0.02, DOOR_H + 0.07), (DOOR_X0 - 0.035, fy, (DOOR_H + 0.07) / 2), M["walnut"])
+        box(f"{name}Arch{s}R", (0.07, 0.02, DOOR_H + 0.07), (DOOR_X1 + 0.035, fy, (DOOR_H + 0.07) / 2), M["walnut"])
+        box(f"{name}Arch{s}T", (dw + 0.14, 0.02, 0.07), (dc, fy, DOOR_H + 0.035), M["walnut"])
+    box(f"{name}Threshold", (dw, WALL_T, 0.008), (dc, y, 0.004), M["floor"])
+
+
 def downlight(x, y, power=70, angle=58):
     cyl(f"DL_{x:.1f}_{y:.1f}", 0.045, 0.045, 0.005, (x, y, BAND_Z0 - 0.003), M["downlight"], verts=24, bake=False)
     ld = bpy.data.lights.new(f"Spot_{x:.1f}_{y:.1f}", 'SPOT')
@@ -311,12 +298,176 @@ def downlight(x, y, power=70, angle=58):
     ld.color = (1.0, 0.86, 0.68); ld.shadow_soft_size = 0.04
     lo = link(bpy.data.objects.new(ld.name, ld)); lo.location = (x, y, BAND_Z0 - 0.02)
 
-for x in (-2.4, -0.8, 0.8, 2.4):
-    downlight(x, YB - 0.35)          # wall-wash on the back wall / feature wall
-for y in (1.6, 0.0, -1.6, -3.0):
-    downlight(X0 + 0.35, y)          # wall-wash on the left wall (sideboard + art)
-for x in (-2.4, 2.4):
-    downlight(x, YF + 0.35, 40)
+
+def shell(kind, front_wall, back_door):
+    plane(f"Floor_{kind}", (W, D), (cx, cy, 0), M["floor"])
+    plane(f"Ceiling_{kind}", (W, D), (cx, cy, H), M["ceiling"], rot=(math.pi, 0, 0))
+    if back_door:
+        doorway_wall(f"Partition_{kind}", YB + WALL_T / 2)
+    else:
+        box("WallBack", (W + 2 * WALL_T, WALL_T, H), (cx, YB + WALL_T / 2, H / 2), M["wall"])
+    if front_wall:  # only the first room; later rooms use the previous room's partition
+        box("WallFront", (W + 2 * WALL_T, WALL_T, H), (cx, YF - WALL_T / 2, H / 2), M["wall"])
+    box("WallLeft", (WALL_T, D, H), (X0 - WALL_T / 2, cy, H / 2), M["wall"])
+    rx = X1 + WALL_T / 2
+    box("WallRightBack", (WALL_T, YB - WIN_Y1, H), (rx, (YB + WIN_Y1) / 2, H / 2), M["wall"])
+    box("WallRightFront", (WALL_T, WIN_Y0 - YF, H), (rx, (WIN_Y0 + YF) / 2, H / 2), M["wall"])
+    box("WallRightSill", (WALL_T, WIN_Y1 - WIN_Y0, WIN_Z0), (rx, wy, WIN_Z0 / 2), M["wall"])
+    box("WallRightHead", (WALL_T, WIN_Y1 - WIN_Y0, H - WIN_Z1), (rx, wy, (WIN_Z1 + H) / 2), M["wall"])
+
+    if kind == "living":
+        box("FeatureWall", (3.4, 0.04, BAND_Z0), (0, YB - 0.02, BAND_Z0 / 2), M["trav"])
+    elif kind == "dining":
+        box("FeatureWall", (3.6, 0.03, BAND_Z0), (0, YB - 0.015, BAND_Z0 / 2), M["grasscloth"])
+    else:  # bedroom: oak-panelled headboard wall
+        box("FeatureWall", (3.6, 0.04, BAND_Z0), (0, YB - 0.02, BAND_Z0 / 2), M["trav"])
+
+    # dropped ceiling band with hidden cove LED
+    bt = BAND_Z1 - BAND_Z0
+    box("BandBack", (W, BAND_W, bt), (cx, YB - BAND_W / 2, (BAND_Z0 + BAND_Z1) / 2), M["ceiling"])
+    box("BandFront", (W, BAND_W, bt), (cx, YF + BAND_W / 2, (BAND_Z0 + BAND_Z1) / 2), M["ceiling"])
+    box("BandLeft", (BAND_W, D - 2 * BAND_W, bt), (X0 + BAND_W / 2, cy, (BAND_Z0 + BAND_Z1) / 2), M["ceiling"])
+    box("BandRight", (BAND_W, D - 2 * BAND_W, bt), (X1 - BAND_W / 2, cy, (BAND_Z0 + BAND_Z1) / 2), M["ceiling"])
+    ix0, ix1, iy0, iy1 = X0 + BAND_W, X1 - BAND_W, YF + BAND_W, YB - BAND_W
+    z_led = BAND_Z1 + 0.012
+    box("CoveB", (ix1 - ix0, 0.03, 0.02), (cx, iy1 + 0.06, z_led), M["led"], bake=False)
+    box("CoveF", (ix1 - ix0, 0.03, 0.02), (cx, iy0 - 0.06, z_led), M["led"], bake=False)
+    box("CoveL", (0.03, iy1 - iy0, 0.02), (ix0 - 0.06, cy, z_led), M["led"], bake=False)
+    box("CoveR", (0.03, iy1 - iy0, 0.02), (ix1 + 0.06, cy, z_led), M["led"], bake=False)
+
+    # skirting (split around the doorway)
+    if back_door:
+        box("SkirtBackL", (DOOR_X0 - X0 - 0.07, 0.015, 0.09), ((X0 + DOOR_X0 - 0.07) / 2, YB - 0.0075, 0.045), M["skirt"])
+        box("SkirtBackR", (X1 - DOOR_X1 - 0.07, 0.015, 0.09), ((DOOR_X1 + 0.07 + X1) / 2, YB - 0.0075, 0.045), M["skirt"])
+    else:
+        box("SkirtBack", (W, 0.015, 0.09), (cx, YB - 0.0075, 0.045), M["skirt"])
+    box("SkirtLeft", (0.015, D, 0.09), (X0 + 0.0075, cy, 0.045), M["skirt"])
+
+    # steel window frame + daylight backdrop (the window view)
+    for y in (WIN_Y0, wy, WIN_Y1):
+        box(f"Mullion{y:.2f}", (0.06, 0.05, WIN_Z1 - WIN_Z0), (X1 + 0.03, y, wz), M["steel"])
+    for z in (WIN_Z0, 1.75, WIN_Z1):
+        box(f"Transom{z:.2f}", (0.06, WIN_Y1 - WIN_Y0, 0.05), (X1 + 0.03, wy, z), M["steel"])
+    bd = plane(f"DaylightBackdrop_{kind}", (6, ROOM_PITCH), (X1 + 3.0, cy, 1.5), M["sky"], rot=(0, -math.pi / 2, 0), bake=False)
+    bd.visible_shadow = False
+    BACKDROPS.append(bd)
+    win_d = bpy.data.lights.new(f"WindowFill_{kind}", 'AREA')
+    win_d.shape = 'RECTANGLE'; win_d.size = WIN_Y1 - WIN_Y0; win_d.size_y = WIN_Z1 - WIN_Z0
+    win_d.energy = 420; win_d.color = (1.0, 0.95, 0.88)
+    win = link(bpy.data.objects.new(win_d.name, win_d))
+    win.location = (X1 + 0.05, wy, wz); win.rotation_euler = (0, -math.pi / 2, 0)
+
+    # downlights
+    for x in (-2.4, -0.8, 0.8, 2.4):
+        if back_door and x < DOOR_X1:
+            continue
+        downlight(x, YB - 0.35)
+    for y in (1.6, 0.0, -1.6, -3.0):
+        downlight(X0 + 0.35, y)
+    for x in (-2.4, 2.4):
+        downlight(x, YF + 0.35, 40)
+
+
+# ---------------------------------------------------------------- styling (not Prime products; never interactive)
+VASE = [(0.0, 0.0), (0.05, 0.0), (0.085, 0.06), (0.09, 0.12), (0.07, 0.2), (0.03, 0.24), (0.035, 0.26)]
+
+def living_styling():
+    box("Rug", (3.3, 2.6, 0.012), (0, -0.55, 0.006), M["rug"])
+    sy = -1.78
+    box("SofaBase", (2.5, 0.98, 0.3), (0, sy, 0.25), M["boucle"], bevel=0.06)
+    box("SofaSeatL", (1.18, 0.8, 0.16), (-0.6, sy + 0.05, 0.47), M["boucle"], bevel=0.06)
+    box("SofaSeatR", (1.18, 0.8, 0.16), (0.6, sy + 0.05, 0.47), M["boucle"], bevel=0.06)
+    box("SofaBack", (2.5, 0.24, 0.48), (0, sy - 0.37, 0.62), M["boucle"], bevel=0.08)
+    box("SofaArmL", (0.22, 0.98, 0.38), (-1.2, sy, 0.5), M["boucle"], bevel=0.08)
+    box("SofaArmR", (0.22, 0.98, 0.38), (1.2, sy, 0.5), M["boucle"], bevel=0.08)
+    box("CushionA", (0.5, 0.14, 0.42), (-0.85, sy - 0.2, 0.74), M["linen_sand"], rot=(0.2, 0.05, 0.15), bevel=0.05)
+    box("CushionB", (0.48, 0.14, 0.4), (0.9, sy - 0.2, 0.74), M["linen_olive"], rot=(0.2, -0.04, -0.2), bevel=0.05)
+    box("TV", (1.6, 0.035, 0.92), (0, YB - 0.06, 1.5), M["tv"])
+    box("ArtFrame", (0.04, 0.95, 1.18), (X0 + 0.03, 0.4, 1.68), M["frame"])
+    box("ArtCanvas", (0.01, 0.85, 1.08), (X0 + 0.055, 0.4, 1.68), M["canvas"])
+    lathe("VaseTV", VASE, (-0.72, 2.82, 0.70), M["ceramic"])
+    lathe("VaseTable", VASE, (-0.15, -0.15, 0.42), M["ceramic2"], 0.6)
+    lathe("VaseSideboard", VASE, (-3.32, 0.95, 0.75), M["ceramic"], 0.9)
+    box("CoffeeBooks", (0.3, 0.22, 0.04), (0.18, 0.0, 0.44), M["book"])
+
+
+def dining_styling():
+    box("Rug", (3.6, 2.6, 0.012), (0, 0.3, 0.006), M["rug"])
+    # oval-back upholstered dining chairs (staging only; Prime's catalogue has no chairs)
+    def torus(name, major, minor, loc, rot, scale, mat):
+        bpy.ops.mesh.primitive_torus_add(major_radius=major, minor_radius=minor, major_segments=64, minor_segments=16,
+                                         location=loc, rotation=rot)
+        ob = bpy.context.active_object; ob.name = name; ob.scale = scale
+        bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+        ob.data.materials.append(mat); bpy.ops.object.shade_smooth(); BAKE.append(ob)
+        return ob
+
+    def chair(name, x, y, rot):
+        g = []
+        g.append(box(f"{name}Rail", (0.5, 0.48, 0.06), (0, 0, 0.42), M["walnut"], bevel=0.008))
+        g.append(box(f"{name}Seat", (0.5, 0.49, 0.075), (0, 0.005, 0.485), M["chairfab"], bevel=0.03))
+        for i, (lx, ly, tilt) in enumerate([(-0.215, 0.2, 0.0), (0.215, 0.2, 0.0), (-0.215, -0.2, -0.08), (0.215, -0.2, -0.08)]):
+            g.append(cyl(f"{name}Leg{i}", 0.016, 0.022, 0.4, (lx, ly - tilt * 0.2, 0.2), M["walnut"], verts=16, rot=(tilt, 0, 0)))
+        for i, lx in enumerate((-0.13, 0.13)):
+            g.append(cyl(f"{name}Post{i}", 0.014, 0.014, 0.16, (lx, -0.225, 0.58), M["walnut"], verts=12, rot=(-0.12, 0, 0)))
+        g.append(torus(f"{name}Frame", 0.2, 0.018, (0, -0.25, 0.86), (math.pi / 2 - 0.14, 0, 0), (1.0, 1.28, 1.0), M["walnut"]))
+        bpy.ops.mesh.primitive_cylinder_add(vertices=64, radius=0.19, depth=0.035, location=(0, -0.25, 0.86), rotation=(math.pi / 2 - 0.14, 0, 0))
+        pan = bpy.context.active_object; pan.name = f"{name}Panel"; pan.scale = (1.0, 1.27, 1.0)
+        bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+        bev = pan.modifiers.new("soft", 'BEVEL'); bev.width = 0.012; bev.segments = 4
+        pan.data.materials.append(M["chairfab"]); bpy.ops.object.shade_smooth(); BAKE.append(pan)
+        g.append(pan)
+        for o in g:
+            o.location = Vector((x, y, 0)) + Euler((0, 0, rot)).to_matrix() @ o.location
+            o.rotation_euler = (Euler((0, 0, rot)).to_matrix() @ o.rotation_euler.to_matrix()).to_euler()
+    ty = 0.3
+    for i, x in enumerate((-0.75, 0.0, 0.75)):
+        chair(f"ChairN{i}", x, ty + 0.78, math.pi)
+        chair(f"ChairS{i}", x, ty - 0.78, 0.0)
+    chair("ChairE", 1.55, ty, math.pi / 2)
+    chair("ChairW", -1.55, ty, -math.pi / 2)
+    cyl("PendantShade", 0.32, 0.36, 0.22, (0, ty, 1.68), M["shade"], verts=64)
+    cyl("PendantRod", 0.006, 0.006, BAND_Z1 - 1.79, (0, ty, (BAND_Z1 + 1.79) / 2 + 0.1), M["brass"], verts=12)
+    cyl("PendantDiffuser", 0.3, 0.3, 0.01, (0, ty, 1.565), M["pendantglow"], verts=64, bake=False)
+    pl = bpy.data.lights.new("PendantLight", 'POINT'); pl.energy = 160; pl.color = (1.0, 0.85, 0.65); pl.shadow_soft_size = 0.25
+    link(bpy.data.objects.new("PendantLight", pl)).location = (0, ty, 1.5)
+    box("ArtFrame", (1.5, 0.04, 0.95), (0, YB - 0.05, 1.75), M["frame"])
+    box("ArtCanvas", (1.4, 0.01, 0.85), (0, YB - 0.075, 1.75), M["canvas"])
+    lathe("VaseBuffetA", VASE, (-0.55, 2.74, 0.85), M["ceramic"], 1.3)
+    lathe("VaseBuffetB", VASE, (0.6, 2.74, 0.85), M["ceramic2"], 0.9)
+    lathe("Centrepiece", VASE, (0.0, ty, 0.76), M["ceramic"], 0.8)
+    box("TableRunner", (1.4, 0.38, 0.004), (0, ty, 0.762), M["grasscloth"])
+
+
+def bedroom_styling():
+    # Prime Cloud Bed (live model) stands centred on the panelled wall, head at y=3.0;
+    # Motif nightstands either side (tops at 0.50 m); Carve dresser on the left wall at y=-0.5.
+    box("Rug", (3.2, 2.5, 0.012), (0, 0.75, 0.006), M["rug"])
+    for s in (-1, 1):
+        x = s * 1.5
+        lathe(f"LampBase{s}", [(0.0, 0.0), (0.06, 0.0), (0.075, 0.05), (0.07, 0.14), (0.03, 0.22), (0.012, 0.3)],
+              (x, 2.77, 0.50), M["ceramic"])
+        cyl(f"LampShade{s}", 0.13, 0.16, 0.2, (x, 2.77, 0.88), M["shade"], verts=48)
+        lt = bpy.data.lights.new(f"Lamp{s}", 'POINT'); lt.energy = 18; lt.color = (1.0, 0.82, 0.6); lt.shadow_soft_size = 0.08
+        link(bpy.data.objects.new(lt.name, lt)).location = (x, 2.77, 0.86)
+    # artwork above the dresser
+    box("ArtFrame", (0.04, 1.1, 0.8), (X0 + 0.03, -0.5, 1.6), M["frame"])
+    box("ArtCanvas", (0.01, 1.0, 0.7), (X0 + 0.055, -0.5, 1.6), M["canvas"])
+    lathe("VaseDresser", VASE, (-3.38, -0.95, 0.85), M["ceramic"], 1.1)
+    box("DresserBooks", (0.22, 0.3, 0.06), (-3.36, -0.1, 0.88), M["book"])
+    # sheer curtain panels beside the window
+    for y in (WIN_Y0 - 0.2, WIN_Y1 + 0.2):
+        box(f"Curtain{y:.1f}", (0.06, 0.42, BAND_Z0 - 0.04), (X1 - 0.12, y, (BAND_Z0 - 0.04) / 2 + 0.02), M["curtain"])
+    # bench-free foot: a throw folded on the bed is part of the live model; nothing else here
+
+
+ROOMS = [("living", living_styling), ("dining", dining_styling), ("bedroom", bedroom_styling)]
+for i, (kind, styling) in enumerate(ROOMS):
+    before = set(scene.objects)
+    shell(kind, front_wall=(i == 0), back_door=(i < len(ROOMS) - 1))
+    styling()
+    for ob in set(scene.objects) - before:
+        ob.location.y += i * ROOM_PITCH
 
 # ---------------------------------------------------------------- daylight
 sun_d = bpy.data.lights.new("Sun", 'SUN')
@@ -324,13 +475,6 @@ sun_d.energy = 5.0; sun_d.angle = math.radians(1.2); sun_d.color = (1.0, 0.88, 0
 sun = link(bpy.data.objects.new("Sun", sun_d))
 sun.rotation_euler = Vector((-1.0, -0.25, -0.62)).to_track_quat('-Z', 'Y').to_euler()
 
-win_d = bpy.data.lights.new("WindowFill", 'AREA')
-win_d.shape = 'RECTANGLE'; win_d.size = WIN_Y1 - WIN_Y0; win_d.size_y = WIN_Z1 - WIN_Z0
-win_d.energy = 420; win_d.color = (1.0, 0.95, 0.88)
-win = link(bpy.data.objects.new("WindowFill", win_d))
-win.location = (X1 + 0.05, wy, wz); win.rotation_euler = (0, -math.pi / 2, 0)
-
-# real outdoor HDRI: lights the room through the window (sky GI) and is the view outside
 world = bpy.data.worlds.new("World"); scene.world = world; world.use_nodes = True
 wnt = world.node_tree
 bg = wnt.nodes["Background"]; bg.inputs["Strength"].default_value = 1.0
@@ -341,10 +485,9 @@ wnt.links.new(wnt.nodes.new("ShaderNodeTexCoord").outputs["Generated"], wmap.inp
 wnt.links.new(wmap.outputs["Vector"], env.inputs["Vector"])
 wnt.links.new(env.outputs["Color"], bg.inputs["Color"])
 
-# Window view for the website: render the HDRI as seen through the window into an image
-# that is mapped on the backdrop (camera-only, so it never blocks light during the bake).
-view_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_bake", ROOM, "window_view.jpg")
-os.makedirs(os.path.dirname(view_path), exist_ok=True)
+# Window view for the website: render the HDRI as seen through a window into an image
+# mapped on the backdrops (camera-only, so they never block light during the bake).
+view_path = os.path.join(TEX_DIR, "window_view.jpg")
 vcam_d = bpy.data.cameras.new("ViewCam"); vcam_d.lens = 14
 vcam = link(bpy.data.objects.new("ViewCam", vcam_d))
 vcam.location = (X1 - 2.0, wy, 1.5); vcam.rotation_euler = (math.pi / 2, 0, -math.pi / 2)
@@ -360,96 +503,8 @@ bpy.data.objects.remove(vcam)
 skym = M["sky"]; snt = skym.node_tree
 snode = snt.nodes.new("ShaderNodeTexImage"); snode.image = bpy.data.images.load(view_path)
 snt.links.new(snode.outputs["Color"], next(n for n in snt.nodes if n.type == 'EMISSION').inputs["Color"])
-backdrop.visible_diffuse = backdrop.visible_glossy = backdrop.visible_transmission = backdrop.visible_volume_scatter = False
-
-# ---------------------------------------------------------------- styling (not Prime products; never interactive)
-def living_styling():
-    # rug
-    box("Rug", (3.3, 2.6, 0.012), (0, -0.55, 0.006), M["rug"])
-    # sofa (three z=1.78 -> y=-1.78), facing +y toward the TV wall
-    sy = -1.78
-    box("SofaBase", (2.5, 0.98, 0.3), (0, sy, 0.25), M["boucle"], bevel=0.06)
-    box("SofaSeatL", (1.18, 0.8, 0.16), (-0.6, sy + 0.05, 0.47), M["boucle"], bevel=0.06)
-    box("SofaSeatR", (1.18, 0.8, 0.16), (0.6, sy + 0.05, 0.47), M["boucle"], bevel=0.06)
-    box("SofaBack", (2.5, 0.24, 0.48), (0, sy - 0.37, 0.62), M["boucle"], bevel=0.08)
-    box("SofaArmL", (0.22, 0.98, 0.38), (-1.2, sy, 0.5), M["boucle"], bevel=0.08)
-    box("SofaArmR", (0.22, 0.98, 0.38), (1.2, sy, 0.5), M["boucle"], bevel=0.08)
-    box("CushionA", (0.5, 0.14, 0.42), (-0.85, sy - 0.2, 0.74), M["linen_sand"], rot=(0.2, 0.05, 0.15), bevel=0.05)
-    box("CushionB", (0.48, 0.14, 0.4), (0.9, sy - 0.2, 0.74), M["linen_olive"], rot=(0.2, -0.04, -0.2), bevel=0.05)
-    # wall TV above the TV unit
-    box("TV", (1.6, 0.035, 0.92), (0, YB - 0.06, 1.5), M["tv"])
-    # artwork on the left wall above the sideboard (three z=-0.4 -> y=0.4)
-    box("ArtFrame", (0.04, 0.95, 1.18), (X0 + 0.03, 0.4, 1.68), M["frame"])
-    box("ArtCanvas", (0.01, 0.85, 1.08), (X0 + 0.055, 0.4, 1.68), M["canvas"])
-    # ceramics
-    vase = [(0.0, 0.0), (0.05, 0.0), (0.085, 0.06), (0.09, 0.12), (0.07, 0.2), (0.03, 0.24), (0.035, 0.26)]
-    lathe("VaseTV", vase, (-0.72, 2.82, 0.70), M["ceramic"])
-    lathe("VaseTable", vase, (-0.15, -0.15, 0.42), M["ceramic2"], 0.6)
-    lathe("VaseSideboard", vase, (-3.32, 0.95, 0.75), M["ceramic"], 0.9)
-    box("CoffeeBooks", (0.3, 0.22, 0.04), (0.18, 0.0, 0.44), M["book"])
-
-
-def dining_styling():
-    # rug under the table (three: centre z=-0.3 -> y=0.3)
-    box("Rug", (3.6, 2.6, 0.012), (0, 0.3, 0.006), M["rug"])
-    # oval-back upholstered dining chairs (staging only; Prime's catalogue has no chairs):
-    # dark walnut frame and tapered legs to sit with the Legacy table, champagne upholstery
-    def torus(name, major, minor, loc, rot, scale, mat):
-        bpy.ops.mesh.primitive_torus_add(major_radius=major, minor_radius=minor, major_segments=64, minor_segments=16,
-                                         location=loc, rotation=rot)
-        ob = bpy.context.active_object; ob.name = name; ob.scale = scale
-        bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
-        ob.data.materials.append(mat); bpy.ops.object.shade_smooth(); BAKE.append(ob)
-        return ob
-
-    def chair(name, x, y, rot):
-        g = []
-        # seat: walnut rail + upholstered cushion with a soft crown
-        g.append(box(f"{name}Rail", (0.5, 0.48, 0.06), (0, 0, 0.42), M["walnut"], bevel=0.008))
-        g.append(box(f"{name}Seat", (0.5, 0.49, 0.075), (0, 0.005, 0.485), M["chairfab"], bevel=0.03))
-        # tapered legs, rear legs splayed back slightly
-        for i, (lx, ly, tilt) in enumerate([(-0.215, 0.2, 0.0), (0.215, 0.2, 0.0), (-0.215, -0.2, -0.08), (0.215, -0.2, -0.08)]):
-            g.append(cyl(f"{name}Leg{i}", 0.016, 0.022, 0.4, (lx, ly - tilt * 0.2, 0.2), M["walnut"], verts=16, rot=(tilt, 0, 0)))
-        # back posts rising from the seat to the oval frame
-        for i, lx in enumerate((-0.13, 0.13)):
-            g.append(cyl(f"{name}Post{i}", 0.014, 0.014, 0.16, (lx, -0.225, 0.58), M["walnut"], verts=12, rot=(-0.12, 0, 0)))
-        # oval walnut frame + upholstered back panel, reclined ~8 degrees
-        g.append(torus(f"{name}Frame", 0.2, 0.018, (0, -0.25, 0.86), (math.pi / 2 - 0.14, 0, 0), (1.0, 1.28, 1.0), M["walnut"]))
-        bpy.ops.mesh.primitive_cylinder_add(vertices=64, radius=0.19, depth=0.035, location=(0, -0.25, 0.86), rotation=(math.pi / 2 - 0.14, 0, 0))
-        pan = bpy.context.active_object; pan.name = f"{name}Panel"; pan.scale = (1.0, 1.27, 1.0)
-        bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
-        bev = pan.modifiers.new("soft", 'BEVEL'); bev.width = 0.012; bev.segments = 4
-        pan.data.materials.append(M["chairfab"]); bpy.ops.object.shade_smooth(); BAKE.append(pan)
-        g.append(pan)
-        for o in g:
-            o.location = Vector((x, y, 0)) + Euler((0, 0, rot)).to_matrix() @ o.location
-            o.rotation_euler = (Euler((0, 0, rot)).to_matrix() @ o.rotation_euler.to_matrix()).to_euler()
-    ty = 0.3
-    for i, x in enumerate((-0.75, 0.0, 0.75)):
-        chair(f"ChairN{i}", x, ty + 0.78, math.pi)   # back side of the table, facing -y
-        chair(f"ChairS{i}", x, ty - 0.78, 0.0)       # front side, facing +y
-    chair("ChairE", 1.55, ty, math.pi / 2)
-    chair("ChairW", -1.55, ty, -math.pi / 2)
-    # pendant above the table
-    cyl("PendantShade", 0.32, 0.36, 0.22, (0, ty, 1.68), M["shade"], verts=64)
-    cyl("PendantRod", 0.006, 0.006, BAND_Z1 - 1.79, (0, ty, (BAND_Z1 + 1.79) / 2 + 0.1), M["brass"], verts=12)
-    cyl("PendantDiffuser", 0.3, 0.3, 0.01, (0, ty, 1.565), M["pendantglow"], verts=64, bake=False)
-    pl = bpy.data.lights.new("PendantLight", 'POINT'); pl.energy = 160; pl.color = (1.0, 0.85, 0.65); pl.shadow_soft_size = 0.25
-    link(bpy.data.objects.new("PendantLight", pl)).location = (0, ty, 1.5)
-    # art above the buffet
-    box("ArtFrame", (1.5, 0.04, 0.95), (0, YB - 0.05, 1.75), M["frame"])
-    box("ArtCanvas", (1.4, 0.01, 0.85), (0, YB - 0.075, 1.75), M["canvas"])
-    # styling on table and buffet (buffet top 0.85 at three z=-2.74 -> y=2.74)
-    vase = [(0.0, 0.0), (0.05, 0.0), (0.085, 0.06), (0.09, 0.12), (0.07, 0.2), (0.03, 0.24), (0.035, 0.26)]
-    lathe("VaseBuffetA", vase, (-0.55, 2.74, 0.85), M["ceramic"], 1.3)
-    lathe("VaseBuffetB", vase, (0.6, 2.74, 0.85), M["ceramic2"], 0.9)
-    lathe("Centrepiece", vase, (0.0, ty, 0.76), M["ceramic"], 0.8)
-    box("TableRunner", (1.4, 0.38, 0.004), (0, ty, 0.762), M["grasscloth"])
-
-if ROOM == "living":
-    living_styling()
-else:
-    dining_styling()
+for bd in BACKDROPS:
+    bd.visible_diffuse = bd.visible_glossy = bd.visible_transmission = bd.visible_volume_scatter = False
 
 # ---------------------------------------------------------------- render settings
 scene.render.engine = 'CYCLES'
@@ -534,8 +589,6 @@ def bake_into(img, color, direct_indirect, samples):
     nt.nodes.active = node; node.image = img
     bpy.ops.object.bake(type='DIFFUSE')
 
-tex_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_bake", ROOM)
-os.makedirs(tex_dir, exist_ok=True)
 
 for ob in BAKE:
     ob.data.materials[0] = ob.data.materials[0].copy()
@@ -569,7 +622,7 @@ for ob in BAKE:
     out = lin_to_srgb(tonemap(hdr))
     final = bpy.data.images.new(f"bake_{ob.name}", size, size)  # 8-bit sRGB
     final.pixels[:] = np.concatenate([out, np.ones((size, size, 1), np.float32)], 2).ravel()
-    final.filepath_raw = os.path.join(tex_dir, f"{ob.name}.png"); final.file_format = 'PNG'; final.save()
+    final.filepath_raw = os.path.join(TEX_DIR, f"{ob.name}.png"); final.file_format = 'PNG'; final.save()
     node.image = final
     bpy.data.images.remove(img_c); bpy.data.images.remove(img_l)
 

@@ -5,11 +5,14 @@ import * as THREE from 'three';
 import BakedRoom from './BakedRoom';
 import InteractiveProduct from './InteractiveProduct';
 import * as Models from './products/ProductModels';
+import { HOUSE, STOPS } from '../data/rooms';
 
 const curve = (pts) => new THREE.CatmullRomCurve3(pts.map((p) => new THREE.Vector3(...p)), false, 'centripetal');
 
-// progressRef.current ∈ [0,1] comes from GSAP ScrollTrigger.
-function CameraRig({ room, progressRef, reducedMotion, interactive }) {
+// progressRef.current ∈ [0,1] comes from GSAP ScrollTrigger: 0 = first stop, 1 = last stop.
+// Stops are spread evenly over the scroll; between two stops the camera follows every
+// waypoint on the path (e.g. through a doorway), so the walk is one continuous move.
+function CameraRig({ progressRef, reducedMotion, interactive }) {
   const { camera, pointer, size } = useThree();
   const p = useRef(0);
 
@@ -21,23 +24,29 @@ function CameraRig({ room, progressRef, reducedMotion, interactive }) {
   const pos = useMemo(() => new THREE.Vector3(), []);
   const tgt = useMemo(() => new THREE.Vector3(), []);
   const { posCurve, tgtCurve } = useMemo(
-    () => ({ posCurve: curve(room.stops.map((s) => s.pos)), tgtCurve: curve(room.stops.map((s) => s.target)) }),
-    [room]
+    () => ({ posCurve: curve(HOUSE.path.map((s) => s.pos)), tgtCurve: curve(HOUSE.path.map((s) => s.target)) }),
+    []
   );
-  const look = useRef(new THREE.Vector3(...room.stops[0].target));
-  // entering a new room: cut straight to its doorway, no fly-across between rooms
+  const look = useRef(new THREE.Vector3(...HOUSE.path[0].target));
   React.useEffect(() => {
-    p.current = 0;
-    camera.position.set(...room.stops[0].pos);
-    look.current.set(...room.stops[0].target);
+    camera.position.set(...HOUSE.path[0].pos);
     camera.lookAt(look.current);
-  }, [room, camera]);
+  }, [camera]);
+
+  // scroll progress -> curve parameter (control point k sits at u = k / (n-1))
+  const toU = (prog) => {
+    const f = Math.min(Math.max(prog, 0), 1) * (STOPS.length - 1);
+    const i = Math.min(Math.floor(f), STOPS.length - 2);
+    const a = STOPS[i].pathIndex, b = STOPS[i + 1].pathIndex;
+    return (a + (f - i) * (b - a)) / (HOUSE.path.length - 1);
+  };
 
   useFrame((_, dt) => {
     const k = reducedMotion ? 1 : 1 - Math.exp(-dt * 3);
     p.current += (progressRef.current - p.current) * k;
-    posCurve.getPoint(p.current, pos);
-    tgtCurve.getPoint(p.current, tgt);
+    const u = toU(p.current);
+    posCurve.getPoint(u, pos);
+    tgtCurve.getPoint(u, tgt);
     if (!reducedMotion && interactive) {
       // gentle head-turn with the mouse
       pos.x += pointer.x * 0.08;
@@ -91,7 +100,7 @@ export function LoadingVeil() {
   return (
     <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center bg-[#F4EEE5]">
       <div className="text-center">
-        <p className="text-[11px] uppercase tracking-[0.3em] text-[#1d2743]/70">Preparing the room</p>
+        <p className="text-[11px] uppercase tracking-[0.3em] text-[#1d2743]/70">Preparing the house</p>
         <div className="mx-auto mt-4 h-[2px] w-48 overflow-hidden bg-[#1d2743]/10">
           <div className="h-full bg-[#B88A5A] transition-all" style={{ width: `${progress}%` }} />
         </div>
@@ -100,16 +109,17 @@ export function LoadingVeil() {
   );
 }
 
-export default function ShowroomScene({ room, progressRef, reducedMotion, lowPower, products, selectedId, hoveredId, onHover, onSelect, onView }) {
+export default function ShowroomScene({ progressRef, reducedMotion, lowPower, products, selectedId, hoveredId, onHover, onSelect, onView }) {
   const [dpr, setDpr] = React.useState(lowPower ? 1 : 1.5);
-  const selected = room.products.find((p) => p.id === selectedId);
-  const hovered = room.products.find((p) => p.id === hoveredId);
+  // selection / hover are tracked per placed piece (key), so each of a pair of nightstands is its own target
+  const selected = HOUSE.products.find((p) => p.key === selectedId);
+  const hovered = HOUSE.products.find((p) => p.key === hoveredId);
 
   return (
     <Canvas
       shadows={{ type: THREE.PCFSoftShadowMap }}
       dpr={dpr}
-      camera={{ fov: 50, near: 0.05, far: 40, position: room.stops[0].pos }}
+      camera={{ fov: 50, near: 0.05, far: 40, position: HOUSE.path[0].pos }}
       gl={{ antialias: !lowPower, powerPreference: 'high-performance' }}
       onCreated={({ gl }) => {
         gl.toneMapping = THREE.ACESFilmicToneMapping;
@@ -122,47 +132,52 @@ export default function ShowroomScene({ room, progressRef, reducedMotion, lowPow
 
       {/* Late-afternoon sun through the window */}
       <directionalLight
-        position={[9, 5.5, 1.8]}
+        position={[9, 5.5, -4.8]}
+        target-position={[0, 0, -6.6]}
         intensity={3.2}
         color="#FFDDB0"
         castShadow
-        shadow-mapSize={lowPower ? [1024, 1024] : [2048, 2048]}
+        shadow-mapSize={lowPower ? [1024, 1024] : [4096, 4096]}
         shadow-bias={-0.0003}
         shadow-normalBias={0.02}
         shadow-radius={6}
-        shadow-camera-left={-6}
-        shadow-camera-right={6}
-        shadow-camera-top={5}
-        shadow-camera-bottom={-5}
+        shadow-camera-left={-13}
+        shadow-camera-right={13}
+        shadow-camera-top={13}
+        shadow-camera-bottom={-13}
         shadow-camera-near={1}
-        shadow-camera-far={20}
+        shadow-camera-far={30}
       />
       {/* soft bounce + sky fill */}
       <hemisphereLight args={['#FFF6EA', '#D9C2A3', 0.7]} />
-      <pointLight position={[0, 2.6, 0.5]} intensity={4} distance={7} decay={2} color="#FFE2BD" />
+      {HOUSE.rooms.map((r) => (
+        <pointLight key={r.id} position={[r.centre[0], 2.6, r.centre[1]]} intensity={4} distance={7} decay={2} color="#FFE2BD" />
+      ))}
       <Environment resolution={lowPower ? 64 : 256} frames={1}>
         <Lightformer form="rect" intensity={2.2} color="#FFF1DC" position={[6, 1.5, 0]} rotation-y={-Math.PI / 2} scale={[4, 2.4, 1]} />
         <Lightformer form="rect" intensity={0.6} color="#F3E6D3" position={[0, 3.5, 0]} rotation-x={Math.PI / 2} scale={[8, 8, 1]} />
         <Lightformer form="rect" intensity={0.35} color="#E9D9C2" position={[-6, 1.5, 0]} rotation-y={Math.PI / 2} scale={[6, 3, 1]} />
       </Environment>
 
-      <CameraRig room={room} progressRef={progressRef} reducedMotion={reducedMotion} interactive={!lowPower} />
-      {/* each room's baked shell streams in on demand; only the current room is loaded */}
+      <CameraRig progressRef={progressRef} reducedMotion={reducedMotion} interactive={!lowPower} />
+      {/* the whole house: one Blender-baked shell, rooms joined by doorways */}
       <Suspense fallback={null}>
-        <BakedRoom key={room.id} url={room.glb} />
+        <BakedRoom url={HOUSE.glb} />
       </Suspense>
-      {/* soft contact shadows where the live product models meet the baked floor */}
-      <ContactShadows key={`cs-${room.id}`} position={[0, 0.002, 0]} scale={9} far={1.2} blur={2.4} opacity={0.55} resolution={1024} frames={1} color="#3a2a1a" />
+      {/* soft contact shadows where the live product models meet the baked floor, one per room */}
+      {HOUSE.rooms.map((r) => (
+        <ContactShadows key={r.id} position={[0, 0.002, r.centre[1]]} scale={[7.2, 7]} far={1.2} blur={2.4} opacity={0.55} resolution={1024} frames={1} color="#3a2a1a" />
+      ))}
 
-      {room.products.filter((e) => products[e.id]).map((e) => {
+      {HOUSE.products.filter((e) => products[e.id]).map((e) => {
         const Model = Models[e.model];
         return (
           <InteractiveProduct
-            key={e.id}
-            productId={e.id}
+            key={e.key}
+            productId={e.key}
             position={e.position}
             rotation={[0, e.rotationY, 0]}
-            selected={selectedId === e.id}
+            selected={selectedId === e.key}
             onHover={onHover}
             onSelect={onSelect}
           >
@@ -171,7 +186,7 @@ export default function ShowroomScene({ room, progressRef, reducedMotion, lowPow
         );
       })}
 
-      {hovered && hovered.id !== selectedId && <HoverTag entry={hovered} name={products[hovered.id].name} />}
+      {hovered && hovered.key !== selectedId && <HoverTag entry={hovered} name={products[hovered.id].name} />}
       {selected && (
         <FloatingInfo entry={selected} info={products[selected.id]} onView={() => onView(selected.id)} onClose={() => onSelect(null)} />
       )}

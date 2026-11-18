@@ -186,3 +186,42 @@ export function archRelief() {
   cache.set('arches', t);
   return t;
 }
+
+/** Hand-carved "scale" relief (overlapping scoops) of the Motif nightstand / Carve dresser fronts, as colour + bump. */
+export function carvedScales(key, base, light, dark) {
+  const k = `scales:${key}`;
+  if (cache.has(k)) return cache.get(k);
+  const S = 512, R = 22;
+  const make = (bump) => {
+    const c = document.createElement('canvas');
+    c.width = c.height = S;
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = bump ? '#808080' : base;
+    ctx.fillRect(0, 0, S, S);
+    const step = R * 1.5;
+    for (let row = -1; row * step * 0.6 < S + R; row++) {
+      const y = row * step * 0.6;
+      const off = row % 2 ? step / 2 : 0;
+      for (let x = -step + off; x < S + step; x += step) {
+        const g = ctx.createRadialGradient(x, y + R * 0.35, 1, x, y, R);
+        if (bump) {
+          g.addColorStop(0, '#404040');
+          g.addColorStop(0.85, '#a8a8a8');
+          g.addColorStop(1, '#5a5a5a');
+        } else {
+          g.addColorStop(0, dark);
+          g.addColorStop(0.8, light);
+          g.addColorStop(1, dark);
+        }
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(x, y, R, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    return finish(c, [1, 1], !bump);
+  };
+  const out = { map: make(false), bump: make(true) };
+  cache.set(k, out);
+  return out;
+}
