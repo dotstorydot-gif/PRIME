@@ -5,3 +5,4 @@ oak_veneer_01
 knitted_fleece
 rough_linen
 arboretum (HDRI)
+homecoming_center_rooftop (HDRI, 4K; saved as view_city.hdr, not committed: download from polyhaven.com/a/homecoming_center_rooftop)

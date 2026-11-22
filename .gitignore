@@ -29,3 +29,5 @@ Thumbs.db
 # Blender intermediate bake output
 tools/blender/_bake/
 public/experience/_bake/
+
+tools/blender/assets/view_city.hdr

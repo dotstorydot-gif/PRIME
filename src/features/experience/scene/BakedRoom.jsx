@@ -14,6 +14,13 @@ export default function BakedRoom({ url }) {
     const root = scene.clone(true);
     root.traverse((o) => {
       if (!o.isMesh) return;
+      // the baked window backdrop is replaced by the live <WindowView />
+      if (/DaylightBackdrop/.test(o.name) || /DaylightBackdrop/.test(o.parent?.name ?? '')) {
+        o.visible = false;
+        return;
+      }
+      // window frames sit flush with the wall face: nudge them 6 mm into the room so they don't flicker
+      if (/^(Mullion|Transom)/.test(o.name)) o.position.x -= 0.006;
       const src = o.material;
       const map = src.map || null;
       if (map) {

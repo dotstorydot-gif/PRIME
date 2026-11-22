@@ -3,6 +3,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { ContactShadows, Environment, Html, Lightformer, PerformanceMonitor, useProgress } from '@react-three/drei';
 import * as THREE from 'three';
 import BakedRoom from './BakedRoom';
+import WindowView from './WindowView';
 import InteractiveProduct from './InteractiveProduct';
 import * as Models from './products/ProductModels';
 import { HOUSE, STOPS } from '../data/rooms';
@@ -163,6 +164,7 @@ export default function ShowroomScene({ progressRef, reducedMotion, lowPower, pr
       {/* the whole house: one Blender-baked shell, rooms joined by doorways */}
       <Suspense fallback={null}>
         <BakedRoom url={HOUSE.glb} />
+        <WindowView />
       </Suspense>
       {/* soft contact shadows where the live product models meet the baked floor, one per room */}
       {HOUSE.rooms.map((r) => (
